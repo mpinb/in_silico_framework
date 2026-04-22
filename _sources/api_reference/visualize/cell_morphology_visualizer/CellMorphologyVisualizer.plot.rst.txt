@@ -11,16 +11,20 @@ plot
 
    Plot the cell morphology in 3D.
 
-   Cam be used to create a static plot of the cell morphology, which may be color-coded with voltage, ion dynamics, or synapse activations.
+   Can be used to create a static plot of the cell morphology, which may be color-coded with voltage, ion dynamics, or synapse activations.
 
    :param color: If you want some other color overlayed on the cell morphology.
                  Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
    :type color: str | [[float]]
    :param show_legend: whether the voltage legend should appear in the plot
    :type show_legend: bool
-   :param show_synapses: whether the synapse activations should be shown
-   :type show_synapses: bool
-   :param time_point: time point from which we want to gather the voltage/synapses. Defaults to 0
+   :param show_synapses: Whether the synapse activations should be shown
+                         If it is a boolean, all synapses will be shown.
+                         If it is a list of strings, only those synapses whose type match an entry in the list will be shown
+   :type show_synapses: bool | List[str]
+   :param time_point: Time point from which to show the voltage/synapses.
+                      If ``None``, no voltage will be shown, and synapses will not be filtered based on activation times.
+                      Defaults to ``None``
    :type time_point: int|float
    :param save: path where the plot will be saved. If it's empty it will not be saved (Default)
    :type save: bool

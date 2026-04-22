@@ -1,0 +1,22 @@
+
+
+_create_presyn_cells
+====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._create_presyn_cells()
+
+
+   Creates presynaptic cells.
+
+   Should be done before creating anatomical synapses.
+   Fills the :attr:`~cells` attribute with a nested dictionary of presynaptic cells,
+   ordered by anatomical area first, and cell type second.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

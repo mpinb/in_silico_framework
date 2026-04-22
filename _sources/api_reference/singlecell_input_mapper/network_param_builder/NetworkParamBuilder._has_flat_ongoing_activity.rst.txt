@@ -1,0 +1,34 @@
+
+
+_has_flat_ongoing_activity
+==========================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder._has_flat_ongoing_activity(celltype)
+
+
+   Check if the :ref:`network_parameters_format` has ongoing activity in flat format.
+
+   Some older :ref:`network_parameters_format' have ongoing activity data in a format that is
+   incompatible with adding multiple sources of activity afterwards::
+
+       <cell_type>: {
+           'cell_type': 'spiketrain',
+           'interval': int,
+       }
+
+   Ideally, the 'cell_type' key contains a dictionary, which in turn contains all sources of activity. Not a string "spiketrain".
+   This function checks if the flat hierarchy exists.
+
+   .. seealso::
+
+      :meth:`~_nest_existing_ongoing_activity_data` to transform this to a nested hierarchy, compatible
+      with adding multiple sources of activity data.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

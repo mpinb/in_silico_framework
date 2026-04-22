@@ -41,16 +41,23 @@ Cell
    The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
    Its attributes are set by :class:`~single_cell_parser.cell_parser.CellParser`.
 
-   .. seealso::
-
-      This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
-      This class concerns itself with providing API to NEURON, not with mapping input to the cell.
-
    :Attributes:
+
+      .. attribute:: path
+
+         Path to the morphology file
+
+         :type: str
 
       .. attribute:: hoc_path
 
-         Path to the hoc file containing the cell morphology.
+         Path to the :ref:`hoc_file_format` morphology file (if the morphology is in the :ref:`hoc_file_format` format)
+
+         :type: str
+
+      .. attribute:: swc_path
+
+         Path to the :ref:`swc_file_format` morphology file (if the morphology is in the :ref:`swc_file_format` format)
 
          :type: str
 
@@ -83,7 +90,7 @@ Cell
          All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...).
          Keys are labels (str), values are lists of :class:`~single_cell_parser.cell.PySection` objects.
 
-         :type: Dict[:class:`~single_cell_parser.cell.PySection`]
+         :type: Dict[str, :class:`~single_cell_parser.cell.PySection`]
 
       .. attribute:: sections
 

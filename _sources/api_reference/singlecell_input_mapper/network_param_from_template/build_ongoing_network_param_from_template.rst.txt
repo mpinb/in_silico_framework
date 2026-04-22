@@ -1,0 +1,61 @@
+
+
+build_ongoing_network_param_from_template
+=========================================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_from_template.build_ongoing_network_param_from_template(template_fn: str | pathlib.Path | None = None, cell_nr_fn=None, syn_fn: str | pathlib.Path = None, con_fn: str | pathlib.Path = None, out_fn: str | None = None, write_all_celltypes: bool = False, additional_activity_params: single_cell_parser.parameters.NTParameterSet | None = None) -> single_cell_parser.parameters.NTParameterSet
+
+
+   Build :ref:`network_parameters_format` from a template.
+
+   This function adds the following info:
+
+   - Network embedding info (:ref:`syn_file_format`, :ref:`con_file_format` files and amount of connected cells per cell type)
+   - Activity data
+
+   A :ref:`network_parameters_format` template is a partially built :ref:`network_parameters_format` object that already contains info on:
+
+   - Synapse dynamics per cell type
+   - Ongoing activity per cell type
+   - Any additional preconfigured activity parameters (e.g. "offset")
+
+   It is assumed that the cell types in the template have no subcategorization per anatomical area.
+   It is also asusmed that the network embedding and activity information **does** have cell types defined per anatomical area, separated by an underscore.
+
+   Example::
+
+       >>> template.network.keys()
+       ['type1', 'type2', ...]
+       >>> netp = build_network_param_from_template(template, ...)
+       >>> netp.keys()
+       ['type1_area1' ... 'type2_area4' ...]
+
+   :param template_fn: The name of the template file. If not given, defaults to the one configured in the user settings. Default: None (user settings fallback).
+   :type template_fn: pathlib.Path
+   :param syn_fn: The name or Path to a :ref:`syn_file_format` file.
+   :type syn_fn: pathlib.Path
+   :param con_fn: The name or Path to a :ref:`con_file_format` file.
+   :type con_fn: pathlib.Path
+   :param out_fn: Where to save the :ref:`network_parameters_format` to. Default: None (don't save).
+   :type out_fn: str
+   :param write_all_celltypes: Whether to write out information of celltypes, even if they are not connected. Default: False.
+   :type write_all_celltypes: bool
+   :param additional_activity_params: Additional network parameters to add.
+   :type additional_activity_params: ~single_cell_parser.parameters.NTParameterSet
+
+   :returns: The :ref:`network_parameters_format`.
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet`
+
+   .. seealso:: :func:`~build_network_param_from_template` for a version that also adds activity data beyond ongoing activity.
+
+   .. deprecated 0.6.0::
+      The :param:`cell_nr_fn` is deprecated and no longer needed. It may be removed in a future version.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

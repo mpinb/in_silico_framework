@@ -1,0 +1,66 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~config` ❭ :mod:`~config.user` ❭ 
+
+
+network_activity
+================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+
+.. module:: config.user.network_activity
+
+.. autoapi-nested-parse::
+   Configure default locations to look for data, when not explicitly given in those pipelines that require it
+
+   All pipelines in ISF allow you to provide data objects, or paths to where this data is stored.
+   Depending on which variables you are investigating, there are certain kinds of data that are not expected to change much throughout the project.
+
+   For example, when investigating the mechanisms underlying a specific in vivo stimulus, it can make sense to keep the
+   activity data of this stimulus fixed.
+
+   This user configuration allows you to set default paths to such data. Some pipelines fall back to these paths when
+   no data is explicitly passed.
+
+   .. caution::
+      Please be careful when using these default fallback values.
+
+      1. Code is not explicitly reproducible when relying on these fallback values. If the fallback values change, the same code can give different results.
+      2. It can be very easy to forget you set these.
+
+      It should always be preferred to pass data directly to the pipelines that require them.
+      Only those configurations that you expect to _never_ change, or settings that are deemed truly baseline
+      (e.g. a stimulus offset that is inherently tied to _all_ data) should be considered here.
+
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`ACTIVITY_DATA_DIR <config.user.network_activity.ACTIVITY_DATA_DIR>`
+     - \-
+   * - :py:obj:`NETWORK_PARAM_TEMPLATE_FN <config.user.network_activity.NETWORK_PARAM_TEMPLATE_FN>`
+     - A template :ref:`network_parameters_format` file containing filled-in values for synapse dynamics and ongoing firing intervals.
+   * - :py:obj:`ADDITIONAL_NETWORK_ACTIVITY_PARAMS <config.user.network_activity.ADDITIONAL_NETWORK_ACTIVITY_PARAMS>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

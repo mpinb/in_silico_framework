@@ -10,7 +10,7 @@ _extract_unique_references_from_neup_and_netp
 
 
    Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
-   and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`cell_parameters_format`.
+   and all unique references to :ref:`morphology_file_format` and recsite files from :ref:`cell_parameters_format`.
 
    :param paramfile_hashmap_df: A pandas dataframe containing all :ref:`cell_parameters_format` and :ref:`network_parameters_format`,
                                 as well as a hash of their content.

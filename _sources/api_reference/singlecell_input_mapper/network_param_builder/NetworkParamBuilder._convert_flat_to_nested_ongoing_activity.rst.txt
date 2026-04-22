@@ -1,0 +1,21 @@
+
+
+_convert_flat_to_nested_ongoing_activity
+========================================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder._convert_flat_to_nested_ongoing_activity(celltype)
+
+
+   Convert flat ongoing activity to a nested format.
+
+   :param celltype: Which celltype to convert ongoing activity for.
+   :type celltype: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

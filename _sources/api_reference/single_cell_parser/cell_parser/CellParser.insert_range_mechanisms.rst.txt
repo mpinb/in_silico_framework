@@ -11,14 +11,12 @@ insert_range_mechanisms
 
    Inserts range mechanisms into all structures named as :param:`label`.
 
-   Range mechanism specifications can be found in :mod:`mechanisms`.
-
    :param label: Label of the structure.
    :type label: str
    :param mechs: Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
    :type mechs: ~single_cell_parser.parameters.NTParameterSet
 
-   :raises RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+   :raises RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
    :raises NotImplementedError: If the spatial distribution is not implemented.
 
    The following table lists the possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
@@ -35,8 +33,6 @@ insert_range_mechanisms
        | linear_capped          | ``prox_value``, ``dist_value``, ``dist_value_distance``         | :math:`y = \min(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})` |
        +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
        | exponential            | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`                                           |
-       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-       | exponential_by_z_dist  | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{z - \text{xOffset}}{\lambda}}`                                           |
        +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
        | capped_exponential     | ``offset``, ``linScale``, ``_lambda``, ``xOffset``, ``max_g``   | :math:`y = \min(\text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}, \text{max_g})`                       |
        +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+

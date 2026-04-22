@@ -1,0 +1,15 @@
+
+
+_compute_summary_tables
+=======================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._compute_summary_tables(connectedCells, connectedCellsPerStructure)
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

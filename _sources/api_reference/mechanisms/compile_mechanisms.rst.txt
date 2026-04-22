@@ -1,0 +1,32 @@
+
+
+compile_mechanisms
+==================
+
+
+.. Signature -------------------------------
+
+.. function:: mechanisms.compile_mechanisms(force_recompile=False)
+
+
+   Compile the mechanisms for L5PTs.
+
+   This function checks if the mechanisms are compiled at the specified paths, and (re)compiles them
+   if necessary using ``nrnivmodl``.
+
+   .. seealso::
+
+      :func:`check_nrnivmodl_is_available` to check if `nrnivmodl` is available in the ``PATH``, and
+      :func:`_compile_mechanisms_at_path` to compile the mechanisms in a given directory.
+
+   :param force_recompile: If True, forces recompilation of the mechanisms even if they are already compiled.
+                           Defaults to False.
+   :type force_recompile: bool
+
+   :raises UserWarning: If the mechanisms needed to be compiled, but failed.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

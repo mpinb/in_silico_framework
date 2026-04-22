@@ -13,7 +13,6 @@ biophysics_fitting
 
    exploration_from_seedpoint </api_reference/biophysics_fitting/exploration_from_seedpoint/index>  
    hay </api_reference/biophysics_fitting/hay/index>  
-   L5tt_parameter_setup </api_reference/biophysics_fitting/L5tt_parameter_setup/index>  
    combiner </api_reference/biophysics_fitting/combiner/index>  
    ephys </api_reference/biophysics_fitting/ephys/index>  
    evaluator </api_reference/biophysics_fitting/evaluator/index>  
@@ -106,9 +105,7 @@ Modules
    * - :py:obj:`exploration_from_seedpoint <biophysics_fitting.exploration_from_seedpoint>`
      - Explore viable biophysical models from a given seedpoint.
    * - :py:obj:`hay <biophysics_fitting.hay>`
-     - Configuration and setup for simulating and evaluating biophysical models of Layer 5 Pyramidal Tract neurons according to the
-   * - :py:obj:`L5tt_parameter_setup <biophysics_fitting.L5tt_parameter_setup>`
-     - This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
+     - Example configuration for generating neuron models.
    * - :py:obj:`combiner <biophysics_fitting.combiner>`
      - This module provides the :class:`~biophysics_fitting.combiner.Combiner` class and associated classes and functions.
    * - :py:obj:`ephys <biophysics_fitting.ephys>`

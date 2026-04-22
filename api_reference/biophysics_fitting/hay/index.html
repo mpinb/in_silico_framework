@@ -431,6 +431,21 @@
   
   
     <li class="md-nav__item">
+      <a href="L5tt_parameter_setup/index.html" class="md-nav__link">
+        <span title="/api_reference/biophysics_fitting/hay/l5tt_parameter_setup/index.rst (reference label)" class="md-ellipsis">L5tt_<wbr>parameter_<wbr>setup</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="default_setup/index.html" class="md-nav__link">
         <span title="/api_reference/biophysics_fitting/hay/default_setup/index.rst (reference label)" class="md-ellipsis">default_<wbr>setup</span>
       </a>
@@ -461,8 +476,38 @@
   
   
     <li class="md-nav__item">
+      <a href="setup_stim/index.html" class="md-nav__link">
+        <span title="/api_reference/biophysics_fitting/hay/setup_stim/index.rst (reference label)" class="md-ellipsis">setup_<wbr>stim</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="specification/index.html" class="md-nav__link">
         <span title="/api_reference/biophysics_fitting/hay/specification/index.rst (reference label)" class="md-ellipsis">specification</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="voltage_trace_visualizer/index.html" class="md-nav__link">
+        <span title="/api_reference/biophysics_fitting/hay/voltage_trace_visualizer/index.rst (reference label)" class="md-ellipsis">voltage_<wbr>trace_<wbr>visualizer</span>
       </a>
     </li>
   
@@ -504,6 +549,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="L5tt_parameter_setup/index.html" class="md-nav__link">
+    <span title="/api_reference/biophysics_fitting/hay/l5tt_parameter_setup/index.rst (reference label)" class="md-ellipsis">L5tt_<wbr>parameter_<wbr>setup</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="default_setup/index.html" class="md-nav__link">
     <span title="/api_reference/biophysics_fitting/hay/default_setup/index.rst (reference label)" class="md-ellipsis">default_<wbr>setup</span>
   </a>
@@ -518,8 +570,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="setup_stim/index.html" class="md-nav__link">
+    <span title="/api_reference/biophysics_fitting/hay/setup_stim/index.rst (reference label)" class="md-ellipsis">setup_<wbr>stim</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="specification/index.html" class="md-nav__link">
     <span title="/api_reference/biophysics_fitting/hay/specification/index.rst (reference label)" class="md-ellipsis">specification</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="voltage_trace_visualizer/index.html" class="md-nav__link">
+    <span title="/api_reference/biophysics_fitting/hay/voltage_trace_visualizer/index.rst (reference label)" class="md-ellipsis">voltage_<wbr>trace_<wbr>visualizer</span>
   </a>
   
 </li>
@@ -535,21 +601,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../L5tt_parameter_setup/index.html" class="md-nav__link">
-        <span title="/api_reference/biophysics_fitting/l5tt_parameter_setup/index.rst (reference label)" class="md-ellipsis">L5tt_<wbr>parameter_<wbr>setup</span>
-      </a>
     </li>
   
 
@@ -1031,19 +1082,43 @@
 <h1 id="hay">hay<a class="headerlink" href="#hay" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p id="module-biophysics_fitting.hay">Configuration and setup for simulating and evaluating biophysical models of Layer 5 Pyramidal Tract neurons according to the
-methods described in <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>.</p>
+<p id="module-biophysics_fitting.hay">Example configuration for generating neuron models.</p>
+<p>This module provides example configuration and setup for simulating and evaluating biophysical models of Layer 5 Pyramidal Tract (L5PT) neurons according to the
+methods described in <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>, including:</p>
+<ul class="simple">
+<li><p>Neuron model parameter setup</p></li>
+<li><p>Target objectives</p></li>
+<li><p>Simulation setup</p></li>
+<li><p>Evaluation routines</p></li>
+</ul>
+<p>While all of these components are usually defined by the user for use with either <a class="reference internal" href="../optimizer/index.html#module-biophysics_fitting.optimizer" title="biophysics_fitting.optimizer (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optimizer</span></code></a> or <a class="reference internal" href="../exploration_from_seedpoint/index.html#module-biophysics_fitting.exploration_from_seedpoint" title="biophysics_fitting.exploration_from_seedpoint (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">exploration_from_seedpoint</span></code></a>,
+and are specific depending on your specific experimental conditions, it can be of use to see how this example is configured as reference material.
+For example, the <a class="reference internal" href="../simulator/Simulator.html#biophysics_fitting.simulator.Simulator" title="biophysics_fitting.simulator.Simulator (Python class) — This class can be used to transform a parameter vector into simulated voltage traces."><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a> can be relatively abstract, to allow for a lot of flexibility.
+An example of how it is set up for L5PT neurons provides useful reference material to see what a <a class="reference internal" href="../simulator/Simulator.html#biophysics_fitting.simulator.Simulator" title="biophysics_fitting.simulator.Simulator (Python class) — This class can be used to transform a parameter vector into simulated voltage traces."><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a> object can and should do.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="default_setup/get_Simulator.html#biophysics_fitting.hay.default_setup.get_Simulator" title="biophysics_fitting.hay.default_setup.get_Simulator (Python function) — Get a set up Simulator object for the Hay_Hill_Schuermann_Markram_Segev_2011 protocol."><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_Simulator()</span></code></a> for an example setup of a <a class="reference internal" href="../simulator/Simulator.html#biophysics_fitting.simulator.Simulator" title="biophysics_fitting.simulator.Simulator (Python class) — This class can be used to transform a parameter vector into simulated voltage traces."><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a> object.</p>
+</div>
 <h2 id="modules">Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h2>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="default_setup/index.html#module-biophysics_fitting.hay.default_setup" title="biophysics_fitting.hay.default_setup (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_setup</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="L5tt_parameter_setup/index.html#module-biophysics_fitting.hay.L5tt_parameter_setup" title="biophysics_fitting.hay.L5tt_parameter_setup (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">L5tt_parameter_setup</span></code></a></p></td>
+<td><p>This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="default_setup/index.html#module-biophysics_fitting.hay.default_setup" title="biophysics_fitting.hay.default_setup (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_setup</span></code></a></p></td>
 <td><p>A Python translation of the setup for in silico current injection experiments as described in <span id="id2">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="evaluation/index.html#module-biophysics_fitting.hay.evaluation" title="biophysics_fitting.hay.evaluation (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="evaluation/index.html#module-biophysics_fitting.hay.evaluation" title="biophysics_fitting.hay.evaluation (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation</span></code></a></p></td>
 <td><p>A Python translation of the evaluation functions used in <span id="id3">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="setup_stim/index.html#module-biophysics_fitting.hay.setup_stim" title="biophysics_fitting.hay.setup_stim (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_stim</span></code></a></p></td>
+<td><p>This module provides methods to set up stimuli by adding recording/injection pipettes to <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> objects.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="specification/index.html#module-biophysics_fitting.hay.specification" title="biophysics_fitting.hay.specification (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">specification</span></code></a></p></td>
 <td><p>This module provides convenience methods for Hay’s model specification (see <span id="id4">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="voltage_trace_visualizer/index.html#module-biophysics_fitting.hay.voltage_trace_visualizer" title="biophysics_fitting.hay.voltage_trace_visualizer (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">voltage_trace_visualizer</span></code></a></p></td>
+<td><p>Visualize voltage traces from the results of a <a class="reference internal" href="../simulator/Simulator.html#biophysics_fitting.simulator.Simulator" title="biophysics_fitting.simulator.Simulator (Python class) — This class can be used to transform a parameter vector into simulated voltage traces."><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a> object.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1087,13 +1162,13 @@ methods described in <span id="id1">Hay <em>et al.</em> [<a class="reference int
       
       
         
-        <a href="default_setup/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: default_setup" rel="next">
+        <a href="L5tt_parameter_setup/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: L5tt_parameter_setup" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              default_setup
+              L5tt_parameter_setup
             </div>
           </div>
           <div class="md-footer__button md-icon">

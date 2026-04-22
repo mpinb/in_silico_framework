@@ -9,7 +9,7 @@ get_optimal_g
 .. function:: simrun.synaptic_strength_fitting.PSPs.get_optimal_g(measured_data, method='dynamic_baseline', merge_celltype_kwargs=None)
 
 
-   Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
+   Calculate the optimal synaptic conductance such that the EPSP matches empirically observed uPSPs.
 
    For each celltype (or merged celltype), the optimal synaptic conductance is calculated
    by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
@@ -27,6 +27,17 @@ get_optimal_g
    :rtype: pd.DataFrame
 
    .. seealso:: :py:meth:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
+
+   Example::
+
+       >>> measured_data
+               EPSP_mean_measured  EPSP_med_measured  EPSP_max_measured
+       EXC1                   0.490              0.350               1.90
+       EXC2                   0.490              0.350               1.90
+       EXC3                   0.350              0.330               1.00
+       ...
+       >>> PSPs(...).get_optimal_g(measured_data)
+
 
 
 

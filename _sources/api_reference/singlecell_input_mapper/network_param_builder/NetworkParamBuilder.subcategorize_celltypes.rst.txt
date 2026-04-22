@@ -1,0 +1,38 @@
+
+
+subcategorize_celltypes
+=======================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder.subcategorize_celltypes(cell_type_map: Dict[str, Iterable[str]] = None) -> typing_extensions.Self
+
+
+   Subgategorize cell types in the :ref:`network_parameters_format` file.
+
+   This is useful for workflows where some presynaptic cell type attributes are defined on an aggregate level.
+   That way, you can set them on an aggregate level, subcategorize the :ref:`network_parameters_format`, and
+   set the more specific cell types afterwards.
+
+   :param cell_type_map: Mapping between existing cell types in the :ref:`network_parameters_format` and the subcategorized cell types.
+   :type cell_type_map: dict
+
+   Example::
+
+       >>> netp.network.keys()
+       ["L1", "L2", ...]
+       >>> netp = NetworkParamBuilder(netp).subcategorize_celltypes(
+               {
+                   "L1": ["L1_A1", "L1_A2", ...]
+               }
+           )
+       >>> netp.network.keys()
+       ["L1", "L2_A1", "L2_A2" ...]
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

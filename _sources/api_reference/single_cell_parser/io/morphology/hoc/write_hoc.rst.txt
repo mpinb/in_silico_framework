@@ -1,0 +1,27 @@
+
+
+write_hoc
+=========
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.hoc.write_hoc(sections, of)
+
+
+   Write a HOC morphology file from a pre-built section directory.
+
+   The soma section is identified by ``parent_name=None`` and is written first
+   without a ``connect`` statement.
+
+   :param sections: Ordered section records as returned by
+                    :func:`build_section_directory`, with soma points already complete.
+   :type sections: list of dict
+   :param of: Output path for the HOC file.
+   :type of: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

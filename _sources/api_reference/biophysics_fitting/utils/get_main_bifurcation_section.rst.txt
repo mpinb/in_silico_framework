@@ -12,11 +12,11 @@ get_main_bifurcation_section
    Get the main bifurcation section of a cell
 
    Assumes the cell has a main bifurcation to begin with, such as a L5PT.
-   A main bifuraction section is defined as a section::
+   A main bifuraction section is defined as a section:
 
-       - with at least two children
-       - whose parent is the soma.
-       - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get_inner_sec_dist_dict` for more information.
+   - with at least two children
+   - whose parent is the soma.
+   - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get_inner_sec_dist_dict` for more information.
 
    :param cell: The cell object.
    :type cell: ~single_cell_parser.cell.Cell

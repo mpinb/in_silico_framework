@@ -1,0 +1,30 @@
+
+
+generate_landmark_template
+==========================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.generate_landmark_template(landmark_name, c, vertexviewid, len)
+
+
+   Generate a template for a landmark file in Amira.
+
+   :param landmark_name: The name of the landmark file.
+   :type landmark_name: str
+   :param c: The color of the landmark.
+   :type c: tuple
+   :param vertexviewid: The vertex view id.
+   :type vertexviewid: int
+   :param len: The length of the landmark.
+   :type len: int
+
+   :returns: The template for the landmark file.
+   :rtype: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,30 @@
+
+
+add_network_embedding
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_network_embedding(syn_fn, con_fn=None, join='left') -> typing_extensions.Self
+
+
+   Add network embedding data.
+
+   :param syn_fn: Path to the :ref:`syn_file_format` file
+   :type syn_fn: str
+   :param con_fn: Path to the :ref:`con_file_format` file.
+                  If not given, it is assumed it has the same name and location as the :ref:`syn_file_format` file, and only the suffix is different.
+                  Default: None.
+   :type con_fn: str
+   :param join: How to join the information for each cell type. Options are:
+
+                - "left": Fetch connectivity info for each cell type already present in the network parameters i.e. left-join the incoming connectivity data.
+                - "right" Fetch connectivity info for each cell type present in the incoming :ref:`syn_file_format` and :ref:`con_file_format` files, and add them (non-destructively) to the parameters, independent of whether they already exist or not i.e. right-join the incoming connectivity data.
+   :type join: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

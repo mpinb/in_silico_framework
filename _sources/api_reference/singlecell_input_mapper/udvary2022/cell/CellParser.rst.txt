@@ -1,0 +1,70 @@
+
+
+
+CellParser
+==========
+
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   spatialgraph_to_cell <CellParser.spatialgraph_to_cell>
+   get_cell <CellParser.get_cell>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+.. class signature --------------------------------------------------------------
+
+.. class:: singlecell_input_mapper.udvary2022.cell.CellParser(hocFilename='')
+
+   Bases: :py:obj:`object`
+   
+   Extract cell morphology from an AMIRA hoc file.
+
+   .. seealso::
+
+      This is not the same class as :class:`single_cell_parser.cell_parser.CellParser`.
+      This is a leightweight dataclass specialized for use with :mod:`single_cell_parser.synapse_mapper.SynapseMapper`,
+      and does not contain any biophysical details.
+
+   :param hocFilename: File name of the hoc file. Default: ''.
+   :type hocFilename: str
+
+   :Attributes:
+
+      .. attribute:: hoc_fname
+
+         File name of the hoc file.
+
+         :type: str
+
+      .. attribute:: cell
+
+         Cell object.
+
+         :type: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`spatialgraph_to_cell <singlecell_input_mapper.udvary2022.cell.CellParser.spatialgraph_to_cell>`\ ()
+        - Set up a cell object from an AMIRA hoc file.
+      * - :py:obj:`get_cell <singlecell_input_mapper.udvary2022.cell.CellParser.get_cell>`\ ()
+        - Returns cell if it is set up
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

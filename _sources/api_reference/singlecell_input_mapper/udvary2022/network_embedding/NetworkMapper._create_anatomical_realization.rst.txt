@@ -1,0 +1,26 @@
+
+
+_create_anatomical_realization
+==============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._create_anatomical_realization(cellTypeSynapseDensities)
+
+
+   Create a single anatomical realization of synapses.
+
+   This is the main method for computing synapse/connectivity realization.
+   Given one or more pre-computed density fields of synapses (see e.g.
+   :func:`~_precompute_anatomical_area_celltype_synapse_densities_vectorized`), this method
+   creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
+   from this synapse density field, and assigns synapses.
+
+   Returns anatomical connectivity map.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

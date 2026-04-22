@@ -1,0 +1,64 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.udvary2022` ❭ 
+
+
+synapse_mapper
+==============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   SynapseMapper </api_reference/singlecell_input_mapper/udvary2022/synapse_mapper/SynapseMapper>
+   SynapseDensity </api_reference/singlecell_input_mapper/udvary2022/synapse_mapper/SynapseDensity>
+
+.. module:: singlecell_input_mapper.udvary2022.synapse_mapper
+
+.. autoapi-nested-parse::
+   This module allows to compute synapse density fields from a Post-Synaptic Target (PST) density field and assign synapses to a neuron morphology based on this synapse density field.
+   The :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` class uses these classes to create synapse realizations.
+   While the classes in this module can be used in isolation, there are also full pipelines available that use the classes here to map synapses to a neuron morphology.
+   Consult the module :mod:`~singlecell_input_mapper.map_singlecell_inputs` for such a pipeline, or the documentation of :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` for more info on how to use these classes in a pipeline.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`SynapseMapper <singlecell_input_mapper.udvary2022.synapse_mapper.SynapseMapper>`
+     - Assign synapses to neuron morphology from density meshes.
+   * - :py:obj:`SynapseDensity <singlecell_input_mapper.udvary2022.synapse_mapper.SynapseDensity>`
+     - Compute synapse density mesh from a PST density mesh.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <singlecell_input_mapper.udvary2022.synapse_mapper.logger>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

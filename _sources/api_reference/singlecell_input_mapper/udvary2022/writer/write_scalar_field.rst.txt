@@ -1,0 +1,28 @@
+
+
+write_scalar_field
+==================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.writer.write_scalar_field(fname=None, scalarField=None)
+
+
+   Write a scalar field to an AmiraMesh file.
+
+   These can be visualized in AMIRA, or converted to VTK using :func:`~visualize.vtk.convert_amira_lattice_to_vtk`
+   for visualization in VTK-compatible renderers.
+
+   :param fname: Name of the output file
+   :type fname: str
+   :param scalarField: Scalar field to be written to disk
+   :type scalarField: ~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField
+
+   :returns: None. Writes the results to disk.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

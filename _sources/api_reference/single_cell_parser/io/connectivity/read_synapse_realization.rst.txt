@@ -1,0 +1,61 @@
+
+
+read_synapse_realization
+========================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.connectivity.read_synapse_realization(fname)
+
+
+   Read a :ref:`syn_file_format` file and returns a dictionary of synapse locations.
+
+
+   See also:
+
+   - :ref:`syn_file_format` for more information on the `.syn` file format.
+   - :func:`~single_cell_parser.io.connectivity.read_pruned_synapse_realization`.
+   - :func:`~single_cell_parser.io.connectivity.write_cell_synapse_locations` for the corresponding writer.
+
+   :param fname: The name of the file to be read.
+   :type fname: str
+
+   :raises IOError: If the input file does not have a `.syn` or `.SYN` suffix.
+
+   :returns: A dictionary with synapse types as keys and lists of synapse locations as values.
+             Each synapse location is a tuple of (section ID, section point ID).
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> synapse_file
+   # Synapse distribution file
+   # corresponding to cell: 86_C2_center
+   # Type - section - section.x
+   VPM_E1  112     0.138046479525
+   VPM_E1  130     0.305058053119
+   VPM_E1  130     0.190509288017
+   VPM_E1  9       0.368760777084
+   VPM_E1  110     0.0
+   VPM_E1  11      0.120662910562
+   ...
+   >>> read_synapse_realization(synapse_file)
+   {
+       'VPM_E1': [
+           (112, 0.138046479525),
+           (130, 0.305058053119),
+           (130, 0.190509288017),
+           (9, 0.368760777084),
+           (110, 0.0),
+           (11, 0.120662910562),
+           ...
+       ]
+   }
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

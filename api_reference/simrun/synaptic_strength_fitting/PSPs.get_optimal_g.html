@@ -734,7 +734,7 @@
       
         <li class="md-nav__item">
   <a href="#simrun.synaptic_strength_fitting.PSPs.get_optimal_g" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data." class="md-ellipsis">simrunsynaptic_<wbr>strength_<wbr>fitting<wbr>PSPsget_<wbr>optimal_<wbr>g</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirically observed uPSPs." class="md-ellipsis">simrunsynaptic_<wbr>strength_<wbr>fitting<wbr>PSPsget_<wbr>optimal_<wbr>g</span>
   </a>
   
     <nav class="md-nav" aria-label="simrunsynaptic_strength_fittingPSPsget_optimal_g">
@@ -1357,7 +1357,7 @@
       
         <li class="md-nav__item">
   <a href="#simrun.synaptic_strength_fitting.PSPs.get_optimal_g" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data." class="md-ellipsis">simrunsynaptic_<wbr>strength_<wbr>fitting<wbr>PSPsget_<wbr>optimal_<wbr>g</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirically observed uPSPs." class="md-ellipsis">simrunsynaptic_<wbr>strength_<wbr>fitting<wbr>PSPsget_<wbr>optimal_<wbr>g</span>
   </a>
   
     <nav class="md-nav" aria-label="simrunsynaptic_strength_fittingPSPsget_optimal_g">
@@ -1434,7 +1434,7 @@
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="simrun.synaptic_strength_fitting.PSPs.get_optimal_g">
 <a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><span class="sig-name descname"><span class="pre">simrun</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-simrun.synaptic_strength_fitting" title="simrun.synaptic_strength_fitting (Python module)"><span class="sig-name descname"><span class="pre">synaptic_strength_fitting</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">PSPs</span></span><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">get_optimal_g</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.synaptic_strength_fitting.PSPs.get_optimal_g.measured_data" title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g.measured_data (Python parameter) — A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype. Must contain the keys: [EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured] and the index celltype."><span class="n"><span class="pre">measured_data</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.synaptic_strength_fitting.PSPs.get_optimal_g.method" title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g.method (Python parameter) — dynamic_baseline or constant_baseline."><span class="n"><span class="pre">method</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;dynamic_baseline&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.synaptic_strength_fitting.PSPs.get_optimal_g.merge_celltype_kwargs" title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g.merge_celltype_kwargs (Python parameter) — Additional keyword arguments to pass to merge_celltypes()."><span class="n"><span class="pre">merge_celltype_kwargs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.get_optimal_g" title="Link to this definition">¶</a></dt>
-<dd><p>Calculate the optimal synaptic conductance such that the EPSP matches empirical data.</p>
+<dd><p>Calculate the optimal synaptic conductance such that the EPSP matches empirically observed uPSPs.</p>
 <p>For each celltype (or merged celltype), the optimal synaptic conductance is calculated
 by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
 This linear interpolation is cross-referenced with empirically observed statistics to infer the optimal synaptic conductance.</p>
@@ -1460,6 +1460,16 @@ Must contain the keys: <code class="docutils literal notranslate"><span class="p
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="calculate_optimal_g.html#simrun.synaptic_strength_fitting.calculate_optimal_g" title="simrun.synaptic_strength_fitting.calculate_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP statistics match empirical data."><code class="xref py py-meth docutils literal notranslate"><span class="pre">calculate_optimal_g()</span></code></a>.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">measured_data</span>
+<span class="go">        EPSP_mean_measured  EPSP_med_measured  EPSP_max_measured</span>
+<span class="go">EXC1                   0.490              0.350               1.90</span>
+<span class="go">EXC2                   0.490              0.350               1.90</span>
+<span class="go">EXC3                   0.350              0.330               1.00</span>
+<span class="go">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PSPs</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">get_optimal_g</span><span class="p">(</span><span class="n">measured_data</span><span class="p">)</span>
+</code></pre></div>
 </div>
 </dd></dl>
 

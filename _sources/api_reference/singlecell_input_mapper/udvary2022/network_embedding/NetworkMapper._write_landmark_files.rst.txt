@@ -1,0 +1,31 @@
+
+
+_write_landmark_files
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._write_landmark_files(synapseLocations, id1, id2, cellName, dirName)
+
+
+   Write out landmark files for each synapse location.
+
+   This is used in :func:`_generate_output_files` to write out landmark files for each synapse location.
+
+   :param synapseLocations: Dictionary of synapse locations.
+   :type synapseLocations: dict
+   :param id1: ID for the current date.
+   :type id1: str
+   :param id2: ID for the current process.
+   :type id2: str
+   :param cellName: Name of the postsynaptic cell.
+   :type cellName: str
+   :param dirName: Directory name for the output files.
+   :type dirName: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

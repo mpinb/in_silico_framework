@@ -11,15 +11,32 @@ hay
 .. toctree::
    :hidden:
 
+   L5tt_parameter_setup </api_reference/biophysics_fitting/hay/L5tt_parameter_setup/index>  
    default_setup </api_reference/biophysics_fitting/hay/default_setup/index>  
    evaluation </api_reference/biophysics_fitting/hay/evaluation/index>  
+   setup_stim </api_reference/biophysics_fitting/hay/setup_stim/index>  
    specification </api_reference/biophysics_fitting/hay/specification/index>  
+   voltage_trace_visualizer </api_reference/biophysics_fitting/hay/voltage_trace_visualizer/index>  
 
 .. module:: biophysics_fitting.hay
 
 .. autoapi-nested-parse::
-   Configuration and setup for simulating and evaluating biophysical models of Layer 5 Pyramidal Tract neurons according to the
-   methods described in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+   Example configuration for generating neuron models.
+
+   This module provides example configuration and setup for simulating and evaluating biophysical models of Layer 5 Pyramidal Tract (L5PT) neurons according to the
+   methods described in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, including:
+
+   - Neuron model parameter setup
+   - Target objectives
+   - Simulation setup
+   - Evaluation routines
+
+   While all of these components are usually defined by the user for use with either :mod:`~biophysics_fitting.optimizer` or :mod:`~biophysics_fitting.exploration_from_seedpoint`,
+   and are specific depending on your specific experimental conditions, it can be of use to see how this example is configured as reference material.
+   For example, the :class:`~biophysics_fitting.simulator.Simulator` can be relatively abstract, to allow for a lot of flexibility.
+   An example of how it is set up for L5PT neurons provides useful reference material to see what a :class:`~biophysics_fitting.simulator.Simulator` object can and should do.
+
+   .. seealso:: :meth:`~biophysics_fitting.hay.default_setup.get_Simulator` for an example setup of a :class:`~biophysics_fitting.simulator.Simulator` object.
 
 
 
@@ -37,12 +54,18 @@ Modules
    :widths: auto
    :class: summarytable
    
+   * - :py:obj:`L5tt_parameter_setup <biophysics_fitting.hay.L5tt_parameter_setup>`
+     - This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
    * - :py:obj:`default_setup <biophysics_fitting.hay.default_setup>`
      - A Python translation of the setup for in silico current injection experiments as described in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
    * - :py:obj:`evaluation <biophysics_fitting.hay.evaluation>`
      - A Python translation of the evaluation functions used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+   * - :py:obj:`setup_stim <biophysics_fitting.hay.setup_stim>`
+     - This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
    * - :py:obj:`specification <biophysics_fitting.hay.specification>`
      - This module provides convenience methods for Hay's model specification (see :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`).
+   * - :py:obj:`voltage_trace_visualizer <biophysics_fitting.hay.voltage_trace_visualizer>`
+     - Visualize voltage traces from the results of a :class:`~biophysics_fitting.simulator.Simulator` object.
 
 
 

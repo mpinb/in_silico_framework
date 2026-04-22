@@ -1,0 +1,29 @@
+
+
+plot_vt
+=======
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.hay.voltage_trace_visualizer.plot_vt(voltage_traces, key='BAC.hay_measure')
+
+
+   Plot voltage traces from simulation results.
+
+   The results of e.g. :class:`biophysics_fitting.simulator.Simulator` are nested dictionaries,
+   containing various voltage traces. NEURON simulation results are NEURON vectors.
+   This is a helper method to extract that data and plot out specific voltage traces from those results.
+
+   :param voltage_traces: dictionary containing the voltage traces.
+   :type voltage_traces: dict
+   :param key: key to access the specific voltage trace to plot.
+   :type key: str
+
+   :returns: None
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

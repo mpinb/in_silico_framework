@@ -1,0 +1,44 @@
+
+
+visualize_vt
+============
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.hay.voltage_trace_visualizer.visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select=295 + 80, lw=2, **kwargs)
+
+
+   Visualize voltage traces from the Hay stimulus protocols.
+
+   The results of e.g. :class:`biophysics_fitting.simulator.Simulator` are nested dictionaries,
+   containing various voltage traces. NEURON simulation results are NEURON vectors.
+   This is a helper method to extract that data and plot out specific voltage traces from those results.
+
+   :param vt: dictionary containing the voltage traces.
+              Must contain the keys:
+
+              - 'BAC.hay_measure'
+              - 'bAP.hay_measure'
+              - 'StepOne.hay_measure'
+              - 'StepTwo.hay_measure'
+              - 'StepThree.hay_measure'
+   :type vt: dict
+   :param fig: figure to plot the voltage traces on.
+   :type fig: matplotlib.figure.Figure
+   :param soma_color: color to plot the soma voltage traces.
+   :type soma_color: str
+   :param dend_color: color to plot the dendrite voltage traces.
+   :type dend_color: str
+   :param BAC_select: timepoint for the end of the BAC stimulus.
+   :type BAC_select: int
+
+   :returns: None
+
+   .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more details on the stimulus protocols.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

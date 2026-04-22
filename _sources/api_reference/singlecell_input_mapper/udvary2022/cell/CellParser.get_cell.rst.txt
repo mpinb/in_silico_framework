@@ -1,0 +1,23 @@
+
+
+get_cell
+========
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.cell.CellParser.get_cell()
+
+
+   Returns cell if it is set up
+
+   :raises RuntimeError: If cell is not set up.
+
+   :returns: Cell object.
+   :rtype: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

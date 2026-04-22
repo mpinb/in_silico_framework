@@ -1,0 +1,36 @@
+
+
+write_cell_synapse_locations
+============================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.connectivity.write_cell_synapse_locations(fname=None, synapses=None, cellID=None)
+
+
+   Write a :ref:`syn_file_format` file.
+
+   :ref:`syn_file_format` files contain a cell's synapses with the locations
+   coded by section ID and section x of cell with ID "cellID".
+
+   See also:
+
+   - :ref:`syn_file_format` for more information on the `.syn` file format.
+   - :func:`single_cell_parser.io.connectivity.read_synapse_realization` for the corresponding reader function.
+   - :func:`write_pruned_synapse_locations` for a similar function that includes a `pruned` flag.
+
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param synapses: A dictionary of synapses, with keys as synapse types and values as lists of synapses.
+   :type synapses: dict
+   :param cellID: The ID of the cell.
+   :type cellID: str
+
+   :returns: None. Writes out the synapse location file to :param:`fname`.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

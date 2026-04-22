@@ -1,0 +1,71 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.io` ❭ 
+
+
+activity
+========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   read_synapse_weight_file </api_reference/single_cell_parser/io/activity/read_synapse_weight_file>
+   read_synapse_activation_file </api_reference/single_cell_parser/io/activity/read_synapse_activation_file>
+   read_complete_synapse_activation_file </api_reference/single_cell_parser/io/activity/read_complete_synapse_activation_file>
+   read_spike_times_file </api_reference/single_cell_parser/io/activity/read_spike_times_file>
+   write_all_traces </api_reference/single_cell_parser/io/activity/write_all_traces>
+   write_synapse_activation_file </api_reference/single_cell_parser/io/activity/write_synapse_activation_file>
+   write_synapse_weight_file </api_reference/single_cell_parser/io/activity/write_synapse_weight_file>
+   write_PSTH </api_reference/single_cell_parser/io/activity/write_PSTH>
+   write_spike_times_file </api_reference/single_cell_parser/io/activity/write_spike_times_file>
+   write_presynaptic_spike_times </api_reference/single_cell_parser/io/activity/write_presynaptic_spike_times>
+
+.. module:: single_cell_parser.io.activity
+
+.. autoapi-nested-parse::
+   Read and write activity data
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_synapse_weight_file <single_cell_parser.io.activity.read_synapse_weight_file>`\ (fname)
+     - Reads list of all anatomical synapses and their maximum conductance values.
+   * - :py:obj:`read_synapse_activation_file <single_cell_parser.io.activity.read_synapse_activation_file>`\ (fname)
+     - Reads list of all functional synapses and their activation times.
+   * - :py:obj:`read_complete_synapse_activation_file <single_cell_parser.io.activity.read_complete_synapse_activation_file>`\ (fname)
+     - Reads list of all functional synapses and their activation times.
+   * - :py:obj:`read_spike_times_file <single_cell_parser.io.activity.read_spike_times_file>`\ (fname)
+     - Reads all trials and spike times within these trials.
+   * - :py:obj:`write_all_traces <single_cell_parser.io.activity.write_all_traces>`\ (fname, t, vTraces)
+     - Write out a list of voltage traces.
+   * - :py:obj:`write_synapse_activation_file <single_cell_parser.io.activity.write_synapse_activation_file>`\ (fname, cell, synTypes, synDistances, synTimes, activeSyns)
+     - Write out a :ref:`syn_activation_format` file.
+   * - :py:obj:`write_synapse_weight_file <single_cell_parser.io.activity.write_synapse_weight_file>`\ (fname, cell)
+     - Write out a synapse weight file.
+   * - :py:obj:`write_PSTH <single_cell_parser.io.activity.write_PSTH>`\ (fname, PSTH, bins)
+     - Write PSTH and time bins of PSTH,
+   * - :py:obj:`write_spike_times_file <single_cell_parser.io.activity.write_spike_times_file>`\ (fname, spikeTimes)
+     - Write trial numbers and all spike times in each trial (may be empty).
+   * - :py:obj:`write_presynaptic_spike_times <single_cell_parser.io.activity.write_presynaptic_spike_times>`\ (fname, cells)
+     - Write cell type, presynaptic cell ID and spike times of all connected
+
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

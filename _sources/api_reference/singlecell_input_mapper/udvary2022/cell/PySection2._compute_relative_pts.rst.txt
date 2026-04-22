@@ -1,0 +1,22 @@
+
+
+_compute_relative_pts
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.cell.PySection2._compute_relative_pts()
+
+
+   Compute the relative position of 3D points along the section.
+
+   This methods transforms 3D coordinates to relative positions along the section.
+   The relative position is denoted as `x` in the context of a section, and
+   can take values between 0 (beginning of the section) and 1 (end of the section).
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

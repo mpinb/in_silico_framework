@@ -45,6 +45,8 @@ Simulator_Setup
    of the apical dendrite. Make sure that the :attr:`~biophysics_fitting.simulator.Simulator.stim_run_fun` reads the
    parameter :param:`recSite` and sets up the stimulus accordingly (see :class:`~biophysics_fitting.simulator.Simulator`).
 
+
+
    Example::
 
        >>> def param_modify_function(params):
@@ -127,7 +129,7 @@ Simulator_Setup
 
       .. attribute:: cell_generator
 
-         A function that generates a :class:`~single_cell_parser.cell.Cell` object.
+         A function that generates a :class:`~single_cell_parser.cell.Cell` object from :ref:`cell_parameters_format`.
 
          :type: callable
 
@@ -139,19 +141,19 @@ Simulator_Setup
 
       .. attribute:: stim_setup_funs
 
-         List of functions that set up the stimulus.
+         List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument and add a NEURON stimulus to it (e.g. :func:`~biophysics_fitting.setup_stim.setup_soma_step`)
 
          :type: list
 
       .. attribute:: stim_run_funs
 
-         List of functions that each run a simulation.
+         List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument, simulate it, and return the simulated :class:`~single_cell_parser.cell.Cell` object (e.g. :func:`~single_cell_parser.init_neuron_run`)
 
          :type: list
 
       .. attribute:: stim_response_measure_funs
 
-         List of functions that extract voltage traces from the cell.
+         List of functions that take the cell as an argument and extract relevant data (e.g. the ``tVec`` and ``VList``), organized per stimulus.
 
          :type: list
 
@@ -166,6 +168,11 @@ Simulator_Setup
          List of functions that check the setup. Useful for debugging.
 
          :type: list
+
+      .. seealso::
+
+         :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions for how ``cell_param_modify_functions`` are used to transform input
+         parameter vectors to :ref:`cell_parameters_format` objects.
 
    :Methods:
 

@@ -13,6 +13,7 @@ single_cell_parser
 
    analyze </api_reference/single_cell_parser/analyze/index>  
    cell_modify_functions </api_reference/single_cell_parser/cell_modify_functions/index>  
+   io </api_reference/single_cell_parser/io/index>  
    network_modify_functions </api_reference/single_cell_parser/network_modify_functions/index>  
    network_param_modify_functions </api_reference/single_cell_parser/network_param_modify_functions/index>  
    cell </api_reference/single_cell_parser/cell/index>  
@@ -20,14 +21,9 @@ single_cell_parser
    network </api_reference/single_cell_parser/network/index>  
    network_realizations </api_reference/single_cell_parser/network_realizations/index>  
    parameters </api_reference/single_cell_parser/parameters/index>  
-   reader </api_reference/single_cell_parser/reader/index>  
-   scalar_field </api_reference/single_cell_parser/scalar_field/index>  
    serialize_cell </api_reference/single_cell_parser/serialize_cell/index>  
-   sim_control </api_reference/single_cell_parser/sim_control/index>  
-   swc </api_reference/single_cell_parser/swc/index>  
    synapse </api_reference/single_cell_parser/synapse/index>  
    synapse_mapper </api_reference/single_cell_parser/synapse_mapper/index>  
-   writer </api_reference/single_cell_parser/writer/index>  
    Event </api_reference/single_cell_parser/Event>
    create_cell </api_reference/single_cell_parser/create_cell>
    init_neuron_run </api_reference/single_cell_parser/init_neuron_run>
@@ -41,7 +37,7 @@ single_cell_parser
    Cell API for single cell simulations.
 
    This package provides functionality to parse :class:`~single_cell_parser.cell.Cell` objects
-   from NEURON :ref:`hoc_file_format` files, map synapses onto these cells, and run biophysically
+   from :ref:`cell_parameters_format` files, map synapses onto these cells, and run biophysically
    detailed NEURON simulations with the resulting neuron-network models.
 
    .. seealso::
@@ -126,6 +122,8 @@ Modules
      - Analyze the results of single cell simulations and its network embeddings:
    * - :py:obj:`cell_modify_functions <single_cell_parser.cell_modify_functions>`
      - Modify the cell after it is initalized.
+   * - :py:obj:`io <single_cell_parser.io>`
+     - Input/ouput operations for various file formats:
    * - :py:obj:`network_modify_functions <single_cell_parser.network_modify_functions>`
      - Modify the cell and/or network after both have been initalized.
    * - :py:obj:`network_param_modify_functions <single_cell_parser.network_param_modify_functions>`
@@ -133,29 +131,19 @@ Modules
    * - :py:obj:`cell <single_cell_parser.cell>`
      - Cell objects for neuron models and cell activity.
    * - :py:obj:`cell_parser <single_cell_parser.cell_parser>`
-     - Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
+     - Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`morphology_file_format` file.
    * - :py:obj:`network <single_cell_parser.network>`
      - Connect and activate presynaptic neuron populations.
    * - :py:obj:`network_realizations <single_cell_parser.network_realizations>`
      - Create anatomical and functional network realizations.
    * - :py:obj:`parameters <single_cell_parser.parameters>`
      - Handle :ref:`param_file_format` files in ISF.
-   * - :py:obj:`reader <single_cell_parser.reader>`
-     - Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
-   * - :py:obj:`scalar_field <single_cell_parser.scalar_field>`
-     - Implementation of 3D scalar fields based on numpy arrays.
    * - :py:obj:`serialize_cell <single_cell_parser.serialize_cell>`
      - Convert a :class:`~single_cell_parser.cell.Cell` object to a serializable object and vice versa.
-   * - :py:obj:`sim_control <single_cell_parser.sim_control>`
-     - Run a NEURON current injection simulation.
-   * - :py:obj:`swc <single_cell_parser.swc>`
-     - Convert :class:`single_cell_parser.cell.Cell` objects to ``SWC`` morphologies.
    * - :py:obj:`synapse <single_cell_parser.synapse>`
      - Synapse class for synaptic activations and NEURON API.
    * - :py:obj:`synapse_mapper <single_cell_parser.synapse_mapper>`
      - Basic synapse mapper to assign synapses to a neuron morphology, based on an existing synapse distribution.
-   * - :py:obj:`writer <single_cell_parser.writer>`
-     - Write out anatomical, morphology or simulation data.
 
 
 

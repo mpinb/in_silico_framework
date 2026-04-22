@@ -55,7 +55,7 @@ init
                                    ``"remount"`` will preserve the relative directory structure of the parameterfiles per file category (see below). Useful when parameterfiles are already organized.
                                  - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
                                  - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
-                                 - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"parameterfiles_folder"``
+                                 - "morph" (str): Target directory name of :ref:`morphology_file_format` files. Default is ``"parameterfiles_folder"``
                                  - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"parameterfiles_folder"``
                                  - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"parameterfiles_folder"``
                                  - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is ``"parameterfiles_folder"``

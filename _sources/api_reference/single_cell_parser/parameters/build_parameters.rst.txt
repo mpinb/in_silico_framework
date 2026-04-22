@@ -12,7 +12,7 @@ build_parameters
    Read in a :ref:`param_file_format` file and return a NTParameterSet object.
 
    :param filename: path to the parameter file
-   :type filename: str
+   :type filename: str | Path
 
    :returns: The parameter file as a :class:`~single_cell_parser.parameters.NTParameterSet` object.
    :rtype: :class:`~single_cell_parser.parameters.NTParameterSet`

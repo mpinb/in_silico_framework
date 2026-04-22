@@ -40,7 +40,7 @@ SynapseMapper
    The synapse distribution can be:
 
    - a previously created synapse realization in dictionary form
-     (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.reader.read_synapse_realization` for more info)
+     (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.io.connectivity.read_synapse_realization` for more info)
    - a :class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities, in which case the synapses are mapped
      in the same way as in :func:`~single_cell_parser.synapse_mapper.SynapseMapper.create_synapses`.
    - a list of synapse distances.
@@ -50,11 +50,11 @@ SynapseMapper
       :mod:`singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` for creating
       network realizations constrained with empirical data.
 
-   :param:`synDist` can be read from a :ref:`syn_file_format` file using :func:`~single_cell_parser.reader.read_synapse_realization`.
+   :param:`synDist` can be read from a :ref:`syn_file_format` file using :func:`~single_cell_parser.io.connectivity.read_synapse_realization`.
 
    :param cell: The cell to map synapses onto.
    :type cell: ~single_cell_parser.cell.Cell
-   :param synDist: Either a previously created synapse realization in dictionary form (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.reader.read_synapse_realization` for more info)
+   :param synDist: Either a previously created synapse realization in dictionary form (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.io.connectivity.read_synapse_realization` for more info)
                    or a :class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities.
    :type synDist: single_cell_parser.scalar_field.ScalarField
    :param isDensity: If True, then the synapse distribution is interpreted as an average density, and the actual number of synapses that will be assigned is drawn from a Poisson distribution.

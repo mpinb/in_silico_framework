@@ -39,8 +39,9 @@ PySection
    
    Wrapper around :class:`neuron:Section` providing additional functionality for geometry and mechanisms.
 
-   NEURON sections are objects of the form ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
-   Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``__nrnsec_0x------------(x)``,
+   NEURON sections are a collection of points and their diameter of the form ``secname``
+   If no section name is known, they are printed as ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
+   Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``secname(x)``,
    which looks similar to the section representation, but has an additional ``(x)``: a relative coordinate representing the
    center point of the segment.
 

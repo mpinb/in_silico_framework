@@ -1,0 +1,23 @@
+
+
+is_valid
+========
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.reader._Edge.is_valid()
+
+
+   Check if this edge is valid.
+
+   Edges are only valid if they have a :param:`label`, a :param:`hocLabel`, and at least one :param:`edgePts`.
+
+   :returns: True if the edge is valid, False otherwise.
+   :rtype: bool
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

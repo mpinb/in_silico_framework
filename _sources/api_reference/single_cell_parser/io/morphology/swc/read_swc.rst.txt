@@ -1,0 +1,27 @@
+
+
+read_swc
+========
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.swc.read_swc(swc_fn, remap_labels=None)
+
+
+   Read a SWC morphology file.
+
+   :param swc_fn: Path to the :ref:`swc_file_format` file to be converted.
+   :type swc_fn: str
+   :param remap_labels: Mapping between labels in the :ref:`hoc_file_format` and actual label used in ISF.
+                        If a label is mapped to ``None``, it is not read in its entirety. This can be useful to e.g.
+                        create a custom AIS morphology instead of the one in the morphology file, as done in :class:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`
+   :type remap_labels: dict[str, str]
+
+   :raises ValueError: If no soma points (type 1) are found in the :ref:`swc_file_format` file.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

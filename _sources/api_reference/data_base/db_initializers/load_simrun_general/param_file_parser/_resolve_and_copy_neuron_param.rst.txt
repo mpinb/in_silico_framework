@@ -9,7 +9,7 @@ _resolve_and_copy_neuron_param
 .. function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_neuron_param(neup_fn, scattered_fn_map)
 
 
-   Convert all references to  :ref:`hoc_file_format` and recsite .landmarkAscii files
+   Convert all references to  :ref:`morphology_file_format` and recsite .landmarkAscii files
    in a :ref:`network_parameters_format` file and copy to a new location.
 
    :param neup_fn: Path to a :ref:`cell_parameters_format` file.

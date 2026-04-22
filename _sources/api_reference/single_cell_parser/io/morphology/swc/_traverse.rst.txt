@@ -1,0 +1,38 @@
+
+
+_traverse
+=========
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.swc._traverse(point_id, sec_name, sec_label, parent_sec_id, points_dict, sections)
+
+
+   Recursively build the section directory from a non-soma starting point.
+
+   Traverse from `point_id`, collecting all points that belong to the current
+   section (i.e. all points until a branch point). Saves the section, then recurses
+   for each child.
+
+   Child section names at branch points are derived from ``REVERSE_SWC_LABEL_MAP``
+   if the child's type is a known label; otherwise they are named ``{sec_name}_{i}``.
+
+   :param point_id: Starting point ID.
+   :type point_id: int
+   :param sec_name: Full name for this section. Used to set the :attr:`~single_cell_parser.io.morphology._edge._Edge.hocLabel` attribute
+   :type sec_name: str
+   :param sec_label: label of this section. Used to set the :attr:`~single_cell_parser.io.morphology._edge._Edge.label` attribute
+   :type sec_label: str
+   :param parent_sec_id: The ID of the parent section. Used to set the :attr:`~single_cell_parser.io.morphology._edge._Edge.parentID` attribute
+   :type parent_sec_id: str
+   :param points_dict: Full point dictionary from :func:`parse_swc`.
+   :type points_dict: dict
+   :param sections: Accumulator; section dicts are appended here in traversal order.
+   :type sections: list
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

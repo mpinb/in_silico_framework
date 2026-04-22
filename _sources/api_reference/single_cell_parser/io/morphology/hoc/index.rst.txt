@@ -1,0 +1,62 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.io` ❭ :mod:`~single_cell_parser.io.morphology` ❭ 
+
+
+hoc
+===
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _extract_label_and_name_from_hoc </api_reference/single_cell_parser/io/morphology/hoc/_extract_label_and_name_from_hoc>
+   read_hoc </api_reference/single_cell_parser/io/morphology/hoc/read_hoc>
+   write_hoc </api_reference/single_cell_parser/io/morphology/hoc/write_hoc>
+
+.. module:: single_cell_parser.io.morphology.hoc
+
+.. autoapi-nested-parse::
+   Read and write :ref:`hoc_file_format` morphologies.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_hoc <single_cell_parser.io.morphology.hoc.read_hoc>`\ (fname, remap\_labels)
+     - Read a .hoc morphology file and return a list of Edge objects.
+   * - :py:obj:`write_hoc <single_cell_parser.io.morphology.hoc.write_hoc>`\ (sections, of)
+     - Write a HOC morphology file from a pre-built section directory.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.io.morphology.hoc.logger>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

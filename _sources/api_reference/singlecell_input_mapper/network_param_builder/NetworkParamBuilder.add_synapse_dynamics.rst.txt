@@ -1,0 +1,25 @@
+
+
+add_synapse_dynamics
+====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_synapse_dynamics(synapse_params_per_ct=None) -> typing_extensions.Self
+
+
+   Add synapse dynamics to the :ref:`network_parameters_format`.
+
+   :param synapse_params_per_ct: Mapping between cell types and synapse parameters. If none are given, this method
+                                 infers if the cell type is excitatory or inhibitory (based on the user configuration), and assigns
+                                 generic glutamate and GABA-ergic receptors instead.
+   :type synapse_params_per_ct: ~single_cell_parser.parameters.NTParameterSet
+
+   .. seealso:: :meth:`_add_synapse_dynamics_generic`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

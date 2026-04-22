@@ -89,7 +89,7 @@ load_simrun_general
        ...     "copy_method": "remount",
        ...     "neup" : "parameterfiles_folder",
        ...     "netp" : "parameterfiles_folder",
-       ...     "hoc" : "morphology_folder",
+       ...     "morph" : "morphology_folder",
        ...     "syn" : "parameterfiles_folder",
        ...     "con" : "parameterfiles_folder",
        ...     "recsites" : "parameterfiles_folder"

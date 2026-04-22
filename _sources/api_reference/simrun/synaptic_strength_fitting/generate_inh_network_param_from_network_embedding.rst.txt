@@ -6,7 +6,7 @@ generate_inh_network_param_from_network_embedding
 
 .. Signature -------------------------------
 
-.. function:: simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding(confile)
+.. function:: simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding(confile, synfile=None)
 
 
    Generate a network parameter file for inhibitory synapses from a :ref:`con_file_format` file.

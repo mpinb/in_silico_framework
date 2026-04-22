@@ -1,0 +1,39 @@
+
+
+write_functional_realization_map
+================================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.connectivity.write_functional_realization_map(fname=None, functionalMap=None, anatomicalID=None)
+
+
+   Write out a :ref:`con_file_format` file.
+
+   Writes list of all functional connections coded by tuples (cell type, presynaptic cell index, synapse index).
+   Only valid for anatomical synapse realization given by anatomicalID
+
+   See also:
+
+   - :ref:`con_file_format` for more information on the `.con` file format.
+   - :func:`single_cell_parser.io.connectivity.read_functional_realization_map` for the corresponding reader function.
+
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param functionalMap: A list of tuples, each containing a cell type, a presynaptic cell ID, and a synapse ID.
+   :type functionalMap: list
+   :param anatomicalID: The ID of the anatomical synapse realization.
+   :type anatomicalID: str
+
+   .. rubric:: Example
+      :class: example
+
+   >>> functionalMap = [('cell_type_1', 0, 0), ('cell_type_2', 0, 1)]
+   >>> write_functional_realization_map('functional_realization.con', functionalMap, 'syn_file.syn')
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -6,59 +6,14 @@ map_singlecell_inputs
 
 .. Signature -------------------------------
 
-.. function:: singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs(cellName, cellTypeName, nrOfSamples=50, numberOfCellsSpreadsheetName=numberOfCellsSpreadsheetName, connectionsSpreadsheetName=connectionsSpreadsheetName, ExPSTDensityName=ExPSTDensityName, InhPSTDensityName=InhPSTDensityName, boutonDensityFolderName=boutonDensityFolderName)
+.. function:: singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs(*args, **kwargs) -> None
 
 
-   Map inputs to a single cell morphology.
+   Infer which network embedding strategy to run.
 
-   These inputs need to be organized per anatomical structure. Anatomical structures
-   can be arbitrary spatial regions of the brain tissue, or anatomically well-defined
-   areas, e.g. barrels in a barrel cortex.
+   This function checks the user configuration and runs the configure network embedding strategy.
 
-   Steps:
-
-   1. Loads in the data:
-
-       - Cell morphology
-       - Number of cells per cell type
-       - Connection probabilities between cell types
-       - PST densities for normalization of innervation calculations
-
-   2. Loads in the bouton densities:
-
-       - For each anatomical area
-       - For each presynaptic cell type
-
-   3. Creates a scalar field (:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
-      for each bouton density.
-   4. Creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
-   5. Creates a network embedding for the cell using
-      :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
-
-   The naming of each anatomical area needs to be consistent between:
-
-   - The number of cells per cell type spreadsheet
-   - The bouton folders containing axon traces
-
-   :param cellName: path to a :ref:`hoc_file_format` file containing the morphology of the cell.
-   :type cellName: str
-   :param cellTypeName: name of the postsynaptic cell type.
-   :type cellTypeName: str
-   :param nrOfSamples: number of samples to use for the network embedding.
-   :type nrOfSamples: int
-   :param numberOfCellsSpreadsheetName: Path to the a spreadsheet, containing each neuropil structures as columns, and celltypes row indices.
-                                        Values indicate how much of each celltype was found in each neuropil structure.
-   :type numberOfCellsSpreadsheetName: str
-   :param connectionsSpreadsheetName: Path to a spreadsheet, containing the connection probabilities between each presynaptic and postsynaptic cell type.
-   :type connectionsSpreadsheetName: str
-   :param ExPSTDensityName: Path to the PST density file for excitatory synapses.
-   :type ExPSTDensityName: str
-   :param InhPSTDensityName: Path to the PST density file for inhibitory synapses.
-   :type InhPSTDensityName: str
-   :param boutonDensityFolderName: A directory containing the following subdirectory structure:
-                                   anatomical_area/presynaptic_cell_type/\*.am
-
-   :returns: None. Writes the results to disk, at the same location as the input :param:`cellName`.
+   .. seealso:: :mod:`config.user.network_connectivity` for configuring network embedding strategies.
 
 
 

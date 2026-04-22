@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#developer-installation" class="md-skip">
+        <a href="#the-isf-environment" class="md-skip">
           Skip to content
         </a>
       
@@ -367,8 +367,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#developer-installation" class="md-nav__link">
-    <span title="/installation.rst#developer-installation (reference label)" class="md-ellipsis">Developer installation</span>
+  <a href="#the-isf-environment" class="md-nav__link">
+    <span title="/installation.rst#the-isf-environment (reference label)" class="md-ellipsis">The ISF environment</span>
   </a>
   
 </li>
@@ -458,8 +458,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#developer-installation" class="md-nav__link">
-    <span title="/installation.rst#developer-installation (reference label)" class="md-ellipsis">Developer installation</span>
+  <a href="#the-isf-environment" class="md-nav__link">
+    <span title="/installation.rst#the-isf-environment (reference label)" class="md-ellipsis">The ISF environment</span>
   </a>
   
 </li>
@@ -537,7 +537,7 @@ which<span class="w"> </span>git
 If it doesn’t, you may need to restart your shell, or something went wrong during the installation of the requirements.</p>
 </details>
 <p>You can then install ISF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpinb/in_silico_framework.git<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpinb/in_silico_framework.git
 <span class="nb">cd</span><span class="w"> </span>in_silico_framework
 pixi<span class="w"> </span>run<span class="w"> </span>install
 </code></pre></div>
@@ -570,7 +570,7 @@ which<span class="w"> </span>git
 If it doesn’t, you may need to restart your shell, or something went wrong during the installation of the requirements.</p>
 </details>
 <p>You can then install ISF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpinb/in_silico_framework.git<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpinb/in_silico_framework.git
 <span class="nb">cd</span><span class="w"> </span>in_silico_framework
 pixi<span class="w"> </span>run<span class="w"> </span>install
 </code></pre></div>
@@ -618,19 +618,71 @@ which<span class="w"> </span>neuron
 If it doesn’t, you may need to restart your shell, or something went wrong during the installation of the requirements.</p>
 </details>
 <p>You can then install ISF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpinb/in_silico_framework.git<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mpinb/in_silico_framework.git
 <span class="nb">cd</span><span class="w"> </span>in_silico_framework
 pixi<span class="w"> </span>run<span class="w"> </span>install
 </code></pre></div>
 </div>
 </div>
 </div>
-</div><h2 id="developer-installation">Developer installation<a class="headerlink" href="#developer-installation" title="Link to this heading">¶</a></h2>
-<p>If you are planning to contribute to ISF and you have read the <a class="reference external" href="https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md">contributor guidelines</a>,
-you should also clone the <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch of the repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>set-branches<span class="w"> </span>origin<span class="w"> </span><span class="s1">&#39;develop&#39;</span>
-git<span class="w"> </span>fetch<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>origin<span class="w"> </span>develop
+</div><h2 id="the-isf-environment">The ISF environment<a class="headerlink" href="#the-isf-environment" title="Link to this heading">¶</a></h2>
+<p>ISF provides two environments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code>: the runtime environment used when you activate the ISF environment. This includes all dependencies of ISF necessary for normal operation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs</span></code>: dependencies needed to build the ISF documentation</p></li>
+</ul>
+<p>Each ISF environment adapts the following environment variables:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3">
+<input checked type="radio" id="__tabbed_2_1" name="__tabbed_2"><input type="radio" id="__tabbed_2_2" name="__tabbed_2"><input type="radio" id="__tabbed_2_3" name="__tabbed_2"><div class="tabbed-labels docutils">
+<label class="tabbed-label" for="__tabbed_2_1">
+Linux</label><label class="tabbed-label" for="__tabbed_2_2">
+macOS</label><label class="tabbed-label" for="__tabbed_2_3">
+Windows</label></div>
+<div class="tabbed-content docutils">
+<div class="tabbed-block docutils">
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>: ISF packages are prepended to the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>. In addition, the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> that existed before activating the ISF environment is preserved within ISF.
+This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ISF_HOME</span></code>: the root directory of the ISF project, as installed on the user system.</p></li>
+</ul>
+</div>
+<div class="tabbed-block docutils">
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>: ISF packages are prepended to the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>. In addition, the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> that existed before activating the ISF environment is preserved within ISF.
+This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ISF_HOME</span></code>: the root directory of the ISF project, as installed on the user system.</p></li>
+</ul>
+</div>
+<div class="tabbed-block docutils">
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>: ISF packages and the python packages that ship with your NEURON installation are prepended to the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> in that order.
+The NEURON python packages can be found at <code class="docutils literal notranslate"><span class="pre">%NEURONHOME%/lib/python</span></code>.
+In addition, the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> that existed before activating the ISF environment is preserved within ISF.
+This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH</span></code>: The location of your NEURON executables is appended to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, so that you can invoke them from within the environment. These are located at <code class="docutils literal notranslate"><span class="pre">%NEURONHOME%/bin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HOME</span></code>: ISF registers your <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%</span></code> under an additional environment variable named <code class="docutils literal notranslate"><span class="pre">HOME</span></code> for convenience.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ISF_HOME</span></code>: the root directory of the ISF project, as installed on the user system.</p></li>
+</ul>
+</div>
+</div>
+</div><div class="warning admonition">
+<p class="admonition-title">Warning</p>
+<p>The ISF <code class="docutils literal notranslate"><span class="pre">pixi</span></code> environment is, similar to other virtual environments, not isolated from system-level or user-level site-packages by default.
+It is recommended to install all python packages for any project in a dedicated environment for each project.
+System-level and user-level site-packages are reserved for those packages that are strictly required by any environment across the system or user respectively.
+If you have installed any other site-packages on the system- or user-level, you may contaminate your environments in unintended ways.
+You can check if this is the case by activating your environment, and inspecting the output of:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>site
 </code></pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">ENABLE_USER_SITE</span></code> flag is set to True (default behavior) and the <code class="docutils literal notranslate"><span class="pre">USER_SITE</span></code> directory exists (non-default behavior),
+then the site packages in <code class="docutils literal notranslate"><span class="pre">USER_SITE</span></code> will be loaded into this virtual environment.
+You should decide for yourself if this is the intended behavior for your user account and system, and if the contents of <code class="docutils literal notranslate"><span class="pre">USER_SITE</span></code> (if it exists) are indeed required across all environments.
+If they contain packages that also exist in ISF, they will clash.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/site.html">https://docs.python.org/3/library/site.html</a></p>
+</div>
 </div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
 <p>ISF works best with a dask server for parallel computing. We provide default scripts to launch a dask server and workers

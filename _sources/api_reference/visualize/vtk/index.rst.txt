@@ -44,7 +44,7 @@ Functions
      - Save synapse activations as vtk point cloud files for each timepoint.
    * - :py:obj:`write_vtk_skeleton_file <visualize.vtk.write_vtk_skeleton_file>`\ (lookup\_table, out\_name, out\_dir, point\_scalar\_data, n\_decimals)
      - Write out a .vtk file for a neuron morphology.
-   * - :py:obj:`convert_amira_lattice_to_vtk <visualize.vtk.convert_amira_lattice_to_vtk>`\ (surf\_file, outname, outdir)
+   * - :py:obj:`convert_amira_lattice_to_vtk <visualize.vtk.convert_amira_lattice_to_vtk>`\ (fn, outname, outdir)
      - Convert an AMIRA lattice file to vtk structured points.
 
 

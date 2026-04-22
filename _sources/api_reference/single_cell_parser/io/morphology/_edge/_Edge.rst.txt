@@ -1,0 +1,101 @@
+
+
+
+_Edge
+=====
+
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   is_valid <_Edge.is_valid>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+.. class signature --------------------------------------------------------------
+
+.. class:: single_cell_parser.io.morphology._edge._Edge
+
+   Bases: :py:obj:`object`
+   
+   Convenience class for NEURON segments.
+
+   Private class used in :func:`~single_cell_parser.io.morphology.read_morphology` to store information about a single morphological segment spanning from point to point.
+   These edges should not be used as API to neuron segments or sections - they merely serve as a convenience class during the creation of a morphology.
+
+   .. seealso::
+
+      :func:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
+      access to NEURON segments.
+
+   .. seealso::
+
+      :class:`~singlecell_input_mapper.singlecell_input_mapper.io.connectivity._Edge` for a similar class
+      that is used in the :mod:`singlecell_input_mapper` reader.
+
+   :Attributes:
+
+      .. attribute:: label
+
+         label of the segment (e.g. "Dendrite").
+
+         :type: str
+
+      .. attribute:: hocLabel
+
+         Full name of the segment (e.g. "Dendrite_1_0_0_0").
+
+         :type: str
+
+      .. attribute:: edgePts
+
+         List of points in the segment.
+
+         :type: list
+
+      .. attribute:: diameterList
+
+         List of diameters at each point.
+
+         :type: list
+
+      .. attribute:: parentID
+
+         label and ID of the parent section.
+
+         :type: int
+
+      .. attribute:: parentConnect
+
+         How far along the parent section the connection is (i.e. the `x`-coordinate).
+
+         :type: float
+
+      .. attribute:: valid
+
+         Flag indicating if the segment is valid.
+
+         :type: bool
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`is_valid <single_cell_parser.io.morphology._edge._Edge.is_valid>`\ ()
+        - Check if this edge is valid.
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

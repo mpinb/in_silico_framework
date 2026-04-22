@@ -1,0 +1,26 @@
+
+
+get_scalar
+==========
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.ScalarField.get_scalar(xyz)
+
+
+   Fetch the scalar value of the voxel containing the point xyz.
+
+   .. warning:: Returns 0 if :param:`xyz` is outside the bounding box.
+
+   :param xyz: The 3D coordinates of the point.
+   :type xyz: tuple
+
+   :returns: The scalar value of the voxel containing the point, 0 if outside bounding box.
+   :rtype: float
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

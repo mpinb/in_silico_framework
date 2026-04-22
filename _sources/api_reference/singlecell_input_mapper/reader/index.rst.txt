@@ -1,0 +1,44 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
+
+
+reader
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   read_cell_number_file </api_reference/singlecell_input_mapper/reader/read_cell_number_file>
+   read_nr_connected_cells_from_con </api_reference/singlecell_input_mapper/reader/read_nr_connected_cells_from_con>
+
+.. module:: singlecell_input_mapper.reader
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_cell_number_file <singlecell_input_mapper.reader.read_cell_number_file>`\ (cell\_nr\_fn)
+     - Load the cell number file.
+   * - :py:obj:`read_nr_connected_cells_from_con <singlecell_input_mapper.reader.read_nr_connected_cells_from_con>`\ (con\_file)
+     - Read a :ref:`con_file_format` and infer how many cells of each cell type are connected
+
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -18,7 +18,7 @@ insert_membrane_properties
                  as they are taken care of by :func:`insert_range_mechanisms` and :func:`_insert_ion_properties`.
    :type props: ~single_cell_parser.parameters.NTParameterSet
 
-   :raises RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+   :raises RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
 
 
 

@@ -1,0 +1,47 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.udvary2022` ❭ 
+
+
+scalar_field
+============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   ScalarField </api_reference/singlecell_input_mapper/udvary2022/scalar_field/ScalarField>
+
+.. module:: singlecell_input_mapper.udvary2022.scalar_field
+
+.. autoapi-nested-parse::
+   Implementation of 3D scalar fields based on numpy arrays.
+
+   Note that this class is identical to :class:`single_cell_parser.scalar_field.ScalarField`.
+   It is duplicated here for package independence.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`ScalarField <singlecell_input_mapper.udvary2022.scalar_field.ScalarField>`
+     - 3D scalar fields based on numpy arrays
+
+
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

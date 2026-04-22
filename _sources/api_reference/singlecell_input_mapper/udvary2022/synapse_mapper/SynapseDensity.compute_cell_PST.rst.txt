@@ -1,0 +1,47 @@
+
+
+compute_cell_PST
+================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseDensity.compute_cell_PST()
+
+
+   Compute density of postsynaptic targets (PSTs) for each anatomical structure as a full bounding-box spanning mesh.
+
+   Densities are calculated both in units per neurite length, and units per membrane surface area.
+
+   Creates a mesh for each structure of the postsynaptic neuron (e.g. "Soma", "Dendrite" etc).
+   Calculates the length and surface area density of each structure with :func:`~SynapseDensity._compute_length_surface_area_density` for each voxel in the mesh.
+   Multiplies these with (postsynaptic and presynaptic) cell type specific connectivity values from :attr:`~SynapseDensity.connectionSpreadsheet`.
+   Usually, poststynaptic cell type specificity is just EXC/INH.
+   This is the PST density used to normalize synapse densities on the postsynaptic structures in :func:`~SynapseDensity.compute_synapse_density` to obtain synapse densities.
+
+   :returns: Fills the scalar fields in place.
+   :rtype: None
+
+   Example:
+
+   >>> synapseDensity.compute_cell_PST()
+   >>> synapseDensity.cellPST['PRESYN_CELLTYPE_1']['Soma'].mesh  # spans the entire bounding box
+   array([[[ 0.        ,  0.        ,  0.        ,  0.        ],
+           ...,
+           [ 0.        ,  0.        ,  0.        ,  0.        ]]])
+   >>> synapseDensity.cellPST
+   {
+       'PRESYN_CELLTYPE_1': {
+           'Soma': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3b90>,
+           'ApicalDendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c10>,
+           'Dendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c50>
+           },
+       'PRESYN_CELLTYPE_2': {...},
+       ...
+   }
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,31 @@
+
+
+write_cell_synapse_locations
+============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.writer.write_cell_synapse_locations(fname=None, synapses=None, cellID=None)
+
+
+   Write a :ref:`syn_file_format` file, containing all synapses and their corresponding cellID, sectionID and x.
+
+   The locations of each synapse are coded by section ID and section x of cell with ID :param:`cellID`.
+
+   :param fname: Name of the output file. May or may not contain the suffix `.syn` or `.SYN`
+   :type fname: str
+   :param synapses: Dictionary containing synapse objects. Keys are synapse types, values are lists of synapse objects
+   :type synapses: dict
+   :param cellID: ID of the cell the synapses belong to
+   :type cellID: str
+
+   :raises RuntimeError: If any of the input arguments is `None`
+
+   :returns: None
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

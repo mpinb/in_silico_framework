@@ -13,7 +13,7 @@ param_file_parser
 
    construct_param_filename_hashmap_df </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/construct_param_filename_hashmap_df>
    _get_syn_con_fns_from_netp </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_syn_con_fns_from_netp>
-   _get_hoc_fns_from_neup </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_hoc_fns_from_neup>
+   _get_morph_fns_from_neup </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_morph_fns_from_neup>
    _get_recsite_fns_from_neup </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_recsite_fns_from_neup>
    _resolve_and_copy_neuron_param </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_resolve_and_copy_neuron_param>
    _resolve_and_copy_network_param </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_resolve_and_copy_network_param>

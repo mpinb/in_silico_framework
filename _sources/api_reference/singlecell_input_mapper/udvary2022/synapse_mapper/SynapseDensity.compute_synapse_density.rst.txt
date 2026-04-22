@@ -1,0 +1,40 @@
+
+
+compute_synapse_density
+=======================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseDensity.compute_synapse_density(boutonDensity, preCellType)
+
+
+   Compute the density of synapses of a given presynaptic celltype onto the postsynaptic neuron.
+
+   Calculates the density field of PSTs of a given post-synaptic morphology using :func:`~SynapseDensity.compute_cell_PST`.
+   The density of synapses at each voxel in the density field is computed to be the
+   postsynaptic cell's PST density * presynaptic bouton density / normalization PST density.
+   These synapse density meshes are computed for excitatory and inhibitory cell types separately.
+   Within the excitatory or inhibitory class, there is no further distinction between cell types.
+   There thus exists one synapse density field that captures all excitatory cell types, and idem ditto for inhibitory.
+   Cell type specific varation in synapses are only assigned during the network realization phase.
+   (see :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.create_network_embedding_from_synapse_densities`)
+
+   This method is used in :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`'s
+   :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities`.
+
+   :param boutonDensity: Density of presynaptic boutons.
+   :type boutonDensity: ~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField
+   :param preCellType: Presynaptic cell type.
+                       Used to check if it is an exitatory or inhibitory cell, as they have separate density meshes and normalization fields.
+   :type preCellType: str
+
+   :returns: Dictionary of synapse densities for each structure of the postsynaptic neuron.
+             If bouton density and cell PST don't overlap, or synapse density == 0 everywhere, returns None.
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

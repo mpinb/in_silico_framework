@@ -1,0 +1,18 @@
+
+
+silence_logger
+==============
+
+
+.. Signature -------------------------------
+
+.. function:: config.isf_logging.silence_logger(name=None, level=logging.CRITICAL)
+
+
+   Silence a named logger (or the root logger if name=None).
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

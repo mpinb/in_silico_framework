@@ -1,0 +1,86 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.udvary2022` ❭ 
+
+
+reader
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _Edge </api_reference/singlecell_input_mapper/udvary2022/reader/_Edge>
+   read_hoc_file </api_reference/singlecell_input_mapper/udvary2022/reader/read_hoc_file>
+   read_scalar_field </api_reference/singlecell_input_mapper/udvary2022/reader/read_scalar_field>
+   _rename_hoc_labels_in_columns </api_reference/singlecell_input_mapper/udvary2022/reader/_rename_hoc_labels_in_columns>
+   read_connections_spreadsheet </api_reference/singlecell_input_mapper/udvary2022/reader/read_connections_spreadsheet>
+   read_celltype_numbers_spreadsheet </api_reference/singlecell_input_mapper/udvary2022/reader/read_celltype_numbers_spreadsheet>
+   read_bouton_densities_per_area_per_ct </api_reference/singlecell_input_mapper/udvary2022/reader/read_bouton_densities_per_area_per_ct>
+
+.. module:: singlecell_input_mapper.udvary2022.reader
+
+.. autoapi-nested-parse::
+   Read in hoc files, Amira Mesh files, and spreadsheets with connection probabilities.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`_Edge <singlecell_input_mapper.udvary2022.reader._Edge>`
+     - Convenience class for NEURON segments.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_hoc_file <singlecell_input_mapper.udvary2022.reader.read_hoc_file>`\ (fname, label\_map)
+     - Read a .hoc morphology file and return a list of Edge objects.
+   * - :py:obj:`read_scalar_field <singlecell_input_mapper.udvary2022.reader.read_scalar_field>`\ (fname, dtype)
+     - Read ASCII AMIRA scalar field mesh files with high speed.
+   * - :py:obj:`read_connections_spreadsheet <singlecell_input_mapper.udvary2022.reader.read_connections_spreadsheet>`\ (fname, rename\_presyn\_map)
+     - Read a connections spreadsheet.
+   * - :py:obj:`read_celltype_numbers_spreadsheet <singlecell_input_mapper.udvary2022.reader.read_celltype_numbers_spreadsheet>`\ (fname)
+     - Reads a spreadsheet with cell type numbers for each anatomical area.
+   * - :py:obj:`read_bouton_densities_per_area_per_ct <singlecell_input_mapper.udvary2022.reader.read_bouton_densities_per_area_per_ct>`\ (dirname, anatomical\_areas, cell\_types)
+     - \-
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <singlecell_input_mapper.udvary2022.reader.logger>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

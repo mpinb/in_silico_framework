@@ -1,0 +1,23 @@
+
+
+encode
+======
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.parameters.CompactListEncoder.encode(obj)
+
+
+   Return a JSON string representation of a Python data structure.
+
+   >>> from json.encoder import JSONEncoder
+   >>> JSONEncoder().encode({"foo": ["bar", "baz"]})
+   '{"foo": ["bar", "baz"]}'
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,41 @@
+
+
+write_population_connectivity_summary
+=====================================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.writer.write_population_connectivity_summary(fname=None, populationDistribution=None)
+
+
+   Write a summary of populations of connectivity realizations to a file.
+
+   The populationDistribution can be calculated with :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+   For each cell type, this method writes a summary on the same attributes for each cell structure as :func:`write_sample_connectivity_summary`, namely:
+
+   - Presynaptic cell type
+   - Number of synapses
+   - Mean path length to soma
+   - SD path length to soma
+   - Connected presynaptic cells
+   - Total presynaptic cells
+   - Convergence
+   - Number of synapses
+
+   In addition, however, it also writes out the standard deviation of these values, taken across network realizations.
+
+   :param fname: Name of the output file
+   :type fname: str
+   :param populationDistribution: Dictionary containing the summary data for each cell type
+                                  Must contain at least a key for each presynaptic cell type.
+                                  Values are lists of the form [mean, std] for each of the attributes mentioned above.
+   :type populationDistribution: dict
+
+   :returns: None. Writes the results to disk.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,28 @@
+
+
+read_morphology
+===============
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.read_morphology(fn, remap_labels=None)
+
+
+   Read a morphology in :ref:`hoc_file_format` or :ref:`swc_file_format` format.
+
+   This function is a simply strategy pattern to decide which reader to use.
+
+   :param fn: Name of the morphology file.
+   :type fn: ~Path
+
+   :returns: List of :class:`~_Edge` objects for further parsing, usually by :meth:`~CellParser.spatialgraph_to_cell`
+   :rtype: List[_Edge]
+
+   :raises NotImplementedError: If the given filename is not a :ref:`hoc_file_format` or :ref:`swc_file_format`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

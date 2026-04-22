@@ -443,38 +443,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../singlecell_input_mapper/index.html" class="md-nav__link">
-        <span title="/api_reference/singlecell_input_mapper/singlecell_input_mapper/index.rst (reference label)" class="md-ellipsis">singlecell_<wbr>input_<wbr>mapper</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../evoked_PSTH_from_spike_times/index.html" class="md-nav__link">
-        <span title="/api_reference/singlecell_input_mapper/evoked_psth_from_spike_times/index.rst (reference label)" class="md-ellipsis">evoked_<wbr>PSTH_<wbr>from_<wbr>spike_<wbr>times</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../evoked_network_param_from_template/index.html" class="md-nav__link">
-        <span title="/api_reference/singlecell_input_mapper/evoked_network_param_from_template/index.rst (reference label)" class="md-ellipsis">evoked_<wbr>network_<wbr>param_<wbr>from_<wbr>template</span>
+      <a href="../udvary2022/index.html" class="md-nav__link">
+        <span title="/api_reference/singlecell_input_mapper/udvary2022/index.rst (reference label)" class="md-ellipsis">udvary2022</span>
       </a>
     </li>
   
@@ -493,7 +463,7 @@
     <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6_4" type="checkbox" id="__nav_1_6_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_6_2" type="checkbox" id="__nav_1_6_2" checked>
       
       
       
@@ -501,14 +471,14 @@
         <div class="md-nav__link md-nav__link--index md-nav__link--active">
           <a href="#"><span title="/api_reference/singlecell_input_mapper/map_singlecell_inputs/index.rst (reference label)" class="md-ellipsis">map_<wbr>singlecell_<wbr>inputs</span></a>
           
-            <label for="__nav_1_6_4">
+            <label for="__nav_1_6_2">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="map_singlecell_inputs" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_6_4">
+        <label class="md-nav__title" for="__nav_1_6_2">
           <span class="md-nav__icon md-icon"></span>
           <span title="/api_reference/singlecell_input_mapper/map_singlecell_inputs/index.rst (reference label)" class="md-ellipsis">map_<wbr>singlecell_<wbr>inputs</span>
         </label>
@@ -600,8 +570,38 @@
   
   
     <li class="md-nav__item">
-      <a href="../ongoing_network_param_from_template/index.html" class="md-nav__link">
-        <span title="/api_reference/singlecell_input_mapper/ongoing_network_param_from_template/index.rst (reference label)" class="md-ellipsis">ongoing_<wbr>network_<wbr>param_<wbr>from_<wbr>template</span>
+      <a href="../network_param_builder/index.html" class="md-nav__link">
+        <span title="/api_reference/singlecell_input_mapper/network_param_builder/index.rst (reference label)" class="md-ellipsis">network_<wbr>param_<wbr>builder</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network_param_from_template/index.html" class="md-nav__link">
+        <span title="/api_reference/singlecell_input_mapper/network_param_from_template/index.rst (reference label)" class="md-ellipsis">network_<wbr>param_<wbr>from_<wbr>template</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reader/index.html" class="md-nav__link">
+        <span title="/api_reference/singlecell_input_mapper/reader/index.rst (reference label)" class="md-ellipsis">reader</span>
       </a>
     </li>
   
@@ -791,67 +791,12 @@
 <h1 id="map-singlecell-inputs">map_singlecell_inputs<a class="headerlink" href="#map-singlecell-inputs" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p id="module-singlecell_input_mapper.map_singlecell_inputs">Map synapses onto a postsynaptic cell.</p>
-<p>This module provides a full pipeline for creating dense connectome models
-of the rat barrel cortex, based on methods and data presented in
-<span id="id1">Udvary <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id11" title="Daniel Udvary, Philipp Harth, Jakob H. Macke, Hans-Christian Hege, Christiaan P.J. De Kock, Bert Sakmann, and Marcel Oberlaender. The impact of neuron morphology on cortical network architecture. Cell Reports, 39(2):110677, April 2022. doi:10.1016/j.celrep.2022.110677.">13</a>]</span>.</p>
-<p>This runfile assumes you have downloaded and extracted the barrel cortex model data from
-<a class="reference external" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa</a>.
-If this is not the case, please consult <code class="docutils literal notranslate"><span class="pre">installer/download_bc_model</span></code> and extract.</p>
-<div class="attention admonition">
-<p class="admonition-title">Attention</p>
-<p>This file is specific to the barrel cortex model data. If you want to use it for other data,
-you need to adapt the paths to the data accordingly. This runfile can serve as a template.</p>
-</div>
-<p>Inputs:</p>
-<ul class="simple">
-<li><p>Morphology of the post-synaptic neuron</p></li>
-<li><p>3D field of synapse densities or synapse counts.</p></li>
-<li><p>Number of cells per cell type in the brain area of interest.</p></li>
-<li><p>Connections spreadsheet containing PST length/area constants of
-the post-synaptic cell for normalization.</p></li>
-<li><p>Bouton locations of individual axon tracings.</p></li>
-</ul>
-<div class="attention admonition">
-<p class="admonition-title">Attention</p>
-<p>This runfile has default values for the barrel cortex, and so assumes that you have downloaded
-and extracted the barrel cortex model data from
-<a class="reference external" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa</a>.
-If this is not the case, please consult <code class="docutils literal notranslate"><span class="pre">installer/download_bc_model</span></code> and extract,
-or adapt the paths in this file to your data.</p>
-</div>
-<p>This module then uses <a class="reference internal" href="../singlecell_input_mapper/network_embedding/NetworkMapper.html#singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper" title="singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper (Python class) — Connect presynaptic cells to a postsynaptic cell model."><code class="xref py py-class docutils literal notranslate"><span class="pre">NetworkMapper</span></code></a>
-to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
-This happens according to the following pipeline:</p>
-<ol class="arabic simple">
-<li><p>The bouton density field and PST density fields are converted to scalar fields with defined voxel resolution.</p></li>
-<li><p>Calculates the overlap between these voxels and the dendrites of the postsynaptic neuron morphology
-using Liang-Barsky clipping <span id="id2">[<a class="reference internal" href="../../../bibliography.html#id9" title="You-Dong Liang and Brian A. Barsky. A new concept and method for line clipping. ACM Transactions on Graphics (TOG), 3(1):1–22, 1984.">14</a>]</span>. Only these voxels are further considered for potential synapses.</p></li>
-<li><p>Calculates a synapse density field by multiplying the bouton density field with the PST density fields
-at these voxels.</p></li>
-<li><p>Normalizes the previous synapse density fields using cell-type specific PST length/area constraints and the number of
-cells per cell type.</p></li>
-<li><p>Poisson samples synapses from this normalized synapse density field to realize synapses.
-These are randomly placed onto the dendritic branch within that voxel. One such sample is called an “anatomical realization”.</p></li>
-<li><p>(optional) Repeat steps 4 and 5 to create a collection of anatomical realizations.</p></li>
-</ol>
-<p>Density meshes are accessed using <a class="reference internal" href="../singlecell_input_mapper/scalar_field/ScalarField.html#singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField" title="singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarField</span></code></a>.
-<a class="reference internal" href="../singlecell_input_mapper/synapse_mapper/SynapseMapper.html#singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper" title="singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">SynapseMapper</span></code></a> makes use of
-<a class="reference internal" href="../singlecell_input_mapper/synapse_mapper/SynapseDensity.html#singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity" title="singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">SynapseDensity</span></code></a> for steps 2, 3 and 4,
-and finalizes step 5 by itself.</p>
-<p>Outputs:</p>
-<ul class="simple">
-<li><p>summary file containing information about number and presynaptic type
-and column of anatomical synapses</p></li>
-<li><p>AmiraMesh landmark file containing 3D synapse locations of anatomical
-synapses of each presynaptic type and column</p></li>
-<li><p>Synapse location (<a class="reference internal" href="../../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a>) and connectivity (<a class="reference internal" href="../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a>) file compatible with <a class="reference internal" href="../../simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a>.</p></li>
-</ul>
+<p id="module-singlecell_input_mapper.map_singlecell_inputs">Top-level pipeline to map synapses onto a postsynaptic cell.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="map_singlecell_inputs.html#singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs" title="singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs (Python function) — Map inputs to a single cell morphology."><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_singlecell_inputs</span></code></a>(cellName, cellTypeName, nrOfSamples, numberOfCellsSpreadsheetName, connectionsSpreadsheetName, ExPSTDensityName, InhPSTDensityName, boutonDensityFolderName)</p></td>
-<td><p>Map inputs to a single cell morphology.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="map_singlecell_inputs.html#singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs" title="singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs (Python function) — Infer which network embedding strategy to run."><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_singlecell_inputs</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Infer which network embedding strategy to run.</p></td>
 </tr>
 </tbody>
 </table>
@@ -859,33 +804,6 @@ synapses of each presynaptic type and column</p></li>
 <table class="summarytable docutils data align-default">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefix</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">numberOfCellsSpreadsheetName</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">connectionsSpreadsheetName</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExPSTDensityName</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">InhPSTDensityName</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">boutonDensityFolderName</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">exTypes</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inhTypes</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fname</span></code></p></td>
 <td><p>-</p></td>
 </tr>
 </tbody>
@@ -914,7 +832,7 @@ synapses of each presynaptic type and column</p></li>
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../evoked_network_param_from_template/load_cell_number_file.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: load_cell_number_file" rel="prev">
+        <a href="../udvary2022/map_singlecell_inputs.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: map_singlecell_inputs" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -923,7 +841,7 @@ synapses of each presynaptic type and column</p></li>
               <span class="md-footer__direction">
                 Previous
               </span>
-              load_cell_number_file
+              map_singlecell_inputs
             </div>
           </div>
         </a>

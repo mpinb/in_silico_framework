@@ -1,0 +1,103 @@
+
+
+
+NetworkParamBuilder
+===================
+
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _generate_param_info <NetworkParamBuilder._generate_param_info>
+   add_network_embedding <NetworkParamBuilder.add_network_embedding>
+   subcategorize_celltypes <NetworkParamBuilder.subcategorize_celltypes>
+   _add_synapse_dynamics_generic <NetworkParamBuilder._add_synapse_dynamics_generic>
+   add_synapse_dynamics <NetworkParamBuilder.add_synapse_dynamics>
+   add_ongoing_activity <NetworkParamBuilder.add_ongoing_activity>
+   add_activity <NetworkParamBuilder.add_activity>
+   _convert_flat_to_nested_ongoing_activity <NetworkParamBuilder._convert_flat_to_nested_ongoing_activity>
+   _has_flat_ongoing_activity <NetworkParamBuilder._has_flat_ongoing_activity>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+.. class signature --------------------------------------------------------------
+
+.. class:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder(netp: NetworkParamBuilder | single_cell_parser.parameters.NTParameterSet | None = None, embedding_include_all_celltypes: bool = False)
+   
+   Builder for :ref:`network_parameters_format`.
+
+   This class adds network data to a :class:`~single_cell_parser.paramters.NTParameterSet`.
+   Network data can include:
+
+   - Network embedding data (locations of synapses on the dendrite and their presynaptic origin, i.e. :ref:`syn_file_format` and :ref:`con_file_format` files)
+   - Activity data (i.e. when does each presynaptic cell activate)
+   - Synapse dynamics
+   - Any relevant additional information, such as a stimulus "offset"
+
+
+   Example::
+
+       netpb = NetworkParamBuilder(
+       ).add_ongoing_activity(
+           ongoing_interval_per_ct = celltype_to_ongoing_map
+       ).add_synapse_dynamics(
+       ).subcategorize_celltypes(
+           cell_type_map = subcategorized_celltypes_map
+       ).add_network_embedding(
+           syn_fn = syn_fn,
+           con_fn = con_fn,
+       ).add_activity(
+           activity_per_ct   = activity_data_per_subct,
+           additional_params = additional_evoked_parameters
+       ).network_parameters
+
+       netp.save(
+           filename=save_filename
+       )
+
+   :param netp: An existing :ref:`network_parameters_format` object.
+                If not given, a new one is initialized from scratch.
+   :type netp: ~single_cell_parser.parameters.NTParameterSet
+   :param embedding_include_all_celltypes: Whether to write network embedding information for all cell types, even if they are not connected
+                                           to the postsynaptic cell.
+                                           Default is False
+   :type embedding_include_all_celltypes: bool
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_generate_param_info <singlecell_input_mapper.network_param_builder.NetworkParamBuilder._generate_param_info>`\ ()
+        - Generate basic info for the :ref:`network_parameters_format`
+      * - :py:obj:`add_network_embedding <singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_network_embedding>`\ (syn\_fn, con\_fn, join)
+        - Add network embedding data.
+      * - :py:obj:`subcategorize_celltypes <singlecell_input_mapper.network_param_builder.NetworkParamBuilder.subcategorize_celltypes>`\ (cell\_type\_map)
+        - Subgategorize cell types in the :ref:`network_parameters_format` file.
+      * - :py:obj:`_add_synapse_dynamics_generic <singlecell_input_mapper.network_param_builder.NetworkParamBuilder._add_synapse_dynamics_generic>`\ ()
+        - Add synapse dynamics based on EXC/INH
+      * - :py:obj:`add_synapse_dynamics <singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_synapse_dynamics>`\ (synapse\_params\_per\_ct)
+        - Add synapse dynamics to the :ref:`network_parameters_format`.
+      * - :py:obj:`add_ongoing_activity <singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_ongoing_activity>`\ (ongoing\_interval\_per\_ct)
+        - Add :ref:`ongoing_activity_data_format` to the :ref:`network_parameters_format`
+      * - :py:obj:`add_activity <singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_activity>`\ (activity\_per\_ct, additional\_params)
+        - Add :ref:`activity_data_format` to a :ref:`network_parameters_format` file.
+      * - :py:obj:`_convert_flat_to_nested_ongoing_activity <singlecell_input_mapper.network_param_builder.NetworkParamBuilder._convert_flat_to_nested_ongoing_activity>`\ (celltype)
+        - Convert flat ongoing activity to a nested format.
+      * - :py:obj:`_has_flat_ongoing_activity <singlecell_input_mapper.network_param_builder.NetworkParamBuilder._has_flat_ongoing_activity>`\ (celltype)
+        - Check if the :ref:`network_parameters_format` has ongoing activity in flat format.
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

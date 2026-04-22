@@ -78,9 +78,9 @@ Functions
      - Simulate a single excitatory or inhibitory synapse.
    * - :py:obj:`run_ex_synapses <simrun.synaptic_strength_fitting.run_ex_synapses>`\ (neuron\_param, network\_param, celltype, gAMPA, gNMDA, gGABA, vardt, tStim, tEnd, mode)
      - Simulate all EPSPs of a given celltype, one by one.
-   * - :py:obj:`generate_ex_network_param_from_network_embedding <simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding>`\ (confile)
-     - Generate a network parameter file for excitatory synapses from a :ref:`con_file_format` file.
-   * - :py:obj:`generate_inh_network_param_from_network_embedding <simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding>`\ (confile)
+   * - :py:obj:`generate_ex_network_param_from_network_embedding <simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding>`\ (confile, synfile)
+     - Fill a network parameter file for excitatory synapses with embedding data and (incomplete) activity data.
+   * - :py:obj:`generate_inh_network_param_from_network_embedding <simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding>`\ (confile, synfile)
      - Generate a network parameter file for inhibitory synapses from a :ref:`con_file_format` file.
    * - :py:obj:`get_voltage_and_timing <simrun.synaptic_strength_fitting.get_voltage_and_timing>`\ (vt, method, tStim, tEnd)
      - Calculate the maximum amplitude (and their timing) of an ePSP for all synapses.
@@ -120,6 +120,10 @@ Attributes
    * - :py:obj:`defaultdict_defaultdict <simrun.synaptic_strength_fitting.defaultdict_defaultdict>`
      - \-
    * - :py:obj:`logger <simrun.synaptic_strength_fitting.logger>`
+     - \-
+   * - :py:obj:`GLUTAMATE_SYN_PARAM_TEMPLATE <simrun.synaptic_strength_fitting.GLUTAMATE_SYN_PARAM_TEMPLATE>`
+     - \-
+   * - :py:obj:`GABA_SYN_PARAM_TEMPLATE <simrun.synaptic_strength_fitting.GABA_SYN_PARAM_TEMPLATE>`
      - \-
 
 

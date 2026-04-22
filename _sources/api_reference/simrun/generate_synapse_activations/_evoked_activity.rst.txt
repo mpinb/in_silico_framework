@@ -17,7 +17,7 @@ _evoked_activity
    Spike time files are generated with :func:`single_cell_parser.analyze.write_presynaptic_spike_times`.
 
    :param cellParamName: Path to a :ref:`cell_parameters_format` file,
-                         containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+                         containing information about the neuron morphology (link to a :ref:`morphology_file_format` file) and biophysical properties.
    :type cellParamName: str
    :param evokedUpParamName: Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
    :type evokedUpParamName: str

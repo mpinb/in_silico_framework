@@ -23,6 +23,7 @@ CMVDataParser
    _calc_voltage_timeseries <CMVDataParser._calc_voltage_timeseries>
    _calc_ion_dynamics_timeseries <CMVDataParser._calc_ion_dynamics_timeseries>
    _get_synapses_at_timepoint <CMVDataParser._get_synapses_at_timepoint>
+   _get_synapses <CMVDataParser._get_synapses>
    _calc_synapses_timeseries <CMVDataParser._calc_synapses_timeseries>
    _get_timeseries_minmax <CMVDataParser._get_timeseries_minmax>
    _update_times_to_show <CMVDataParser._update_times_to_show>
@@ -216,6 +217,13 @@ CMVDataParser
 
          :type: list
 
+      .. attribute:: synapses
+
+         List containing the synapse locations.
+         Each key is the type of input population and the value is the list of synapses for that type of population.
+
+         :type: dict
+
       .. attribute:: ion_dynamics_timeseries
 
          Dictionary containing the ion dynamics during a timeseries (Similarly to :param:`voltage_timeseries`).
@@ -259,6 +267,8 @@ CMVDataParser
         - Retrieves ion dynamics info along the whole cell body during a set of time points (specified in self.times_to_show).
       * - :py:obj:`_get_synapses_at_timepoint <visualize.cell_morphology_visualizer.CMVDataParser._get_synapses_at_timepoint>`\ (time\_point)
         - Retrieves the active synapses at a particular time point.
+      * - :py:obj:`_get_synapses <visualize.cell_morphology_visualizer.CMVDataParser._get_synapses>`\ (active\_only)
+        - Retrieves the synapse locations per synapse group.
       * - :py:obj:`_calc_synapses_timeseries <visualize.cell_morphology_visualizer.CMVDataParser._calc_synapses_timeseries>`\ ()
         - Retrieves the active synapses during a set of time points (specified in :param:`times_to_show`).
       * - :py:obj:`_get_timeseries_minmax <visualize.cell_morphology_visualizer.CMVDataParser._get_timeseries_minmax>`\ (timeseries)

@@ -1,0 +1,21 @@
+
+
+get_bounding_box
+================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.cell.Cell.get_bounding_box()
+
+
+   Calculate the bounding box around the cell.
+
+   :returns: 6-tuple bounding box around the cell: (xMin, xMax, yMin, yMax, zMin, zMax).
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

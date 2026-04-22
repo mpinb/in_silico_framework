@@ -1,0 +1,46 @@
+
+
+convert_hoc_to_swc
+==================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.convert_hoc_to_swc(hoc_fn, of, axon=False, skip_myelin=False, remap_sections=None)
+
+
+   Convert a :ref:`hoc_file_format` morphology file to swc format.
+
+   :param hoc_fn: Path to the :ref:`hoc_file_format` morphology file.
+   :type hoc_fn: str
+   :param of: Output path for the resulting swc file.
+   :type of: str
+   :param skip_myelin: If True, myelin will not be written to the resulting .swc file.
+   :type skip_myelin: bool
+   :param remap_sections: A dictionary mapping section indices to a custom label.
+                          Custom labels
+   :type remap_sections: dict
+   :param axon: Whether or not to include the axon in the resulting swc file.
+                Default is `False``, because ISF by default ignores morphologically detailed axons in favor of a custom one
+                (see :meth:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`)
+   :type axon: bool
+
+   .. attention::
+
+      The conversion from :ref:`hoc_file_format` to :ref:`swc_file_format` is slightly destructive.
+      :ref:`hoc_file_format` allows you to specify connectivity between sections in terms of a continuous
+      relative coordinate `x`. On the other hand, :ref:`swc_file_format` defines this based on a discrete point index.
+      We make a best effort to choose the point closest to the `x` coordinate as specified in the :ref:`hoc_file_format`,
+      but this is not guaranteed to exactly match the connection point.
+      In reality, this is often only used for the soma, and ISF by default connects soma children at ``x=0.5`` anyways.
+
+   .. attention::
+
+      When :param:`axon` is set to True, the axon is built  and written out according to :meth:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`,
+      and has nothing to do with any axon that may be present in the :ref:`hoc_file_format` file.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

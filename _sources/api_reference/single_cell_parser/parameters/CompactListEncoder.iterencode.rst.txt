@@ -1,0 +1,25 @@
+
+
+iterencode
+==========
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.parameters.CompactListEncoder.iterencode(obj, _one_shot=False)
+
+
+   Encode the given object and yield each string
+   representation as available.
+
+   For example::
+
+       for chunk in JSONEncoder().iterencode(bigobject):
+           mysocket.write(chunk)
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

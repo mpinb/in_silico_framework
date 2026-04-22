@@ -1,0 +1,26 @@
+
+
+_calc_soma_x
+============
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.swc._calc_soma_x(sections, point_id, points_dict)
+
+
+   Infer where along the parent section (x) a given point connects
+
+   This function is only applicable when the :paramref:`sections` are organized
+   in the same order as the point IDs.
+   When parsing SWC files, this is not necessarily true, as parsing SWC will iterate
+   child sections depth-first, potentially parsing a section whose point IDs exceed
+   the amount of already parsed points.
+   However, if we assume all branches connect at x=1, except for the soma,
+   we can safely assume the soma has already been parsed.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

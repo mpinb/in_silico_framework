@@ -1,0 +1,29 @@
+
+
+get_mesh_coordinates
+====================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.ScalarField.get_mesh_coordinates(xyz)
+
+
+   Fetch the mesh index of the voxel containing the point xyz.
+
+   .. warning::
+
+      This method does not perform range checking.
+      If :param:`xyz` is outside the bounding box, the index will be out of bounds for the :attr:`mesh`.
+
+   :param xyz: The 3D coordinates of the point.
+   :type xyz: tuple
+
+   :returns: The :attr:`mesh` index of the voxel containing the point.
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

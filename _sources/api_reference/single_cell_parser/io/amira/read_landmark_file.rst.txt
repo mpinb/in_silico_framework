@@ -1,0 +1,26 @@
+
+
+read_landmark_file
+==================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.read_landmark_file(landmarkFilename)
+
+
+   Read an AMIRA landmark file
+
+   :param landmarkFilename: Filename of the landmark file to be read.
+   :type landmarkFilename: str
+
+   :raises RuntimeError: If the input file does not have a `.landmarkAscii` suffix.
+
+   :returns: (x,y,z) points of landmarks.
+   :rtype: list
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

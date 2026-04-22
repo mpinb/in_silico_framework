@@ -1,0 +1,36 @@
+
+
+build_section_directory
+=======================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.swc.build_section_directory(root_ids, points_dict)
+
+
+   Build an ordered list of section records from an SWC point dictionary.
+
+   Traverses the morphology tree starting from the soma root and produces one
+   record per section, including the soma as the first entry. Each record
+   contains the section name, its parent section name (``None`` for soma), and
+   the ordered list of 3D points (x, y, z, diameter) belonging to that section.
+
+   :param root_ids: Point IDs of the soma root (parent == -1). Multiple points on the soma are usually a root for child setions.
+   :type root_ids: List[int]
+   :param points_dict: Full point dictionary from :func:`parse_swc`.
+   :type points_dict: dict
+
+   :returns: Ordered section records, each with keys ``"name"`` (str),
+             ``"parent_name"`` (str or ``None``), and ``"points"``
+             (list of ``(x, y, z, diameter)`` tuples). The soma section is always first
+             and has ``"parent_name": None``.
+   :rtype: list of dict
+
+   :raises ValueError: If no soma points (type 1) are found in the SWC file.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,26 @@
+
+
+spatialgraph_to_cell
+====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.cell.CellParser.spatialgraph_to_cell()
+
+
+   Set up a cell object from an AMIRA hoc file.
+
+   Reads cell morphology from Amira hoc file
+   and sets up PySections and Cell object.
+
+   .. deprecated:: 1.0
+       The `scaleFunc` argument is deprecated and will be removed in a future version.
+       To ensure reproducability, scaleFunc should be specified in the cell parameters, as
+       described in :mod:`~single_cell_parser.cell_modify_funs`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,29 @@
+
+
+setup_StepThree
+===============
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.hay.setup_stim.setup_StepThree(cell, delay=700)
+
+
+   Setup a step current stimulus at the soma:
+
+   - amplitude = 1.507 nA
+   - delay = 700 ms
+   - duration = 2000 ms
+
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param delay: The delay of the step current stimulus (ms).
+   :type delay: float
+
+   :returns: None. Adds a step current stimulus to the cell.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

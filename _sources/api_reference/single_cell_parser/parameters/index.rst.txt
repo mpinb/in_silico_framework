@@ -12,6 +12,7 @@ parameters
    :hidden:
 
    NTParameterSet </api_reference/single_cell_parser/parameters/NTParameterSet>
+   CompactListEncoder </api_reference/single_cell_parser/parameters/CompactListEncoder>
    _make_json_compatible </api_reference/single_cell_parser/parameters/_make_json_compatible>
    _read_params_to_dict </api_reference/single_cell_parser/parameters/_read_params_to_dict>
    build_parameters </api_reference/single_cell_parser/parameters/build_parameters>
@@ -39,6 +40,8 @@ Classes
    
    * - :py:obj:`NTParameterSet <single_cell_parser.parameters.NTParameterSet>`
      - NeuroTools Parameter Set format.
+   * - :py:obj:`CompactListEncoder <single_cell_parser.parameters.CompactListEncoder>`
+     - Custom JSON encoder to keep lists on a single line
 
 
 .. rst-class:: absolute-paragraph

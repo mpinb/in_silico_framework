@@ -1,0 +1,151 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
+
+
+udvary2022
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   cell </api_reference/singlecell_input_mapper/udvary2022/cell/index>  
+   generate_nr_of_cells_spreadsheet </api_reference/singlecell_input_mapper/udvary2022/generate_nr_of_cells_spreadsheet/index>  
+   network_embedding </api_reference/singlecell_input_mapper/udvary2022/network_embedding/index>  
+   reader </api_reference/singlecell_input_mapper/udvary2022/reader/index>  
+   scalar_field </api_reference/singlecell_input_mapper/udvary2022/scalar_field/index>  
+   synapse_mapper </api_reference/singlecell_input_mapper/udvary2022/synapse_mapper/index>  
+   writer </api_reference/singlecell_input_mapper/udvary2022/writer/index>  
+   map_singlecell_inputs </api_reference/singlecell_input_mapper/udvary2022/map_singlecell_inputs>
+
+.. module:: singlecell_input_mapper.udvary2022
+
+.. autoapi-nested-parse::
+   Top-level pipeline to map synapses onto a postsynaptic cell according to :cite:t:`Udvary_Harth_Macke_Hege_De_Kock_Sakmann_Oberlaender_2022`.
+
+   This module provides a full pipeline for creating dense connectome models
+   of the rat barrel cortex, based on methods and data presented in
+   :cite:t:`Udvary_Harth_Macke_Hege_De_Kock_Sakmann_Oberlaender_2022` and :cite:t:`Egger_Dercksen_Udvary_Hege_Oberlaender_2014`.
+
+   This runfile assumes you have downloaded and extracted the barrel cortex model data from
+   https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
+   If this is not the case, please consult ``installer/download_bc_model`` and extract.
+
+   .. attention::
+
+      This file is specific to the barrel cortex model data. If you want to use it for other data,
+      you need to adapt the paths to the data accordingly. This runfile can serve as a template.
+
+   Inputs:
+
+   - Morphology of the postsynaptic neuron
+   - 3D density field of synapses across the entire neuropil.
+   - Number of cells per cell type in the neuropil.
+   - Connections spreadsheet containing Post-Synaptic Targets (PSTs) per unit of length and area
+   - Bouton locations of individual axon tracings per presynaptic cell type.
+
+   .. attention::
+
+      This runfile has default values for the barrel cortex, and so assumes that you have downloaded
+      and extracted the barrel cortex model data from
+      https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
+      If this is not the case, please consult ``installer/download_bc_model`` and extract,
+      or adapt the paths in this file to your data.
+
+   This module then uses :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+   to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
+   This happens according to the following pipeline:
+
+   1. The bouton density field and PST density fields are converted to scalar fields with defined voxel resolution.
+   2. Calculates the overlap between these voxels and the dendrites of the postsynaptic neuron morphology
+      using Liang-Barsky clipping :cite:`liang1984new`. Only these voxels are further considered for potential synapses.
+   3. Calculates a synapse density field by multiplying the bouton density field with the PST density fields
+      at these voxels.
+   4. Normalizes the previous synapse density fields using cell-type specific PST length/area constraints and the number of
+      cells per cell type.
+   5. Poisson samples synapses from this normalized synapse density field to realize synapses.
+      These are randomly placed onto the dendritic branch within that voxel. One such sample is called an "anatomical realization".
+   6. (optional) Repeat steps 4 and 5 to create a collection of anatomical realizations.
+
+   Density meshes are accessed using :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
+   :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` makes use of
+   :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` for steps 2, 3 and 4,
+   and finalizes step 5 by itself.
+
+   Primary output:
+
+   - Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with ISF.
+
+   Additional outputs:
+
+   - summary file containing information about number and presynaptic type
+     and column of anatomical synapses
+   - AmiraMesh landmark file containing 3D synapse locations of anatomical
+     synapses of each presynaptic type and column
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`map_singlecell_inputs <singlecell_input_mapper.udvary2022.map_singlecell_inputs>`\ (cellName, cellTypeName, nrOfSamples, numberOfCellsSpreadsheetName, connectionsSpreadsheetName, ExPSTDensityName, InhPSTDensityName, boutonDensityFolderName)
+     - Map inputs to a single cell morphology.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <singlecell_input_mapper.udvary2022.logger>`
+     - \-
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`cell <singlecell_input_mapper.udvary2022.cell>`
+     - Classes for setting up a cell morphology and mapping synapses onto it.
+   * - :py:obj:`generate_nr_of_cells_spreadsheet <singlecell_input_mapper.udvary2022.generate_nr_of_cells_spreadsheet>`
+     - Convert a :ref:`con_file_format` file to a dataframe with the number of connected presynaptic cells for each celltype and column.
+   * - :py:obj:`network_embedding <singlecell_input_mapper.udvary2022.network_embedding>`
+     - Create anatomical realizations of connectivity.
+   * - :py:obj:`reader <singlecell_input_mapper.udvary2022.reader>`
+     - Read in hoc files, Amira Mesh files, and spreadsheets with connection probabilities.
+   * - :py:obj:`scalar_field <singlecell_input_mapper.udvary2022.scalar_field>`
+     - Implementation of 3D scalar fields based on numpy arrays.
+   * - :py:obj:`synapse_mapper <singlecell_input_mapper.udvary2022.synapse_mapper>`
+     - This module allows to compute synapse density fields from a Post-Synaptic Target (PST) density field and assign synapses to a neuron morphology based on this synapse density field.
+   * - :py:obj:`writer <singlecell_input_mapper.udvary2022.writer>`
+     - Write out the results of a single connectivity realization or a population of realizations.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

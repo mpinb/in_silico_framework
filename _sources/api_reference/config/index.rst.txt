@@ -11,7 +11,7 @@ config
 .. toctree::
    :hidden:
 
-   cell_types </api_reference/config/cell_types/index>  
+   user </api_reference/config/user/index>  
    file_locking </api_reference/config/file_locking/index>  
    isf_configure </api_reference/config/isf_configure/index>  
    isf_logging </api_reference/config/isf_logging/index>  
@@ -56,6 +56,20 @@ Functions
      - \-
 
 
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`AVAILABLE_SYNAPSE_MAPPING_METHODS <config.AVAILABLE_SYNAPSE_MAPPING_METHODS>`
+     - \-
+
 
 .. rst-class:: absolute-paragraph
 
@@ -68,8 +82,8 @@ Modules
    :widths: auto
    :class: summarytable
    
-   * - :py:obj:`cell_types <config.cell_types>`
-     - Cell type configuration.
+   * - :py:obj:`user <config.user>`
+     - \-
    * - :py:obj:`file_locking <config.file_locking>`
      - \-
    * - :py:obj:`isf_configure <config.isf_configure>`

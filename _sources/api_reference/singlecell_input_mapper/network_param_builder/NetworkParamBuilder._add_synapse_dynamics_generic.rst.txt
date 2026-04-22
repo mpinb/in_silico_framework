@@ -1,0 +1,23 @@
+
+
+_add_synapse_dynamics_generic
+=============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder._add_synapse_dynamics_generic()
+
+
+   Add synapse dynamics based on EXC/INH
+
+   Infers if the cell type is excitatory or inhibitory (based on the user configuration), and assigns
+   generic glutamate and GABA-ergic receptors instead.
+
+   .. seealso:: :meth:`add_synapse_dynamics`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

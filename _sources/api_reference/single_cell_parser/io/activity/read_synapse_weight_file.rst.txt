@@ -1,0 +1,27 @@
+
+
+read_synapse_weight_file
+========================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.activity.read_synapse_weight_file(fname)
+
+
+   Reads list of all anatomical synapses and their maximum conductance values.
+
+   :param fname: Synapse weight filename.
+                 See: :func:`~single_cell_parser.io.activity.write_synapse_weight_file`.
+   :type fname: str
+
+   :returns: two dictionaries with cell types as keys, ordered the same as the anatomical synapses:
+             1st with section ID and pt ID, 2nd with synaptic weights, coded as dictionaries
+             (keys=receptor strings) containing weights: (gmax_0, gmax_1, ... , gmax_n)
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

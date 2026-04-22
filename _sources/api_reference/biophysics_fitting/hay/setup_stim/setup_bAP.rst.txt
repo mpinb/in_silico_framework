@@ -1,0 +1,32 @@
+
+
+setup_bAP
+=========
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.hay.setup_stim.setup_bAP(cell, delay=295)
+
+
+   Setup a bAP (backpropagating action potential) stimulus for the cell.
+
+   Soma:
+
+   - shape = step
+   - amplitude = 1.9 nA
+   - delay = 295 ms
+   - duration = 5 ms
+
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param delay: The delay of the bAP stimulus (ms).
+   :type delay: float
+
+   :returns: None. Adds a bAP stimulus to the cell.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

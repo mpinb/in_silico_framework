@@ -1,0 +1,20 @@
+
+
+_create_voxel_edge_map
+======================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseMapper._create_voxel_edge_map()
+
+
+   Fills :param:`voxelEdgeMap` with voxel indices, and the section and point indices that the voxel contains.
+
+   Only needs to be called once at the beginning.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

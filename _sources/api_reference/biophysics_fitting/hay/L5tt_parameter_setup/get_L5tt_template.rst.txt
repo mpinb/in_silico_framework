@@ -1,0 +1,37 @@
+
+
+get_L5tt_template
+=================
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.hay.L5tt_parameter_setup.get_L5tt_template()
+
+
+   Get a template cell parameter dictionary for a L5PT cell.
+
+   This method returns a nested dictionary-like object that can be used to set up a L5PT cell for simulations.
+   The values of each key are set to None or default values, and need to be filled in with the actual values.
+   This dictionary-like parameter structure is used by e.g. the :class:`~biophysics_fitting.simulator.Simulator` object.
+   It provides information on:
+
+   - For each section label (for an L5PT: Soma, AIS, ApicalDendrite, Dendrite, Myelin):
+       - ``neuron.<section_label>.mechanisms``: active biophysics of the cell (e.g. ion channel densities)
+       - ``neuron.<section_label>.properties``: passive biophysics of the cell (e.g. membrane capacitance)
+   - sim: simulation parameters:
+       - ``T``: temperature
+       - ``Vinit``: initial voltage
+       - ``dt``: time step
+       - ``recordingSites``: recording sites
+       - ``tStart``: start time
+       - ``tStop``: stop time
+
+   :returns: The template cell parameters.
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

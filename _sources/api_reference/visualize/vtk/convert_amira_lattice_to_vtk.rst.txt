@@ -6,7 +6,7 @@ convert_amira_lattice_to_vtk
 
 .. Signature -------------------------------
 
-.. function:: visualize.vtk.convert_amira_lattice_to_vtk(surf_file, outname='lattice', outdir='.')
+.. function:: visualize.vtk.convert_amira_lattice_to_vtk(fn, outname='lattice', outdir='.')
 
 
    Convert an AMIRA lattice file to vtk structured points.

@@ -1,0 +1,33 @@
+
+
+write_swc
+=========
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.swc.write_swc(sections, of, skip_myelin=False, remap_sections=None)
+
+
+   Write out a cell object to :ref:`swc_file_format`.
+
+   :param sections: A list of neuron ``Section`` objects.
+   :type sections: ~single_cell_parser.cell.PySection
+   :param skip_myelin: If True, myelin will not be written to the resulting .swc file.
+   :type skip_myelin: bool
+   :param remap_sections: A dictionary mapping section indices to a custom label.
+                          Custom labels can often be re-assigned to a type of choice anyways after loading the SWC morphology.
+                          This feature is useful for temporarily remapping the label of same-type only-child sections, preserving
+                          the fact that they are different sections in SWC.
+   :type remap_sections: dict
+
+   .. note:: The default labels recognized by SWC are: {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
+
+   :returns:     Nested list of swc lines (index, type, x, y, z, radius, parent), organized per section.
+   :rtype: List[List[List]]
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

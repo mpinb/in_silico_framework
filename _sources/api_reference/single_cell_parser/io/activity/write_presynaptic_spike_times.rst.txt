@@ -1,0 +1,37 @@
+
+
+write_presynaptic_spike_times
+=============================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.activity.write_presynaptic_spike_times(fname=None, cells=None)
+
+
+   Write cell type, presynaptic cell ID and spike times of all connected
+   presynaptic point cells.
+
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param cells: A dictionary with cell types as keys and lists of cells as values.
+   :type cells: dict
+
+   :returns: None. Writes out the presynaptic spike times file to :param:`fname`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> cells = {'cell_type_1': [cell1, cell2], 'cell_type_2': [cell3]}
+   >>> write_presynaptic_spike_times('presynaptic_spikes.param', cells)
+   >>> presynaptic_spikes.param
+   # presynaptic cell type cell ID spike times
+   cell_type_1     0       100.4,
+   cell_type_1     1
+   cell_type_2     0       30.6,205.1,500.0,
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

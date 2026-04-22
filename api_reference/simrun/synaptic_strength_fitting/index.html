@@ -1313,10 +1313,10 @@ infers the optimal synaptic strength for each synapse type based on empirical da
 <tr class="row-even"><td><p><a class="reference internal" href="run_ex_synapses.html#simrun.synaptic_strength_fitting.run_ex_synapses" title="simrun.synaptic_strength_fitting.run_ex_synapses (Python function) — Simulate all EPSPs of a given celltype, one by one."><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_ex_synapses</span></code></a>(neuron_param, network_param, celltype, gAMPA, gNMDA, gGABA, vardt, tStim, tEnd, mode)</p></td>
 <td><p>Simulate all EPSPs of a given celltype, one by one.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generate_ex_network_param_from_network_embedding.html#simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding" title="simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding (Python function) — Generate a network parameter file for excitatory synapses from a con_file_format file."><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_ex_network_param_from_network_embedding</span></code></a>(confile)</p></td>
-<td><p>Generate a network parameter file for excitatory synapses from a <a class="reference internal" href="../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generate_ex_network_param_from_network_embedding.html#simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding" title="simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding (Python function) — Fill a network parameter file for excitatory synapses with embedding data and (incomplete) activity data."><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_ex_network_param_from_network_embedding</span></code></a>(confile, synfile)</p></td>
+<td><p>Fill a network parameter file for excitatory synapses with embedding data and (incomplete) activity data.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generate_inh_network_param_from_network_embedding.html#simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding" title="simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding (Python function) — Generate a network parameter file for inhibitory synapses from a con_file_format file."><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_inh_network_param_from_network_embedding</span></code></a>(confile)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generate_inh_network_param_from_network_embedding.html#simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding" title="simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding (Python function) — Generate a network parameter file for inhibitory synapses from a con_file_format file."><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_inh_network_param_from_network_embedding</span></code></a>(confile, synfile)</p></td>
 <td><p>Generate a network parameter file for inhibitory synapses from a <a class="reference internal" href="../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="get_voltage_and_timing.html#simrun.synaptic_strength_fitting.get_voltage_and_timing" title="simrun.synaptic_strength_fitting.get_voltage_and_timing (Python function) — Calculate the maximum amplitude (and their timing) of an ePSP for all synapses."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_voltage_and_timing</span></code></a>(vt, method, tStim, tEnd)</p></td>
@@ -1361,6 +1361,12 @@ infers the optimal synaptic strength for each synapse type based on empirical da
 <td><p>-</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GLUTAMATE_SYN_PARAM_TEMPLATE</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GABA_SYN_PARAM_TEMPLATE</span></code></p></td>
 <td><p>-</p></td>
 </tr>
 </tbody>

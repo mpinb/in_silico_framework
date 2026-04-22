@@ -1,0 +1,39 @@
+
+
+read_hoc_file
+=============
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.reader.read_hoc_file(fname: str = '', label_map: Optional[Dict[str, str]] = None) -> List[_Edge]
+
+
+   Read a .hoc morphology file and return a list of Edge objects.
+
+   Instead of hard-coding section-type names, the function extracts the raw
+   label from every ``create <label>`` statement via regex and resolves it
+   through *label_map*.
+
+   The map key is compared against the **prefix** of
+   the raw label (everything before the first ``_``), case-
+   insensitively.  If no key matches, the raw label itself is used as the
+   semantic label so that unknown section types are preserved.
+
+   Mapping a prefix to ``None`` causes those sections to be skipped entirely.
+
+   :param fname: Path to the :ref:`hoc_file_format`
+   :type fname: str
+   :param label_map: Mapping between labels in the :ref:`hoc_file_format` and actual label used in ISF.
+   :type label_map: dict[str, str]
+
+   :returns: A list of :class:`_Edge` objects representing the cell morphology
+             (axon sections excluded by default).
+
+   :raises IOError: If :paramref:`fname` is not a :ref:`hoc_file_format` file, or if the parsed data are internally inconsistent.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

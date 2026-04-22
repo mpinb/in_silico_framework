@@ -1,0 +1,70 @@
+
+
+map_singlecell_inputs
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.map_singlecell_inputs(cellName, cellTypeName, nrOfSamples=50, numberOfCellsSpreadsheetName=None, connectionsSpreadsheetName=None, ExPSTDensityName=None, InhPSTDensityName=None, boutonDensityFolderName=None)
+
+
+   Map inputs to a single cell morphology.
+
+   These inputs need to be organized per anatomical structure. Anatomical structures
+   can be arbitrary spatial regions of the brain tissue, or anatomically well-defined
+   areas, e.g. barrels in a barrel cortex.
+
+   Steps:
+
+   1. Loads in the data:
+
+       - Cell morphology
+       - Number of cells per cell type
+       - Connection probabilities between cell types
+       - PST densities for normalization of innervation calculations
+
+   2. Loads in the bouton densities:
+
+       - For each anatomical area
+       - For each presynaptic cell type
+
+   3. Creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` for each bouton density.
+   4. Creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
+   5. Creates a network embedding for the cell using :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
+
+   The naming of each anatomical area needs to be consistent between:
+
+   - The number of cells per cell type spreadsheet
+   - The bouton folders containing axon traces
+
+   :param cellName: path to a :ref:`hoc_file_format` file containing the morphology of the cell.
+   :type cellName: str
+   :param cellTypeName: name of the postsynaptic cell type.
+   :type cellTypeName: str
+   :param nrOfSamples: number of samples to use for the network embedding.
+   :type nrOfSamples: int
+   :param numberOfCellsSpreadsheetName: Path to the a spreadsheet, containing each neuropil structures as columns, and celltypes row indices.
+                                        Values indicate how much of each celltype was found in each neuropil structure.
+   :type numberOfCellsSpreadsheetName: str
+   :param connectionsSpreadsheetName: Path to a spreadsheet, containing the connection probabilities between each presynaptic and postsynaptic cell type.
+   :type connectionsSpreadsheetName: str
+   :param ExPSTDensityName: Path to the PST density file for excitatory synapses.
+   :type ExPSTDensityName: str
+   :param InhPSTDensityName: Path to the PST density file for inhibitory synapses.
+   :type InhPSTDensityName: str
+   :param boutonDensityFolderName: A directory containing the following subdirectory structure:
+                                   anatomical_area/presynaptic_cell_type/\*.am
+
+   :returns:
+
+             None.
+                 Writes the results to disk, at the same location as the input :param:`cellName`.
+                 Results consist of a :ref:`syn_file_format`, :ref:`conf_file_format` file, and a ``.csv`` file containing the amount of connected
+                 presynaptic cells per cell type, and per anatomical area.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

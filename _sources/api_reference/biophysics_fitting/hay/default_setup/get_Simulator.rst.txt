@@ -9,10 +9,19 @@ get_Simulator
 .. function:: biophysics_fitting.hay.default_setup.get_Simulator(fixed_params, step=False, vInit=False)
 
 
-   Get a set up :class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
+   Get a set up :class:`~biophysics_fitting.simulator.Simulator` object for the :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` protocol.
 
    Given cell-specific fixed parameters, set up a simulator object for the Hay protocol,
    including measuring functions for bAP and BAC stimuli (no step currents)
+
+   Sets up:
+
+   - ``cell_param_generator``: A function generating a :ref:`cell_parameters_format` tempalate.
+   - ``cell_param_modify_funs``, which transform an input parameter vector (usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions) to :ref:`cell_parameters_format`.
+   - ``cell_generator``: A function that takes the :ref:`cell_parameters_format` as an argument and returns a :class:`~single_cell_parser.cell.Cell` object.
+   - ``stim_setup_funs``: Functions that take a :class:`~single_cell_parser.cell.Cell` as an argument and add a NEURON stimulus to it (e.g. :func:`~biophysics_fitting.setup_stim.setup_soma_step`)
+   - ``stim_run_funs``: Functions that take a :class:`~single_cell_parser.cell.Cell` as an argument, simulate it, and return the simulated :class:`~single_cell_parser.cell.Cell` object (e.g. :func:`~single_cell_parser.init_neuron_run`)
+   - ``stim_response_measure_funs``: Functions that take the cell as an argument and extract relevant data (e.g. the ``tVec`` and ``VList``), organized per stimulus.
 
    :param fixed_params: A dictionary of fixed parameters for the cell.
    :type fixed_params: dict
@@ -23,8 +32,6 @@ get_Simulator
 
    :returns: A simulator object.
    :rtype: :class:`~biophysics_fitting.simulator.Simulator`
-
-   .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 
 
 

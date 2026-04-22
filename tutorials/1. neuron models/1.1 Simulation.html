@@ -744,7 +744,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[1]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="n">tutorial_output_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="si">}</span><span class="s2">/isf_tutorial_output&quot;</span>  <span class="c1"># &lt;-- Change this to your desired output directory</span>
 </code></pre></div>
 </div>
@@ -753,7 +753,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span><span class="w"> </span><span class="nn">Interface</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">I</span>
 <span class="n">db</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">DataBase</span><span class="p">(</span><span class="n">tutorial_output_dir</span><span class="p">)</span><span class="o">.</span><span class="n">create_sub_db</span><span class="p">(</span><span class="s2">&quot;neuron_modeling&quot;</span><span class="p">)</span>
 </code></pre></div>
@@ -764,8 +764,8 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[INFO] ISF: Current version: heads/data+0.g1077bcf8.dirty
-[INFO] ISF: Current pid: 227340
+[INFO] ISF: Current version: heads/rc-0.7.0-beta+0.g7bb7c2210.dirty
+[INFO] ISF: Current pid: 2916847
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -782,13 +782,13 @@ Warning: no DISPLAY environment variable.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[INFO] ISF: Loading mechanisms:
+[INFO] mechanisms: Loaded mechanisms in NEURON namespace.
 [ATTENTION] ISF: The source folder has uncommited changes!
 
 
 
 [INFO] ISF: Loaded modules with __version__ attribute are:
-IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 1.0.9, _csv: 1.0, _ctypes: 1.1.0, _curses: b&#39;2.2&#39;, _decimal: 1.70, argparse: 1.1, backcall: 0.2.0, blosc: 1.11.1, bluepyopt: 1.9.126, brotli: 1.0.9, certifi: 2024.08.30, cffi: 1.17.0, charset_normalizer: 3.4.0, click: 7.1.2, cloudpickle: 3.1.0, colorama: 0.4.6, comm: 0.2.2, csv: 1.0, ctypes: 1.1.0, cycler: 0.12.1, cytoolz: 0.12.3, dash: 2.18.2, dask: 2.30.0, dateutil: 2.9.0, deap: 1.4, debugpy: 1.8.5, decimal: 1.70, decorator: 5.1.1, defusedxml: 0.7.1, distributed: 2.30.0, distutils: 3.8.20, django: 1.8.19, entrypoints: 0.4, executing: 2.1.0, fasteners: 0.17.3, flask: 1.1.4, fsspec: 2024.10.0, future: 1.0.0, greenlet: 3.1.1, idna: 3.10, ipaddress: 1.0, ipykernel: 6.29.5, ipywidgets: 8.1.5, isf_pandas_msgpack: 0.2.3, itsdangerous: 1.1.0, jedi: 0.19.1, jinja2: 2.11.3, joblib: 1.4.2, json: 2.0.9, jupyter_client: 7.3.4, jupyter_core: 5.7.2, kiwisolver: 1.4.5, logging: 0.5.1.2, markupsafe: 2.0.1, matplotlib: 3.5.1, matplotlib_inline: 0.1.7, msgpack: 1.0.8, neuron: 7.8.2+, numcodecs: 0.12.1, numexpr: 2.8.6, numpy: 1.19.2, packaging: 25.0, pandas: 1.1.3, parameters: 0.2.1, parso: 0.8.4, past: 1.0.0, pexpect: 4.9.0, pickleshare: 0.7.5, platform: 1.0.8, platformdirs: 4.3.6, plotly: 5.24.1, prompt_toolkit: 3.0.48, psutil: 6.0.0, ptyprocess: 0.7.0, pure_eval: 0.2.3, pydevd: 2.9.5, pygments: 2.18.0, pyparsing: 3.1.4, pytz: 2024.2, re: 2.2.1, requests: 2.32.3, scandir: 1.10.0, scipy: 1.5.2, seaborn: 0.12.2, six: 1.16.0, sklearn: 0.23.2, socketserver: 0.4, socks: 1.7.1, sortedcontainers: 2.4.0, stack_data: 0.6.2, statsmodels: 0.13.2, sumatra: 0.7.4, tables: 3.8.0, tblib: 3.0.0, tlz: 0.12.3, toolz: 1.0.0, tqdm: 4.67.1, traitlets: 5.14.3, urllib3: 2.2.3, wcwidth: 0.2.13, werkzeug: 1.0.1, yaml: 5.3.1, zarr: 2.15.0, zlib: 1.0, zmq: 26.2.0, zstandard: 0.19.0
+IPython: 8.18.1, Interface: heads/rc-0.7.0-beta+0.g7bb7c2210.dirty, PIL: 11.3.0, _brotli: 1.1.0, _csv: 1.0, _ctypes: 1.1.0, _curses: b&#39;2.2&#39;, _decimal: 1.70, argparse: 1.1, blosc: 1.11.3, bluepyopt: 1.9.126, brotli: 1.1.0, certifi: 2025.08.03, charset_normalizer: 3.4.3, click: 7.1.2, cloudpickle: 3.1.1, colorama: 0.4.6, comm: 0.2.3, csv: 1.0, ctypes: 1.1.0, cycler: 0.12.1, cytoolz: 1.0.1, dash: 2.18.2, dask: 2.30.0, dateutil: 2.9.0.post0, deap: 1.4, debugpy: 1.8.16, decimal: 1.70, decorator: 5.2.1, defusedxml: 0.7.1, distributed: 2.30.0, distutils: 3.9.23, entrypoints: 0.4, exceptiongroup: 1.3.0, executing: 2.2.0, fasteners: 0.17.3, flask: 1.1.4, fsspec: 2025.7.0, future: 1.0.0, greenlet: 3.2.4, idna: 3.10, ipaddress: 1.0, ipykernel: 6.29.5, ipywidgets: 8.1.7, isf_pandas_msgpack: 0.4.0, itsdangerous: 1.1.0, jedi: 0.19.2, jinja2: 2.11.3, joblib: 1.5.1, json: 2.0.9, jupyter_client: 7.3.4, jupyter_core: 5.8.1, kiwisolver: 1.4.7, logging: 0.5.1.2, markupsafe: 2.0.1, matplotlib: 3.3.2, matplotlib_inline: 0.1.7, msgpack: 1.1.1, neuron: 7.8.2+, numcodecs: 0.12.1, numexpr: 2.9.0, numpy: 1.19.2, packaging: 25.0, pandas: 1.1.3, parso: 0.8.4, past: 1.0.0, pexpect: 4.9.0, pickleshare: 0.7.5, platform: 1.0.8, platformdirs: 4.3.8, plotly: 5.24.1, prompt_toolkit: 3.0.51, psutil: 7.0.0, ptyprocess: 0.7.0, pure_eval: 0.2.3, pydevd: 3.2.3, pygments: 2.19.2, pyparsing: 3.2.3, pytz: 2025.2, re: 2.2.1, requests: 2.32.5, scipy: 1.5.2, seaborn: 0.12.2, six: 1.17.0, sklearn: 0.23.2, socketserver: 0.4, socks: 1.7.1, sortedcontainers: 2.4.0, stack_data: 0.6.3, statsmodels: 0.12.1, tables: 3.8.0, tblib: 3.1.0, tlz: 1.0.1, toolz: 1.0.0, tqdm: 4.67.1, traitlets: 5.14.3, urllib3: 2.5.0, wcwidth: 0.2.13, werkzeug: 1.0.1, yaml: 6.0.2, zarr: 2.15.0, zlib: 1.0, zmq: 27.0.2, zstandard: 0.23.0
 </pre></div></div>
 </div>
 <h2 id="Equipping-a-morphology-with-biophysical-parameters">Equipping a morphology with biophysical parameters<a class="headerlink" href="#Equipping-a-morphology-with-biophysical-parameters" title="Link to this heading">¶</a></h2>
@@ -798,7 +798,7 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">getting_started</span><span class="w"> </span><span class="kn">import</span> <span class="n">example_data_dir</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">getting_started</span><span class="w"> </span><span class="kn">import</span> <span class="n">example_data_dir</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pprint</span>
 
@@ -825,7 +825,7 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
  &#39;NMODL_mechanisms&#39;: {&#39;channels&#39;: &#39;/&#39;},
  &#39;mech_globals&#39;: {},
  &#39;neuron&#39;: {&#39;filename&#39;: &#39;/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_C2_center.hoc&#39;,
-            &#39;cell_modify_functions&#39;: {&#39;scale_apical_morph_86&#39;: {}},
+            &#39;cell_modify_functions&#39;: {&#39;scale_apical&#39;: {&#39;scale&#39;: 2.5}},
             &#39;Soma&#39;: {&#39;properties&#39;: {&#39;Ra&#39;: 100.0,
                                     &#39;cm&#39;: 1.0,
                                     &#39;ions&#39;: {&#39;ek&#39;: -85.0, &#39;ena&#39;: 50.0}},
@@ -948,14 +948,13 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 <li><p>a morphology file</p></li>
 <li><p>cell modify functions</p></li>
 </ul>
-<p>For our neuron, we need to pass a function to scale the apical dendrite of the L5PT. this is visible in the key <code class="docutils literal notranslate"><span class="pre">cell_modify_functions</span></code>. Why this is necessary is outlined <a class="reference external" href="../auxiliary%20notebooks/A.1%20Morphology%20Reconstruction.ipynb">here</a></p>
+<p>For our neuron, we need to pass a function to scale the apical dendrite of the L5PT. this is visible in the key <code class="docutils literal notranslate"><span class="pre">cell_modify_functions</span></code>. Why this is necessary is outlined <a class="reference internal" href="../auxiliary%20notebooks/A.1%20Morphology%20Reconstruction.html"><span class="doc">here</span></a></p>
 <p>Using these parameters, we can create a <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object, containing all the information on morphology and simulation data.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">single_cell_parser.cell_modify_functions.scale_apical_morph_86</span><span class="w"> </span><span class="kn">import</span> <span class="n">scale_apical_morph_86</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">neuron</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">neuron</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">neuron</span><span class="o">.</span><span class="n">h</span>
 <span class="n">I</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s2">&quot;INFO&quot;</span><span class="p">)</span>  <span class="c1"># verbose output to see what is happening</span>
 
@@ -976,66 +975,12 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 [INFO] single_cell_parser: -------------------------------
 [INFO] single_cell_parser: Starting setup of cell model...
 [INFO] single_cell_parser: Loading cell morphology...
-[INFO] reader: Reading hoc file /gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_C2_center.hoc
-[INFO] cell_parser: Creating AIS:
-[INFO] cell_parser:     axon hillock diameter: 3.00
-[INFO] cell_parser:     initial segment diameter: 1.75
-[INFO] cell_parser:     myelin diameter: 1.00
+[INFO] hoc: Reading hoc file: /gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_C2_center.hoc
+[INFO] cell_parser: Creating AIS
 [INFO] single_cell_parser: Setting up biophysical model...
-[INFO] cell_parser:     Adding membrane properties to Soma
-[INFO] cell_parser:     Adding membrane properties to Dendrite
-[INFO] cell_parser:     Adding membrane properties to ApicalDendrite
-[INFO] cell_parser:     Adding membrane properties to AIS
-[INFO] cell_parser:     Adding membrane properties to Myelin
-[INFO] cell_parser:     Setting up spatial discretization...
-[INFO] cell_parser:     frequency used for determining discretization: 100.0
-[INFO] cell_parser:     maximum segment length: None
-[INFO] cell_parser:     Total number of compartments in model: 1109
-[INFO] cell_parser:     Total length of model cell: 15290.39
-[INFO] cell_parser:     Average compartment length: 13.79
-[INFO] cell_parser:     Maximum compartment (Dendrite) length: 31.54
-[INFO] cell_parser:     Adding membrane range mechanisms to Soma
-[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ca_LVAst with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ca_HVA with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism SKv3_1 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism SK_E2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism K_Tst with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism K_Pst with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Nap_Et2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism NaTa_t with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism CaDynamics_E2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution uniform
-[INFO] cell_parser:     Adding membrane range mechanisms to Dendrite
-[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution uniform
-[INFO] cell_parser:     Adding membrane range mechanisms to ApicalDendrite
-[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism SK_E2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ca_LVAst with spatial distribution uniform_range
-[INFO] cell_parser:         Inserting mechanism Ca_HVA with spatial distribution uniform_range
-[INFO] cell_parser:         Inserting mechanism CaDynamics_E2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism SKv3_1 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism NaTa_t with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Im with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution exponential
-[INFO] cell_parser:     Adding membrane range mechanisms to AIS
-[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ca_LVAst with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ca_HVA with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism SKv3_1 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism SK_E2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism K_Tst with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism K_Pst with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Nap_Et2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism NaTa_t with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism CaDynamics_E2 with spatial distribution uniform
-[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution uniform
-[INFO] cell_parser:     Adding membrane range mechanisms to Myelin
-[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
 [INFO] single_cell_parser: -------------------------------
-[INFO] cell_parser: Applying cell_modify_function scale_apical_morph_86 with parameters {}
-[INFO] scale_apical_morph_86: Scaled 33 apical sections...
+[INFO] cell_parser: Applying cell_modify_function scale_apical with parameters NTParameterSet({&#39;scale&#39;: 2.5})
+[INFO] scale_apical: Scaled 79 apical sections...
 </pre></div></div>
 </div>
 <p>We now have a biophysically detailed <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object. Let’s start by figuring out some general morphological properties of our neuron.</p>
@@ -1043,7 +988,7 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span>
     <span class="n">sec</span><span class="o">.</span><span class="n">L</span> <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">cell</span><span class="o">.</span><span class="n">sections</span><span class="p">])</span>
 <span class="n">dendrite_length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span>
     <span class="n">sec</span><span class="o">.</span><span class="n">L</span> <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">cell</span><span class="o">.</span><span class="n">sections</span> <span class="k">if</span> <span class="n">sec</span><span class="o">.</span><span class="n">label</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Soma&#39;</span><span class="p">,</span> <span class="s1">&#39;Dendrite&#39;</span><span class="p">,</span> <span class="s1">&#39;ApicalDendrite&#39;</span><span class="p">]])</span>
@@ -1075,7 +1020,7 @@ apical dendrite area = 16855 micron^2
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span><span class="w"> </span><span class="nn">visualize.cell_morphology_visualizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">CellMorphologyVisualizer</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">CellMorphologyVisualizer</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </code></pre></div>
@@ -1089,16 +1034,17 @@ apical dendrite area = 16855 micron^2
 </div>
 </div>
 <h2 id="The-ISF-Simulator">The ISF <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a><a class="headerlink" href="#The-ISF-Simulator" title="Link to this heading">¶</a></h2>
-<p>This <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object can be directly simulated using NEURON’s Python API, as outlined in <a class="reference external" href="../auxiliary%20notebooks/A.2%20Neuron%20API.ipynb">this auxiliary tutorial</a>. However, ISF provides convenient wrappers for simulating fixed stimuli that makes this process more convenient.</p>
-<p>This Section will provide a walkthrough on how to interact with the biophysical properties of a <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> using the <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> object, rather than directly interacting with the NEURON hoc interface. This object can be configured once per cell, and re-used for various simulation protocols. It operates on biophysical parameters of the <code class="docutils literal notranslate"><span class="pre">pandas.dataFrame</span></code> type.</p>
-<p>We will load in an existing configuration to showcase the syntax. More information on how this <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> object can be configures is given in <a class="reference internal" href="1.3%20Generation.html"><span class="doc">Tutorial 1.3: Generation</span></a>.</p>
+<p>This <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object can be directly simulated using NEURON’s Python API, as outlined in <a class="reference internal" href="../auxiliary%20notebooks/A.2%20Neuron%20API.html"><span class="doc">this auxiliary tutorial</span></a>. However, ISF provides convenient wrappers for simulating fixed stimuli that makes this process more convenient.</p>
+<p>This Section will provide a walkthrough on how to interact with the biophysical properties of a <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> using the <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> object, rather than directly interacting with the NEURON hoc interface. This object can be configured once per cell, and re-used for various simulation protocols. It operates on biophysical parameters of the <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> type.</p>
+<p>We will load in an example configuration to showcase the syntax. This example configuration sets up a <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> according to the methods described in <a class="reference external" href="https://doi.org/10.1371/journal.pcbi.1002107">Hay et al. (2011)</a></p>
+<p>More information on how this <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> object can be configured manually, and specific to your use case, is given in <a class="reference internal" href="1.3%20Generation.html"><span class="doc">Tutorial 1.3: Generation</span></a>.</p>
 <h3 id="Biophysical-parameters">Biophysical parameters<a class="headerlink" href="#Biophysical-parameters" title="Link to this heading">¶</a></h3>
 <p>Rather than using the <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#cell-parameters">cell parameters</a> as described above directly, we will instead use vectors, here in the form of pandas Series. The <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> handles the rest.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Load example biophysical models</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Load example biophysical models</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">getting_started</span><span class="w"> </span><span class="kn">import</span> <span class="n">example_data_dir</span>
 <span class="n">model_db</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">DataBase</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">example_data_dir</span><span class="p">,</span> <span class="s2">&quot;simulation_data&quot;</span><span class="p">,</span> <span class="s2">&quot;biophysics&quot;</span><span class="p">))</span>
 <span class="n">example_models</span> <span class="o">=</span> <span class="n">model_db</span><span class="p">[</span><span class="s1">&#39;example_models&#39;</span><span class="p">]</span>
@@ -1106,27 +1052,27 @@ apical dendrite area = 16855 micron^2
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># parameter names</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># parameter names</span>
 <span class="n">biophysical_parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">example_models</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">&quot;ephys&quot;</span> <span class="ow">in</span> <span class="n">e</span> <span class="ow">or</span> <span class="n">e</span> <span class="o">==</span> <span class="s2">&quot;scale_apical.scale&quot;</span><span class="p">]</span>
 </code></pre></div>
 </div>
 </div>
 <p>Let’s inspect what these biophysical parameters look like</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># get the biophysical parameters of one examplary biophysical model</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># get the biophysical parameters of one examplary biophysical model</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">example_models</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">biophysical_parameters</span><span class="p">]</span>
 <span class="n">p</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1204,20 +1150,20 @@ Name: 0, dtype: object
 <p>Here, we introduce the <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> object, specific to a particular morphology.</p>
 <p>To set up a Simulator, you need morphology-specific fixed parameters. We will use a new morphology for this, with the ID “89”.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_example_fixed_params</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_example_fixed_params</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;get_fixed_params&#39;</span><span class="p">](</span><span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">p</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">fixed_params</span> <span class="o">=</span> <span class="n">get_example_fixed_params</span><span class="p">(</span><span class="n">model_db</span><span class="p">,</span> <span class="s1">&#39;89&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fixed_params</span> <span class="o">=</span> <span class="n">get_example_fixed_params</span><span class="p">(</span><span class="n">model_db</span><span class="p">,</span> <span class="s1">&#39;89&#39;</span><span class="p">)</span>
 <span class="n">pprint</span><span class="o">.</span><span class="n">pp</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">)</span>
 </code></pre></div>
 </div>
@@ -1267,11 +1213,11 @@ Name: 0, dtype: object
 morphologies, simulations etc. The setup below will highlight which parts are specific to the celltype, the cell, or the biophysical details of a single cell.</p>
 <p>The full setup of a Simulator object for running Hay’s protocols on an L5PT is given in <a class="reference internal" href="../../api_reference/biophysics_fitting/hay/default_setup/index.html"><span class="doc">biophysics_fitting.hay.default_setup.get_Simulator()</span></a>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">biophysics_fitting.hay.default_setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_Simulator</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">biophysics_fitting.L5tt_parameter_setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_L5tt_template_v2</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">biophysics_fitting.hay.default_setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_Simulator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">biophysics_fitting.hay.L5tt_parameter_setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_L5tt_template_v2</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">scale_apical</span><span class="p">(</span><span class="n">cell_param</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
     <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
@@ -1313,29 +1259,29 @@ morphologies, simulations etc. The setup below will highlight which parts are sp
 <h4 id="The-bAP-stimulus">The <span class="math notranslate nohighlight">\(bAP\)</span> stimulus<a class="headerlink" href="#The-bAP-stimulus" title="Link to this heading">¶</a></h4>
 <p>The <span class="math notranslate nohighlight">\(bAP\)</span> stimulus protocol is a step current injection at the soma, strong enough to evoke a backpropagating action potential (bAP)</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[13]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">cell</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get_simulated_cell</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;bAP&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">cell</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get_simulated_cell</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;bAP&#39;</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[14]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
 <span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">tVec</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">recVList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[14]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&lt;matplotlib.lines.Line2D at 0x2ab6c65df160&gt;]
+[&lt;matplotlib.lines.Line2D at 0x14fde344fbe0&gt;]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1349,15 +1295,15 @@ morphologies, simulations etc. The setup below will highlight which parts are sp
 <p>A <span class="math notranslate nohighlight">\(BAC\)</span> stimulus is a <span class="math notranslate nohighlight">\(bAP\)</span> stimulus, with a well-timed epsp-shaped current injection at the apical dendrite. <span class="math notranslate nohighlight">\(BAC\)</span> here stands for <span class="math notranslate nohighlight">\(bAP\)</span>-activated <span class="math notranslate nohighlight">\(Ca^{2+}\)</span>-spike</p>
 <p>Where exactly do we inject the epsp-shaped apical current? We already saved this information in <code class="docutils literal notranslate"><span class="pre">fixed_params</span></code>. Morphology “89” has a rather deep bifurcation, so the epsp injection is at only <span class="math notranslate nohighlight">\(295\mu m\)</span> from the soma.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">fixed_params</span><span class="p">[</span><span class="s1">&#39;BAC.stim.dist&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fixed_params</span><span class="p">[</span><span class="s1">&#39;BAC.stim.dist&#39;</span><span class="p">]</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1366,29 +1312,29 @@ morphologies, simulations etc. The setup below will highlight which parts are sp
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s2">&quot;ATTENTION&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s2">&quot;ATTENTION&quot;</span><span class="p">)</span>
 <span class="n">cell</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get_simulated_cell</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;BAC&#39;</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">tVec</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">recVList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">tVec</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">recVList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&lt;matplotlib.lines.Line2D at 0x2ab6c6575790&gt;]
+[&lt;matplotlib.lines.Line2D at 0x14fde3463d00&gt;]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1402,30 +1348,30 @@ morphologies, simulations etc. The setup below will highlight which parts are sp
 <p>In the previous sections, we ran an example <span class="math notranslate nohighlight">\(bAP\)</span> stimulus, and a <span class="math notranslate nohighlight">\(BAC\)</span> stimulus. This resulted in a single AP, and a triplet respectively. In order to verify if the biophysical properties of the cell match empirically observed responses, we also need to run <span class="math notranslate nohighlight">\(3\)</span> step currents and measure the response.</p>
 <p>For this, we have a Simulator that has these step currents set up:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">s</span> <span class="o">=</span> <span class="n">get_Simulator</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">s</span> <span class="o">=</span> <span class="n">get_Simulator</span><span class="p">(</span><span class="n">fixed_params</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">s</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">cell_param_generator</span> <span class="o">=</span> <span class="n">get_L5tt_template_v2</span>
 <span class="n">s</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">cell_param_modify_funs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;scale_apical&#39;</span><span class="p">,</span> <span class="n">scale_apical</span><span class="p">))</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[19]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># may take a while, especially the step currents</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># may take a while, especially the step currents</span>
 <span class="n">voltage_traces</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
 <p>These results will be convenient for <a class="reference internal" href="1.2%20Evaluation.html"><span class="doc">the next tutorial</span></a>. Let’s save them.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[20]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">db</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">db</span><span class="p">[</span><span class="s1">&#39;simulator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
 <span class="n">db</span><span class="p">[</span><span class="s1">&#39;voltage_traces&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">voltage_traces</span>
 </code></pre></div>
 </div>
@@ -1435,21 +1381,21 @@ morphologies, simulations etc. The setup below will highlight which parts are sp
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[WARNING] isf_data_base: The database source folder has uncommitted changes!
-[WARNING] isf_data_base: The database source folder has uncommitted changes!
+[WARNING] isf_data_base: ISF has uncommitted changes - reproducing results may not be possible.
+[WARNING] isf_data_base: ISF has uncommitted changes - reproducing results may not be possible.
 </pre></div></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">voltage_traces</span></code> is a dictionary with the voltage trace (i.e. NEURON’s <code class="docutils literal notranslate"><span class="pre">tVec</span></code> and <code class="docutils literal notranslate"><span class="pre">vList</span></code>) of the cell for each stimulus protocol.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[21]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">voltage_traces</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">voltage_traces</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[21]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1458,11 +1404,11 @@ dict_keys([&#39;bAP.hay_measure&#39;, &#39;BAC.hay_measure&#39;, &#39;StepOne.ha
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[22]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># visualize all responses</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">visualize</span><span class="w"> </span><span class="kn">import</span> <span class="n">voltage_trace_visualizer</span> <span class="k">as</span> <span class="n">vtv</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># visualize all responses</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">biophysics_fitting.hay</span><span class="w"> </span><span class="kn">import</span> <span class="n">voltage_trace_visualizer</span> <span class="k">as</span> <span class="n">vtv</span>
 <span class="n">vtv</span><span class="o">.</span><span class="n">visualize_vt</span><span class="p">(</span><span class="n">voltage_traces</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div>
 </div>

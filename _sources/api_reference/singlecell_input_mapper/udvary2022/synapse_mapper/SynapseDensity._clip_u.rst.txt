@@ -1,0 +1,20 @@
+
+
+_clip_u
+=======
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseDensity._clip_u(pq, u1u2)
+
+
+   Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.
+
+   Used in :func:`~SynapseDensity._compute_length_surface_area_density` to clip line segments to scalar field meshes.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

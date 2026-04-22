@@ -12,6 +12,7 @@ utils
    :hidden:
 
    _hash_file_content </api_reference/data_base/db_initializers/load_simrun_general/utils/_hash_file_content>
+   _get_fn_as_hash </api_reference/data_base/db_initializers/load_simrun_general/utils/_get_fn_as_hash>
    _get_dumper </api_reference/data_base/db_initializers/load_simrun_general/utils/_get_dumper>
 
 .. module:: data_base.db_initializers.load_simrun_general.utils

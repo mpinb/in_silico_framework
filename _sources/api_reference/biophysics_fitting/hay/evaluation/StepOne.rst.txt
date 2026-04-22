@@ -37,7 +37,7 @@ StepOne
 
    Here, the format of each line is: ``acronym: [full name, mean, std]``
 
-   .. seealso:: :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepOne` for more information on the stimulus protocol.
+   .. seealso:: :class:`_Step` for the template class, and :func:`biophysics_fitting.hay.setup_stim.setup_StepOne` for more information on the stimulus protocol.
 
    :param soma_thresh: The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
    :type soma_thresh: float

@@ -1,0 +1,31 @@
+
+
+read_scalar_field
+=================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.read_scalar_field(fname='', dtype=np.float64)
+
+
+   Read ASCII AMIRA scalar field mesh files with high speed.
+
+   This function reads in AMIRA scalar fields. Particular attention is given to speeding up reading of
+   the actual data.
+
+   :param fname: Filename of the Amira Mesh file to be read.
+   :type fname: str
+   :param dtype: Data type of the scalar field, default is `np.float64`.
+   :type dtype: numpy.dtype
+
+   :raises IOError: If the input file does not have a `.am` or `.AM` suffix.
+
+   :returns: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
+   :rtype: :class:`~single_cell_parser.scalar_field.ScalarField`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

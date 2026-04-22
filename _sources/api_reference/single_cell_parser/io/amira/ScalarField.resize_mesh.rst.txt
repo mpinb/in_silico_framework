@@ -1,0 +1,18 @@
+
+
+resize_mesh
+===========
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.ScalarField.resize_mesh()
+
+
+   Resizes mesh to non-zero scalar data using slicing views (no copy).
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

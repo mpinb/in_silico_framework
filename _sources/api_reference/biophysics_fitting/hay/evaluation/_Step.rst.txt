@@ -39,7 +39,7 @@ _Step
 
    These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
-   .. seealso:: :func:`biophysics_fitting.setup_stim` for more information on the stimulus protocols.
+   .. seealso:: :func:`biophysics_fitting.hay.setup_stim` for more information on the stimulus protocols.
 
    :param soma_thresh: The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
    :type soma_thresh: float

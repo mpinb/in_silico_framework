@@ -1,0 +1,33 @@
+
+
+write_landmarks_colorcoded_to_folder
+====================================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.write_landmarks_colorcoded_to_folder(basedir, landmarks, values, vmin=0, vmax=10, vbinsize=0.1)
+
+
+   Write landmarks to a folder, colorcoded by their values.
+
+   :param basedir: The directory to write the landmarks to.
+   :type basedir: str
+   :param landmarks: The landmarks to write.
+   :type landmarks: numpy.array
+   :param values: The values to color the landmarks by.
+   :type values: numpy.array
+   :param vmin: The minimum value to color by.
+   :type vmin: float
+   :param vmax: The maximum value to color by.
+   :type vmax: float
+   :param vbinsize: The size of the bins to color by.
+   :type vbinsize: float
+
+   :returns: None. Writes out the landmarks to the directory :param:`basedir`.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

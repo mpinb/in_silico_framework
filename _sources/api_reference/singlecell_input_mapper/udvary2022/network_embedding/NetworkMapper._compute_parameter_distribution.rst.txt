@@ -1,0 +1,36 @@
+
+
+_compute_parameter_distribution
+===============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._compute_parameter_distribution(realizationPopulation)
+
+
+   Compute mean +- SD of parameters for population of anatomical realizations.
+
+   Using parameters in :attr:`cellTypeSummaryTable` on a per cell type basis:
+
+   0.  nrOfSynapses
+   1.  nrConnectedCells
+   2.  nrPreCells
+   3.  convergence
+   4.  distanceMean
+   5.  distanceSTD
+   6.  cellTypeSynapsesPerStructure
+   7.  cellTypeConnectionsPerStructure
+   8.  cellTypeConvergencePerStructure
+   9.  cellTypeDistancesPerStructure
+
+   :returns: dictionary organized the same way as :attr:`cellTypeSummaryTable`,
+             but entries are tuples (mean, STD) of each parameter for
+             given population of realizations.
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

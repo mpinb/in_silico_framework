@@ -1,0 +1,42 @@
+
+
+create_network_embedding_for_simulations
+========================================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper.create_network_embedding_for_simulations(postCellName, boutonDensities, nrOfRealizations)
+
+
+   Create multiple network realizations from a bouton density field.
+
+   Main method used for creating fixed network connectivity for use in Monte Carlo simulations.
+   Same principle as :func:`~create_network_embedding`, but rather than taking
+   the most representative sample, this method saves all :param:`nrOfRealizations` network
+   realizations to allow investigating the effects of anatomical variability on neuron responses.
+
+   .. warning::
+
+      Give this network realization a (somewhat) unique name!
+      Then save it at the same location as the anatomical realization
+
+   .. warning::
+
+      Assumes path names to anatomical realization files are relative to the working directory.
+      These paths should be correct relative, or preferably absolute paths.
+
+   :param postCellName: Path to the postsynaptic :ref:`hoc_file_format` morphology file.
+   :type postCellName: str
+   :param boutonDensities: Dictionary of bouton densities, ordered by anatomical area and cell type.
+   :type boutonDensities: dict
+   :param nrOfRealizations: Number of network realizations to create.
+   :type nrOfRealizations: int
+
+   :returns: None. Writes output files to disk.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

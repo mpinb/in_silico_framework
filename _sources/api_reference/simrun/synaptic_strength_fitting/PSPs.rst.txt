@@ -32,20 +32,28 @@ PSPs
 .. fetch arguments from __init__ or __new__ docstring
 .. class signature --------------------------------------------------------------
 
-.. class:: simrun.synaptic_strength_fitting.PSPs(neuron_param=None, confile=None, gExRange=[0.5, 1.0, 1.5, 2.0], AMPA_component=1, NMDA_component=1, vardt=True, mode='cells', exc_inh='exc', tStim=110, tEnd=150)
+.. class:: simrun.synaptic_strength_fitting.PSPs(neuron_param=None, confile=None, gExRange=None, AMPA_component=1, NMDA_component=1, vardt=True, mode='cells', exc_inh='exc', tStim=110, tEnd=150, synfile=None)
    
    Calculate PSP amlitudes of single synapses and fit synaptic strength
+
+   Excitatory synapses are modeled as a superposition of both AMPA and NMDA receptors.
+   The ratio between the two is captured by the relative scaling factors :param:`AMPA_component` and :NMDA_component`.
 
    :param neuron_param: The :ref:`cell_parameters_format`.
    :type neuron_param: ~single_cell_parser.parameters.NTParameterSet
    :param confile: Path to a :ref:`con_file_format` file.
    :type confile: str
-   :param gExRange: List of synaptic strength values to simulate (in :math:`\mu S`).
+   :param gExRange: Range of synapse conductances to simulate (in :math:`\mu S`).
                     The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
+                    Default is [0.5, 1.0, 1.5, 2.0]
    :type gExRange: list
-   :param AMPA_component:
+   :param AMPA_component: Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component`
+                          Only necessary when :param:`exc_inh` is ``"exc"``.
+                          Default is 1.
    :type AMPA_component: float
-   :param NMDA_component:
+   :param NMDA_component: Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component`
+                          Only necessary when :param:`exc_inh` is ``"exc"``.
+                          Default is 1.
    :type NMDA_component: float
    :param vardt: Whether to use the variable step size solver.
    :type vardt: bool
@@ -86,13 +94,17 @@ PSPs
 
       .. attribute:: AMPA_component
 
-         
+         Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component`
+         Only necessary when :param:`exc_inh` is ``"exc"``.
+         Default is 1.
 
          :type: float
 
       .. attribute:: NMDA_component
 
-         
+         Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component`
+         Only necessary when :param:`exc_inh` is ``"exc"``.
+         Default is 1.
 
          :type: float
 
@@ -176,7 +188,7 @@ PSPs
       * - :py:obj:`get_summary_statistics <simrun.synaptic_strength_fitting.PSPs.get_summary_statistics>`\ (method, merge\_celltype\_kwargs, ePSP\_summary\_statistics\_kwargs)
         - Calculate summary statistics of the PSP voltage and timing.
       * - :py:obj:`get_optimal_g <simrun.synaptic_strength_fitting.PSPs.get_optimal_g>`\ (measured\_data, method, merge\_celltype\_kwargs)
-        - Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
+        - Calculate the optimal synaptic conductance such that the EPSP matches empirically observed uPSPs.
       * - :py:obj:`visualize_psps <simrun.synaptic_strength_fitting.PSPs.visualize_psps>`\ (g, method, merge\_celltype\_kwargs, fig)
         - Plot a histogram of the EPSP max voltage deflections for each celltype.
       * - :py:obj:`_get_cell_and_nw_map <simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map>`\ (network\_param)

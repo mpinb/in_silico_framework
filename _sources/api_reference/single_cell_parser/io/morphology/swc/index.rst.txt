@@ -1,0 +1,78 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.io` ❭ :mod:`~single_cell_parser.io.morphology` ❭ 
+
+
+swc
+===
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _get_swc_lines_per_section </api_reference/single_cell_parser/io/morphology/swc/_get_swc_lines_per_section>
+   _get_only_child_sections </api_reference/single_cell_parser/io/morphology/swc/_get_only_child_sections>
+   write_swc </api_reference/single_cell_parser/io/morphology/swc/write_swc>
+   swc_to_point_dict </api_reference/single_cell_parser/io/morphology/swc/swc_to_point_dict>
+   _calc_soma_x </api_reference/single_cell_parser/io/morphology/swc/_calc_soma_x>
+   _traverse </api_reference/single_cell_parser/io/morphology/swc/_traverse>
+   build_section_directory </api_reference/single_cell_parser/io/morphology/swc/build_section_directory>
+   complete_soma </api_reference/single_cell_parser/io/morphology/swc/complete_soma>
+   read_swc </api_reference/single_cell_parser/io/morphology/swc/read_swc>
+
+.. module:: single_cell_parser.io.morphology.swc
+
+.. autoapi-nested-parse::
+   Read and write :ref:`swc_file_format` morphologies.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`write_swc <single_cell_parser.io.morphology.swc.write_swc>`\ (sections, of, skip\_myelin, remap\_sections)
+     - Write out a cell object to :ref:`swc_file_format`.
+   * - :py:obj:`swc_to_point_dict <single_cell_parser.io.morphology.swc.swc_to_point_dict>`\ (swc\_filepath)
+     - Extract point coordinate information.
+   * - :py:obj:`build_section_directory <single_cell_parser.io.morphology.swc.build_section_directory>`\ (root\_ids, points\_dict)
+     - Build an ordered list of section records from an SWC point dictionary.
+   * - :py:obj:`complete_soma <single_cell_parser.io.morphology.swc.complete_soma>`\ (sections)
+     - Expand a single-point soma to a 3-point cable representation.
+   * - :py:obj:`read_swc <single_cell_parser.io.morphology.swc.read_swc>`\ (swc\_fn, remap\_labels)
+     - Read a SWC morphology file.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.io.morphology.swc.logger>`
+     - \-
+   * - :py:obj:`SWC_LABEL_MAP <single_cell_parser.io.morphology.swc.SWC_LABEL_MAP>`
+     - \-
+   * - :py:obj:`REVERSE_SWC_LABEL_MAP <single_cell_parser.io.morphology.swc.REVERSE_SWC_LABEL_MAP>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

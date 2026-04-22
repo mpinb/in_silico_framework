@@ -1,0 +1,93 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.io` ❭ 
+
+
+amira
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   ScalarField </api_reference/single_cell_parser/io/amira/ScalarField>
+   read_scalar_field </api_reference/single_cell_parser/io/amira/read_scalar_field>
+   read_landmark_file </api_reference/single_cell_parser/io/amira/read_landmark_file>
+   write_landmark_file </api_reference/single_cell_parser/io/amira/write_landmark_file>
+   write_landmarks_colorcoded_to_folder </api_reference/single_cell_parser/io/amira/write_landmarks_colorcoded_to_folder>
+   value_to_color </api_reference/single_cell_parser/io/amira/value_to_color>
+   generate_landmark_template </api_reference/single_cell_parser/io/amira/generate_landmark_template>
+
+.. module:: single_cell_parser.io.amira
+
+.. autoapi-nested-parse::
+   Read and write data formats for AMIRA.
+
+   The primary function of this module is to provide read and write acces to AMIRA ``ScalarField`` files.
+   These are represented internally by the :class:`~ScalarField` object.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`ScalarField <single_cell_parser.io.amira.ScalarField>`
+     - 3D scalar fields based on numpy arrays
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_scalar_field <single_cell_parser.io.amira.read_scalar_field>`\ (fname, dtype)
+     - Read ASCII AMIRA scalar field mesh files with high speed.
+   * - :py:obj:`read_landmark_file <single_cell_parser.io.amira.read_landmark_file>`\ (landmarkFilename)
+     - Read an AMIRA landmark file
+   * - :py:obj:`write_landmark_file <single_cell_parser.io.amira.write_landmark_file>`\ (fname, landmarkList)
+     - Write an AMIRA landmark file from 3D coordinates
+   * - :py:obj:`write_landmarks_colorcoded_to_folder <single_cell_parser.io.amira.write_landmarks_colorcoded_to_folder>`\ (basedir, landmarks, values, vmin, vmax, vbinsize)
+     - Write landmarks to a folder, colorcoded by their values.
+   * - :py:obj:`value_to_color <single_cell_parser.io.amira.value_to_color>`\ (v, vmin, vmax)
+     - Map a value to a color.
+   * - :py:obj:`generate_landmark_template <single_cell_parser.io.amira.generate_landmark_template>`\ (landmark\_name, c, vertexviewid, len)
+     - Generate a template for a landmark file in Amira.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`template_init <single_cell_parser.io.amira.template_init>`
+     - \-
+   * - :py:obj:`template_landmark <single_cell_parser.io.amira.template_landmark>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

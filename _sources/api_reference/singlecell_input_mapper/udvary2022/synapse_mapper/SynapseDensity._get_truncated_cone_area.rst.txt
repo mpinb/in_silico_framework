@@ -1,0 +1,20 @@
+
+
+_get_truncated_cone_area
+========================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseDensity._get_truncated_cone_area(height, radius1, radius2)
+
+
+   Calculate the are of a truncated cone.
+
+   Used in :func:`~SynapseDensity._compute_length_surface_area_density` to calculate the area of clipped neurites.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

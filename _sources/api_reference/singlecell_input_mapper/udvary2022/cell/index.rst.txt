@@ -1,0 +1,59 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.udvary2022` ❭ 
+
+
+cell
+====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Cell </api_reference/singlecell_input_mapper/udvary2022/cell/Cell>
+   PySection2 </api_reference/singlecell_input_mapper/udvary2022/cell/PySection2>
+   PointCell </api_reference/singlecell_input_mapper/udvary2022/cell/PointCell>
+   Synapse </api_reference/singlecell_input_mapper/udvary2022/cell/Synapse>
+   CellParser </api_reference/singlecell_input_mapper/udvary2022/cell/CellParser>
+
+.. module:: singlecell_input_mapper.udvary2022.cell
+
+.. autoapi-nested-parse::
+   Classes for setting up a cell morphology and mapping synapses onto it.
+
+   Used to create network realizations.
+   For functional network realizations (i.e. known presynaptic origin of each synapse), see :mod:`single_cell_parser.network`
+
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Cell <singlecell_input_mapper.udvary2022.cell.Cell>`
+     - Cell object for mapping synapses onto a morphology.
+   * - :py:obj:`PySection2 <singlecell_input_mapper.udvary2022.cell.PySection2>`
+     - Convenience class around NEURON's Section class.
+   * - :py:obj:`PointCell <singlecell_input_mapper.udvary2022.cell.PointCell>`
+     - Cell object without morphological or biophysical attributes.
+   * - :py:obj:`Synapse <singlecell_input_mapper.udvary2022.cell.Synapse>`
+     - Leightweight dataclass to store basic synapse information.
+   * - :py:obj:`CellParser <singlecell_input_mapper.udvary2022.cell.CellParser>`
+     - Extract cell morphology from an AMIRA hoc file.
+
+
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

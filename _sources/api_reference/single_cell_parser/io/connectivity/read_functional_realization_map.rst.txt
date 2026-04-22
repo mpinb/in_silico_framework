@@ -1,0 +1,35 @@
+
+
+read_functional_realization_map
+===============================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.connectivity.read_functional_realization_map(fname)
+
+
+   Read in a :ref:`con_file_format` file and return a dictionary of functional connections.
+
+   Only valid for anatomical synapse realization given by anatomicalID.
+
+   See also:
+
+   - :ref:`con_file_format` for more information on the `.con` file format.
+   - :func:`~single_cell_parser.io.connectivity.write_functional_realization_map` for the corresponding writer.
+
+   :param fname: The name of the file to be read.
+   :type fname: str
+
+   :raises IOError: If the input file does not have a `.con` or `.CON` suffix.
+
+   :returns:     A dictionary with cell types as keys and a list of synapse information for each synapse as values.
+                 Synapse information is a 3-tuple with (cell type, cell ID, synapse ID)
+                 The filename of the corresponding :ref:`syn_file_format` file.
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,68 @@
+
+
+read_cell_number_file
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.reader.read_cell_number_file(cell_nr_fn)
+
+
+   Load the cell number file.
+
+   The cell number file must have the following format::
+
+       Anatomical_area (optional)  Presynaptic_cell_type   n_cells
+       A1                              cell_type_1                 8
+       A1                              cell_type_2                 14
+       ...
+
+   :param cellNumberFileName: Path to the cell number file.
+   :type cellNumberFileName: str
+
+   :returns: Dictionary of the form {celltype: {column: nr_of_cells}}
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> load_cell_number_file(
+   ...    'getting_started/example_data/anatomical_constraints/'
+   ...    'example_embedding_86_C2_center/'
+   ...    'NumberOfConnectedCells.csv'
+   ...    )
+   {
+       'L4py': {
+           'A1': 8,
+           'A2': 1,
+           'A3': 7,
+           'A4': 3,
+           'Alpha': 9,
+           'B1': 72,
+           'B2': 30,
+           'B3': 97,
+           'B4': 30,
+           'Beta': 0,
+           'C1': 59,
+           'C2': 374,
+           'C3': 88,
+           'C4': 3,
+           'D1': 22,
+           'D2': 89,
+           'D3': 59,
+           'D4': 0,
+           'Delta': 0,
+           'E1': 0,
+           'E2': 0,
+           'E3': 0,
+           'E4': 0,
+           'Gamma': 16},
+           'L6cc': {...},
+           ...
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

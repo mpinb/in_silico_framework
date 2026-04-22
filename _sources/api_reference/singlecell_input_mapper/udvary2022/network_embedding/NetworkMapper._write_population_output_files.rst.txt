@@ -1,0 +1,39 @@
+
+
+_write_population_output_files
+==============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._write_population_output_files(postCellName, populationDistribution, connectivityMap, synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable, writeLandmarkFiles=False)
+
+
+   Writes output files for precomputed summary files.
+
+   Used by :func:`_create_network_embedding` to write output files to disk.
+
+   :param postCellName: Path to the postsynaptic :ref:`hoc_file_format` file.
+   :type postCellName: str
+   :param populationDistribution: Population distribution of anatomical parameters.
+   :type populationDistribution: dict
+   :param connectivityMap: Connections between presynaptic cells and postsynaptic cell of the form
+                           (cell type, presynaptic cell index, synapse index).
+                           Created by :func:`_create_anatomical_connectivity_map`.
+   :type connectivityMap: list
+   :param synapseLocations: Synapse locations.
+   :type synapseLocations: dict
+   :param cellSynapseLocations: Cell synapse locations.
+   :type cellSynapseLocations: dict
+   :param cellTypeSummaryTable: Summary table of cell types.
+   :type cellTypeSummaryTable: dict
+   :param anatomicalAreaSummaryTable: Summary table of anatomical areas.
+   :type anatomicalAreaSummaryTable: dict
+
+   :returns: None. Writes output files to disk.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

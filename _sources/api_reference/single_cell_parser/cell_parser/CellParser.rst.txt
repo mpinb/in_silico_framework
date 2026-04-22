@@ -35,29 +35,36 @@ CellParser
 .. fetch arguments from __init__ or __new__ docstring
 .. class signature --------------------------------------------------------------
 
-.. class:: single_cell_parser.cell_parser.CellParser(hocFilename='')
+.. class:: single_cell_parser.cell_parser.CellParser(fn='')
 
    Bases: :py:obj:`object`
    
-   Configure a :class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+   Configure a :class:`~single_cell_parser.cell.Cell` object from a :ref:`morphology_file_format` file.
 
-   This class is used to read a hoc file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
+   This class is used to read a :ref:`morphology_file_format`  file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
    It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's
    membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
 
-   .. seealso::
-
-      This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
-      This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
-
-   :param hocFilename: Path to :ref:`hoc_file_format` file.
-   :type hocFilename: str
+   :param fn: Path to :ref:`morphology_file_format` file.
+   :type fn: str
 
    :Attributes:
 
+      .. attribute:: path
+
+         Path to the morphology file
+
+         :type: str
+
       .. attribute:: hoc_path
 
-         Path to hoc file
+         Path to the :ref:`hoc_file_format` morphology file (if the morphology is in the :ref:`hoc_file_format` format)
+
+         :type: str
+
+      .. attribute:: swc_path
+
+         Path to the :ref:`swc_file_format` morphology file (if the morphology is in the :ref:`swc_file_format` format)
 
          :type: str
 
@@ -87,8 +94,8 @@ CellParser
       :widths: auto
       :class: summarytable
       
-      * - :py:obj:`spatialgraph_to_cell <single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell>`\ (parameters, axon, scaleFunc)
-        - Create a :class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
+      * - :py:obj:`spatialgraph_to_cell <single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell>`\ (parameters, axon, scaleFunc, force\_connect\_soma\_halfway)
+        - Create a :class:`~single_cell_parser.cell.Cell` object from the :ref:`morphology_file_format`.
       * - :py:obj:`set_up_biophysics <single_cell_parser.cell_parser.CellParser.set_up_biophysics>`\ (parameters, full)
         - Initialize membrane properties.
       * - :py:obj:`apply_cell_modify_functions <single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions>`\ (parameters)

@@ -43,7 +43,7 @@ isf_configure
 
    .. seealso:: :func:`getting_started.generate_param_files_with_valid_references`
 
-   .. seealso:: :func:`mechanisms.l5pt.compile_l5pt_mechanisms`
+   .. seealso:: :func:`mechanisms.compile_mechanisms`
 
 
 

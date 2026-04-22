@@ -1,0 +1,24 @@
+
+
+_add_synapse_pointer
+====================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.cell.PointCell._add_synapse_pointer(synapse)
+
+
+   Add a :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
+
+   The purpose of this synapse is to keep track of where this :class:`PointCell` connects
+   to a postsynaptic :class:`~single_cell_parser.cell.Cell` object.
+
+   :param synapse: Synapse object.
+   :type synapse: ~singlecell_input_mapper.singlecell_input_mapper.synapse.Synapse
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

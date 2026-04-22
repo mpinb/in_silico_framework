@@ -6,17 +6,17 @@ _convert_syn_fns_to_reldb
 
 .. Signature -------------------------------
 
-.. function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_syn_fns_to_reldb(syn_content, hoc_fn_map)
+.. function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_syn_fns_to_reldb(syn_content, morph_fn_map)
 
 
    Copy, rename and transform a single :ref:`syn_file_format` file.
 
-   The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
+   The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the morphology file name is replaced.
 
    :param syn_content: Content of the :ref:`syn_file_format` file as a list of strings, each element representing a line.
    :type syn_content: List[str]
-   :param hoc_fn_map: Mapping from old to new :ref:`hoc_file_format` files.
-   :type hoc_fn_map: str
+   :param morph_fn_map: Mapping from old to new :ref:`morphology_file_format` files.
+   :type morph_fn_map: str
 
 
 

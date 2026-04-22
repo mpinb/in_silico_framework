@@ -1,0 +1,37 @@
+
+
+set_many_param
+==============
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.hay.L5tt_parameter_setup.set_many_param(cell_param, params=None)
+
+
+   Updates cell_param given a dict of params in the dot naming convention.
+
+   This method is almost identical to :func:`set_param`, but it has a different behavior when
+   a parameter name appears both as a top-level key and as a nested key in :param:`params`. In this case, the top-level
+   key will be used as the master value.
+
+   Example::
+
+       cell_param = {'a': {'b': {'c': 0}}}
+       params = {'a': True, 'a.b.c': False}
+       set_many_param(cell_param, params)
+       # Output: {'a': {'b': {'c': True}}}, NOT {'a': {'b': {'c': False}}}
+
+   :param cell_param: The cell parameter nested dictionary.
+   :type cell_param: ~single_cell_parser.parameters.NTParameterSet
+   :param params: The parameter vector as a pandas Series. This is usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions.
+   :type params: pd.Series
+
+   :returns: The updated cell_param.
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

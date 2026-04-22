@@ -31,7 +31,7 @@ activate_functional_synapse
    :type cell: ~single_cell_parser.cell.Cell
    :param preSynCell: Presynaptic cell.
    :type preSynCell: ~single_cell_parser.cell.PointCell
-   :param synParameters: Synapse parameters, see also the ``synapses.rerceptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
+   :param synParameters: Synapse parameters, see also the ``synapses.receptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
    :type synParameters: ~single_cell_parser.parameters.NTParameterSet
    :param tChange: Time at which the synapse parameters change (e.g. the release probability due to a spike).
    :type tChange: float

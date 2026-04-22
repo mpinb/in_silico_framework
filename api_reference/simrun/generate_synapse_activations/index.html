@@ -931,7 +931,7 @@ To generate <a class="reference internal" href="../../../file_formats.html#syn-a
 <p class="admonition-title">Hint</p>
 <p>If the postsynaptic neuron is not simulated, why does this module need the <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>?
 On the one hand, it needs morphoplogical information in order to connect these synapses. The <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> contains
-a backlink to the original <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> file, which contains the morphological information. But then why not start from the :ref:’hoc_file_format’ file directly?
+a backlink to the original <a class="reference internal" href="../../../file_formats.html#morphology-file-format"><span class="std std-ref">Morphology</span></a> file, which contains the morphological information. But then why not start from the :ref:’morphology_file_format’ file directly?
 Because this module does in fact create a biophsyically detailed neuron model to pass to <a class="reference internal" href="../../single_cell_parser/network/NetworkMapper.html#single_cell_parser.network.NetworkMapper" title="single_cell_parser.network.NetworkMapper (Python class) — Map active presynaptic cells to a multi-compartmental neuron model."><code class="xref py py-class docutils literal notranslate"><span class="pre">NetworkMapper</span></code></a> to create the network,
 despite the fact that the postsynaptic activity is not saved.</p>
 </div>

@@ -1,0 +1,33 @@
+
+
+set_param
+=========
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.hay.L5tt_parameter_setup.set_param(cell_param, params=None)
+
+
+   Updates cell_param given a dict of params in the dot naming convention.
+
+   Example::
+
+       cell_param = {'a': {'b': {'c': 2}}}
+       params = {'a.b.c': 3}
+       set_param(cell_param, params)
+       # returns {'a': {'b': {'c': 3}}}
+
+   :param cell_param: The cell parameter nested dictionary.
+   :type cell_param: ~single_cell_parser.parameters.NTParameterSet
+   :param params: The parameter vector as a pandas Series. This is usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions.
+   :type params: pd.Series
+
+   :returns: The updated cell_param.
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -6,7 +6,7 @@ save
 
 .. Signature -------------------------------
 
-.. function:: single_cell_parser.parameters.NTParameterSet.save(filename)
+.. function:: single_cell_parser.parameters.NTParameterSet.save(filename, **kwargs)
 
 
    Save the NTParameterSet to a file in JSON format.

@@ -1,0 +1,30 @@
+
+
+complete_soma
+=============
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.swc.complete_soma(sections)
+
+
+   Expand a single-point soma to a 3-point cable representation.
+
+   When the soma section has only one point, two additional points are added
+   symmetrically along the y-axis at ±radius from the original point, matching
+   the convention used when loading such morphologies.
+
+   :param sections: Section records as returned by
+                    :func:`build_section_directory`. The soma section must be first.
+   :type sections: list of dict
+
+   :returns: A copy of ``sections`` with the soma's ``"points"`` replaced
+             by the 3-point cable expansion.
+   :rtype: list of dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

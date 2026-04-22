@@ -14,6 +14,7 @@ isf_logging
    LastPartFilter </api_reference/config/isf_logging/LastPartFilter>
    RecordFilter </api_reference/config/isf_logging/RecordFilter>
    stream_to_logger </api_reference/config/isf_logging/stream_to_logger>
+   silence_logger </api_reference/config/isf_logging/silence_logger>
    add_logging_level </api_reference/config/isf_logging/add_logging_level>
    _get_log_formatter </api_reference/config/isf_logging/_get_log_formatter>
    get_isf_logger </api_reference/config/isf_logging/get_isf_logger>
@@ -55,6 +56,8 @@ Functions
    
    * - :py:obj:`stream_to_logger <config.isf_logging.stream_to_logger>`\ (logger, level)
      - Wrapper for a stream object that redirects writes to a logger instance.
+   * - :py:obj:`silence_logger <config.isf_logging.silence_logger>`\ (name, level)
+     - Silence a named logger (or the root logger if name=None).
    * - :py:obj:`add_logging_level <config.isf_logging.add_logging_level>`\ (levelName, levelNum, methodName)
      - Comprehensively adds a new logging level to the ``logging`` module and the
    * - :py:obj:`get_isf_logger <config.isf_logging.get_isf_logger>`\ (force\_reconfigure)

@@ -1,0 +1,24 @@
+
+
+swc_to_point_dict
+=================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.swc.swc_to_point_dict(swc_filepath)
+
+
+   Extract point coordinate information.
+
+   :param swc_filepath: Path to the swc file to be converted.
+   :type swc_filepath: file
+
+   :returns: Dictionary mapping point IDs to their properties (type, coords, radius, parent, children).
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

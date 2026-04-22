@@ -6,10 +6,12 @@ generate_ex_network_param_from_network_embedding
 
 .. Signature -------------------------------
 
-.. function:: simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding(confile)
+.. function:: simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding(confile, synfile=None)
 
 
-   Generate a network parameter file for excitatory synapses from a :ref:`con_file_format` file.
+   Fill a network parameter file for excitatory synapses with embedding data and (incomplete) activity data.
+
+   The activity data filled includes default values.
 
    Generates a template that defines a glutamate-binding synapse with default parameters, as described in the
    :ref:`network_parameters_format`. Together with a :ref:`con_file_format` file, this template

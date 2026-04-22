@@ -1,0 +1,34 @@
+
+
+write_synapse_weight_file
+=========================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.activity.write_synapse_weight_file(fname=None, cell=None)
+
+
+   Write out a synapse weight file.
+
+   This file contains the following information:
+
+   - synapse type
+   - synapse ID
+   - section ID
+   - section pt ID
+   - receptor type
+   - synapse weights
+
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param cell: The cell object, containing synapses.
+   :type cell: single_cell_parser.cell.Cell
+
+   :returns: None. Writes out the synapse weight file to :param:`fname`.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

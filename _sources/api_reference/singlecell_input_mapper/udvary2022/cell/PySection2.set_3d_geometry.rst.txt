@@ -1,0 +1,26 @@
+
+
+set_3d_geometry
+===============
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.cell.PySection2.set_3d_geometry(pts, diams)
+
+
+   Invokes NEURON :cite:`hines2001neuron` 3D geometry setup
+
+   Fetch the 3D coordinates and diameters of the section.
+   Computes the bounding box, length, and relative position of the 3D points along the section.
+
+   :param pts: List of 3D coordinates.
+   :type pts: list
+   :param diams: List of diameters.
+   :type diams: list
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,15 @@
+
+
+_get_activity_data_from_globstring
+==================================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_from_template._get_activity_data_from_globstring(match_str: str | None, activity_data_dir: str | pathlib.Path) -> single_cell_parser.parameters.NTParameterSet
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,25 @@
+
+
+convert_swc_to_hoc
+==================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.morphology.convert_swc_to_hoc(swc_fn, of, axon=False)
+
+
+   Convert a :ref:`swc_file_format` morphology file to :ref:`hoc_file_format` format.
+
+   :param swc_fn: Path to the :ref:`swc_file_format` file to be converted.
+   :type swc_fn: str
+   :param of: Output path for the :ref:`hoc_file_format` file.
+   :type of: str
+
+   :raises ValueError: If no soma points (type 1) are found in the SWC file.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,58 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
+
+
+io
+==
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   morphology </api_reference/single_cell_parser/io/morphology/index>  
+   activity </api_reference/single_cell_parser/io/activity/index>  
+   amira </api_reference/single_cell_parser/io/amira/index>  
+   connectivity </api_reference/single_cell_parser/io/connectivity/index>  
+
+.. module:: single_cell_parser.io
+
+.. autoapi-nested-parse::
+   Input/ouput operations for various file formats:
+
+   - :ref:`activity_data_format` and associated files in :mod:`~activity`
+   - Connectivity data such as :ref:`syn_file_format` and :ref:`con_file_format` files in :mod:`~connectivity`
+   - AMIRA files such as :class:`~single_cell_parser.io.amira.ScalarField` objects in :mod:`~amira`
+   - Morphologies in :ref:`hoc_file_format` and :ref:`swc_file_format` in :mod:`~morphology`
+
+
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`morphology <single_cell_parser.io.morphology>`
+     - Read, write and convert morphology files.
+   * - :py:obj:`activity <single_cell_parser.io.activity>`
+     - Read and write activity data
+   * - :py:obj:`amira <single_cell_parser.io.amira>`
+     - Read and write data formats for AMIRA.
+   * - :py:obj:`connectivity <single_cell_parser.io.connectivity>`
+     - Read and write connectivity data
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

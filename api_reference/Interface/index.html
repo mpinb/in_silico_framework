@@ -736,8 +736,12 @@
 <div class="toctree-wrapper compound">
 </div>
 <p id="module-Interface">Interface provides top-level API access to the In Silico Framework (ISF).
-It is the main entry point for users to interact with ISF, providing access to various pacakges, modules and workflows.
-It is designed to be used in a jupyter notebook, but can also be used in scripts.</p>
+It is the main entry point for users to interact with ISF, providing access to various pacakges, modules and workflows.</p>
+<p>The primary purpose of providing these workflows, subpackages, and external dependencies through Interface is to:</p>
+<ol class="arabic simple">
+<li><p>keep the API stable</p></li>
+<li><p>give the user convenient top-level access to all major workflows</p></li>
+</ol>
 <p>The recommended way to use ISF is to import <code class="docutils literal notranslate"><span class="pre">Interface</span></code> in a jupyter notebook in the following manner:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">Interface</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">I</span>
 </code></pre></div>
@@ -749,7 +753,7 @@ It is designed to be used in a jupyter notebook, but can also be used in scripts
 <span class="gp">...</span>
 </code></pre></div>
 </div>
-<p>Take a look at the <a class="reference internal" href="../../tutorials.html#tutorials"><span class="std std-ref">Tutorials</span></a> for examples on how to use the Interface API.</p>
+<p>Take a look at the <a class="reference internal" href="../../tutorials.html#tutorials"><span class="std std-ref">Tutorials</span></a> for examples on how to use ISF from the Interface API.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <table class="summarytable docutils data align-default">
 <tbody>

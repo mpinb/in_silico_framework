@@ -1,0 +1,77 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ 
+
+
+setup_stim
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   setup_bAP </api_reference/biophysics_fitting/hay/setup_stim/setup_bAP>
+   setup_BAC </api_reference/biophysics_fitting/hay/setup_stim/setup_BAC>
+   setup_StepOne </api_reference/biophysics_fitting/hay/setup_stim/setup_StepOne>
+   setup_StepTwo </api_reference/biophysics_fitting/hay/setup_stim/setup_StepTwo>
+   setup_StepThree </api_reference/biophysics_fitting/hay/setup_stim/setup_StepThree>
+
+.. module:: biophysics_fitting.hay.setup_stim
+
+.. autoapi-nested-parse::
+   This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
+
+   Stimulus types include the stimuli used by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`:
+
+   - a bAP (backpropagating AP) stimulus.
+   - a BAC (bAP-Activated :math:`Ca^{2+}`) stimulus.
+   - Three step current stimuli with amplitudes :math:`[0.619, 0.793, 1.507]\ nA`.
+
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`setup_bAP <biophysics_fitting.hay.setup_stim.setup_bAP>`\ (cell, delay)
+     - Setup a bAP (backpropagating action potential) stimulus for the cell.
+   * - :py:obj:`setup_BAC <biophysics_fitting.hay.setup_stim.setup_BAC>`\ (cell, dist, delay)
+     - Setup a BAC (bAP-activated Ca2+-spike) stimulus for the cell.
+   * - :py:obj:`setup_StepOne <biophysics_fitting.hay.setup_stim.setup_StepOne>`\ (cell, delay)
+     - Setup a step current stimulus at the soma:
+   * - :py:obj:`setup_StepTwo <biophysics_fitting.hay.setup_stim.setup_StepTwo>`\ (cell, delay)
+     - Setup a step current stimulus at the soma:
+   * - :py:obj:`setup_StepThree <biophysics_fitting.hay.setup_stim.setup_StepThree>`\ (cell, delay)
+     - Setup a step current stimulus at the soma:
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`h <biophysics_fitting.hay.setup_stim.h>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

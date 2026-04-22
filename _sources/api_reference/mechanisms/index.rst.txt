@@ -11,27 +11,43 @@ mechanisms
 .. toctree::
    :hidden:
 
-   l5pt </api_reference/mechanisms/l5pt/index>  
+   check_nrnivmodl_is_available </api_reference/mechanisms/check_nrnivmodl_is_available>
+   _check_if_mechanisms_are_compiled_at_path </api_reference/mechanisms/_check_if_mechanisms_are_compiled_at_path>
+   _compile_mechanisms_at_path </api_reference/mechanisms/_compile_mechanisms_at_path>
+   are_compiled </api_reference/mechanisms/are_compiled>
+   are_loaded </api_reference/mechanisms/are_loaded>
+   list_loaded </api_reference/mechanisms/list_loaded>
+   compile_mechanisms </api_reference/mechanisms/compile_mechanisms>
+   load </api_reference/mechanisms/load>
 
 .. module:: mechanisms
 
 .. autoapi-nested-parse::
-   This directory contains the `.mod` files that define the biophysical behaviour of ion channels, such as conductivity, states, derivative states and initial conditions.
+   This directory contains the `.mod` files that define the biophysical behaviour of ion channels found in a Layer 5 Pyramidal Tract neuron (L5PT).
    In addition, it contains network connectivity parameters that define synaptic connections.
 
-   These are used by the NEURON simulator as variable parameters for solving the partial differential equations that describe the biophysics of a neuron.
+   Importing this module on UNIX systems registers the mechanisms in NEURON namespace.
+   This only works if they are compiled, which should have happened upon configuring ISF.
+   If this is not the case, you can:
 
-   In this direrctory, you will find cell-specific biphysical mechanisms organizeed per folder. Each folder has its own __init__ file that sets up these mechanisms using NEURON.
+   ```python
+   >>> from config.user import mechanisms
+   >>> mechanisms.are_compiled()  # check if all mechanisms are compiled
+   False
+   >>> mechanisms.compile_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
+   >>> mechanisms.are_compiled()  # check if all mechanisms are compiled
+   True
+   ```
 
-
+   .. seealso:: :mod:`config.isf_configure`
 
 
 
 
 .. rst-class:: absolute-paragraph
 
-Modules
--------
+Functions
+---------
 
 
 .. list-table:: 
@@ -39,8 +55,44 @@ Modules
    :widths: auto
    :class: summarytable
    
-   * - :py:obj:`l5pt <mechanisms.l5pt>`
-     - This directory contains the `.mod` files that define the biophysical behaviour of ion channels found in a Layer 5 Pyramidal Tract neuron (L5PT).
+   * - :py:obj:`check_nrnivmodl_is_available <mechanisms.check_nrnivmodl_is_available>`\ ()
+     - Check if nrnivmodl is available in the PATH.
+   * - :py:obj:`are_compiled <mechanisms.are_compiled>`\ ()
+     - Check if all mechanisms are compiled.
+   * - :py:obj:`are_loaded <mechanisms.are_loaded>`\ ()
+     - Check if all mechanisms are loaded into NEURON namespace.
+   * - :py:obj:`list_loaded <mechanisms.list_loaded>`\ ()
+     - \-
+   * - :py:obj:`compile_mechanisms <mechanisms.compile_mechanisms>`\ (force\_recompile)
+     - Compile the mechanisms for L5PTs.
+   * - :py:obj:`load <mechanisms.load>`\ ()
+     - Load the mechanisms into NEURON namespace.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <mechanisms.logger>`
+     - \-
+   * - :py:obj:`MECHANISMS_PATH <mechanisms.MECHANISMS_PATH>`
+     - \-
+   * - :py:obj:`CHANNELS_PATH <mechanisms.CHANNELS_PATH>`
+     - \-
+   * - :py:obj:`NETCON_PATH <mechanisms.NETCON_PATH>`
+     - \-
+   * - :py:obj:`ARCHITECTURE <mechanisms.ARCHITECTURE>`
+     - \-
+   * - :py:obj:`MECH_LOCK <mechanisms.MECH_LOCK>`
+     - \-
+
 
 
 

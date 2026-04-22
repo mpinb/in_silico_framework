@@ -1,0 +1,15 @@
+
+
+_rename_hoc_labels_in_columns
+=============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.reader._rename_hoc_labels_in_columns(df: pandas.core.frame.DataFrame) -> pandas.core.frame.DataFrame
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

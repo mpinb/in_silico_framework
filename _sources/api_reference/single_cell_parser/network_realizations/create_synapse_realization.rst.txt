@@ -13,8 +13,9 @@ create_synapse_realization
 
    :param pname: :ref:`network_parameters_format` file.
    :type pname: str
-   :param write_synapses: Write synapse locations to a `.landmarkAscii` file for visualization in AMIRA. Default is False.
-   :type write_synapses: bool
+
+   .. deprecated:: 0.4.0
+       write_synapses has been deprecated.
 
 
 

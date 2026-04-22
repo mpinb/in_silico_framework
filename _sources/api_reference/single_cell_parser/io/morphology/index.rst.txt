@@ -1,0 +1,86 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.io` ❭ 
+
+
+morphology
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _edge </api_reference/single_cell_parser/io/morphology/_edge/index>  
+   hoc </api_reference/single_cell_parser/io/morphology/hoc/index>  
+   swc </api_reference/single_cell_parser/io/morphology/swc/index>  
+   read_morphology </api_reference/single_cell_parser/io/morphology/read_morphology>
+   convert_swc_to_hoc </api_reference/single_cell_parser/io/morphology/convert_swc_to_hoc>
+   convert_hoc_to_swc </api_reference/single_cell_parser/io/morphology/convert_hoc_to_swc>
+
+.. module:: single_cell_parser.io.morphology
+
+.. autoapi-nested-parse::
+   Read, write and convert morphology files.
+
+   Specific readers for morphology files are defined in submodules.
+   This module specifies converters between :ref:`swc_file_format` and :ref:`hoc_file_format` morphologies.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_morphology <single_cell_parser.io.morphology.read_morphology>`\ (fn, remap\_labels)
+     - Read a morphology in :ref:`hoc_file_format` or :ref:`swc_file_format` format.
+   * - :py:obj:`convert_swc_to_hoc <single_cell_parser.io.morphology.convert_swc_to_hoc>`\ (swc\_fn, of, axon)
+     - Convert a :ref:`swc_file_format` morphology file to :ref:`hoc_file_format` format.
+   * - :py:obj:`convert_hoc_to_swc <single_cell_parser.io.morphology.convert_hoc_to_swc>`\ (hoc\_fn, of, axon, skip\_myelin, remap\_sections)
+     - Convert a :ref:`hoc_file_format` morphology file to swc format.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.io.morphology.logger>`
+     - \-
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`hoc <single_cell_parser.io.morphology.hoc>`
+     - Read and write :ref:`hoc_file_format` morphologies.
+   * - :py:obj:`swc <single_cell_parser.io.morphology.swc>`
+     - Read and write :ref:`swc_file_format` morphologies.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

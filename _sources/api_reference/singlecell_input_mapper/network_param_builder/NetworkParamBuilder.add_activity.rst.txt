@@ -1,0 +1,29 @@
+
+
+add_activity
+============
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_activity(activity_per_ct=None, additional_params=None) -> typing_extensions.Self
+
+
+   Add :ref:`activity_data_format` to a :ref:`network_parameters_format` file.
+
+   Evoked activity is network activity that is modeled as a ``"pointcell"`` with multiple possible activity distributions
+   (see :meth:`~single_cell_parser.network.NetworkMapper._create_pointcell_activities`).
+   It is distinct form ongoing activity, which is modeled as a Poisson ``"spiketrain"``.
+
+   :param activity_per_ct: Mapping between cell types and their corresponding activity data. Can e.g. be read from a :ref:`activity_data_format` file.
+   :type activity_per_ct: ~single_cell_parser.parameters.NTParameterSet
+   :param additional_params: Additional parameters to add to the evoked network activity parameters. Useful for e.g. setting a time offset value.
+   :type additional_params: ~single_cell_parser.parameters.NTParameterSet
+
+   .. seealso:: :meth:`add_ongoing_activity`
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

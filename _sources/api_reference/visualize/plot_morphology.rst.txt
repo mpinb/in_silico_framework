@@ -1,0 +1,36 @@
+
+
+plot_morphology
+===============
+
+
+.. Signature -------------------------------
+
+.. function:: visualize.plot_morphology(fn, **kwargs)
+
+
+   Plot a :ref:`morphology_file_format` file using matplotlib.
+
+   Instatiate a :class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`morphology_file_format` file.
+
+   :param fn: The path to the :ref:`morphology_file_format` file
+   :type fn: str
+   :param kwargs: additional arguments to pass to :meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot`
+
+   :returns: The figure object
+   :rtype: :class:`~matplotlib.figure.Figure`
+
+   Example::
+
+       from visualize import plot_hoc
+       fn = "getting_started/example_data/anatomical_constraints/86_C2_center.hoc"
+       plot_hoc(fn)
+
+   .. figure:: ../../_static/_images/86_hoc.png
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

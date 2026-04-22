@@ -1,0 +1,23 @@
+
+
+get_voxel_bounds
+================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.scalar_field.ScalarField.get_voxel_bounds(ijk)
+
+
+   Gets the bounding box of voxel given by indices i,j,k.
+
+   :param ijk: tuple of 3 integers: the indices of voxel in mesh.
+   :type ijk: tuple
+
+   .. warning:: Does not perform bounds checking. The voxel bounds may be beyond the span of the mesh.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

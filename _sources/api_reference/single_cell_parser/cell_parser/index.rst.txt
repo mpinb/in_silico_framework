@@ -16,7 +16,7 @@ cell_parser
 .. module:: single_cell_parser.cell_parser
 
 .. autoapi-nested-parse::
-   Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
+   Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`morphology_file_format` file.
 
 
 
@@ -32,7 +32,7 @@ Classes
    :class: summarytable
    
    * - :py:obj:`CellParser <single_cell_parser.cell_parser.CellParser>`
-     - Configure a :class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+     - Configure a :class:`~single_cell_parser.cell.Cell` object from a :ref:`morphology_file_format` file.
 
 
 

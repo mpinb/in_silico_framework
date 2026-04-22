@@ -1,0 +1,26 @@
+
+
+get_voxel_center
+================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.amira.ScalarField.get_voxel_center(ijk)
+
+
+   Fetch the center of the voxel given by indices i,j,k.
+
+   .. warning:: Does not perform bounds checking. The voxel center may be outside the span of the mesh.
+
+   :param ijk: tuple of 3 integers: the indices of voxel in mesh.
+   :type ijk: tuple
+
+   :returns: The 3D coordinates of the center of the voxel.
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

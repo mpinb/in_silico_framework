@@ -1,0 +1,15 @@
+
+
+read_bouton_densities_per_area_per_ct
+=====================================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.reader.read_bouton_densities_per_area_per_ct(dirname, anatomical_areas, cell_types)
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

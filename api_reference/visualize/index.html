@@ -624,21 +624,6 @@
   
   
     <li class="md-nav__item">
-      <a href="voltage_trace_visualizer/index.html" class="md-nav__link">
-        <span title="/api_reference/visualize/voltage_trace_visualizer/index.rst (reference label)" class="md-ellipsis">voltage_<wbr>trace_<wbr>visualizer</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="vtk/index.html" class="md-nav__link">
         <span title="/api_reference/visualize/vtk/index.rst (reference label)" class="md-ellipsis">vtk</span>
       </a>
@@ -669,8 +654,8 @@
   
   
     <li class="md-nav__item">
-      <a href="plot_hoc.html" class="md-nav__link">
-        <span title="/api_reference/visualize/plot_hoc.rst (reference label)" class="md-ellipsis">plot_<wbr>hoc</span>
+      <a href="plot_morphology.html" class="md-nav__link">
+        <span title="/api_reference/visualize/plot_morphology.rst (reference label)" class="md-ellipsis">plot_<wbr>morphology</span>
       </a>
     </li>
   
@@ -782,13 +767,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="voltage_trace_visualizer/index.html" class="md-nav__link">
-    <span title="/api_reference/visualize/voltage_trace_visualizer/index.rst (reference label)" class="md-ellipsis">voltage_<wbr>trace_<wbr>visualizer</span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="vtk/index.html" class="md-nav__link">
     <span title="/api_reference/visualize/vtk/index.rst (reference label)" class="md-ellipsis">vtk</span>
   </a>
@@ -803,8 +781,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="plot_hoc.html" class="md-nav__link">
-    <span title="/api_reference/visualize/plot_hoc.rst (reference label)" class="md-ellipsis">plot_<wbr>hoc</span>
+  <a href="plot_morphology.html" class="md-nav__link">
+    <span title="/api_reference/visualize/plot_morphology.rst (reference label)" class="md-ellipsis">plot_<wbr>morphology</span>
   </a>
   
 </li>
@@ -999,8 +977,8 @@ Provides modules for efficiently visualizing cell morphologies, ion currents, vo
 <tr class="row-odd"><td><p><a class="reference internal" href="svg2emf.html#visualize.svg2emf" title="visualize.svg2emf (Python function) — Converts svg to emf, which can be imported in Word using inkscape."><code class="xref py py-obj docutils literal notranslate"><span class="pre">svg2emf</span></code></a>(filename, path_to_inkscape)</p></td>
 <td><p>Converts svg to emf, which can be imported in Word using inkscape.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="plot_hoc.html#visualize.plot_hoc" title="visualize.plot_hoc (Python function) — Plot a hoc file using matplotlib."><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_hoc</span></code></a>(hoc_file, **kwargs)</p></td>
-<td><p>Plot a hoc file using matplotlib.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="plot_morphology.html#visualize.plot_morphology" title="visualize.plot_morphology (Python function) — Plot a morphology_file_format file using matplotlib."><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_morphology</span></code></a>(fn, **kwargs)</p></td>
+<td><p>Plot a <a class="reference internal" href="../../file_formats.html#morphology-file-format"><span class="std std-ref">Morphology</span></a> file using matplotlib.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1008,6 +986,12 @@ Provides modules for efficiently visualizing cell morphologies, ion currents, vo
 <table class="summarytable docutils data align-default">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_hoc</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_swc</span></code></p></td>
 <td><p>-</p></td>
 </tr>
 </tbody>
@@ -1039,10 +1023,7 @@ Provides modules for efficiently visualizing cell morphologies, ion currents, vo
 <tr class="row-even"><td><p><a class="reference internal" href="utils/index.html#module-visualize.utils" title="visualize.utils (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">utils</span></code></a></p></td>
 <td><p>Visualization utilities.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="voltage_trace_visualizer/index.html#module-visualize.voltage_trace_visualizer" title="visualize.voltage_trace_visualizer (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">voltage_trace_visualizer</span></code></a></p></td>
-<td><p>Visualize voltage traces from the results of a <a class="reference internal" href="../biophysics_fitting/simulator/Simulator.html#biophysics_fitting.simulator.Simulator" title="biophysics_fitting.simulator.Simulator (Python class) — This class can be used to transform a parameter vector into simulated voltage traces."><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a> object.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="vtk/index.html#module-visualize.vtk" title="visualize.vtk (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vtk</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="vtk/index.html#module-visualize.vtk" title="visualize.vtk (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vtk</span></code></a></p></td>
 <td><p>Save simulation data in vtk compatible formats</p></td>
 </tr>
 </tbody>

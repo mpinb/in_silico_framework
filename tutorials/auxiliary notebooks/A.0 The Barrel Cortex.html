@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
@@ -407,7 +407,9 @@ cortex. A single barrel is a columnar structure that spans the depth of the neoc
 <p><img alt="l5pt_morphology" class="no-scaled-link" src="../../_images/morphology_names%40300x.png" style="width: 30%;" /></p>
 <p>“Apical dendrite” refers to the fact that the dendrite originates from the apex of the soma, or the “upper point” of the pyramidal shape.</p>
 <h1 id="Scaling-the-apical-dendrite">Scaling the apical dendrite<a class="headerlink" href="#Scaling-the-apical-dendrite" title="Link to this heading">¶</a></h1>
-<p>The diameter of the L5PT’s apical dendrite has an important influence on the biophysical properties of the neuron. Biophysical parameters are expressed in units of conductance per area. This area scales with the square of the radius of the dendrite, making the diameter of the dendrites a very influential morphological property. For this reason, the width of the apical dendrite is added as a free parameter in our examples on biophysical expression under the name <code class="docutils literal notranslate"><span class="pre">scale_apical</span></code>.</p>
+<p>The diameter of the L5PT’s apical dendrite has an important influence on the biophysical properties of the neuron. Biophysical parameters are expressed in units of conductance per area. This area scales with the square of the radius of the dendrite, making the diameter of the dendrites a very influential morphological property. At the same time, it is not always possible to accurately infer its diameter. For example, we reconstructed out morphologies from brain slices that were cut perpendicular
+to the apical dendrite. If you look at the apical dendrite from the top, figuring out if it is a thick dendrite, or simply corkscrewing, is not always clear. If you additionally consider e.g. diffraction artifacts, measurement uncertainty, dyes not fully diffusing through the cell body, inexperienced microscope operators… the certainty level on the dendritic diameters drastically shrinks. For this reason, we added a scaling parameter for the apical dendrite diameter under the name
+<code class="docutils literal notranslate"><span class="pre">scale_apical</span></code>. We only did this for the apical diameter, as this is the most influential one for dendritic coupling mechanisms in this cell type.</p>
 
 
 

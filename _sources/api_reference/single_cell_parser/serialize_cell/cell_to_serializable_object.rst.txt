@@ -27,7 +27,7 @@ cell_to_serializable_object
    - synapses: dictionary of synapse populations, each containing a list of synapses with the following information:
        - preCell: dictionary containing the spike times of the presynaptic cell
        - coordinates: coordinates of the synapse
-   - hoc: hoc file content
+   - hoc/swc: Morphology file content
 
    :param cell: cell object
    :type cell: ~single_cell_parser.cell.Cell

@@ -6,7 +6,7 @@
       "source": [
         "# Generating biophysically detailed multi-compartmental models\n",
         "\n",
-        "This tutorial provides a walkthrough on how to use ISF in order to generate biophysically detailed multi-comparmental models that are consistent with empirical responses. To do this, you will need:\n",
+        "This tutorial provides a walkthrough on how to use ISF in order to generate biophysically detailed multi-comparmental models (hereafter: neuron models) that are consistent with empirical responses. To do this, you will need:\n",
         "\n",
         "1. A neuron morphology in the `.hoc` format.\n",
         "2. Empirical data on the neuron's biophysical expression.\n",
@@ -17,10 +17,10 @@
         "ISF provides two ways of generating multi-compartmental neuron models:\n",
         "\n",
         "\n",
-        "|   |Algorithm | Pros | Cons\n",
-        "|---|---|---|---|\n",
-        "|1.|[Optimization algorithm](../../api_reference/biophysics_fitting/optimizer/index.rst) | No a priori requirements | Does not explore the full diversity of possible BDMs|\n",
-        "|2.|[Exploration algorithm](../../api_reference/biophysics_fitting/exploration_from_seedpoint//index.rst) | Explores the full biophysical diversity of possible BDMs | Requires a seedpoint|\n",
+        "|     | Algorithm                                                                                             | Pros                                                              | Cons                                                          |\n",
+        "| -----| -------------------------------------------------------------------------------------------------------| -------------------------------------------------------------------| ---------------------------------------------------------------|\n",
+        "| 1.  | [Optimization algorithm](../../api_reference/biophysics_fitting/optimizer/index.rst)                  | No a priori requirements                                          | Does not explore the full diversity of possible neuron models |\n",
+        "| 2.  | [Exploration algorithm](../../api_reference/biophysics_fitting/exploration_from_seedpoint//index.rst) | Explores the full biophysical diversity of possible neuron models | Requires a seedpoint to start from                              |\n",
         "\n",
         "To get started, adapt your desired output path:"
       ]
@@ -87,6 +87,7 @@
         "## Optimization Algorithm\n",
         "\n",
         "This section will guide you through using ISF to create neuron models from scratch using a Multi-Objective Evolutionary Optimization algorithm (MOEA) called [BluePyOpt](https://github.com/BlueBrain/BluePyOpt).\n",
+        "In principle, any method that finds a neuron model is compatible with ISF. The main purpose of this workflow is to find at least a single seedpoint for the exploration algorithm, which is more performant in terms of succes rate, and in terms of capturing biological diversity. We provide an interface to [BluePyOpt](https://github.com/BlueBrain/BluePyOpt), simply because it is the most performant method we have tried so far for the case where you don't have a neuron model to start from.\n",
         "\n",
         "### Empirical limits for biophysical parameters"
       ]

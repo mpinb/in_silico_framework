@@ -1,0 +1,49 @@
+
+
+read_spike_times_file
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.activity.read_spike_times_file(fname)
+
+
+   Reads all trials and spike times within these trials.
+
+   .. deprecated::
+       This format is now commonly a pandas or dask dataframe.
+       They can still be explicitly read with this function
+       using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+
+
+   :param fname: file of format:
+                 trial nr.   activation times (comma-separated list or empty)
+   :type fname: str
+
+   :raises RuntimeError: If a trial number is found twice in the file
+
+   :returns: Dictionary with trial numbers as keys (integers), and tuples of spike times in each trial as values
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> spike_file
+   # Spike times file
+   # trial nr.   activation times (ms)
+   1   100.2,698.1
+   2   100.2,698.1,1000.0
+   ...
+   >>> read_spike_times_file(spike_file)
+   {
+       1: (100.2, 698.1),
+       2: (100.2, 698.1, 1000.0),
+       ...
+   }
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

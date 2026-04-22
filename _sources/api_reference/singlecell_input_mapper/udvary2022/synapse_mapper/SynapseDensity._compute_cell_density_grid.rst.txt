@@ -1,0 +1,29 @@
+
+
+_compute_cell_density_grid
+==========================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseDensity._compute_cell_density_grid()
+
+
+   Create an empty mesh for the postsynaptic neuron to match the mesh of the synapse distribution.
+
+   :returns:
+
+             Tuple containing:
+
+                 - cellMesh (array): Empty mesh for the postsynaptic neuron.
+                 - cellOrigin (tuple): Origin of the mesh.
+                 - cellExtent (tuple): Extent of the mesh.
+                 - cellSpacing (tuple): Spacing of the mesh (dx, dy, dz).
+                 - cellBoundingBox (tuple): Bounding box of the mesh (minx, maxx, miny, maxy, minz, maxz).
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

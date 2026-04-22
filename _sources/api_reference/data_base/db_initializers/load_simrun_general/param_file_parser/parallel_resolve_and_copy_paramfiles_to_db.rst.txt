@@ -14,10 +14,10 @@ parallel_resolve_and_copy_paramfiles_to_db
    This function:
 
    1. Fetches all :ref:`network_parameters_format` and :ref:`cell_parameters_format`
-   2. Fetches all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files from these parameter files
+   2. Fetches all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`morphology_file_format` and recsite (.landmarkAscii) files from these parameter files
    3. Creates a mapping for each file from original location to target location, depending on the config.
    4. Scatters this filename mapping dict to a distsributed cluster
-   5. Resolves all references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files in each file depending on this map.
+   5. Resolves all references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`morphology_file_format` and recsite (.landmarkAscii) files in each file depending on this map.
    6. Copies over all resolved files from source to target.
 
    The resolution and copying is done in a single pass for efficiency.
@@ -37,7 +37,7 @@ parallel_resolve_and_copy_paramfiles_to_db
 
                                  - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
                                  - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
-                                 - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+                                 - "morph" (str): Target directory name of :ref:`morphology_file_format` files. Default is ``"anatomy_folder"``
                                  - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
                                  - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
                                  - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"

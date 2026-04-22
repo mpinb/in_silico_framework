@@ -19,7 +19,7 @@ map_pruned_synapse_realization
 
    See also:
 
-   - :func:`~single_cell_parser.reader.read_pruned_synapse_realization`
+   - :func:`~single_cell_parser.io.connectivity.read_pruned_synapse_realization`
    - The :ref:`syn_file_format` file type.
 
 

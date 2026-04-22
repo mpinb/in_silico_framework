@@ -1,0 +1,19 @@
+
+
+check_nrnivmodl_is_available
+============================
+
+
+.. Signature -------------------------------
+
+.. function:: mechanisms.check_nrnivmodl_is_available()
+
+
+   Check if nrnivmodl is available in the PATH.
+   Cross-platform implementation that works on both Windows and Unix systems.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

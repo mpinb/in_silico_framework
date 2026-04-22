@@ -764,7 +764,7 @@
 
 
 <h1 id="Generating-biophysically-detailed-multi-compartmental-models">Generating biophysically detailed multi-compartmental models<a class="headerlink" href="#Generating-biophysically-detailed-multi-compartmental-models" title="Link to this heading">¶</a></h1>
-<p>This tutorial provides a walkthrough on how to use ISF in order to generate biophysically detailed multi-comparmental models that are consistent with empirical responses. To do this, you will need:</p>
+<p>This tutorial provides a walkthrough on how to use ISF in order to generate biophysically detailed multi-comparmental models (hereafter: neuron models) that are consistent with empirical responses. To do this, you will need:</p>
 <ol class="arabic simple">
 <li><p>A neuron morphology in the <code class="docutils literal notranslate"><span class="pre">.hoc</span></code> format.</p></li>
 <li><p>Empirical data on the neuron’s biophysical expression.</p></li>
@@ -787,15 +787,15 @@
 </td>
 <td><p><a class="reference internal" href="../../api_reference/biophysics_fitting/optimizer/index.html"><span class="doc">Optimization algorithm</span></a></p></td>
 <td><p>No a priori requirements</p></td>
-<td><p>Does not explore the full diversity of possible BDMs</p></td>
+<td><p>Does not explore the full diversity of possible neuron models</p></td>
 </tr>
 <tr class="row-odd"><td><ol class="arabic simple" start="2">
 <li></li>
 </ol>
 </td>
 <td><p><a class="reference internal" href="../../api_reference/biophysics_fitting/exploration_from_seedpoint/index.html"><span class="doc">Exploration algorithm</span></a></p></td>
-<td><p>Explores the full biophysical diversity of possible BDMs</p></td>
-<td><p>Requires a seedpoint</p></td>
+<td><p>Explores the full biophysical diversity of possible neuron models</p></td>
+<td><p>Requires a seedpoint to start from</p></td>
 </tr>
 </tbody>
 </table>
@@ -856,7 +856,8 @@ IPython: 8.12.2, Interface: heads/docs+0.gbb14e30d.dirty, PIL: 10.4.0, _brotli: 
 </pre></div></div>
 </div>
 <h2 id="Optimization-Algorithm">Optimization Algorithm<a class="headerlink" href="#Optimization-Algorithm" title="Link to this heading">¶</a></h2>
-<p>This section will guide you through using ISF to create neuron models from scratch using a Multi-Objective Evolutionary Optimization algorithm (MOEA) called <a class="reference external" href="https://github.com/BlueBrain/BluePyOpt">BluePyOpt</a>.</p>
+<p>This section will guide you through using ISF to create neuron models from scratch using a Multi-Objective Evolutionary Optimization algorithm (MOEA) called <a class="reference external" href="https://github.com/BlueBrain/BluePyOpt">BluePyOpt</a>. In principle, any method that finds a neuron model is compatible with ISF. The main purpose of this workflow is to find at least a single seedpoint for the exploration algorithm, which is more performant in terms of succes rate, and in terms of capturing biological diversity. We provide
+an interface to <a class="reference external" href="https://github.com/BlueBrain/BluePyOpt">BluePyOpt</a>, simply because it is the most performant method we have tried so far for the case where you don’t have a neuron model to start from.</p>
 <h3 id="Empirical-limits-for-biophysical-parameters">Empirical limits for biophysical parameters<a class="headerlink" href="#Empirical-limits-for-biophysical-parameters" title="Link to this heading">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
@@ -873,7 +874,7 @@ IPython: 8.12.2, Interface: heads/docs+0.gbb14e30d.dirty, PIL: 10.4.0, _brotli: 
 <p>In addition to the conductance of the ion channels, two important free parameters need to be added in order to find models for an L5PT:</p>
 <ul class="simple">
 <li><p>The spatial distribution of <span class="math notranslate nohighlight">\(SK_V3.1\)</span> channels along the apical dendrite. These are modeled here to slope off from the soma towards the end of the apical dendrite, consistent with <a class="reference external" href="https://doi.org/10.1113/jphysiol.2006.122564">Schaefer et al. (2007)</a></p></li>
-<li><p>The thickness of the apical dendrite. Why this is added as a free parameter is explained in <a class="reference external" href="../auxiliary%20notebooks/A.0%20The%20Barrel%20Cortex.ipynb">this auxiliary notebook</a></p></li>
+<li><p>The thickness of the apical dendrite. Why this is added as a free parameter is explained in <a class="reference internal" href="../auxiliary%20notebooks/A.0%20The%20Barrel%20Cortex.html"><span class="doc">this auxiliary notebook</span></a></p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
@@ -1120,7 +1121,7 @@ Empirical limits for biological parameters
 </div>
 <h3 id="Database-setup">Database setup<a class="headerlink" href="#Database-setup" title="Link to this heading">¶</a></h3>
 <p>The MOEA algorithm expects a database containing methods that set up Simulator and Evaluator objects. Let’s create these methods. Here, you can set up which input stimuli will be run, and how they will be evaluated. We have already created such simulation setup and evaluation methods for L5PTs consistent with <a class="reference external" href="https://doi.org/10.1371/journal.pcbi.1002107">Hay et al. (2011)</a> in <a class="reference internal" href="../../api_reference/biophysics_fitting/hay/default_setup/index.html"><span class="doc">default_setup</span></a> and
-<a class="reference internal" href="../../api_reference/biophysics_fitting/L5tt_parameter_setup/index.html"><span class="doc">L5tt_parameter_setup</span></a></p>
+<a class="reference external" href="../../api_reference/biophysics_fitting/L5tt_parameter_setup/index.rst">L5tt_parameter_setup</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
 </code></pre></div>

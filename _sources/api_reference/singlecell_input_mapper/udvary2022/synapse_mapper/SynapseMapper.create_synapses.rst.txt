@@ -1,0 +1,29 @@
+
+
+create_synapses
+===============
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseMapper.create_synapses(preType='Generic')
+
+
+   Creates instantiation of synapses on cell from synapse distribution.
+
+   Iterates the cell structures (e.g. "Soma", "Dendrite", "ApicalDendrite").
+   For each structure, creates a list of synapses per voxel by poisson sampling the synapse distribution mesh.
+   Randomly assignes these synapses to any point on the morphology that lies within the same voxel.
+
+   :param preType: Type of presynaptic cell. Default is 'Generic'.
+   :type preType: str
+
+   :returns: list of :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
+             Also updates the :param:`cell` attribute to contain synapses.
+   :rtype: list
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

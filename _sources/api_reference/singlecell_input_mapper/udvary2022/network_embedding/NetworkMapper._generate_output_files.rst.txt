@@ -1,0 +1,39 @@
+
+
+_generate_output_files
+======================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._generate_output_files(postCellName, connectivityMap, connectedCells, connectedCellsPerStructure, writeLandmarkFiles=False)
+
+
+   Generates all summary files and writes output files.
+
+   Generates and writes out summary files using
+   :func:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`,
+   :func:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`, and
+   :func:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`.
+
+   Used by :func:`~create_network_embedding_for_simulations` and
+   :func:`~create_network_embedding_from_synapse_densities` to write output files to disk.
+
+   :param postCellName: Path to the postsynaptic :ref:`hoc_file_format` file.
+   :type postCellName: str
+   :param connectivityMap: Connections between presynaptic cells and postsynaptic cell of the form
+                           (cell type, presynaptic cell index, synapse index).
+                           Created by :func:`_create_anatomical_connectivity_map`.
+   :type connectivityMap: list
+   :param connectedCells: Dictionary of connected cells.
+   :type connectedCells: dict
+   :param connectedCellsPerStructure: Dictionary of connected cells per structure.
+   :type connectedCellsPerStructure: dict
+
+   :returns: None. Writes output files to disk.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

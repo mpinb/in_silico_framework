@@ -11,7 +11,6 @@ cell_modify_functions
 .. toctree::
    :hidden:
 
-   BAC_injection </api_reference/single_cell_parser/cell_modify_functions/BAC_injection/index>  
    apical_current_injection </api_reference/single_cell_parser/cell_modify_functions/apical_current_injection/index>  
    apical_epsp_injection </api_reference/single_cell_parser/cell_modify_functions/apical_epsp_injection/index>  
    blender_recorder </api_reference/single_cell_parser/cell_modify_functions/blender_recorder/index>  
@@ -88,8 +87,6 @@ Modules
    :widths: auto
    :class: summarytable
    
-   * - :py:obj:`BAC_injection <single_cell_parser.cell_modify_functions.BAC_injection>`
-     - Injects the BAC stimulus :cite:`Hay_Hill_Schuermann_Markram_Segev_2011` at a specified distance.
    * - :py:obj:`apical_current_injection <single_cell_parser.cell_modify_functions.apical_current_injection>`
      - Inject a current at a given distance from the soma.
    * - :py:obj:`apical_epsp_injection <single_cell_parser.cell_modify_functions.apical_epsp_injection>`

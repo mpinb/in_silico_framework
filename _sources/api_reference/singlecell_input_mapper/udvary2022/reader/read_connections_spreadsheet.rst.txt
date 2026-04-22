@@ -1,0 +1,28 @@
+
+
+read_connections_spreadsheet
+============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.reader.read_connections_spreadsheet(fname, rename_presyn_map=None)
+
+
+   Read a connections spreadsheet.
+
+   Connections spreadsheets define the empirically measured connectivity between
+   presynaptic cells, and all structures of a postsynaptic cell, in units of
+   connections per unit of area and length.
+
+   :param fname: Filename of the connections spreadsheet file.
+   :type fname: str
+   :param rename_presyn_map: Mapping between presynaptic cell type names, and the internal representation to use.
+                             If ``None`` (default), maps "ALL_EXCITATORY" to "EXC" and "ALL_INHIBITORY" to "INH".
+   :type rename_presyn_map: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,25 @@
+
+
+write_landmark_file
+===================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.writer.write_landmark_file(fname=None, landmarkList=None)
+
+
+   Write Amira landmark file
+
+   :param fname: Name of the output file
+   :type fname: str
+   :param landmarkList: List of tuples, each of which holds 3 float coordinates
+   :type landmarkList: array
+
+   :raises RuntimeError: If no file name is given
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

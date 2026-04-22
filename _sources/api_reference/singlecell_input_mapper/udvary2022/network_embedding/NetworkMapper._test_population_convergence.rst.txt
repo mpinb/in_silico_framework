@@ -1,0 +1,29 @@
+
+
+_test_population_convergence
+============================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.network_embedding.NetworkMapper._test_population_convergence(nrOfSamples, sampleConnectivityData, postCellName)
+
+
+   Test how many samples are needed to get a representative sample.
+
+   Tests how many network realizations need to be sampled in order
+   to get a reasonable estimate of the variability of connectivity
+   parameters.
+
+   :param nrOfSamples: Number of network realizations.
+   :type nrOfSamples: int
+   :param sampleConnectivityData: List of network realizations.
+   :type sampleConnectivityData: list
+   :param postCellName: Name of the postsynaptic cell model.
+   :type postCellName: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

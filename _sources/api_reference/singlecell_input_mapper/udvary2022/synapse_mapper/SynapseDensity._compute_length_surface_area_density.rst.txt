@@ -1,0 +1,41 @@
+
+
+_compute_length_surface_area_density
+====================================
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.synapse_mapper.SynapseDensity._compute_length_surface_area_density(likeAmira=0)
+
+
+   Fills the scalar fields :param:`lengthDensity` and :param:`surfaceDensity` to contain length and area per structure per voxel.
+
+   This method is an implementation of line segment clipping using the
+   Liang-barsky :cite:`liang1984new` algorithm (http://en.wikipedia.org/wiki/Liang%E2%80%93Barsky_algorithm).
+   This makes use of the fact that end points of individual sections are beginning points
+   of connected sections and represented in each section separately.
+   This way, sections can be treated separately from each other.
+
+   The methods runs in two steps:
+
+   1. Compute length between all pairs of points that are located in the same grid cell (vast majority)
+   2. Use Liang-Barsky for clipping line segments between remaining points that are not located within same grid cell
+
+   :param lengthDensity: dictionary with structure labels as keys (e.g. "Soma", "Dendrite"...) and
+                         :class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
+   :type lengthDensity: dict
+   :param surfaceAreaDensity: dictionary with structure labels as keys (e.g. "Soma", "Dendrite"...) and
+                              :class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
+   :type surfaceAreaDensity: dict
+   :param likeAmira: Set to True if the diamlist of each section denotes the radius, rather than the diameter.
+                     Default is ``False``.
+   :type likeAmira: bool
+
+   :returns: None. Fills the scalar fields in place.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

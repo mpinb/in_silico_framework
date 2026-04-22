@@ -1,0 +1,54 @@
+
+
+read_pruned_synapse_realization
+===============================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.io.connectivity.read_pruned_synapse_realization(fname)
+
+
+   Read in a :ref:`syn_file_format` and returns a dictionary of synapse locations and whether they are pruned or not.
+
+   Pruned synapses are synapses that have been removed from the model.
+   Whether or not they are pruned is indicated by an additional column in the synapse realization file.
+
+   See also:
+
+   - :ref:`syn_file_format` for more information on the `.syn` file format.
+   - :func:`~single_cell_parser.io.connectivity.read_synapse_realization`.
+   - :func:`~single_cell_parser.io.connectivity.write_pruned_synapse_locations` for the corresponding writer.
+
+   :param fname: The name of the file to be read.
+   :type fname: str
+
+   :raises IOError: If the input file does not have a `.syn` or `.SYN` suffix.
+
+   :returns: A dictionary with synapse types as keys and lists of synapse locations as values.
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> synapse_file
+   # Synapse distribution file
+   # corresponding to cell: 86_C2_center
+   # Type - section - section.x - pruned
+   VPM_E1  112     0.138046479525  0
+   VPM_E1  130     0.305058053119  0
+   ...
+   >>> read_pruned_synapse_realization(synapse_file)
+   {
+       'VPM_E1': [
+           (112, 0.138046479525, 0),
+           (130, 0.305058053119, 0),
+           ...
+           ]
+   }
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

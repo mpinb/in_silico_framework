@@ -31,12 +31,12 @@ dask_to_categorized_msgpack
    - The index is str
    - The columns have a lot of repetitive values, so they can be grouped.
 
-   If the number of partitions is very large (:math:`>10000`), it will repartition the
+   If the number of partitions is very large (:math:`\textgreater 10000`), it will repartition the
    dataframe to 5000 partitions.
    Loading such a dataframe is normaly possible within 1 second.
 
    Before saving, all str-columns will be converted to ``pd.Categorical``s
-   In each respective partition, if the part of unique values in the respective column is :math:`<= 20\%`. The original datatype
+   In each respective partition, if the part of unique values in the respective column is :math:`\leq 20%`. The original datatype
    will be restored if the dataframe is loaded.
    This therefore only serves as optimization to increase loading speed and reduce network traffic for suitable dataframes.
    Suitable dataframes are for example the :ref:`syn_activation_format` dataframe.

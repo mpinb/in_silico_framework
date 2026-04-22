@@ -20,13 +20,13 @@ _create_pointcell_activities
       :header-rows: 1
 
       * - Distribution Type
-        - Required Parameters
+        - Parameters
       * - "normal"
-        - "spikeT", "spikeWidth", "offset"
+        - "spikeT", "spikeWidth", "offset", "activeFrac" (optional, default=1)
       * - "uniform"
-        - "window", "offset"
+        - "window", "offset", "activeFrac" (optional, default=1)
       * - "lognormal"
-        - "mu", "sigma", "offset"
+        - "mu", "sigma", "offset", "activeFrac" (optional, default=1)
       * - "PSTH"
         - "intervals", "probabilities", "offset"
       * - "PSTH_absolute_number"

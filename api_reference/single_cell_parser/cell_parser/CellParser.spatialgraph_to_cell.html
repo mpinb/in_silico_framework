@@ -458,6 +458,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../io/index.html" class="md-nav__link">
+        <span title="/api_reference/single_cell_parser/io/index.rst (reference label)" class="md-ellipsis">io</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../network_modify_functions/index.html" class="md-nav__link">
         <span title="/api_reference/single_cell_parser/network_modify_functions/index.rst (reference label)" class="md-ellipsis">network_<wbr>modify_<wbr>functions</span>
       </a>
@@ -507,7 +522,7 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5_6" type="checkbox" id="__nav_1_5_6" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5_7" type="checkbox" id="__nav_1_5_7" checked>
       
       
       
@@ -515,14 +530,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="index.html"><span title="/api_reference/single_cell_parser/cell_parser/index.rst (reference label)" class="md-ellipsis">cell_<wbr>parser</span></a>
           
-            <label for="__nav_1_5_6">
+            <label for="__nav_1_5_7">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="cell_parser" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_5_6">
+        <label class="md-nav__title" for="__nav_1_5_7">
           <span class="md-nav__icon md-icon"></span>
           <span title="/api_reference/single_cell_parser/cell_parser/index.rst (reference label)" class="md-ellipsis">cell_<wbr>parser</span>
         </label>
@@ -539,7 +554,7 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5_6_1" type="checkbox" id="__nav_1_5_6_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5_7_1" type="checkbox" id="__nav_1_5_7_1" checked>
       
       
       
@@ -547,14 +562,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="CellParser.html"><span title="/api_reference/single_cell_parser/cell_parser/cellparser.rst (reference label)" class="md-ellipsis">Cell<wbr>Parser</span></a>
           
-            <label for="__nav_1_5_6_1">
+            <label for="__nav_1_5_7_1">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="CellParser" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_5_6_1">
+        <label class="md-nav__title" for="__nav_1_5_7_1">
           <span class="md-nav__icon md-icon"></span>
           <span title="/api_reference/single_cell_parser/cell_parser/cellparser.rst (reference label)" class="md-ellipsis">Cell<wbr>Parser</span>
         </label>
@@ -599,7 +614,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell (Python function) — Create a Cell object from an AMIRA spatial graph in hoc_file_format format." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parserspatialgraph_<wbr>to_<wbr>cell</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell (Python function) — Create a Cell object from the morphology_file_format." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parserspatialgraph_<wbr>to_<wbr>cell</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parsercell_parserCellParserspatialgraph_to_cell">
@@ -615,7 +630,14 @@
         
           <li class="md-nav__item">
   <a href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon" class="md-nav__link">
-    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon (Python parameter) — Whether or not to add an axon initial segment (AIS)." class="md-ellipsis">axon</span>
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon (Python parameter) — Whether or not to add a custom axon initial segment (AIS) instead of the one in the morphology file." class="md-ellipsis">axon</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway (Python parameter) — Force direct descendants of the soma to connect to the soma at x=0.5. Sections that connect to soma at x=0 mess up the calculation of R_a. In addition, this flag is useful for consistency for those morphologies where the soma geometry is ill-defined, or to preserve continuity between swc_file_format and hoc_file_format in those cases where hoc_file_format defines connectivity between soma and child sections in ways that swc_file_format can&#39;t define (i.e." class="md-ellipsis">force_<wbr>connect_<wbr>soma_<wbr>halfway</span>
   </a>
   
 </li>
@@ -917,68 +939,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../reader/index.html" class="md-nav__link">
-        <span title="/api_reference/single_cell_parser/reader/index.rst (reference label)" class="md-ellipsis">reader</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../scalar_field/index.html" class="md-nav__link">
-        <span title="/api_reference/single_cell_parser/scalar_field/index.rst (reference label)" class="md-ellipsis">scalar_<wbr>field</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../serialize_cell/index.html" class="md-nav__link">
         <span title="/api_reference/single_cell_parser/serialize_cell/index.rst (reference label)" class="md-ellipsis">serialize_<wbr>cell</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../sim_control/index.html" class="md-nav__link">
-        <span title="/api_reference/single_cell_parser/sim_control/index.rst (reference label)" class="md-ellipsis">sim_<wbr>control</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../swc/index.html" class="md-nav__link">
-        <span title="/api_reference/single_cell_parser/swc/index.rst (reference label)" class="md-ellipsis">swc</span>
       </a>
     </li>
   
@@ -1009,21 +971,6 @@
     <li class="md-nav__item">
       <a href="../synapse_mapper/index.html" class="md-nav__link">
         <span title="/api_reference/single_cell_parser/synapse_mapper/index.rst (reference label)" class="md-ellipsis">synapse_<wbr>mapper</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../writer/index.html" class="md-nav__link">
-        <span title="/api_reference/single_cell_parser/writer/index.rst (reference label)" class="md-ellipsis">writer</span>
       </a>
     </li>
   
@@ -1284,7 +1231,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell (Python function) — Create a Cell object from an AMIRA spatial graph in hoc_file_format format." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parserspatialgraph_<wbr>to_<wbr>cell</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell (Python function) — Create a Cell object from the morphology_file_format." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parserspatialgraph_<wbr>to_<wbr>cell</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parsercell_parserCellParserspatialgraph_to_cell">
@@ -1300,7 +1247,14 @@
         
           <li class="md-nav__item">
   <a href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon" class="md-nav__link">
-    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon (Python parameter) — Whether or not to add an axon initial segment (AIS)." class="md-ellipsis">axon</span>
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon (Python parameter) — Whether or not to add a custom axon initial segment (AIS) instead of the one in the morphology file." class="md-ellipsis">axon</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway (Python parameter) — Force direct descendants of the soma to connect to the soma at x=0.5. Sections that connect to soma at x=0 mess up the calculation of R_a. In addition, this flag is useful for consistency for those morphologies where the soma geometry is ill-defined, or to preserve continuity between swc_file_format and hoc_file_format in those cases where hoc_file_format defines connectivity between soma and child sections in ways that swc_file_format can&#39;t define (i.e." class="md-ellipsis">force_<wbr>connect_<wbr>soma_<wbr>halfway</span>
   </a>
   
 </li>
@@ -1332,17 +1286,28 @@
 <h1 id="spatialgraph-to-cell">spatialgraph_to_cell<a class="headerlink" href="#spatialgraph-to-cell" title="Link to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell">
-<a class="reference internal" href="../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><span class="sig-name descname"><span class="pre">single_cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-single_cell_parser.cell_parser" title="single_cell_parser.cell_parser (Python module)"><span class="sig-name descname"><span class="pre">cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">CellParser</span></span><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">spatialgraph_to_cell</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.parameters (Python parameter)"><span class="n"><span class="pre">parameters</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon (Python parameter) — Whether or not to add an axon initial segment (AIS)."><span class="n"><span class="pre">axon</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.scaleFunc (Python parameter)"><span class="n"><span class="pre">scaleFunc</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="Link to this definition">¶</a></dt>
-<dd><p>Create a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from an AMIRA spatial graph in <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> format.</p>
-<p>Reads cell morphology from Amira hoc file and sets up PySections and Cell object.</p>
+<a class="reference internal" href="../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><span class="sig-name descname"><span class="pre">single_cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-single_cell_parser.cell_parser" title="single_cell_parser.cell_parser (Python module)"><span class="sig-name descname"><span class="pre">cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">CellParser</span></span><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">spatialgraph_to_cell</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.parameters (Python parameter)"><span class="n"><span class="pre">parameters</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon (Python parameter) — Whether or not to add a custom axon initial segment (AIS) instead of the one in the morphology file."><span class="n"><span class="pre">axon</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.scaleFunc (Python parameter)"><span class="n"><span class="pre">scaleFunc</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway (Python parameter) — Force direct descendants of the soma to connect to the soma at x=0.5. Sections that connect to soma at x=0 mess up the calculation of R_a. In addition, this flag is useful for consistency for those morphologies where the soma geometry is ill-defined, or to preserve continuity between swc_file_format and hoc_file_format in those cases where hoc_file_format defines connectivity between soma and child sections in ways that swc_file_format can't define (i.e."><span class="n"><span class="pre">force_connect_soma_halfway</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="Link to this definition">¶</a></dt>
+<dd><p>Create a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from the <a class="reference internal" href="../../../file_formats.html#morphology-file-format"><span class="std std-ref">Morphology</span></a>.</p>
+<p>Reads a <a class="reference internal" href="../../../file_formats.html#morphology-file-format"><span class="std std-ref">Morphology</span></a> file and sets up PySections and Cell object.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon"><span class="sig-name descname">axon</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon" title="Permalink to this definition">¶</a></dt><dd><p>Whether or not to add an axon initial segment (AIS). AIS creation is according to <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id12" title="Etay Hay, Felix Schürmann, Henry Markram, and Idan Segev. Preserving axosomatic spiking features despite diverse dendritic morphology. Journal of Neurophysiology, 109(12):2972–2981, June 2013. doi:10.1152/jn.00048.2013.">10</a>]</span>.</p>
+<dt id="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon"><span class="sig-name descname">axon</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.axon" title="Permalink to this definition">¶</a></dt><dd><p>Whether or not to add a custom axon initial segment (AIS) instead of the one in the morphology file. If <code class="docutils literal notranslate"><span class="pre">True</span></code>, an AIS is created according to the methods described in <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id12" title="Etay Hay, Felix Schürmann, Henry Markram, and Idan Segev. Preserving axosomatic spiking features despite diverse dendritic morphology. Journal of Neurophysiology, 109(12):2972–2981, June 2013. doi:10.1152/jn.00048.2013.">10</a>]</span>.</p>
+</dd>
+<dt id="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway"><span class="sig-name descname">force_connect_soma_halfway</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway" title="Permalink to this definition">¶</a></dt><dd><p>Force direct descendants of the soma to connect to the soma at <span class="math notranslate nohighlight">\(x=0.5\)</span>.
+Sections that connect to soma at <span class="math notranslate nohighlight">\(x=0\)</span> mess up the calculation of <span class="math notranslate nohighlight">\(R_a\)</span>.
+In addition, this flag is useful for consistency for those morphologies where the soma geometry is ill-defined, or
+to preserve continuity between <a class="reference internal" href="../../../file_formats.html#swc-file-format"><span class="std std-ref">.swc</span></a> and <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> in those cases where <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> defines connectivity
+between soma and child sections in ways that <a class="reference internal" href="../../../file_formats.html#swc-file-format"><span class="std std-ref">.swc</span></a> can’t define (i.e. continuous coordinate that lands in-between points)
+Default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<div class="seealso admonition">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="CellParser._create_ais_Hay2013.html#single_cell_parser.cell_parser.CellParser._create_ais_Hay2013" title="single_cell_parser.cell_parser.CellParser._create_ais_Hay2013 (Python function) — Create axon hillock and AIS according to Hay_Schuermann_Markram_Segev_2013"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_create_ais_Hay2013()</span></code></a> for how a custom AIS is created.</p>
+</div>
 <div class="admonition deprecated">
 <p class="admonition-title"><span class="versionmodified deprecated">Deprecated since version 0.1.0: </span>The <cite>scaleFunc</cite> argument is deprecated and will be removed in a future version.
 To ensure simulation reproducability, scaleFunc should be specified in the parameters, as
@@ -1449,6 +1414,8 @@ Instead of passing parameters as a keyword, the <a class="reference internal" hr
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
         <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>

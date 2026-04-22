@@ -67,7 +67,7 @@ NTParameterSet
         - \-
       * - :py:obj:`as_dict <single_cell_parser.parameters.NTParameterSet.as_dict>`\ ()
         - Convert the NTParameterSet to a regular dictionary.
-      * - :py:obj:`save <single_cell_parser.parameters.NTParameterSet.save>`\ (filename)
+      * - :py:obj:`save <single_cell_parser.parameters.NTParameterSet.save>`\ (filename, \*\*kwargs)
         - Save the NTParameterSet to a file in JSON format.
       * - :py:obj:`keys <single_cell_parser.parameters.NTParameterSet.keys>`\ ()
         - D.keys() -> a set-like object providing a view on D's keys

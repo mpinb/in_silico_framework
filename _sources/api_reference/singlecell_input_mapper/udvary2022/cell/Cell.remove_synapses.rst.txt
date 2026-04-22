@@ -1,0 +1,23 @@
+
+
+remove_synapses
+===============
+
+
+.. Signature -------------------------------
+
+.. function:: singlecell_input_mapper.udvary2022.cell.Cell.remove_synapses(preType=None)
+
+
+   Remove all synapses of type :param:`preType` from the cell.
+
+   :param preType: Presynaptic cell type. Default: None. Set to 'All' or 'all' to remove all synapses.
+   :type preType: str
+
+   :returns: None
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_
