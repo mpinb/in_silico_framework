@@ -16,7 +16,7 @@ name = "ISF"
 requires-python = ">=3.8"
 version = "0.6.0-beta"
 
-[tool.pixi.project]
+[tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-arm64", "win-64"]
 
@@ -60,6 +60,8 @@ scipy = "1.5.2.*"
 wheel = ">=0.45.1,<0.46"
 zarr = ">=2.15.0,<3"
 pyarrow = ">=18.0.0,<22"
+# for extracting barrel cortex data (optional)
+7zip = ">=26.0,<27"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"
@@ -261,3 +263,27 @@ host_docs = {cmd = ["python", "-m", "http.server", "8000"], description = "Host 
 [tool.coverage.run]
 # Ignore temporary dask files during test suite.
 omit = ["dask-worker-space/*", "*/dask-worker-space/*"]
+
+[tool.basedpyright]
+pythonVersion = "3.8"
+# we don't typehint arguments
+reportUnknownArgumentType = false
+reportArgumentType = false
+# we don't typehint class instance variables
+reportUnknownMemberType = false
+# we don't typehing variables
+reportUnknownVariableType = false
+# Otherwise passing args to get or set gives error: No overloads for "__getitem__" match the provided arguments (basedpyrightreportCallIssue)
+reportCallIssue = false
+# We don't typehing parameters or functions
+reportUnknownParameterType = false
+reportMissingParameterType = false
+# usually caught by the linter. there are many reasons why imports may remain unused, this clutters warnings
+reportUnusedImport = false
+# we allow "private" imports
+reportPrivateLocalImportUsage = false
+# When you call a function and don't care about the return value
+reportUnusedCallResult = false
+reportUnannotatedClassAttribute = false
+ignore = ["**/*.ipynb"]
+exclude = ["**/*.ipynb", "**.pixi**"]

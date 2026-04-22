@@ -101,6 +101,9 @@ class CMVDataParser:
             Each element is a dictionary where each key is the type of input population and the value is the list of active synapses for that type of population at that time point. 
             The list contains the 3d coordinates where each active synapse is located. None means it has no simulation data. 
             Empty list means it has simulation data that has not been initialized yet.
+        synapses (dict): 
+            List containing the synapse locations. 
+            Each key is the type of input population and the value is the list of synapses for that type of population. 
         ion_dynamics_timeseries (dict): 
             Dictionary containing the ion dynamics during a timeseries (Similarly to :param:`voltage_timeseries`). 
             Each value is a list corresponding where each element corresponds 1 timepoint, containing per-point info on the ion channel state or ion concentration. 
@@ -169,6 +172,7 @@ class CMVDataParser:
 
         self.voltage_timeseries = None
         self.synapses_timeseries = None
+        self.synapses = None
         self.ion_dynamics_timeseries = None
         self.time_show_syn_activ = 2  # ms
         if self._has_simulation_data():
@@ -484,6 +488,32 @@ class CMVDataParser:
                         if not population_name in synapses:
                             synapses[population_name] = []
                         synapses[population_name].append(pt)
+        return synapses
+
+    def _get_synapses(self, active_only=False):
+        '''Retrieves the synapse locations per synapse group.
+
+        Args:
+            active_only (bool): Only fetch those synapses that actually activate at some point.
+
+        Returns:
+            dict: 
+                dictionary where each key is the type of the input population and the value is a list of synapse coordinates for that type of population. 
+                If :param:`rotation_with_zaxis` is not None, the synapse coordinates are rotated to align with the z-axis.
+        '''
+
+        synapses = {}
+
+        for population in self.cell.synapses.keys():
+            for synapse in self.cell.synapses[population]:
+                if synapse.preCell is None and active_only: continue
+                population_name = self.synapse_group_function(population)
+                pt = synapse.coordinates
+                if self.rotation_with_zaxis is not None:  # no alignment with z-axis
+                    pt = self.rotation_with_zaxis.apply(synapse.coordinates - self.soma_center)
+                if not population_name in synapses:
+                    synapses[population_name] = []
+                synapses[population_name].append(pt)
         return synapses
 
     def _calc_synapses_timeseries(self):
@@ -928,14 +958,20 @@ class CellMorphologyVisualizer(CMVDataParser):
         highlight_x=None):
         '''Plot the cell morphology in 3D.
         
-        Cam be used to create a static plot of the cell morphology, which may be color-coded with voltage, ion dynamics, or synapse activations.
+        Can be used to create a static plot of the cell morphology, which may be color-coded with voltage, ion dynamics, or synapse activations.
 
         Args:
             color (str | [[float]]): If you want some other color overlayed on the cell morphology. 
               Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
             show_legend (bool): whether the voltage legend should appear in the plot
-            show_synapses (bool): whether the synapse activations should be shown
-            time_point (int|float): time point from which we want to gather the voltage/synapses. Defaults to 0
+            show_synapses (bool | List[str]): 
+                Whether the synapse activations should be shown
+                If it is a boolean, all synapses will be shown.
+                If it is a list of strings, only those synapses whose type match an entry in the list will be shown
+            time_point (int|float): 
+                Time point from which to show the voltage/synapses.
+                If ``None``, no voltage will be shown, and synapses will not be filtered based on activation times.
+                Defaults to ``None``
             save (bool): path where the plot will be saved. If it's empty it will not be saved (Default)
             highlight_section (int): section number of the section that should be highlighted
             highlight_x (float): x coordinate of the section that should be highlighted
@@ -956,14 +992,23 @@ class CellMorphologyVisualizer(CMVDataParser):
         else:
             colors = color
         if show_synapses:
-            self._calc_synapses_timeseries()
+            if time_point is not None: 
+                self._calc_synapses_timeseries()
+                synapses = self._get_synapses_at_timepoint(time_point)
+            else:
+                synapses = self._get_synapses()
+            if isinstance(show_synapses, list):
+                synapses = {k: v for k, v in synapses.items() if k in show_synapses}
+            elif not isinstance(show_synapses, bool): raise ValueError("Please pass either a boolean or a list of strings for the argument `show_synapses`")
+        else:
+            synapses = None
         
         
         fig, ax = get_3d_plot_morphology(
             self._morphology_connected,
             colors=colors,
             color_keyword=color,
-            synapses= self._get_synapses_at_timepoint(time_point) if show_synapses else None,
+            synapses=synapses,
             time_point=time_point-self.time_offset if type(time_point) in (float, int) else time_point,
             camera_position=self.camera_position,
             highlight_section_kwargs={
@@ -972,12 +1017,12 @@ class CellMorphologyVisualizer(CMVDataParser):
                 'arrow_args': self.highlight_arrow_kwargs},
             population_to_color_dict=self.population_to_color_dict,
             legend=self.scalar_mappable if show_legend else None,
-            synapse_legend=self.synapse_legend and show_synapses,
+            synapse_legend=self.synapse_legend and show_synapses and show_legend,
             dpi=self.dpi,
             save=save,
-            plot=True
+            plot=False
         )
-        return fig
+        return fig, ax
 
     def write_gif(
         self,
@@ -1206,7 +1251,7 @@ class CellMorphologyVisualizer(CMVDataParser):
             
         Args:
             out_dir (str): path of the directory where the VTK file will be stored.
-            fn (str): name of the VTK file. If empty, the file will be named after the cell's :ref:`hoc_file_format` filename.
+            fn (str): name of the VTK file. If empty, the file will be named after the cell's :ref:`morphology_file_format` filename.
 
         Returns:
             None: writes the .VTK file.
@@ -1217,7 +1262,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         # add diameters by default
         scalar_data['diameter'] = self._morphology_unconnected['diameter'].values
 
-        out_name_ = fn or os.path.basename(self.cell.hoc_path).replace('.hoc', '.vtk')
+        out_name_ = fn
         write_vtk_skeleton_file(
             self._morphology_unconnected,
             out_name_,

@@ -1,0 +1,19 @@
+{
+    "synapses": {
+        "receptors": {
+            "gaba_syn": {
+                "threshold": 0.0,
+                "delay": 0.0,
+                "parameter": {
+                    "decaygaba": 1.0,
+                    "risetime": 1.0,
+                    "decaytime": 20.0,
+                    "facilgaba": 0.0,
+                    "e": -80.0
+                },
+                "weight": 1.0
+            }
+        },
+        "releaseProb": 0.25,
+    },
+}

@@ -33,7 +33,7 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
@@ -67,7 +67,7 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
@@ -110,23 +110,61 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
+The ISF environment
+-------------------
+ISF provides two environments:
 
+- ``default``: the runtime environment used when you activate the ISF environment. This includes all dependencies of ISF necessary for normal operation
+- ``docs``: dependencies needed to build the ISF documentation
 
-Developer installation
------------------------
+Each ISF environment adapts the following environment variables:
 
+.. md-tab-set::
 
-If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
-you should also clone the ``develop`` branch of the repository:
+   .. md-tab-item:: Linux
 
-.. code-block:: bash
+      - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
 
-   git remote set-branches origin 'develop'
-   git fetch --depth 1 origin develop
+   .. md-tab-item:: macOS
+
+      - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
+
+   .. md-tab-item:: Windows
+
+      - ``PYTHONPATH``: ISF packages and the python packages that ship with your NEURON installation are prepended to the ``PYTHONPATH`` in that order. 
+        The NEURON python packages can be found at ``%NEURONHOME%/lib/python``.
+        In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``PATH``: The location of your NEURON executables is appended to your ``PATH``, so that you can invoke them from within the environment. These are located at ``%NEURONHOME%/bin``
+      - ``HOME``: ISF registers your ``%USERPROFILE%`` under an additional environment variable named ``HOME`` for convenience.
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
+
+.. warning::
+   The ISF ``pixi`` environment is, similar to other virtual environments, not isolated from system-level or user-level site-packages by default. 
+   It is recommended to install all python packages for any project in a dedicated environment for each project.
+   System-level and user-level site-packages are reserved for those packages that are strictly required by any environment across the system or user respectively.
+   If you have installed any other site-packages on the system- or user-level, you may contaminate your environments in unintended ways.
+   You can check if this is the case by activating your environment, and inspecting the output of:
+   
+   .. code-block:: bash
+
+      python -m site
+
+   If the ``ENABLE_USER_SITE`` flag is set to True (default behavior) and the ``USER_SITE`` directory exists (non-default behavior), 
+   then the site packages in ``USER_SITE`` will be loaded into this virtual environment. 
+   You should decide for yourself if this is the intended behavior for your user account and system, and if the contents of ``USER_SITE`` (if it exists) are indeed required across all environments.
+   If they contain packages that also exist in ISF, they will clash.
+
+   .. seealso::
+      https://docs.python.org/3/library/site.html
 
 
 Configuration
@@ -172,8 +210,6 @@ To test if all components of ISF are working as intended, you can run the test s
 .. code-block:: bash
 
    pixi run test
-
-
 
 
 

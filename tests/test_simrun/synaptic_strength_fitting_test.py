@@ -34,6 +34,7 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     Attention:
         This test is specific to the barrel cortex and assumes that the barrel cortex model is downloaded
     """
+
     PSPs = simrun.synaptic_strength_fitting.PSPs
     confile = os.path.join(
         context.data_dir,
@@ -42,7 +43,7 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     neuron_param = os.path.join(context.data_dir, 'neuron_model.param')
     neuron_param = scp.build_parameters(neuron_param)
     neuron_param.neuron['cell_modify_functions'] = scp.NTParameterSet(
-        {'scale_apical_morph_86': {}})
+        {'scale_apical': {"scale": 2.5}})
     filename = os.path.join(
         context.data_dir,
         "86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2.hoc")
@@ -52,6 +53,6 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     psps._delayeds = [psps._delayeds[index] for index in indexes]
     psps._keys = [psps._keys[index] for index in indexes]
     psps.run(client)
-    optimal_g_pdf = psps.get_optimal_g(get_EPSP_measurement())
+    optimal_g_pdf = psps.get_optimal_g(measured_data=get_EPSP_measurement())
     gVPM = optimal_g_pdf.loc['VPM_C2']['optimal g']
     assert 1.85 >= gVPM >= 1.72

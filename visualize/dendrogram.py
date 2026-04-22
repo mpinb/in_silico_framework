@@ -420,11 +420,12 @@ class _DendrogramDendriteStatistics:
         self._compute_dendrite_hist(xlim[1], binsize=binsize)
         histogram(
             (self.bins, self.dendrite_density),
-            label="dendrite",
-            colormap={"dendrite": "k"},
+            label="dendritic length",
+            colormap={"dendritic length": "k"},
             ax=ax,
         )
-        ax.set_ylabel("dendritic length / bin", color="k")
+        # ax.legend()
+        ax.set_ylabel(r"dendritic length $(\mu m)$", color="k")
         ax.set_xlim(xlim)
         return ax
 
@@ -602,11 +603,11 @@ class _DendrogramSynapseStatistics:
         self._compute_synapse_hist(binsize=binsize)
         if self.colormap_synapses is None:
             # Plot all
-            self.colormap_synapses = {"total": "r"}
+            self.colormap_synapses = {"synapse count": "r"}
             histogram(
                 (self.bins, self.synapse_density),
-                label="total",
-                colormap={"total": "r"},
+                label="synapse count",
+                colormap={"synapse count": "r"},
                 ax=ax,
             )
         else:
@@ -618,9 +619,9 @@ class _DendrogramSynapseStatistics:
                     colormap=self.colormap_synapses,
                     ax=ax,
                 )
-        ax.legend()
+        # ax.legend()
         ax.set_xlim(xlim)
-        ax.set_ylabel("# syn / micron dendritic length", color="k")
+        ax.set_ylabel("Synapse count", color="k")
         return ax
 
     def _plot_synapse_hist(self, ax, dendrite_density):
@@ -635,12 +636,12 @@ class _DendrogramSynapseStatistics:
         """
         histogram(
             (self.bins, self.synapse_density / dendrite_density),
-            label="total",
-            colormap={"total": "k"},
+            label="density",
+            colormap={"density": "k"},
             ax=ax,
         )
         ax.legend()
-        ax.set_ylabel("# syn / micron dendritic length", color="k")
+        ax.set_ylabel(r"Synapse density $(\mu m ^{-1})$", color="k")
 
     def _plot_synapses_dendrogram_overlay(self, ax):
         """Plot the synapses on the dendrogram.
@@ -746,12 +747,15 @@ class DendrogramStatistics(Dendrogram):
         ax = fig.add_subplot(gs[0])
         ax2 = fig.add_subplot(gs[1])
         ax3 = fig.add_subplot(gs[2])
+        ax2_2 = ax2.twinx()
 
         ax = self.dendrogram._plot_dendrogram(ax)
         xlim = ax.get_xlim()
         ax2 = self.dend_statistics._plot_dendrite_hist(ax2, xlim=xlim)
-        ax2_2 = ax2.twinx()
         ax2_2 = self.syn_statistics._plot_synapse_density_hist(ax2_2, xlim=xlim)
+        lns = (*ax2.lines, *ax2_2.lines)
+        labels = [l.get_label() for l in lns]
+        ax2.legend(lns, labels)
         ax3 = self.syn_statistics._plot_synapse_hist(
             ax3, dendrite_density=self.dend_statistics.dendrite_density
         )

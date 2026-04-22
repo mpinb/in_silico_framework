@@ -94,15 +94,15 @@ def _check_netp_has_working_refs(netp_fn):
 
 
 def _check_neup_has_working_refs(neup_fn):
-    hoc_fns, = fast_extract_values_from_param_file_key(neup_fn, ['filename'])
+    morph_fns, = fast_extract_values_from_param_file_key(neup_fn, ['filename'])
     recsites_fns, = fast_extract_values_from_param_file_key(neup_fn, ['recordingSites'])
-    if not len(hoc_fns) == 1:
-        logger.error(f"Found {len(hoc_fns)} .hoc references in {neup_fn}, expected 1.")
+    if not len(morph_fns) == 1:
+        logger.error(f"Found {len(morph_fns)} morphology references in {neup_fn}, expected 1.")
         return False
-    hoc_fn = hoc_fns[0]
+    morph_fn = morph_fns[0]
     assert not len(recsites_fns) > 1, f"recSites key is defined multiple times in {neup_fn}"
-    if not Path(hoc_fn).exists():
-        logger.error(f"The .hoc reference in {neup_fn} does not exist: {hoc_fn}")
+    if not Path(morph_fn).exists():
+        logger.error(f"The morphology reference in {neup_fn} does not exist: {morph_fn}")
         return False
     for recsites_fn_list in recsites_fns:
         for recsite_fn in recsites_fn_list:

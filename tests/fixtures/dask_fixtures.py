@@ -36,6 +36,6 @@ def client(dask_cluster, pytestconfig, n_workers=None):
     n_workers = n_workers or default_n_workers
     client = Client(dask_cluster)
     client.wait_for_workers(n_workers)
-    
+
     yield client
     client.close()

@@ -1,0 +1,76 @@
+.. graphviz::
+   :caption: Overview of file formats.
+   :alt: How Sphinx and GraphViz Render the Final Document
+   :align: center
+
+   digraph "sphinx-ext-graphviz" {
+   compound=true;
+   rankdir="TB";
+   graph [fontname="Verdana", fontsize="12"];
+   node [fontname="Verdana", fontsize="12"];
+   edge [fontname="Sans", fontsize="9"];
+
+   morphology_file [label="morphology", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           xref=":ref:`morphology_file_format`"];
+   con_data [label="dense connectome model", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           ];
+   biophys_limits [label="biophysical parameter range\nintrinsic physiology", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           ];
+   syn [label=".syn", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           xref=":ref:`syn_file_format`"];
+   con [label=".con", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           xref=":ref:`con_file_format`"];
+   act_data [label="activity data", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           xref=":ref:`activity_data_format`"];
+   netp [label="network.param", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           xref=":ref:`network_parameters_format`"];
+   neup [label="neuron.param", shape="note", fontcolor=black,
+           fillcolor="white", style=filled,
+           xref=":ref:`cell_parameters_format`"];
+   biophys_df [label="neuron model parameters", shape="note", fontcolor=black,
+           fillcolor="white", style=filled];
+
+   scim [label="singlecell_input_mapper", shape="folder",
+           xref=":mod:`singlecell_input_mapper`"];
+   scim2 [label="singlecell_input_mapper", shape="folder",
+           xref=":mod:`singlecell_input_mapper`"];
+   scp [label="single_cell_parser", shape="folder",
+           xref=":mod:`single_cell_parser`"];
+   simrun [label="simrun", shape="folder",
+           xref=":mod:`simrun`"];
+   biophysics_fitting [label="biophysics_fitting", shape="folder",
+           xref=":mod:`biophysics_fitting`"];
+
+   subgraph cluster_syncon {
+           style=filled;
+           rankdir="LR";
+           color=lightgrey;
+           con [constraint=false];
+           syn [constraint=false];
+           label = "";
+   }
+
+   morphology_file -> biophysics_fitting ;
+   biophys_limits -> biophysics_fitting ;
+   biophysics_fitting -> biophys_df ;
+   biophys_df -> scp ;
+   scp -> neup ;
+   neup -> simrun ;
+
+   morphology_file -> scim;
+   con_data -> scim;
+   scim -> con [lhead=cluster_syncon];
+   con -> scim2 [ltail=cluster_syncon];
+   act_data -> scim2;
+   scim2 -> netp ;
+   netp -> simrun ;
+
+   }
+

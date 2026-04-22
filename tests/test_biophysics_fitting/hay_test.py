@@ -1,6 +1,6 @@
 import neuron
 
-import mechanisms.l5pt
+import mechanisms
 from biophysics_fitting.hay.default_setup import get_Combiner
 from biophysics_fitting.hay.default_setup import (
     get_Evaluator as get_python_evaluator,

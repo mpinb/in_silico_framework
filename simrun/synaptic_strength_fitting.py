@@ -35,9 +35,42 @@ from collections import defaultdict
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
 from .utils import get_cellnumbers_from_confile, split_network_param_in_one_elem_dicts
 from .get_cell_with_network import get_cell_with_network
-from config.cell_types import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 logger = logging.getLogger("ISF").getChild(__name__)
+
+
+GLUTAMATE_SYN_PARAM_TEMPLATE = {
+    'glutamate_syn': {
+        'delay': 0.0,
+        'parameter': {
+            # glutamate receptors are modeled as a superposition of NMDA and AMPA receptors
+            'decaynmda': 1.0,
+            'facilampa': 0.0,
+            'facilnmda': 0.0,
+            'tau1': 26.0,
+            'tau2': 2.0,
+            'tau3': 2.0,
+            'tau4': 0.1
+        },
+        'threshold': 0.0,
+        'weight': [0.0, 1.0]
+    }
+}
+GABA_SYN_PARAM_TEMPLATE = {
+    'gaba_syn': {
+        'delay': 0.0,
+        'parameter': {
+            'decaygaba': 1.0,
+            'decaytime': 20.0,
+            'e': -80.0,
+            'facilgaba': 0.0,
+            'risetime': 1.0
+        },
+        'threshold': 0.0,
+        'weight': 1.0
+    }
+}
 
 
 ###############################
@@ -45,13 +78,22 @@ logger = logging.getLogger("ISF").getChild(__name__)
 ###############################
 class PSPs:
     r'''Calculate PSP amlitudes of single synapses and fit synaptic strength
+
+    Excitatory synapses are modeled as a superposition of both AMPA and NMDA receptors.
+    The ratio between the two is captured by the relative scaling factors :param:`AMPA_component` and :NMDA_component`.
     
     Attributes:
         neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
         confile (str): Path to a :ref:`con_file_format` file.
         gExRange (list): List of allowed synaptic strength values (in :math:`\mu S`).
         AMPA_component (float): 
-        NMDA_component (float):
+                Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component` 
+                Only necessary when :param:`exc_inh` is ``"exc"``. 
+                Default is 1.
+        NMDA_component (float): 
+                Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component` 
+                Only necessary when :param:`exc_inh` is ``"exc"``. 
+                Default is 1.
         vardt (bool): Whether to use the variable step size solver.
         mode (str): 
             Whether to activate each synapse one by one, or each cell one by one.
@@ -78,23 +120,32 @@ class PSPs:
         self,
         neuron_param=None,
         confile=None,
-        gExRange=[0.5, 1.0, 1.5, 2.0],
+        gExRange=None,
         AMPA_component=1,
         NMDA_component=1,
         vardt=True,
         mode='cells',
         exc_inh='exc',
         tStim=110,
-        tEnd=150):
+        tEnd=150,
+        synfile=None
+        ):
         r''' 
         Args:
             neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
             confile (str): Path to a :ref:`con_file_format` file.
             gExRange (list): 
-                List of synaptic strength values to simulate (in :math:`\mu S`). 
+                Range of synapse conductances to simulate (in :math:`\mu S`). 
                 The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
+                Default is [0.5, 1.0, 1.5, 2.0]
             AMPA_component (float): 
-            NMDA_component (float):
+                Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component` 
+                Only necessary when :param:`exc_inh` is ``"exc"``. 
+                Default is 1.
+            NMDA_component (float): 
+                Relative scaling factor for excitatory synapses, so that the ratio AMPA to NMDA receptors is :param:`AMPA_component` : :param:`NMDA_component` 
+                Only necessary when :param:`exc_inh` is ``"exc"``. 
+                Default is 1.
             vardt (bool): Whether to use the variable step size solver.
             mode (str): 
                 Whether to activate each synapse one by one, or each cell one by one.
@@ -109,9 +160,11 @@ class PSPs:
             tStim (float): Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.
             tEnd (float): End time of the simulation.
         '''
+        if gExRange == None: gExRange = [0.5, 1.0, 1.5, 2.0]
         assert 'neuron' in list(neuron_param.keys())
         self.neuron_param = neuron_param
         self.confile = confile
+        self.synfile = synfile or confile[:-3] + 'syn'  # assuming same name
         self.gExRange = gExRange
         self.vardt = vardt
         self.AMPA_component = AMPA_component
@@ -126,9 +179,9 @@ class PSPs:
         self.result = None
 
         if exc_inh == 'exc':
-            self.network_param = generate_ex_network_param_from_network_embedding(self.confile)
+            self.network_param = generate_ex_network_param_from_network_embedding(confile=self.confile, synfile=self.synfile)
         elif exc_inh == 'inh':
-            self.network_param = generate_inh_network_param_from_network_embedding(self.confile)
+            self.network_param = generate_inh_network_param_from_network_embedding(confile=self.confile, synfile=self.synfile)
         self.network_params_by_celltype = split_network_param_in_one_elem_dicts(self.network_param)
 
         self._setup_computation(exc_inh)
@@ -336,7 +389,7 @@ class PSPs:
         return ePSP_summary_statistics(vt, **ePSP_summary_statistics_kwargs)
 
     def get_optimal_g(self, measured_data, method='dynamic_baseline', merge_celltype_kwargs=None):
-        """Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
+        """Calculate the optimal synaptic conductance such that the EPSP matches empirically observed uPSPs.
         
         For each celltype (or merged celltype), the optimal synaptic conductance is calculated
         by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
@@ -354,6 +407,17 @@ class PSPs:
             
         See also:
             :py:meth:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
+
+        Example::
+
+            >>> measured_data
+                    EPSP_mean_measured  EPSP_med_measured  EPSP_max_measured
+            EXC1                   0.490              0.350               1.90
+            EXC2                   0.490              0.350               1.90
+            EXC3                   0.350              0.330               1.00
+            ...
+            >>> PSPs(...).get_optimal_g(measured_data)
+
         """
         if merge_celltype_kwargs is None: merge_celltype_kwargs = {}
         pdf = self.get_summary_statistics(method=method, merge_celltype_kwargs=merge_celltype_kwargs)
@@ -814,8 +878,11 @@ def run_ex_synapses(
     return t_baseline, v_baseline, somaT, somaV
 
 
-def generate_ex_network_param_from_network_embedding(confile):
-    '''Generate a network parameter file for excitatory synapses from a :ref:`con_file_format` file.
+def generate_ex_network_param_from_network_embedding(confile, synfile=None):
+    # TODO where is ongoing activity data set.
+    '''Fill a network parameter file for excitatory synapses with embedding data and (incomplete) activity data.
+
+    The activity data filled includes default values.
     
     Generates a template that defines a glutamate-binding synapse with default parameters, as described in the 
     :ref:`network_parameters_format`. Together with a :ref:`con_file_format` file, this template 
@@ -829,22 +896,7 @@ def generate_ex_network_param_from_network_embedding(confile):
         :py:meth:`simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding`
         for the template of inhibitory synapses.
     '''
-    param_template = {
-        'glutamate_syn': {
-            'delay': 0.0,
-            'parameter': {
-                'decaynmda': 1.0,
-                'facilampa': 0.0,
-                'facilnmda': 0.0,
-                'tau1': 26.0,
-                'tau2': 2.0,
-                'tau3': 2.0,
-                'tau4': 0.1
-            },
-            'threshold': 0.0,
-            'weight': [0.0, 1.0]
-        }
-    }
+    if synfile == None: synfile = confile[:-3] + 'syn'
 
     out = defaultdict_defaultdict()
     import six
@@ -858,12 +910,12 @@ def generate_ex_network_param_from_network_embedding(confile):
         out['network'][k]['spikeT'] = 10
         out['network'][k]['spikeWidth'] = 1.0
         out['network'][k]['synapses']['connectionFile'] = confile
-        out['network'][k]['synapses']['distributionFile'] = confile[:-3] + 'syn'
-        out['network'][k]['synapses']['receptors'] = param_template
+        out['network'][k]['synapses']['distributionFile'] = synfile
+        out['network'][k]['synapses']['receptors'] = GLUTAMATE_SYN_PARAM_TEMPLATE
     return NTParameterSet(out)
 
 
-def generate_inh_network_param_from_network_embedding(confile):
+def generate_inh_network_param_from_network_embedding(confile, synfile=None):
     '''Generate a network parameter file for inhibitory synapses from a :ref:`con_file_format` file.
     
     Generates a template that defines a GABA-binding synapse with default parameters, as described in the 
@@ -878,36 +930,23 @@ def generate_inh_network_param_from_network_embedding(confile):
         :py:meth:`simrun.synaptic_strength_fitting.generate_exc_network_param_from_network_embedding`
         for the template of excitatory synapses.
     '''
-    param_template = {
-        'gaba_syn': {
-            'delay': 0.0,
-            'parameter': {
-                'decaygaba': 1.0,
-                'decaytime': 20.0,
-                'e': -80.0,
-                'facilgaba': 0.0,
-                'risetime': 1.0
-            },
-            'threshold': 0.0,
-            'weight': 1.0
-        }
-    }
+    if synfile == None: synfile = confile[:-3] + "syn"
 
     import six
-    out = defaultdict_defaultdict()
+    netp = defaultdict_defaultdict()
     for k, cellnumber in six.iteritems(get_cellnumbers_from_confile(confile)):
         if not k.split('_')[0] in INHIBITORY:
             continue
-        out['network'][k]['cellNr'] = cellnumber
-        out['network'][k]['activeFrac'] = 1.0
-        out['network'][k]['celltype'] = 'pointcell'
-        out['network'][k]['spikeNr'] = 1
-        out['network'][k]['spikeT'] = 10
-        out['network'][k]['spikeWidth'] = 1.0
-        out['network'][k]['synapses']['connectionFile'] = confile
-        out['network'][k]['synapses']['distributionFile'] = confile[:-3] + 'syn'
-        out['network'][k]['synapses']['receptors'] = param_template
-    return NTParameterSet(out)
+        netp['network'][k]['cellNr'] = cellnumber
+        netp['network'][k]['activeFrac'] = 1.0
+        netp['network'][k]['celltype'] = 'pointcell'
+        netp['network'][k]['spikeNr'] = 1
+        netp['network'][k]['spikeT'] = 10
+        netp['network'][k]['spikeWidth'] = 1.0
+        netp['network'][k]['synapses']['connectionFile'] = confile
+        netp['network'][k]['synapses']['distributionFile'] = confile[:-3] + 'syn'
+        netp['network'][k]['synapses']['receptors'] = GABA_SYN_PARAM_TEMPLATE
+    return NTParameterSet(netp)
 
 
 ###############################################
