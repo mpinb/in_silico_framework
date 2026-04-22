@@ -42,8 +42,8 @@ def _extract_label_and_name_from_hoc(
 
     if hoc_prefix.lower() in remap_labels:
         rename_label = [k for k in remap_labels if k.lower() == hoc_prefix.lower()][0]
-        label = remap_labels[rename_label]
-        sec_name = f"{label}"
+        hoc_prefix = remap_labels[rename_label]
+        sec_name = f"{hoc_prefix}"
         if hoc_suffix: sec_name += str(hoc_suffix)
     else:
         sec_name = hoc_label
