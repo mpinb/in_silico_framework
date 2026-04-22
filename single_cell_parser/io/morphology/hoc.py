@@ -31,13 +31,13 @@ def _extract_label_and_name_from_hoc(
     ):
     remap_labels = remap_labels or {}
     remap_labels = {k.lower(): v for k, v in remap_labels.items()}
-    # Derive the base label: everything before the first '_' or digit
-    hoc_name_match = re.match(r'([A-Za-z\d]+)(_.*)', hoc_label)  # match letters and numbers, NOT underscores
-    if hoc_name_match:
-        label = hoc_name_match.group(1)
-        hoc_suffix = hoc_name_match.group(2)
+    suffix_match = re.findall(r'((?:_\d+)+)', hoc_label)  # match combinations of digits and underscores
+    if len(suffix_match) > 1: raise ValueError("Regex match failed; multiple distinct string segments found that contain underscores and digits.")
+    if len(suffix_match) == 1:
+        hoc_suffix = suffix_match[0]
+        hoc_prefix = hoc_label[:-len(hoc_suffix)]
     else:
-        label = hoc_label
+        hoc_prefix = hoc_label
         hoc_suffix = None
 
     if label.lower() in remap_labels:
@@ -48,7 +48,7 @@ def _extract_label_and_name_from_hoc(
     else:
         sec_name = hoc_label
 
-    return label, sec_name
+    return hoc_prefix, sec_name
 
 
 def read_hoc(
@@ -219,3 +219,7 @@ def write_hoc(
             f.write(f"\n{{access {sec_name}}}\n{{nseg = 1}}\n{{pt3dclear()}}")
             for (x, y, z), d in zip(sec.pts, sec.diamList):
                 f.write(f"\n{{pt3dadd({x:.{zero_pad}f}, {y:.{zero_pad}f}, {z:.{zero_pad}f}, {d:.{zero_pad}f})}}")
+
+
+if __name__ == "__main__":
+    _extract_label_and_name_from_hoc("dend_1_0_1")
