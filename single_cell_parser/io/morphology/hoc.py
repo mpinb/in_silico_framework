@@ -219,7 +219,3 @@ def write_hoc(
             f.write(f"\n{{access {sec_name}}}\n{{nseg = 1}}\n{{pt3dclear()}}")
             for (x, y, z), d in zip(sec.pts, sec.diamList):
                 f.write(f"\n{{pt3dadd({x:.{zero_pad}f}, {y:.{zero_pad}f}, {z:.{zero_pad}f}, {d:.{zero_pad}f})}}")
-
-
-if __name__ == "__main__":
-    _extract_label_and_name_from_hoc("dend_1_0_1")
