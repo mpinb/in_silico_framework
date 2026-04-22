@@ -127,8 +127,8 @@ class Loader(parent_classes.Loader):
         fnames = os.listdir(savedir)
         fnames = [f for f in fnames if 'pandas_to_parquet' in f]
         n_partitions = int(fnames[0].split('.')[1])
-        if columns: 
-            meta = self.meta[columns]
+        meta = self.meta
+        if columns: meta = meta[columns]
         delayeds = [
             load_helper(savedir, n_partitions, partition, meta=meta, columns=columns)
             for partition in range(n_partitions)

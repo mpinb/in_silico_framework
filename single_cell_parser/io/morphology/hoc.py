@@ -31,35 +31,24 @@ def _extract_label_and_name_from_hoc(
     ):
     remap_labels = remap_labels or {}
     remap_labels = {k.lower(): v for k, v in remap_labels.items()}
-    # Derive the base label: everything before the first '_' or digit
-    hoc_name_match = re.match(r'([A-Za-z\d]+)(_.*)', hoc_label)  # match letters and numbers, NOT underscores
-    if hoc_name_match:
-        label = hoc_name_match.group(1)
-        hoc_suffix = hoc_name_match.group(2)
+    suffix_match = re.findall(r'((?:_\d+)+)', hoc_label)  # match combinations of digits and underscores
+    if len(suffix_match) > 1: raise ValueError("Regex match failed; multiple distinct string segments found that contain underscores and digits.")
+    if len(suffix_match) == 1:
+        hoc_suffix = suffix_match[0]
+        hoc_prefix = hoc_label[:-len(hoc_suffix)]
     else:
-        label = hoc_label
+        hoc_prefix = hoc_label
         hoc_suffix = None
 
-    matched_key = label.lower() if label.lower() in remap_labels else None
-
-    if matched_key is None:
-        # check if any map key appears anywhere in the full hoc label
-        nonprefix_matches = [k for k in remap_labels if k in hoc_label.lower()]
-        if len(nonprefix_matches) > 1:
-            raise ValueError(
-                f"Ambiguous label '{hoc_label}': multiple map keys match (non-perfix match) as: {nonprefix_matches}"
-            )
-        if nonprefix_matches:
-            matched_key = nonprefix_matches[0]
-
-    if matched_key is not None:
-        label = remap_labels[matched_key]
-        sec_name = f"{label}"
+    if hoc_prefix.lower() in remap_labels:
+        rename_label = [k for k in remap_labels if k.lower() == hoc_prefix.lower()][0]
+        hoc_prefix = remap_labels[rename_label]
+        sec_name = f"{hoc_prefix}"
         if hoc_suffix: sec_name += str(hoc_suffix)
     else:
         sec_name = hoc_label
 
-    return label, sec_name
+    return hoc_prefix, sec_name
 
 
 def read_hoc(
