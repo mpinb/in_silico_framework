@@ -33,13 +33,26 @@ jobs:
 
       - name: Check version is newer than latest tag
         run: |
-          PYPROJECT_VER="${{ steps.pyproject.outputs.version }}"
-          LATEST_TAG="${{ steps.tag.outputs.tag }}"
-          # Strip leading 'v' if present
-          TAG_VER="${LATEST_TAG#v}"
-          if [ "$PYPROJECT_VER" = "$TAG_VER" ]; then
-            echo "::warning::pyproject.toml version ($PYPROJECT_VER) matches the latest tag — remember to bump before releasing."
-            exit 1
-          else
-            echo "Version $PYPROJECT_VER differs from latest tag $TAG_VER — looks good."
-          fi
+          python3 - <<'EOF'
+          from packaging.version import Version
+          import sys
+
+          pyproject_ver = "${{ steps.pyproject.outputs.version }}"
+          latest_tag = "${{ steps.tag.outputs.tag }}".lstrip("v")
+
+          if not latest_tag:
+              print("No existing tags found, skipping version check.")
+              sys.exit(0)
+
+          current = Version(pyproject_ver)
+          latest = Version(latest_tag)
+
+          print(f"pyproject.toml version : {current}")
+          print(f"Latest tag             : {latest}")
+
+          if current <= latest:
+              print(f"::error::Version {current} is not strictly greater than latest tag {latest}. Please bump the version.")
+              sys.exit(1)
+          else:
+              print(f"OK: {current} > {latest}")
+          EOF
