@@ -520,7 +520,11 @@ def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
         cell_param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
         min\_ (float): The minimum distance from the soma.
         max\_ (float): The maximum distance from the soma.
-        outsidescale_sections (list): A list of sections where the channels should be inserted.
+        outsidescale_sections (list): 
+            A list of sections not part of the hot zone, but including calcium channels nonetheless.
+            These sections will get a Ca channel density equal to the :ref:`neuron_parameters_format` key ``outside_scale``.
+            Usually, this is less than the hot zone density.
+            See :ref:`~single_cell_parser.cell_parser.insert_range_mechanisms` for more information on channel density during neuron model creation.
         
     Returns:
         :class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell_param.

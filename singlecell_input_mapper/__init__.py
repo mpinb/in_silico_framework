@@ -32,7 +32,7 @@ A network embedding for a given morphology is uniquely defined as a :ref:`syn_fi
 
 ISF currently implements the following workflows to generate :ref:`syn_file_format` and :ref:`conf_file_format` files:
 
-- :mod:`udvary2022`
+- :mod:`~singlecell_input_mapper.udvary2022`
 
 .. hint::
    If you work on a model system that does not have the required input data for these workflows, we recommend to infer
