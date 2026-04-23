@@ -64,6 +64,5 @@ keywords:
   - python
   - neuron
 license: Apache-2.0
-commit: 2b8b660c22540e93b9debaf77c758a1aaf917274
 version: 0.7.0-beta
 date-released: '2026-04-22'
