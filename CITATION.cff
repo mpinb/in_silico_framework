@@ -5,7 +5,7 @@ message: >-
   vivo neuron-network mechanisms
 type: software
 authors:
-  - given-names: Bjorge Gil
+  - given-names: Bjorge
     family-names: Meulemeester
     email: bjorge.meulemeester@mpinb.mpg.de
     affiliation: >-
@@ -18,7 +18,7 @@ authors:
     affiliation: Howard Hughes Medical Institute - Janelia Campus
     orcid: 'https://orcid.org/0000-0001-7258-6248'
   - given-names: Maria
-    family-names: Royo Cano
+    family-names: Royo
     affiliation: >-
       Max Planck Institute for Neurobiology of Behavior -
       caesar (MPINB)
