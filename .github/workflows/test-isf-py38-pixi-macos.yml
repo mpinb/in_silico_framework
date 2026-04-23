@@ -6,6 +6,7 @@ on:
       - README.md
       - CHANGELOG.md
       - .gitignore
+      - 'CITATION.cff'
     branches:
       - develop
       - master
