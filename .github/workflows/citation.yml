@@ -28,7 +28,6 @@ jobs:
 
       - name: Update CITATION.cff
         run: |
-          sed -i "s/^commit:.*/commit: ${{ steps.meta.outputs.sha }}/" CITATION.cff
           sed -i "s/^date-released:.*/date-released: '${{ steps.meta.outputs.date }}'/" CITATION.cff
           sed -i "s/^version:.*/version: ${{ steps.meta.outputs.version }}/" CITATION.cff
 
