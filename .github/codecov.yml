@@ -13,6 +13,6 @@ coverage:
        # advanced settings
         branches: 
           - master
-        if_ci_failed: error #success, failure, error, ignore
-        informational: false
+        if_ci_failed: failure #success, failure, error, ignore
+        informational: true
         only_pulls: false
