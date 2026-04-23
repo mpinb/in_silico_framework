@@ -83,7 +83,7 @@ Modules
    :class: summarytable
    
    * - :py:obj:`user <config.user>`
-     - \-
+     - User-specific configuration
    * - :py:obj:`file_locking <config.file_locking>`
      - \-
    * - :py:obj:`isf_configure <config.isf_configure>`

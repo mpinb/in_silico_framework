@@ -797,7 +797,7 @@
 <p><a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn files</a> define the location of synapses onto a postsynaptic morphology. As such, they are only valid for one specific morphology.</p>
 <p>Let’s have a look at what exactly a <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn file</a> looks like.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[179]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[1]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">getting_started</span><span class="w"> </span><span class="kn">import</span> <span class="n">example_data_dir</span>
@@ -807,7 +807,7 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[180]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">example_syn_fn</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">example_embedding_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.syn&quot;</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
@@ -847,7 +847,7 @@ VPM_E1  11      0.120662910562
 <h2 id="The-.con-file">The <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con file</a><a class="headerlink" href="#The-.con-file" title="Link to this heading">¶</a></h2>
 <p>A <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con file</a> defines to which presynaptic cell each synapse belongs.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[181]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">example_con_fn</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">example_embedding_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.con&quot;</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
@@ -887,7 +887,7 @@ L6cc_A3 4       5
 models.</p>
 <p>For the sake of completeness, we already show here how to build one containing just connectivity info.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[182]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">singlecell_input_mapper.network_param_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetworkParamBuilder</span>
@@ -902,13 +902,22 @@ models.</p>
 </code></pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Warning: no DISPLAY environment variable.
+--No graphics will be displayed.
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[182]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;info&#39;: {&#39;date&#39;: &#39;2026-04-14&#39;, &#39;name&#39;: &#39;meulemeester&#39;},
+{&#39;info&#39;: {&#39;date&#39;: &#39;2026-04-23&#39;, &#39;name&#39;: &#39;meulemeester&#39;},
  &#39;network&#39;: {&#39;L1_B1&#39;: {&#39;cellNr&#39;: 8,
    &#39;synapses&#39;: {&#39;distributionFile&#39;: PosixPath(&#39;/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/example_embedding_86_C2_center/example_embedding_86_C2_center.syn&#39;),
     &#39;connectionFile&#39;: PosixPath(&#39;/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/example_embedding_86_C2_center/example_embedding_86_C2_center.con&#39;)}},
@@ -1767,7 +1776,7 @@ models.</p>
 <p>This is one of many methods in which you can infer synapse locations onto a postsynaptic morphology. If you do not have the required input data for this method, or you have your own methods, you can still use ISF! Familiarize yourself with the network connectivity file formats used in ISF: <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a></p>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[183]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Check if the model is downloaded</span>
@@ -1778,7 +1787,7 @@ models.</p>
 </div>
 <p>To get started, adapt the desired output directory below:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[184]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -1786,8 +1795,8 @@ models.</p>
 </code></pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[185]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -1799,11 +1808,27 @@ models.</p>
 </code></pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[INFO] ISF: Current version: heads/morph+0.gc42d144b8.dirty
+[INFO] ISF: Current pid: 3075680
+[INFO] mechanisms: Loaded mechanisms in NEURON namespace.
+[ATTENTION] ISF: The source folder has uncommited changes!
+
+
+
+[INFO] ISF: Loaded modules with __version__ attribute are:
+IPython: 8.18.1, Interface: heads/morph+0.gc42d144b8.dirty, PIL: 11.3.0, _brotli: 1.1.0, _csv: 1.0, _ctypes: 1.1.0, _curses: b&#39;2.2&#39;, _decimal: 1.70, argparse: 1.1, blosc: 1.11.3, bluepyopt: 1.9.126, brotli: 1.1.0, certifi: 2025.08.03, charset_normalizer: 3.4.3, click: 7.1.2, cloudpickle: 3.1.1, colorama: 0.4.6, comm: 0.2.3, csv: 1.0, ctypes: 1.1.0, cycler: 0.12.1, cytoolz: 1.0.1, dash: 2.18.2, dask: 2.30.0, dateutil: 2.9.0.post0, deap: 1.4, debugpy: 1.8.16, decimal: 1.70, decorator: 5.2.1, defusedxml: 0.7.1, distributed: 2.30.0, distutils: 3.9.23, entrypoints: 0.4, exceptiongroup: 1.3.0, executing: 2.2.0, fasteners: 0.17.3, flask: 1.1.4, fsspec: 2025.7.0, future: 1.0.0, greenlet: 3.2.4, idna: 3.10, ipaddress: 1.0, ipykernel: 6.29.5, ipywidgets: 8.1.7, isf_pandas_msgpack: 0.4.0, itsdangerous: 1.1.0, jedi: 0.19.2, jinja2: 2.11.3, joblib: 1.5.1, json: 2.0.9, jupyter_client: 7.3.4, jupyter_core: 5.8.1, kiwisolver: 1.4.7, logging: 0.5.1.2, markupsafe: 2.0.1, matplotlib: 3.3.2, matplotlib_inline: 0.1.7, msgpack: 1.1.1, neuron: 7.8.2+, numcodecs: 0.12.1, numexpr: 2.9.0, numpy: 1.19.2, packaging: 25.0, pandas: 1.1.3, parso: 0.8.4, past: 1.0.0, pexpect: 4.9.0, pickleshare: 0.7.5, platform: 1.0.8, platformdirs: 4.3.8, plotly: 5.24.1, prompt_toolkit: 3.0.51, psutil: 7.0.0, ptyprocess: 0.7.0, pure_eval: 0.2.3, pydevd: 3.2.3, pygments: 2.19.2, pyparsing: 3.2.3, pytz: 2025.2, re: 2.2.1, requests: 2.32.5, scipy: 1.5.2, seaborn: 0.12.2, six: 1.17.0, sklearn: 0.23.2, socketserver: 0.4, socks: 1.7.1, sortedcontainers: 2.4.0, stack_data: 0.6.3, statsmodels: 0.12.1, tables: 3.8.0, tblib: 3.1.0, tlz: 1.0.1, toolz: 1.0.0, tqdm: 4.67.1, traitlets: 5.14.3, urllib3: 2.5.0, wcwidth: 0.2.13, werkzeug: 1.0.1, yaml: 6.0.2, zarr: 2.15.0, zlib: 1.0, zmq: 27.0.2, zstandard: 0.23.0
+</pre></div></div>
+</div>
 <p>The first step to embedding a neuron model into a network model, is to align the reference frames of both.</p>
 <p>From external resources (e.g. the NeuroMorph pipeline), you need a morphology <code class="docutils literal notranslate"><span class="pre">.hoc</span></code>-file. The coordinates in the hoc morphology file need to be anchored at the desired location.</p>
 <p>As an example, we provide such file of a Layer-5 Pyramidal Tract Neuron (L5PT), whose coordinates are anchored in the C2 column of a rat barrel cortex (BC)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[186]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">anatomy_dir</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">example_data_dir</span><span class="p">,</span> <span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">)</span>
@@ -1812,7 +1837,7 @@ models.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[186]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1828,54 +1853,47 @@ models.</p>
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[187]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">path_to_hoc</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">path_to_morph</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
     <span class="n">anatomy_dir</span><span class="p">,</span>
-    <span class="s1">&#39;86_C2_center.hoc&#39;</span><span class="p">)</span>
-<span class="n">path_to_scaled_hoc</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-    <span class="n">anatomy_dir</span><span class="p">,</span>
-    <span class="s1">&#39;86_C2_center_scaled_diameters.hoc&#39;</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_to_hoc</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_to_scaled_hoc</span><span class="p">)</span>
+    <span class="s1">&#39;86_C2_center.swc&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_to_morph</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
 <p>We copy these morphology files to our DataBase.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[188]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;anatomical_constraints&#39;</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
     <span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">)</span>
-<span class="n">I</span><span class="o">.</span><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">path_to_hoc</span><span class="p">,</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">])</span>
-<span class="n">I</span><span class="o">.</span><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">path_to_scaled_hoc</span><span class="p">,</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">])</span>
+<span class="n">I</span><span class="o">.</span><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">path_to_morph</span><span class="p">,</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">])</span>
 </code></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[188]:
-</code></pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 &#39;/gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center_scaled_diameters.hoc&#39;
 </pre></div></div>
 </div>
-<p>We use <a class="reference internal" href="../../api_reference/singlecell_input_mapper/index.html"><span class="doc">singlecell_input_mapper</span></a> to create an anatomical embedding. Under the hood, multiple anatomical embeddings will be calculated, all constrained with the same input data. From this distribution of anatomical realizations, the one that is closest to the average is chosen, which can be refered to as a “representative realization”. The result is saved in the same folder as the hoc morphology. This takes very long to compute (up to 4
-hours), but you can continue with a precomputed result.</p>
+<p>We use <a class="reference internal" href="../../api_reference/singlecell_input_mapper/index.html"><span class="doc">singlecell_input_mapper</span></a> to create an anatomical embedding. The primary use case is to pass multiple samples to this workflow. Under the hood, multiple anatomical embeddings will be then calculated, all constrained with the same input data. From this distribution of anatomical realizations, the one that is closest to the average is chosen, which can be refered to as a “representative realization”. The result is saved in the same
+folder as the hoc morphology. This can take quite long to compute (<span class="math notranslate nohighlight">\(\sim 10\)</span> min setup + <span class="math notranslate nohighlight">\(\sim 1.5\)</span> min/sample), but you can continue with a precomputed result, or generate only a single sample. A single sample does not capture biological variability, but it suffices to showcase the API and workflow.</p>
 <p>For a given <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#morphology">morphology file</a>, a network embedding is fully defined by a <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a> file. The former to specify the locations fo the synapses onto the morphology, and the latter to specify their presynaptic origin.</p>
 <h3 id="Computing-it-yourself">Computing it yourself<a class="headerlink" href="#Computing-it-yourself" title="Link to this heading">¶</a></h3>
 <p>Here, we only use <span class="math notranslate nohighlight">\(1\)</span> sample. This is not enough to get a sufficiently large distribution to draw a representative sample from. In our experience, <span class="math notranslate nohighlight">\(50\)</span> samples is about enough to get a convergent distribution of synapse embeddings.</p>
 <p>A sample size of <span class="math notranslate nohighlight">\(1\)</span> is however sufficient for the sake of this tutorial.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[189]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[13]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">celltype</span> <span class="o">=</span> <span class="s1">&#39;L5tt&#39;</span>  <span class="c1"># Layer 5 thick-tufted</span>
-<span class="n">morphology_fn</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;86_C2_center.hoc&#39;</span><span class="p">)</span>
+<span class="n">morphology_fn</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;86_C2_center.swc&#39;</span><span class="p">)</span>
 
 <span class="n">I</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s2">&quot;INFO&quot;</span><span class="p">)</span> <span class="c1"># verbose output</span>
 <span class="n">I</span><span class="o">.</span><span class="n">map_singlecell_inputs</span><span class="p">(</span>
@@ -1898,12 +1916,11 @@ hours), but you can continue with a precomputed result.</p>
 [INFO] udvary2022: No InhPSTDensityName passed. Falling back to user-configured one.
 [INFO] udvary2022: No boutonDensityFolderName passed. Falling back to user-configured one.
 [INFO] udvary2022: Loading cell morphology
-[INFO] reader: Reading hoc file: /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center.hoc
 [INFO] udvary2022: Loading spreadsheets and bouton/PST densities...
 [INFO] udvary2022:     Loading numberOfCells spreadsheet /gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/barrel_cortex/nrCells.csv
 [INFO] udvary2022:     Loading bouton densities from folder /gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/barrel_cortex/singleaxon_boutons_ascii (may take a while)
-[INFO] udvary2022:     Loaded bouton densities in 1062.83 s
-[INFO] udvary2022: Creating network embedding for  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center.hoc
+[INFO] udvary2022:     Loaded bouton densities in 766.89 s
+[INFO] udvary2022: Creating network embedding for  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center.swc
 [INFO] network_embedding: ---------------------------
 [INFO] network_embedding: Created 536162 presynaptic cells in total
 [INFO] network_embedding: ---------------------------
@@ -1926,17 +1943,17 @@ hours), but you can continue with a precomputed result.</p>
 [INFO] network_embedding: ---------------------------
 [INFO] network_embedding: Writing output files...
 
-Directory Name is  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center_synapses_20260414-2153_1819524/
-CSV file name is  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center_synapses_20260414-2153_1819524/86_C2_center_summary_20260414-2153_1819524
+Directory Name is  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center_synapses_20260423-1501_3075680/
+CSV file name is  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center_synapses_20260423-1501_3075680/86_C2_center_summary_20260423-1501_3075680
 
 ---------------------------
 [INFO] network_embedding: Done generating network embedding!
 [INFO] network_embedding: ---------------------------
-[INFO] udvary2022: Runtime: 20.2 minutes
+[INFO] udvary2022: Runtime: 15.2 minutes
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[14]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Adapt the path if you have generated a new anatomical model</span>
@@ -1950,7 +1967,7 @@ CSV file name is  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_mo
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Saved embedding results to:  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center_synapses_20260319-1801_4193665
+Saved embedding results to:  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output/network_modeling/db/anatomical_constraints/86_C2_center_synapses_20260423-1501_3075680
 </pre></div></div>
 </div>
 <h3 id="Copying-a-pre-computed-result-instead">Copying a pre-computed result instead<a class="headerlink" href="#Copying-a-pre-computed-result-instead" title="Link to this heading">¶</a></h3>
@@ -2062,7 +2079,7 @@ Saved embedding results to:  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output
 <h2 id="Inspecting-the-output">Inspecting the output<a class="headerlink" href="#Inspecting-the-output" title="Link to this heading">¶</a></h2>
 <p>In the directory generated by the singlecell_input_mapper, there are the following files:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">listdir</span><span class="p">()</span>
@@ -2070,24 +2087,27 @@ Saved embedding results to:  /gpfs/soma_fs/home/meulemeester/isf_tutorial_output
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
 </code></pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 [&#39;Loader.json&#39;,
  &#39;example_embedding_86_C2_center.con&#39;,
+ &#39;86_C2_center_synapses_20260423-1501_3075680&#39;,
  &#39;NumberOfConnectedCells.csv&#39;,
  &#39;86_C2_center.hoc&#39;,
+ &#39;86_C2_center_synapses_20260414-2153_1819524&#39;,
  &#39;example_embedding_86_C2_center.syn&#39;,
  &#39;example_embedding&#39;,
+ &#39;86_C2_center.swc&#39;,
  &#39;metadata.json&#39;,
  &#39;86_C2_center_scaled_diameters.hoc&#39;]
 </pre></div></div>
 </div>
 <p>The most important files for making single-cell simulations are <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a> files. The others are useful for analysis, but are not required for further use in ISF.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">con_file</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;.con&#39;</span><span class="p">)</span>
@@ -2123,7 +2143,7 @@ L6cc_
 </div>
 <p>The <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> file specifies the exact position of each synapse on the hoc morphology:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">syn_file_path</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;.syn&#39;</span><span class="p">))</span>
@@ -2156,7 +2176,7 @@ SymLocal3_C1    83      0.754400311346
 <h3 id="Analyzing-and-visualizing-the-network-embedding">Analyzing and visualizing the network embedding<a class="headerlink" href="#Analyzing-and-visualizing-the-network-embedding" title="Link to this heading">¶</a></h3>
 <p>Let’s create a <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object from our morphology, add the synapse locations we just created in the <a class="reference external" href="http://somacpu217:8000/file_formats.html#syn">.syn</a> format, and inspect the result.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">cp</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">CellParser</span><span class="p">(</span><span class="n">morphology_fn</span><span class="p">)</span>
@@ -2167,7 +2187,7 @@ SymLocal3_C1    83      0.754400311346
 </div>
 <p>To add synapse locations from a <a class="reference external" href="http://somacpu217:8000/file_formats.html#syn">.syn</a> file with a <a class="reference internal" href="../../api_reference/single_cell_parser/synapse_mapper/index.html"><span class="doc">SynapseMapper</span></a>:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[19]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">syn_locations</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">connectivity</span><span class="o">.</span><span class="n">read_synapse_realization</span><span class="p">(</span><span class="n">syn_file_path</span><span class="p">)</span>
@@ -2178,12 +2198,12 @@ SymLocal3_C1    83      0.754400311346
 </div>
 <p>You can inspect the synapse location statistics with <a class="reference internal" href="../../api_reference/visualize/dendrogram/index.html"><span class="doc">Dendrograms</span></a></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[20]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span><span class="w"> </span><span class="nn">visualize.dendrogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">DendrogramStatistics</span>
 <span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">visualize.dendrogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">DendrogramStatistics</span>
 
 <span class="n">dg</span> <span class="o">=</span> <span class="n">DendrogramStatistics</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
 <span class="n">dg</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">));</span>
@@ -2199,7 +2219,7 @@ SymLocal3_C1    83      0.754400311346
 </div>
 <p>You can also simply plot out the morphology and the synapse locations as a fully featured plot using <a class="reference internal" href="../../api_reference/visualize/cell_morphology_visualizer/index.html"><span class="doc">CellMorphologyVisualizer</span></a></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[101]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[21]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">visualize.cell_morphology_visualizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">CellMorphologyVisualizer</span>
@@ -2227,7 +2247,7 @@ SymLocal3_C1    83      0.754400311346
 <h2 id="Compatibility-with-other-dense-connectome-models.">Compatibility with other dense connectome models.<a class="headerlink" href="#Compatibility-with-other-dense-connectome-models." title="Link to this heading">¶</a></h2>
 <p>While ISF currently only features one network embedding pipeline (<a class="reference external" href="https://doi.org/10.1016/j.celrep.2022.110677">Udvary et al., 2022</a>), ISF is not limited to this particular way of generating synapse locations. As long as a <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a> file is present (no matter which pipeline created them), any dense connectome model is compatible with ISF. All subsequent
 workflows in ISF simply rely on these <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a> files, but not on the input data that was necessary to generate these. In other words, the barrel cortex model as downloaded in the beginning of this tutorial is simply one example of a network model. Many other dense connectome models may be used. If you have a different way of generating synapse locations, but
-you still want to use ISF, simply convert the information to <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a>. The file formats are purposfully kept as simple as possible.</p>
+you still want to use ISF, simply convert the information to <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a>. The file formats are purposefully kept as simple as possible.</p>
 <h2 id="Recap">Recap<a class="headerlink" href="#Recap" title="Link to this heading">¶</a></h2>
 <p>This tutorial provided a full pipeline on how to generate synapse locations for a given neuron morphology (i.e. an “anatomical network embedding”), and how to parallellize these for multiple morphologies.</p>
 <p>In order to assign activity to these synapse realizations, consult the <a class="reference internal" href="2.2%20Network%20activity.html"><span class="doc">the next tutorial</span></a>.</p>

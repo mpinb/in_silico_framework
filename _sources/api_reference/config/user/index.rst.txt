@@ -18,6 +18,16 @@ user
 
 .. module:: config.user
 
+.. autoapi-nested-parse::
+   User-specific configuration
+
+   These configuration modules allow the user to set per-project configuration.
+   These are ideally set once for a specific project, and left unchanged after that.
+
+   Beware when relying on default fallback values, as it makes your code less explicit.
+   It is always recommended to explicitly pass your data sources to the relevant workflows,
+   rather than relying on some default fallback values set here.
+
 
 
 

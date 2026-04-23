@@ -22,7 +22,7 @@ CellParser
 .. fetch arguments from __init__ or __new__ docstring
 .. class signature --------------------------------------------------------------
 
-.. class:: singlecell_input_mapper.udvary2022.cell.CellParser(hocFilename='')
+.. class:: singlecell_input_mapper.udvary2022.cell.CellParser(morph_fn='')
 
    Bases: :py:obj:`object`
    
