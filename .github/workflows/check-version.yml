@@ -4,9 +4,19 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+      - 'CITATION.cff'
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+      - 'CITATION.cff'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
