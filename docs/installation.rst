@@ -144,15 +144,13 @@ Each ISF environment adapts the following environment variables:
         In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
         This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
       - ``PATH``: The location of your NEURON executables is appended to your ``PATH``, so that you can invoke them from within the environment. These are located at ``%NEURONHOME%/bin``
-      - ``HOME``: ISF registers your ``%USERPROFILE%`` under an additional environment variable named ``HOME`` for convenience.
       - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
 
-.. warning::
+.. attention::
    The ISF ``pixi`` environment is, similar to other virtual environments, not isolated from system-level or user-level site-packages by default. 
-   If you have installed site-packages on the system- or user-level (i.e. not in a virtual environment) for a python version that ISF also uses, 
-   you will likely contaminate the ISF environment, as well as any other virtual environment.
+   If you have installed site-packages on the system- or user-level (i.e. not in a virtual environment) you may contaminate your virtual environments in unintended ways.
    It is recommended to install all python packages for any project in a dedicated environment for each project.
-   You can check if you are at risk of contaminating virtual environments (such as the ISF one) by inspecting the result of:
+   If you encounter unexpected package versions or mismatches, try inspecting the result of:
    
    .. code-block:: bash
 
