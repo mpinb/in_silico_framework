@@ -5,7 +5,7 @@ Installation
 
 .. md-tab-set::
 
-   .. md-tab-item:: Linux
+   .. md-tab-item:: Linux/macOS
 
       Before installing ISF, make sure you have the following requirements installed:
 
@@ -13,7 +13,7 @@ Installation
          :header: "Requirement", "Download", ""
 
          `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__ 
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__, Likely already installed
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__
 
       .. success::
          :title: Check requirements
@@ -28,40 +28,6 @@ Installation
 
          Each command should return a path to the program.
          If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
-
-      You can then install ISF:
-
-      .. code-block:: bash
-
-         git clone https://github.com/mpinb/in_silico_framework.git
-         cd in_silico_framework
-         pixi run install
-
-   .. md-tab-item:: macOS
-
-      Before installing ISF, make sure you have the following requirements installed:
-
-      .. csv-table::
-         :header: "Requirement", "Download"
-
-         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/mac>`__
-
-
-      .. success::
-         :title: Check requirements
-         :collapsible:
-
-         You can check if the requirements are installed correctly by running the following commands in your terminal:
-
-         .. code-block:: bash
-
-            which pixi
-            which git
-
-         Each command should return a path to the program.
-         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
-
 
       You can then install ISF:
 
@@ -125,13 +91,7 @@ Each ISF environment adapts the following environment variables:
 
 .. md-tab-set::
 
-   .. md-tab-item:: Linux
-
-      - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
-        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
-      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
-
-   .. md-tab-item:: macOS
+   .. md-tab-item:: Linux/macOS
 
       - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
         This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
