@@ -5,7 +5,7 @@ Installation
 
 .. md-tab-set::
 
-   .. md-tab-item:: Linux
+   .. md-tab-item:: Linux/macOS
 
       Before installing ISF, make sure you have the following requirements installed:
 
@@ -13,7 +13,7 @@ Installation
          :header: "Requirement", "Download", ""
 
          `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__ 
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__, Likely already installed
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__
 
       .. success::
          :title: Check requirements
@@ -28,40 +28,6 @@ Installation
 
          Each command should return a path to the program.
          If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
-
-      You can then install ISF:
-
-      .. code-block:: bash
-
-         git clone https://github.com/mpinb/in_silico_framework.git
-         cd in_silico_framework
-         pixi run install
-
-   .. md-tab-item:: macOS
-
-      Before installing ISF, make sure you have the following requirements installed:
-
-      .. csv-table::
-         :header: "Requirement", "Download"
-
-         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/mac>`__
-
-
-      .. success::
-         :title: Check requirements
-         :collapsible:
-
-         You can check if the requirements are installed correctly by running the following commands in your terminal:
-
-         .. code-block:: bash
-
-            which pixi
-            which git
-
-         Each command should return a path to the program.
-         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
-
 
       You can then install ISF:
 
@@ -125,13 +91,7 @@ Each ISF environment adapts the following environment variables:
 
 .. md-tab-set::
 
-   .. md-tab-item:: Linux
-
-      - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
-        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
-      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
-
-   .. md-tab-item:: macOS
+   .. md-tab-item:: Linux/macOS
 
       - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
         This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
@@ -144,24 +104,20 @@ Each ISF environment adapts the following environment variables:
         In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
         This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
       - ``PATH``: The location of your NEURON executables is appended to your ``PATH``, so that you can invoke them from within the environment. These are located at ``%NEURONHOME%/bin``
-      - ``HOME``: ISF registers your ``%USERPROFILE%`` under an additional environment variable named ``HOME`` for convenience.
       - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
 
-.. warning::
+.. attention::
    The ISF ``pixi`` environment is, similar to other virtual environments, not isolated from system-level or user-level site-packages by default. 
+   If you have installed site-packages on the system- or user-level (i.e. not in a virtual environment) you may contaminate your virtual environments in unintended ways.
    It is recommended to install all python packages for any project in a dedicated environment for each project.
-   System-level and user-level site-packages are reserved for those packages that are strictly required by any environment across the system or user respectively.
-   If you have installed any other site-packages on the system- or user-level, you may contaminate your environments in unintended ways.
-   You can check if this is the case by activating your environment, and inspecting the output of:
+   If you encounter unexpected package versions or mismatches, try inspecting the result of:
    
    .. code-block:: bash
 
       python -m site
 
-   If the ``ENABLE_USER_SITE`` flag is set to True (default behavior) and the ``USER_SITE`` directory exists (non-default behavior), 
-   then the site packages in ``USER_SITE`` will be loaded into this virtual environment. 
-   You should decide for yourself if this is the intended behavior for your user account and system, and if the contents of ``USER_SITE`` (if it exists) are indeed required across all environments.
-   If they contain packages that also exist in ISF, they will clash.
+   If ``ENABLE_USER_SITE`` is True (default) and ``USER_SITE`` exists (not default), then all site-packages in ``USER_SITE`` will be loaded into
+   virtual environments. For most use cases, this is not desirable.
 
    .. seealso::
       https://docs.python.org/3/library/site.html
