@@ -5,14 +5,6 @@ message: >-
   vivo neuron-network mechanisms
 type: software
 authors:
-  - name: >-
-      Max Planck Institute for Neurobiology of Behavior -
-      caesar
-    address: Ludwig Erhard Allee 2
-    city: Bonn
-    country: DE
-    post-code: '53175'
-    alias: MPINB
   - given-names: Bjorge Gil
     family-names: Meulemeester
     email: bjorge.meulemeester@mpinb.mpg.de
