@@ -20,7 +20,7 @@ For functional network realizations (i.e. known presynaptic origin of each synap
 '''
 from __future__ import absolute_import
 import numpy as np
-from . import reader
+from single_cell_parser.io.morphology import read_morphology
 __author__ = 'Robert Egger'
 __date__ = '2012-04-28'
 
@@ -383,12 +383,12 @@ class CellParser(object):
     '''
     cell = None
 
-    def __init__(self, hocFilename=''):
+    def __init__(self, morph_fn=''):
         '''
         Args:
             hocFilename (str): File name of the hoc file. Default: ''.
         '''
-        self.hoc_fname = hocFilename
+        self.morph_fn = morph_fn
 
     def spatialgraph_to_cell(self):
         '''Set up a cell object from an AMIRA hoc file.
@@ -401,13 +401,13 @@ class CellParser(object):
             To ensure reproducability, scaleFunc should be specified in the cell parameters, as 
             described in :mod:`~single_cell_parser.cell_modify_funs`
         '''
-        edgeList = reader.read_hoc_file(self.hoc_fname)
-        self.hoc_fname = self.hoc_fname.split('/')[-1]
+        edgeList = read_morphology(self.morph_fn)
+        self.morph_fn = self.morph_fn.split('/')[-1]
         #part1 = self.hoc_fname.split('_')[0]
         #part2 = self.hoc_fname.split('_')[1]
         #part3 = self.hoc_fname.split('.')[-2]
         self.cell = Cell()
-        self.cell.id = self.hoc_fname  # '_'.join([part1, part2, part3])
+        self.cell.id = self.morph_fn  # '_'.join([part1, part2, part3])
 
         #        # first loop: create all Sections
         for edge in edgeList:
