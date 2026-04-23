@@ -60,7 +60,15 @@ jobs:
           post-cleanup: true
           pixi-bin-path: ${{ runner.temp }}\Scripts\pixi.exe
 
+      - name: Cache barrel cortex model
+        id: cache-bc-model
+        uses: actions/cache@v4
+        with:
+          path: barrel_cortex/
+          key: barrel-cortex-model
+
       - name: Download barrel cortex model
+        if: steps.cache-bc-model.outputs.cache-hit != 'true'
         shell: cmd
         run: |
           echo ------------ Downloading barrel cortex model -------------

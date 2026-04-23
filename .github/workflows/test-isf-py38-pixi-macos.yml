@@ -36,7 +36,15 @@ jobs:
           auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
           manifest-path: pyproject.toml
 
+      - name: Cache barrel cortex model
+        id: cache-bc-model
+        uses: actions/cache@v4
+        with:
+          path: barrel_cortex/
+          key: barrel-cortex-model
+
       - name: Download barrel cortex model
+        if: steps.cache-bc-model.outputs.cache-hit != 'true'
         run: |
           echo ------------ Downloading barrel cortex model -------------
           pixi r download_bc_model
