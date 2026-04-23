@@ -29,6 +29,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Cache NEURON installation
+        id: cache-neuron
+        uses: actions/cache@v4
+        with:
+          path: C:\nrn
+          key: neuron-8.0.w64-mingwsetup
+
       - name: Install NEURON
         shell: cmd
         run: |
