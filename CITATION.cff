@@ -33,7 +33,9 @@ authors:
     orcid: 'https://orcid.org/0009-0007-8364-2023'
   - given-names: Rieke
     family-names: Fruengel
-    affiliation: 'https://orcid.org/0009-0007-8364-2023'
+    affiliation: >-
+      Max Planck Institute for Neurobiology of Behavior -
+      caesar (MPINB)
     orcid: 'https://orcid.org/0000-0002-1086-9143'
   - given-names: Marcel
     family-names: Oberlaender
