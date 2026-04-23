@@ -51,7 +51,7 @@ jobs:
           print(f"Latest tag             : {latest}")
 
           if current <= latest:
-              print(f"::error::Version {current} is not strictly greater than latest tag {latest}. Please bump the version.")
+              print(f"::error::Version {current} is not strictly greater than latest tag {latest}. Please bump the version in pyproject.toml.")
               sys.exit(1)
           else:
               print(f"OK: {current} > {latest}")
