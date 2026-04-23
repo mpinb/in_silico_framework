@@ -117,7 +117,7 @@ Each ISF environment adapts the following environment variables:
       python -m site
 
    If ``ENABLE_USER_SITE`` is True (default) and ``USER_SITE`` exists (not default), then all site-packages in ``USER_SITE`` will be loaded into
-   virtual environments. For most ues cases, this is not desirable.
+   virtual environments. For most use cases, this is not desirable.
 
    .. seealso::
       https://docs.python.org/3/library/site.html
