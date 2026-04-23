@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
 
@@ -40,6 +38,7 @@ from data_base.IO.roberts_formats import write_pandas_synapse_activation_to_robe
 import numpy as np
 import pandas as pd
 from .utils import *
+from data_base.dbopen import resolve_db_path
 import logging
 
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -163,10 +162,8 @@ def simtrial_to_cell_object(
 
     try:
         parameter_table = db['parameterfiles']
-        cellName = parameter_table.loc[sim_trial_index].hash_neuron
-        cellName = os.path.join(db['parameterfiles_cell_folder'], cellName)
-        networkName = parameter_table.loc[sim_trial_index].hash_network
-        networkName = os.path.join(db['parameterfiles_network_folder'], networkName)
+        cellName = resolve_db_path(parameter_table.loc[sim_trial_index].path_neuron, db_basedir = db.basedir)
+        networkName = resolve_db_path(parameter_table.loc[sim_trial_index].path_network, db_basedir = db.basedir)
         sa = db['synapse_activation'].loc[sim_trial_index].compute()
         dummy =  trial_to_cell_object(
             cellName = cellName, \

@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 The somatic summation model is - I believe - the "synchronous proximal drive" model as used in the L6 paper.
 The reduced model is a more general extension of this, I believe.
@@ -28,17 +26,17 @@ from functools import partial
 import pandas as pd
 from simrun.somatic_summation_model import ParseVT
 from data_base.IO.LoaderDumper import dask_to_msgpack
-from config.cell_types import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 import single_cell_parser as scp
 
 
 class CelltypeSpecificSynapticWeights:
     '''Configure cell type specific synaptic weights for the somatic summation model.
     
-    :mod:`simrun.somatic_summation_model` allows specifying synaptic weights of individual synapses.
+    :py:mod:`simrun.somatic_summation_model` allows specifying synaptic weights of individual synapses.
     For this, it needs a dictionary that maps from (celltype, synapseID) to the weight of that synapse. 
     This class parses a :ref:`network_parameters_format` file and extracts the synaptic weights of individual synapses.
-    These can then be accessed in a dictionary-like fashion for use in :mod:`~simrun.somatic_summation_model`::
+    These can then be accessed in a dictionary-like fashion for use in :py:mod:`~simrun.somatic_summation_model`::
     
         >>> n = scp.build_parameters('path/to/network.param')
         >>> weights = CelltypeSpecificSynapticWeights()
@@ -65,7 +63,7 @@ class CelltypeSpecificSynapticWeights:
         """Initialize the synaptic weights with :ref:`network_parameters_format`.
         
         Args:
-            n (:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameters object.
+            n (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameters object.
             select_celltypes (list): If not None, only the synaptic weights of the celltypes in this list are loaded.
             use_default_weight (float): If not None, all synaptic weights are set to this value.
         
@@ -166,7 +164,7 @@ def get_db_loader_dict(db, descriptor=None, PSPClass_name=None):
     """Get the loader functions for the PSPs from the database.
     
     Args:
-        db (:class:`~data_base.DataBase`): The simrun-initialized database object.
+        db (:py:class:`~data_base.DataBase`): The simrun-initialized database object.
         descriptor (str): The descriptor of the PSPs.
         PSPClass_name (str): The name of the PSP class.
         

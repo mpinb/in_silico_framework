@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Visualization toolbox. 
 Provides modules for efficiently visualizing cell morphologies, ion currents, voltage traces, rasterplots, histograms, and PSTHs.
@@ -44,21 +42,33 @@ def svg2emf(filename, path_to_inkscape="/usr/bin/inkscape"):
     logger.info(os.system(command))
 
 
-def plot_hoc(hoc_file, **kwargs):
-    """Plot a hoc file using matplotlib.
+def plot_morphology(fn, **kwargs):
+    """Plot a :ref:`morphology_file_format` file using matplotlib.
 
-    Instatiate a :class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`hoc_file_format` file.
+    Instatiate a :class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`morphology_file_format` file.
     
     Args:
-        hoc_file (str): The path to the :ref:`hoc_file_format` file
-        kwargs: additional arguments to pass to :func:`CellMorphologyVisualizer.plot`
+        fn (str): The path to the :ref:`morphology_file_format` file
+        kwargs: additional arguments to pass to :meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot`
 
     Returns:
         :class:`~matplotlib.figure.Figure`: The figure object
+
+    Example::
+    
+        from visualize import plot_hoc
+        fn = "getting_started/example_data/anatomical_constraints/86_C2_center.hoc"
+        plot_hoc(fn)
+        
+    .. figure:: ../../_static/_images/86_hoc.png
+
     """
-    cp = CellParser(hoc_file)
+    cp = CellParser(fn=fn)
     cp.spatialgraph_to_cell()
     cell = cp.cell
     cmv = CellMorphologyVisualizer(cell) 
     fig = cmv.plot(**kwargs)
     return fig
+
+plot_hoc = plot_morphology
+plot_swc = plot_morphology

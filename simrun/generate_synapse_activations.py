@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
 Generate synapse activation files.
@@ -32,7 +30,7 @@ To generate :ref:`syn_activation_format` files **and** simulate the effect on th
 .. hint::
    If the postsynaptic neuron is not simulated, why does this module need the :ref:`cell_parameters_format`?
    On the one hand, it needs morphoplogical information in order to connect these synapses. The :ref:`cell_parameters_format` contains 
-   a backlink to the original :ref:`hoc_file_format` file, which contains the morphological information. But then why not start from the :ref:'hoc_file_format' file directly?
+   a backlink to the original :ref:`morphology_file_format` file, which contains the morphological information. But then why not start from the :ref:'morphology_file_format' file directly?
    Because this module does in fact create a biophsyically detailed neuron model to pass to :class:`~single_cell_parser.network.NetworkMapper` to create the network,
    despite the fact that the postsynaptic activity is not saved.
    
@@ -80,7 +78,7 @@ def _evoked_activity(
     Args:
         cellParamName (str): 
             Path to a :ref:`cell_parameters_format` file, 
-            containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+            containing information about the neuron morphology (link to a :ref:`morphology_file_format` file) and biophysical properties.
         evokedUpParamName (str): 
             Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
         dirPrefix (str): 
@@ -195,7 +193,7 @@ def generate_synapse_activations(
     Args:
         cellParamName (str): 
             Path to a :ref:`cell_parameters_format` file, 
-            containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+            containing information about the neuron morphology (link to a :ref:`morphology_file_format` file) and biophysical properties.
         evokedUpParamName (str): 
             Path to a :ref:`network_parameters_format` file,
             containing information on synapse and network parameters per cell type. 

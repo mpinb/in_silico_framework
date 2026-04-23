@@ -24,12 +24,17 @@ from docs.utils.sphinx_hooks import (
 
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
-# Parse pyproject.toml to get the release version
-pyproject_path = os.path.join(project_root, "pyproject.toml")
-with open(pyproject_path, "r") as f:
-    pyproject_data = toml.load(f)
-    release = pyproject_data["project"]["version"]
-    version = release
+
+def get_project_version():
+    # Parse pyproject.toml to get the release version
+    pyproject_path = os.path.join(project_root, "pyproject.toml")
+    with open(pyproject_path, "r") as f:
+        pyproject_data = toml.load(f)
+        release = pyproject_data["project"]["version"]
+        version = release
+    return version
+
+version = get_project_version()
 project = "ISF"
 copyright = "2025 Max Planck Institute for Neurobiology of Behavior - CAESAR"
 author = "Arco Bast, Robert Egger, Bjorge Meulemeester, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Omar Valerio"
@@ -62,7 +67,8 @@ extensions = [
     # Custom extensions
     # "docs.custom_extensions.short_signatures",  # Strip the prefix from signature handles
     "docs.custom_extensions.xrefs_in_signature_handle",
-    "docs.custom_extensions.monkey_patch_napoleon_immaterial"
+    "docs.custom_extensions.monkey_patch_napoleon_immaterial",
+    "docs.custom_extensions.nmodl_lexer"
 ]
 # object_description_options = [
 #     ("py:.*", dict(black_format_style={"line_length": 60})),
@@ -103,6 +109,7 @@ def setup(app):
         source_dir=os.path.join(project_root, "getting_started", "tutorials"),
         dest_dir=os.path.join(project_root, "docs", "tutorials"),
         api_output_dir=autoapi_root,  
+        ignore=['.ipynb_checkpoints']  # by default also ignores auxiliary
     )
 
 
@@ -155,8 +162,8 @@ paramlinks_hyperlink_param = "name"
 
 # Domains for cross-referencing other documentation
 intersphinx_mapping = {
-    'matplotlib': ('http://matplotlib.org/stable', None),
-    "neuron": ("https://nrn.readthedocs.io/en/latest", None)
+    'matplotlib': ('https://matplotlib.org/stable', None),
+    "neuron": ("https://www.neuronsimulator.org/en/latest", None)
     }
 
 # Don't run notebooks

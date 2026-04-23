@@ -1,29 +1,30 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
 Interface provides top-level API access to the In Silico Framework (ISF).
 It is the main entry point for users to interact with ISF, providing access to various pacakges, modules and workflows.
-It is designed to be used in a jupyter notebook, but can also be used in scripts.
+
+The primary purpose of providing these workflows, subpackages, and external dependencies through Interface is to:
+
+1. keep the API stable
+2. give the user convenient top-level access to all major workflows
 
 The recommended way to use ISF is to import ``Interface`` in a jupyter notebook in the following manner::
 
     >>> import Interface as I
-
 
 You then have access to all important builtins and top-level pipelines via Interface::
 
@@ -32,7 +33,7 @@ You then have access to all important builtins and top-level pipelines via Inter
     >>> I.scp                           # access the single_cell_parser package
     ...
     
-Take a look at the :ref:`tutorials` for examples on how to use the Interface API.
+Take a look at the :ref:`tutorials` for examples on how to use ISF from the Interface API.
 '''
 import matplotlib
 
@@ -65,7 +66,7 @@ import math
 
 ### logging setup
 import logging
-from config.isf_logging import logger
+from config.isf_logging import logger, silence_logger
 
 try:
     from IPython import display
@@ -227,12 +228,10 @@ from simrun.reduced_model \
 import simrun.synaptic_strength_fitting
 
 from singlecell_input_mapper.map_singlecell_inputs import map_singlecell_inputs
-from singlecell_input_mapper.evoked_network_param_from_template \
-    import create_network_parameter \
-    as create_evoked_network_parameter
-from singlecell_input_mapper.ongoing_network_param_from_template \
-    import create_network_parameter \
-    as create_ongoing_network_parameter
+from singlecell_input_mapper.network_param_from_template import (
+    build_network_param_from_template as create_evoked_network_parameter,
+    build_ongoing_network_param_from_template as create_ongoing_network_parameter
+)
 
 if not 'ISF_MINIMIZE_IO' in os.environ:
     if get_versions()['dirty']: logger.attention('The source folder has uncommited changes!')
@@ -240,8 +239,10 @@ if not 'ISF_MINIMIZE_IO' in os.environ:
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
 
 import biophysics_fitting
-from biophysics_fitting.hay import default_setup as bfit_hay_complete_default_setup
-from biophysics_fitting import L5tt_parameter_setup as bfit_L5tt_parameter_setup
+from biophysics_fitting.hay import (
+    default_setup as bfit_hay_complete_default_setup,
+    L5tt_parameter_setup as bfit_L5tt_parameter_setup
+)
 from biophysics_fitting.parameters import param_to_kwargs as bfit_param_to_kwargs
 from biophysics_fitting.optimizer import start_run as bfit_start_run
 from biophysics_fitting.exploration_from_seedpoint import RW
@@ -303,6 +304,6 @@ def get_client(ip=None, client_port=38786, timeout=120):
 print("\n\n")
 print_module_versions()
 
-from config.cell_types import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 logger.setLevel(logging.ATTENTION)

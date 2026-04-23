@@ -12,22 +12,22 @@ from data_base.exceptions import DataBaseException
 logger = logging.getLogger("ISF").getChild(__name__)
 
 
-def _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map):
+def _convert_neup_fns_to_reldb(neup, morph_fn_map, recsites_fn_map):
     """Convert all paths in a :ref:`cell_parameters_format` file to point to a hash filename.
 
     See also:
         :func:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
     """
-    orig_hoc = neup["neuron"]["filename"]
+    morph_fn = neup["neuron"]["filename"]
     original_recsite_fns = neup["sim"]["recordingSites"]
     assert (
-        orig_hoc in hoc_fn_map
-    ), "The hoc file referenced in the neuron parameter file was not found:\n{}".format(
-        orig_hoc
+        morph_fn in morph_fn_map
+    ), "The morphology file referenced in the neuron parameter file was not found:\n{}".format(
+        morph_fn
     )
-    new_hoc_fn = hoc_fn_map[orig_hoc]
-    rel_hoc_fn = create_reldb_path(new_hoc_fn)
-    neup["neuron"]["filename"] = rel_hoc_fn
+    new_morph_fn = morph_fn_map[morph_fn]
+    rel_morph_fn = create_reldb_path(new_morph_fn)
+    neup["neuron"]["filename"] = rel_morph_fn
 
     for i, recsite_fn in enumerate(original_recsite_fns):
         assert (recsite_fn in recsites_fn_map), "The recording site file referenced in the neuron parameter file was not found:\n{}".format(recsite_fn)
@@ -71,55 +71,55 @@ def _convert_netp_fns_to_reldb(netp, syn_fn_map, con_fn_map):
     return netp
 
 
-def _convert_syn_fns_to_reldb(syn_content, hoc_fn_map):
+def _convert_syn_fns_to_reldb(syn_content, morph_fn_map):
     """Copy, rename and transform a single :ref:`syn_file_format` file.
 
-    The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
+    The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the morphology file name is replaced.
 
     Args:
         syn_content (List[str]): Content of the :ref:`syn_file_format` file as a list of strings, each element representing a line.
-        hoc_fn_map (str): Mapping from old to new :ref:`hoc_file_format` files.
+        morph_fn_map (str): Mapping from old to new :ref:`morphology_file_format` files.
     """
 
-    def find_hoc_file(match):
-        if match not in hoc_fn_map:
-            hoc_fn_soft_matches = {k: v for k, v in hoc_fn_map.items() if match in k}
-            if len(hoc_fn_soft_matches) == 1:
-                return list(hoc_fn_soft_matches.values())[0]
-            elif len(hoc_fn_soft_matches) > 1:
+    def find_morph_file(match):
+        if match not in morph_fn_map:
+            morph_fn_soft_matches = {k: v for k, v in morph_fn_map.items() if match in k}
+            if len(morph_fn_soft_matches) == 1:
+                return list(morph_fn_soft_matches.values())[0]
+            elif len(morph_fn_soft_matches) > 1:
                 logger.warning(
-                    "The .hoc file referenced in the .syn file can refer to multiple .hoc files, so I will leave the reference unchanged.\n.hoc reference in .syn: {}\n Potential .hoc file candidates: {}".format(
-                        match, hoc_fn_soft_matches.keys()
+                    "The morphology file referenced in the .syn file can refer to multiple morphology files, so I will leave the reference unchanged.\n.Morphology reference in .syn: {}\n Potential morphology file candidates: {}".format(
+                        match, morph_fn_soft_matches.keys()
                     )
                 )
                 return match
             else:
                 logger.warning(
-                    "The .hoc file referenced in the .syn file was not found in the .hoc filepath mapping, so I will leave the reference unchanged\n.hoc reference in .syn: {}\n filepath mapping: {}".format(
-                        match, hoc_fn_map
+                    "The morphology file referenced in the .syn file was not found in the morphology filepath mapping, so I will leave the reference unchanged\n.Morphology reference in .syn: {}\n filepath mapping: {}".format(
+                        match, morph_fn_map
                     )
                 )
                 return match
 
     syn_content = syn_content.split("\n")
-    # Use a regular expression to replace the .hoc file name
-    matches = re.findall(r"\b\S+\.hoc\b", syn_content[1])
+    # Use a regular expression to replace the morphology file name
+    matches = re.findall(r"\b\S+\.(hoc|swc)\b", syn_content[1])
     if len(matches) == 0:
-        logger.warning("No .hoc file reference in syn file")
-        assert (len(hoc_fn_map) == 1), "Found no .hoc file reference in the .syn file, but there are {} .hoc files in the original results directory. I don't know which .hoc file this .syn file is supposed to refer to.".format(len(hoc_fn_map))
-        # simply take the first and only hoc file
-        original_hoc_file = list(hoc_fn_map.values())[0]
+        logger.warning("No morphology file reference in syn file")
+        assert (len(morph_fn_map) == 1), "Found no morphology file reference in the .syn file, but there are {} morphology files in the original results directory. I don't know which morphology file this .syn file is supposed to refer to.".format(len(morph_fn_map))
+        # simply take the first and only morphology file
+        original_morph_file = list(morph_fn_map.values())[0]
     elif len(matches) > 1:
         raise ValueError(
-            "Found multiple .hoc references in the .syn file. This is not supported."
+            "Found multiple morphology references in the .syn file. This is not supported."
         )
     else:
-        original_hoc_file = matches[0]
-        if not os.path.isabs(original_hoc_file):
-            original_hoc_file = find_hoc_file(original_hoc_file)
-    if not os.path.isabs(original_hoc_file): relative_hoc_file = original_hoc_file
-    else: relative_hoc_file = create_reldb_path(original_hoc_file)
-    syn_content[1] = "# {}\n".format(relative_hoc_file)
+        original_morph_file = matches[0]
+        if not os.path.isabs(original_morph_file):
+            original_morph_file = find_morph_file(original_morph_file)
+    if not os.path.isabs(original_morph_file): relative_morph_file = original_morph_file
+    else: relative_morph_file = create_reldb_path(original_morph_file)
+    syn_content[1] = "# {}\n".format(relative_morph_file)
     return "\n".join(syn_content)
 
 
@@ -183,7 +183,7 @@ def _resolve_rel_syncon_ref(fn, ref):
     return abs_ref
 
 def _resolve_syncon_ref(fn, ref):
-    """Resolve relative references in :ref:`syn_file_format` or :ref:`conf_file_format` files.
+    """Resolve relative references in :ref:`syn_file_format` or :ref:`con_file_format` files.
 
     Relative references can either be filenmaes without preceding directory structure, or reldb://-style relative paths.
     """

@@ -9,6 +9,7 @@ on:
     branches:
       - develop
       - master
+      - rc**
   push:
     branches:
       - master

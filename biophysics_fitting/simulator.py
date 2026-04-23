@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 '''
 This module concerns itself with setting up a cell with biophysical details and simulation parameters.
 
@@ -49,6 +47,8 @@ class Simulator_Setup:
     A typical usecase is to use the fixed parameters to specify to soma distance for a voltage trace 
     of the apical dendrite. Make sure that the :attr:`~biophysics_fitting.simulator.Simulator.stim_run_fun` reads the 
     parameter :param:`recSite` and sets up the stimulus accordingly (see :class:`~biophysics_fitting.simulator.Simulator`).
+
+
     
     Example::
 
@@ -119,14 +119,18 @@ class Simulator_Setup:
     Attributes:
         cell_param_generator (callable): A function that generates a :class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
         cell_param_modify_funs (list): list of functions that modify the cell parameters.
-        cell_generator (callable): A function that generates a :class:`~single_cell_parser.cell.Cell` object.
+        cell_generator (callable): A function that generates a :class:`~single_cell_parser.cell.Cell` object from :ref:`cell_parameters_format`.
         cell_modify_funs (list): List of functions that modify the cell object.
-        stim_setup_funs (list): List of functions that set up the stimulus.
-        stim_run_funs (list): List of functions that each run a simulation.
-        stim_response_measure_funs (list): List of functions that extract voltage traces from the cell.
+        stim_setup_funs (list): List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument and add a NEURON stimulus to it (e.g. :func:`~biophysics_fitting.setup_stim.setup_soma_step`)
+        stim_run_funs (list): List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument, simulate it, and return the simulated :class:`~single_cell_parser.cell.Cell` object (e.g. :func:`~single_cell_parser.init_neuron_run`)
+        stim_response_measure_funs (list): List of functions that take the cell as an argument and extract relevant data (e.g. the ``tVec`` and ``VList``), organized per stimulus.
         params_modify_funs (list): List of functions that modify the biophysical parameter vector.
         check_funs (list): List of functions that check the setup. Useful for debugging.
-    
+
+    See also:
+        :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions for how ``cell_param_modify_functions`` are used to transform input
+        parameter vectors to :ref:`cell_parameters_format` objects.
+
     """
     def __init__(self):    
         self.cell_param_generator = None
@@ -497,14 +501,14 @@ class Simulator:
         # get cell object with biophysics
         cell, params = self.setup.get(params)
         # set up stimulus
-        name, fun = self.setup.get_stim_setup_fun_by_stim(stim)
+        name, setup_fun = self.setup.get_stim_setup_fun_by_stim(stim)
         #print name, param_selector(params, name)
-        fun(cell, params=param_selector(params, name))
+        setup_fun(cell, params=param_selector(params, name))
         # run simulation
-        name, fun = self.setup.get_stim_run_fun_by_stim(stim)
+        name, run_fun = self.setup.get_stim_run_fun_by_stim(stim)
         #print name,param_selector(params, name)
         if simulate:
-            cell = fun(cell, params = param_selector(params, name))
+            cell = run_fun(cell, params = param_selector(params, name))
             logger.info("simulating {} took {} seconds".format(stim, time.time()-t))
         return cell, params
 

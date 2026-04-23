@@ -1,8 +1,9 @@
 {
   "info": {
-    "date": "11Feb2015",
-    "name": "ongoing_activity_up_state_anatomical_map_20150211-1430_22780",
-    "author": "regger",
+    "date": "2026/03/13",
+    "name": "example_network_parameters_260313",
+    "author": "",
+    "description": "Example network parameters containing information on the network embedding (cellNr, .syn and .con file), ongoing activity rates (spiketrain) and evoked activity (pointcell)"
   },
   "network": {
     "L45Peak_D1": {

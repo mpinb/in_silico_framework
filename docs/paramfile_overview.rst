@@ -10,9 +10,9 @@
         node [fontname="Verdana", fontsize="12"];
         edge [fontname="Sans", fontsize="9"];
 
-        morphology_file [label="morphology.hoc", shape="note", fontcolor=black,
+        morphology_file [label="morpholog", shape="note", fontcolor=black,
                  fillcolor="white", style=filled,
-                 xref=":ref:`hoc_file_format`"];
+                 xref=":ref:`morphology_file_format`"];
         syn [label=".syn", shape="note", fontcolor=black,
                  fillcolor="white", style=filled,
                  xref=":ref:`syn_file_format`"];
@@ -25,14 +25,14 @@
         neup [label="neuron.param", shape="note", fontcolor=black,
                 fillcolor="white", style=filled,
                 xref=":ref:`cell_parameters_format`"];
-        biophys_df [label="biophys.df", shape="note", fontcolor=black,
+        biophys_df [label="neuron model parameters", shape="note", fontcolor=black,
                  fillcolor="white", style=filled];
 
-        scim [label="single_cell_input_mapper", shape="folder",
+        scim [label="singlecell_input_mapper", shape="folder",
                  xref=":mod:`singlecell_input_mapper`"];
-        scim2 [label="single_cell_input_mapper", shape="folder",
+        scim2 [label="singlecell_input_mapper", shape="folder",
                  xref=":mod:`singlecell_input_mapper`"];
-        scp [label="single_cell_processor", shape="folder",
+        scp [label="single_cell_parser", shape="folder",
                 xref=":mod:`single_cell_parser`"];
         simrun [label="simrun", shape="folder",
                  xref=":mod:`simrun`"];

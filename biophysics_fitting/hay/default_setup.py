@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 A Python translation of the setup for in silico current injection experiments as described in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
 """
@@ -28,10 +26,10 @@ from toolz.dicttoolz import merge
 
 import single_cell_parser as scp
 
-from .. import setup_stim
+from . import setup_stim
 from ..combiner import Combiner
 from ..evaluator import Evaluator
-from ..L5tt_parameter_setup import (
+from .L5tt_parameter_setup import (
     get_L5tt_template,
     get_L5tt_template_v2,
     set_ephys,
@@ -115,10 +113,19 @@ def record_Step(cell):
 
 
 def get_Simulator(fixed_params, step=False, vInit=False):
-    """Get a set up :class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
+    """Get a set up :class:`~biophysics_fitting.simulator.Simulator` object for the :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` protocol.
 
     Given cell-specific fixed parameters, set up a simulator object for the Hay protocol,
     including measuring functions for bAP and BAC stimuli (no step currents)
+
+    Sets up:
+
+    - ``cell_param_generator``: A function generating a :ref:`cell_parameters_format` tempalate.
+    - ``cell_param_modify_funs``, which transform an input parameter vector (usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions) to :ref:`cell_parameters_format`.
+    - ``cell_generator``: A function that takes the :ref:`cell_parameters_format` as an argument and returns a :class:`~single_cell_parser.cell.Cell` object.
+    - ``stim_setup_funs``: Functions that take a :class:`~single_cell_parser.cell.Cell` as an argument and add a NEURON stimulus to it (e.g. :func:`~biophysics_fitting.setup_stim.setup_soma_step`)
+    - ``stim_run_funs``: Functions that take a :class:`~single_cell_parser.cell.Cell` as an argument, simulate it, and return the simulated :class:`~single_cell_parser.cell.Cell` object (e.g. :func:`~single_cell_parser.init_neuron_run`)
+    - ``stim_response_measure_funs``: Functions that take the cell as an argument and extract relevant data (e.g. the ``tVec`` and ``VList``), organized per stimulus.
 
     Args:
         fixed_params (dict): A dictionary of fixed parameters for the cell.
@@ -127,13 +134,13 @@ def get_Simulator(fixed_params, step=False, vInit=False):
 
     Returns:
         :class:`~biophysics_fitting.simulator.Simulator`: A simulator object.
-
-    See also:
-        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
     """
     s = Simulator()
     s.setup.stim_response_measure_funs = []
     s.setup.cell_param_generator = get_L5tt_template
+    
+    # --- Cell param modify functions
+    # These are invoked in e.g. simulator.setup.get(param_vector) to map input param_vector to cellular parameters
     s.setup.params_modify_funs.append(
         ["fixed_params", partial(set_fixed_params, fixed_params=fixed_params)]
     )
@@ -141,10 +148,12 @@ def get_Simulator(fixed_params, step=False, vInit=False):
         ["morphology", param_to_kwargs(set_morphology)]
     )
     s.setup.cell_param_modify_funs.append(["ephys", set_ephys])
+    # Mapping from dot convention to dictionary-style
     s.setup.cell_param_modify_funs.append(["params", set_param])
     s.setup.cell_param_modify_funs.append(["many_params", set_many_param])
-
     s.setup.cell_param_modify_funs.append(["hot_zone", param_to_kwargs(set_hot_zone)])
+
+    # Function that takes cell parameters and returns a cell object
     s.setup.cell_generator = scp.create_cell
     # s.setup.cell_modify_funs.append('apical_dendrite_scaling', apical_dendrite_scaling)
 

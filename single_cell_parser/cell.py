@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''Cell objects for neuron models and cell activity.
 
@@ -25,6 +23,7 @@ For neuron-network multiscale simulations, you should consult :mod:`simrun`.
 '''
 
 #from neuron import h, nrn
+from typing import Any, List, Dict
 import numpy as np
 from . import synapse
 from collections import Sequence
@@ -52,17 +51,15 @@ class Cell(object):
     The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
     Its attributes are set by :class:`~single_cell_parser.cell_parser.CellParser`.
     
-    See also: 
-        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
-        This class concerns itself with providing API to NEURON, not with mapping input to the cell.
-    
     Attributes: 
-        hoc_path (str): Path to the hoc file containing the cell morphology.
+        path (str): Path to the morphology file
+        hoc_path (str): Path to the :ref:`hoc_file_format` morphology file (if the morphology is in the :ref:`hoc_file_format` format)
+        swc_path (str): Path to the :ref:`swc_file_format` morphology file (if the morphology is in the :ref:`swc_file_format` format)
         id (str | int, optional): ID of the cell (often unused).
         soma (:class:`~single_cell_parser.cell.PySection`): The soma section of the cell.
         tree (:class:`neuron:SectionList`): NEURON SectionList containing all sections of the cell.
         branches (dict): maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:class:`neuron:SectionList`).
-        structures (Dict[:class:`~single_cell_parser.cell.PySection`]): 
+        structures (Dict[str, :class:`~single_cell_parser.cell.PySection`]): 
             All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). 
             Keys are labels (str), values are lists of :class:`~single_cell_parser.cell.PySection` objects.
         sections (List[:class:`~single_cell_parser.cell.PySection`]): 
@@ -78,12 +75,15 @@ class Cell(object):
     '''
     def __init__(self):
         self.hoc_path = None
+        self.swc_path = None
+        self.path = None
+
         self.id = None
         self.soma = None
         self.tree = None  # TODO: implement trees in python to avoid NEURON section stack problems that may occur during use of SectionLists
         self.branches = {}
-        self.structures = {}
-        self.sections = []
+        self.structures: Dict[str, PySection] = {}
+        self.sections: List[PySection] = []
         self.synapses = {}
         self.E = -70.0  # TODO: this should be read in from the paramfile (e_pas)
         self.changeSynParamDict = {}
@@ -349,121 +349,120 @@ class Cell(object):
         :skip-doc:
         '''
         raise NotImplementedError('Synapse parameter change does not work correctly with VecStim!')
-        """ Old code
-        eventList = self.changeSynParamDict.keys()
-        eventList.sort()
-        print 'Cell %s: event at t = %.2f' % (self.id ,eventList[0])
-        tChange = eventList[0]
-        newParamDict = self.changeSynParamDict.pop(eventList[0])
-        synCnt = 0
-        for synType in newParamDict.keys():
-           print '\tchanging parameters for synapses of type %s' % synType
-           for syn in self.synapses[synType]:
-               synCnt += 1
-               if not syn.is_active():
-                   continue
-               #===============================================================
-               # re-compute release times in case release probability changes
-               #===============================================================
-               preChange = False
-               for t in syn.preCell.spikeTimes:
-                   if t >= tChange:
-                       preChange = True
-                       break
-               if preChange:
-                   changeBin = None
-                   for i in range(len(syn.releaseSite.spikeTimes)):
-                       if syn.releaseSite.spikeTimes[i] >= tChange:
-                           changeBin = i
-                   if changeBin is not None:
-                       print '\tdetermine new release times for synapse %d of type %s' % (synCnt-1, synType)
-                       print '\t\told VecStim: %s' % (syn.releaseSite.spikes)
-                       del syn.releaseSite.spikeTimes[changeBin:]
-                       syn.releaseSite.spikes.play()
-                       syn.releaseSite.spikeVec.resize(0)
-                       prelNew = newParamDict[synType].synapses.releaseProb
-                       newSpikes = []
-                       for t in syn.preCell.spikeTimes:
-                           if t >= tChange:
-                               if np.random.rand() < prelNew:
-                                    # syn.releaseSite.append(t)
-                                   newSpikes.append(t)
-                                   syn.releaseSite.spikeTimes.append(t)
-                                   print '\t\tnew release time %.2f' % (t)
-                       if len(newSpikes):
-                           print '\t\told NetCon: %s' % (syn.netcons[0])
-                           print '\t\told NetCon valid: %d' % (syn.netcons[0].valid())
-                           del syn.netcons[0]
-                           # syn.netcons = []
-                           print '\t\tcreating new VecStim'
-                           del syn.releaseSite.spikes
-                           syn.releaseSite.spikes = h.VecStim()
-                           print '\t\tupdating SpikeVec:'
-                           del syn.releaseSite.spikeVec
-                           syn.releaseSite.spikeVec = h.Vector(newSpikes)
-                           tRelStr = '\t\t'
-                           for t in syn.releaseSite.spikeVec:
-                               tRelStr += str(t)
-                               tRelStr += ', '
-                           print tRelStr
-                           print '\t\tactivating new VecStim %s' % (syn.releaseSite.spikes)
-                           syn.releaseSite.spikes.play(syn.releaseSite.spikeVec)
-                           print '\t\tupdated VecStim %s with %d new spike times' % (syn.releaseSite.spikes, len(newSpikes))
-                           
-                           newSyn = synapse.Synapse(syn.secID, syn.ptID, syn.x, syn.preCellType, syn.postCellType)
-                           newSyn.coordinates = np.array(self.sections[syn.secID].pts[syn.ptID])
-                           newSyn.weight = syn.weight
-                           newSyn.activate_hoc_syn(syn.releaseSite, syn.preCell, self, newParamDict[synType].synapses.receptors)
-                           
-                           syn.netcons = []
-                           syn.receptors = {}
-                           forget = syn
-                           syn = newSyn
-                           del forget
-                           #===============================================================
-                           # update biophysical parameters and NetCon
-                           #===============================================================
-#                            for recepStr in newParamDict[synType].synapses.receptors.keys():
-#                                recep = newParamDict[synType].synapses.receptors[recepStr]
-#                                hocStr = 'h.'
-#                                hocStr += recepStr
-#                                hocStr += '(x, sec=hocSec)'
-#                                newSyn = eval(hocStr)
-#                                del syn.receptors[recepStr]
-#                                syn.receptors[recepStr] = newSyn
-#                                for paramStr in recep.parameter.keys():
-#                                #===========================================================
-#                                # try treating parameters as NMODL range variables,
-#                                # then as (global) NMODL parameters
-#                                #===========================================================
-#                                    try:
-#                                        valStr = str(recep.parameter[paramStr])
-#                                        cmd = 'syn.receptors[\'' + recepStr + '\'].' + paramStr + '=' + valStr
-##                                        print 'setting %s for synapse of type %s' % (cmd, synType)
-#                                        exec(cmd)
-#                                    except LookupError:
-#                                        cmd = paramStr + '_' + recepStr + '='
-#                                        cmd += str(recep.parameter[paramStr])
-##                                        print 'setting %s for synapse of type %s' % (cmd, synType)
-#                                        h(cmd)
-#                                threshParam = float(recep.threshold)
-#                                delayParam = float(recep.delay)
-#                                newNetcon = h.NetCon(syn.releaseSite.spikes, syn.receptors[recepStr])
-##                                print '\t\told NetCon: %s' % (syn.netcons[0])
-##                                print '\t\told NetCon valid: %d' % (syn.netcons[0].valid())
-##                                del syn.netcons[0]
-##                                syn.netcons = []
-#                                syn.netcons = [newNetcon]
-#                                print '\t\tnew NetCon: %s' % (syn.netcons[0])
-#                                print '\t\tnew NetCon valid: %d' % (syn.netcons[0].valid())
-#                                syn.netcons[0].threshold = threshParam
-#                                syn.netcons[0].delay = delayParam
-#                                if isinstance(recep.weight, Sequence):
-#                                    for i in range(len(recep.weight)):
-#                                        syn.netcons[0].weight[i] = recep.weight[i]
-#                                else:
-#                                    syn.netcons[0].weight[0] = recep.weight
-    """
+        # Old code
+        # eventList = self.changeSynParamDict.keys()
+        # eventList.sort()
+        # print 'Cell %s: event at t = %.2f' % (self.id ,eventList[0])
+        # tChange = eventList[0]
+        # newParamDict = self.changeSynParamDict.pop(eventList[0])
+        # synCnt = 0
+        # for synType in newParamDict.keys():
+        #    print '\tchanging parameters for synapses of type %s' % synType
+        #    for syn in self.synapses[synType]:
+        #        synCnt += 1
+        #        if not syn.is_active():
+        #            continue
+        #        #===============================================================
+        #        # re-compute release times in case release probability changes
+        #        #===============================================================
+        #        preChange = False
+        #        for t in syn.preCell.spikeTimes:
+        #            if t >= tChange:
+        #                preChange = True
+        #                break
+        #        if preChange:
+        #            changeBin = None
+        #            for i in range(len(syn.releaseSite.spikeTimes)):
+        #                if syn.releaseSite.spikeTimes[i] >= tChange:
+        #                    changeBin = i
+        #            if changeBin is not None:
+        #                print '\tdetermine new release times for synapse %d of type %s' % (synCnt-1, synType)
+        #                print '\t\told VecStim: %s' % (syn.releaseSite.spikes)
+        #                del syn.releaseSite.spikeTimes[changeBin:]
+        #                syn.releaseSite.spikes.play()
+        #                syn.releaseSite.spikeVec.resize(0)
+        #                prelNew = newParamDict[synType].synapses.releaseProb
+        #                newSpikes = []
+        #                for t in syn.preCell.spikeTimes:
+        #                    if t >= tChange:
+        #                        if np.random.rand() < prelNew:
+        #                             # syn.releaseSite.append(t)
+        #                            newSpikes.append(t)
+        #                            syn.releaseSite.spikeTimes.append(t)
+        #                            print '\t\tnew release time %.2f' % (t)
+        #                if len(newSpikes):
+        #                    print '\t\told NetCon: %s' % (syn.netcons[0])
+        #                    print '\t\told NetCon valid: %d' % (syn.netcons[0].valid())
+        #                    del syn.netcons[0]
+        #                    # syn.netcons = []
+        #                    print '\t\tcreating new VecStim'
+        #                    del syn.releaseSite.spikes
+        #                    syn.releaseSite.spikes = h.VecStim()
+        #                    print '\t\tupdating SpikeVec:'
+        #                    del syn.releaseSite.spikeVec
+        #                    syn.releaseSite.spikeVec = h.Vector(newSpikes)
+        #                    tRelStr = '\t\t'
+        #                    for t in syn.releaseSite.spikeVec:
+        #                        tRelStr += str(t)
+        #                        tRelStr += ', '
+        #                    print tRelStr
+        #                    print '\t\tactivating new VecStim %s' % (syn.releaseSite.spikes)
+        #                    syn.releaseSite.spikes.play(syn.releaseSite.spikeVec)
+        #                    print '\t\tupdated VecStim %s with %d new spike times' % (syn.releaseSite.spikes, len(newSpikes))
+        #                    
+        #                    newSyn = synapse.Synapse(syn.secID, syn.ptID, syn.x, syn.preCellType, syn.postCellType)
+        #                    newSyn.coordinates = np.array(self.sections[syn.secID].pts[syn.ptID])
+        #                    newSyn.weight = syn.weight
+        #                    newSyn.activate_hoc_syn(syn.releaseSite, syn.preCell, self, newParamDict[synType].synapses.receptors)
+        #                    
+        #                    syn.netcons = []
+        #                    syn.receptors = {}
+        #                    forget = syn
+        #                    syn = newSyn
+        #                    del forget
+        #                    #===============================================================
+        #                    # update biophysical parameters and NetCon
+        #                    #===============================================================
+        #                    # for recepStr in newParamDict[synType].synapses.receptors.keys():
+        #                    #     recep = newParamDict[synType].synapses.receptors[recepStr]
+        #                    #     hocStr = 'h.'
+        #                    #     hocStr += recepStr
+        #                    #     hocStr += '(x, sec=hocSec)'
+        #                    #     newSyn = eval(hocStr)
+        #                    #     del syn.receptors[recepStr]
+        #                    #     syn.receptors[recepStr] = newSyn
+        #                    #     for paramStr in recep.parameter.keys():
+        #                    #     #===========================================================
+        #                    #     # try treating parameters as NMODL range variables,
+        #                    #     # then as (global) NMODL parameters
+        #                    #     #===========================================================
+        #                    #         try:
+        #                    #             valStr = str(recep.parameter[paramStr])
+        #                    #             cmd = 'syn.receptors[\'' + recepStr + '\'].' + paramStr + '=' + valStr
+        #                    #              print 'setting %s for synapse of type %s' % (cmd, synType)
+        #                    #             exec(cmd)
+        #                    #         except LookupError:
+        #                    #             cmd = paramStr + '_' + recepStr + '='
+        #                    #             cmd += str(recep.parameter[paramStr])
+        #                    #              print 'setting %s for synapse of type %s' % (cmd, synType)
+        #                    #             h(cmd)
+        #                    #     threshParam = float(recep.threshold)
+        #                    #     delayParam = float(recep.delay)
+        #                    #     newNetcon = h.NetCon(syn.releaseSite.spikes, syn.receptors[recepStr])
+        #                    #      print '\t\told NetCon: %s' % (syn.netcons[0])
+        #                    #      print '\t\told NetCon valid: %d' % (syn.netcons[0].valid())
+        #                    #      del syn.netcons[0]
+        #                    #      syn.netcons = []
+        #                    #     syn.netcons = [newNetcon]
+        #                    #     print '\t\tnew NetCon: %s' % (syn.netcons[0])
+        #                    #     print '\t\tnew NetCon valid: %d' % (syn.netcons[0].valid())
+        #                    #     syn.netcons[0].threshold = threshParam
+        #                    #     syn.netcons[0].delay = delayParam
+        #                    #     if isinstance(recep.weight, Sequence):
+        #                    #         for i in range(len(recep.weight)):
+        #                    #             syn.netcons[0].weight[i] = recep.weight[i]
+        #                    #     else:
+        #                    #         syn.netcons[0].weight[0] = recep.weight
 
     def get_synapse_activation_dataframe(
         self,
@@ -577,8 +576,9 @@ class Cell(object):
 class PySection(nrn.Section):
     '''Wrapper around :class:`neuron:Section` providing additional functionality for geometry and mechanisms.
 
-    NEURON sections are objects of the form ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
-    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``__nrnsec_0x------------(x)``,
+    NEURON sections are a collection of points and their diameter of the form ``secname``
+    If no section name is known, they are printed as ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
+    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``secname(x)``,
     which looks similar to the section representation, but has an additional ``(x)``: a relative coordinate representing the
     center point of the segment.
     
@@ -619,10 +619,9 @@ class PySection(nrn.Section):
             cell (:class:`~single_cell_parser.cell.Cell`, optional): reference to the cell object
             label (str, optional): label of the section
         '''
-        if name is None:
-            name = ''
+        if name is None: name = ''
         if cell is None:
-            nrn.Section.__init__(self)
+            nrn.Section.__init__(self, name=name)
         else:
             nrn.Section.__init__(self, name=name, cell=cell)
         self.label = label
@@ -831,6 +830,11 @@ class PySection(nrn.Section):
         The relative position is the x-coordinate to the previous point.
         Ergo, the sum of :paramref:`relPts` should always equal 1.
         """
+        # edge case: the section only has 1 point
+        if len(self.pts) == 1:
+            self.relPts = [1.0]
+            return
+
         self.relPts = [0.0]
         ptLength = 0.0
         pts = self.pts
@@ -840,16 +844,17 @@ class PySection(nrn.Section):
             x = ptLength / self.L
             self.relPts.append(x)  # compared to previous point
         # avoid roundoff errors:
-        norm = 1.0 / self.relPts[-1]
-        for i in range(len(self.relPts) - 1):
-            self.relPts[i] *= norm
+        if len(self.relPts) > 1:
+            norm = 1.0 / self.relPts[-1]
+            for i in range(len(self.relPts) - 1):
+                self.relPts[i] *= norm
         self.relPts[-1] = 1.0
 
     def _compute_seg_pts(self):
         '''Computes the 3D center points of each segment in this section.
         
         Approximates sections as a straight line.
-        This data is only used for visualization purposes, not for simulating.        
+        This data is only used for visualization purposes, not for simulating.
         '''
         if len(self.pts) > 1:
             p0 = np.array(self.pts[0])
@@ -928,7 +933,7 @@ class PySection(nrn.Section):
                 for seg in self:
                     vec = h.Vector()
                     hRef = eval('seg._ref_' + var)
-                    logger.info('seg._ref_' + var)
+                    # logger.debug('seg._ref_' + var)
                     vec.record(hRef, sec=self)
                     self.recordVars[var].append(vec)
         else:

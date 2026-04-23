@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''
 Synapse class for synaptic activations and NEURON API.
@@ -106,7 +104,7 @@ class Synapse(object):
                 Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
             preCell (:class:`single_cell_parser.cell.PointCell`): Presynaptic cell.
             targetCell (:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
-            receptors (dict | Dict[:class:`~single_cell_parser.parameters.NTParameterSet`]): 
+            receptors (:class:`~single_cell_parser.parameters.NTParameterSet`): 
                 Dictionary or :class:`~single_cell_parser.parameters.NTParameterSet` of receptors. 
                 Each individual receptor in this collection must be of the type :class:`~single_cell_parser.parameters.NTParameterSet`.
         '''
@@ -123,23 +121,20 @@ class Synapse(object):
         if x > maxX:
             x = maxX
         hocSec = targetCell.sections[self.secID]
-        for recepStr in list(receptors.keys()):
-            recep = receptors[recepStr]
-            hocStr = 'h.'
-            hocStr += recepStr
-            hocStr += '(x, sec=hocSec)'
-            newSyn = eval(hocStr)
-            newNetcon = h.NetCon(source.spikes, newSyn)
-            newNetcon.threshold = recep.threshold
-            newNetcon.delay = recep.delay
+        for receptor_name, receptor in receptors.items():
+            # newSyn = eval("h.{}(x, sec=hocSec)".format(receptor_name))
+            new_synapse = getattr(h, receptor_name)(x, sec=hocSec)
+            new_netcon = h.NetCon(source.spikes, new_synapse)
+            new_netcon.threshold = receptor.threshold
+            new_netcon.delay = receptor.delay
             if self.weight is None:
                 errstr = 'Synaptic weights are not set! This should not occur!'
                 raise RuntimeError(errstr)
             else:
-                for i in range(len(self.weight[recepStr])):
-                    newNetcon.weight[i] = self.weight[recepStr][i]
-            self.receptors[recepStr] = newSyn
-            self.netcons.append(newNetcon)
+                for i in range(len(self.weight[receptor_name])):
+                    new_netcon.weight[i] = self.weight[receptor_name][i]
+            self.receptors[receptor_name] = new_synapse
+            self.netcons.append(new_netcon)
         self._active = True
 
     def disconnect_hoc_synapse(self):

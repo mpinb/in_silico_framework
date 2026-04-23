@@ -1,24 +1,22 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Cell API for single cell simulations.
 
 This package provides functionality to parse :class:`~single_cell_parser.cell.Cell` objects
-from NEURON :ref:`hoc_file_format` files, map synapses onto these cells, and run biophysically 
+from :ref:`cell_parameters_format` files, map synapses onto these cells, and run biophysically 
 detailed NEURON simulations with the resulting neuron-network models.
 
 See also:
@@ -43,7 +41,7 @@ import warnings
 import neuron
 import tables  # so florida servers have no problem with neuron
 
-from config.cell_types import EXCITATORY
+from config.user.cell_types import EXCITATORY
 
 from . import network_param_modify_functions
 from .cell import Cell, PointCell, PySection, SynParameterChanger
@@ -53,29 +51,29 @@ from .parameters import NTParameterSet, build_parameters, load_NMODL_parameters
 # from synapse import activate_functional_synapse
 from .network import NetworkMapper
 from .network_realizations import create_functional_network, create_synapse_realization
-from .reader import (
+from .io.activity import (
     read_complete_synapse_activation_file,
-    read_functional_realization_map,
-    read_landmark_file,
-    read_scalar_field,
     read_spike_times_file,
     read_synapse_activation_file,
-    read_synapse_realization,
     read_synapse_weight_file,
-)
-from .synapse_mapper import SynapseMapper
-from .writer import (
     write_all_traces,
-    write_cell_simulation,
-    write_cell_synapse_locations,
-    write_landmark_file,
     write_presynaptic_spike_times,
     write_PSTH,
-    write_sim_results,
     write_spike_times_file,
     write_synapse_activation_file,
     write_synapse_weight_file,
 )
+from .io.connectivity import (
+    read_synapse_realization,
+    read_functional_realization_map,
+    write_cell_synapse_locations,
+)
+from .io.amira import (
+    read_landmark_file,
+    read_scalar_field,
+    write_landmark_file,
+)
+from .synapse_mapper import SynapseMapper
 
 __author__ = "Robert Egger"
 __credits__ = ["Robert Egger", "Arco Bast"]
@@ -83,7 +81,7 @@ __credits__ = ["Robert Egger", "Arco Bast"]
 
 def create_cell(
     parameters, 
-    scaleFunc=None, 
+    scaleFunc=None,  # deprecated
     allPoints=False, 
     setUpBiophysics=True, 
     silent=False
@@ -93,18 +91,19 @@ def create_cell(
     Adds spatial discretization and inserts biophysical mechanisms according to parameter file
 
     Args:
-        parameters (dict | dict-like):
-            A nested dictionary structure, read from a :ref:`cell_parameters_format` file.
-            Should include at least the keys 'filename' and one key per structure present in the :ref:`hoc_file_format` file (e.g. "AIS", "Soma" ...).
+        parameters (:class:`~single_cell_parser.parameters.NTParameterSet`):
+            A :ref:`cell_parameters_format` object.
+            Should include at least the keys 'filename' and one key per structure present in the :ref:`morphology_file_format` file (e.g. "AIS", "Soma" ...).
             Optional keys include: ``cell_modify_functions``, ``discretization``
-        scaleFunc (bool):
-            DEPRECATED,  should be specified in the parameters, as described in :meth:`~single_cell_parser.cell_modify_funs`
         allPoints (bool):
-            Whether or not to use all the points in the `.hoc` file, or one point per segment (according to the distance-lambda rule).
+            Whether or not to use all the points in the :ref:`morphology_file_format` file, or one point per segment (according to the distance-lambda rule).
             Will be passed to ``full`` in :meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg`
         setUpBiophysics (bool):
             Whether or not to insert mechanisms corresponding to the biophysical parameters in ``parameters``
 
+    .. deprecated 0.5.0::
+       The ``scaleFunc` argument is depracated and may be removed in a future version.
+       For scaling the morphoplogy, use ``cell_param_modify_funs`` instead.
     """
     if scaleFunc is not None:
         warnings.warn(
@@ -119,7 +118,7 @@ def create_cell(
         axon = True
 
     logger.info("Loading cell morphology...")
-    parser = CellParser(parameters.filename)
+    parser = CellParser(fn=parameters.filename)
     parser.spatialgraph_to_cell(parameters, axon, scaleFunc)
     if setUpBiophysics:
         logger.info("Setting up biophysical model...")

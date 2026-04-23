@@ -1,26 +1,50 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
-"""Convenience functions for the :mod:`~biophysics_fitting.exploration_from_seedpoint` module."""
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module."""
 
 import numpy as np
 import pandas as pd
-from data_base.utils import silence_stdout
 
-
+class silence_stdout():
+    '''Silence stdout
+    
+    Can be used as context manager and decorator.
+    
+    See also:
+        https://stackoverflow.com/a/2829036/5082048
+    '''
+    
+    def __init__(self, fun = None):
+        self.save_stdout = sys.stdout
+        if fun is not None:
+            return self(fun)
+        
+    def __enter__(self):
+        logging.disable(logging.CRITICAL)
+        sys.stdout = six.StringIO()
+        
+    def __exit__(self, *args, **kwargs):
+        logging.disable(logging.NOTSET)
+        sys.stdout = self.save_stdout
+        
+    def __call__(self, func):
+        def wrapper(*args, **kwds):
+            with self:
+                return func(*args, **kwds)
+        return wrapper
+    
 def get_vector_norm(v):
     """Calculate the norm of a vector v.
     
@@ -82,7 +106,7 @@ def evaluation_function_incremental_helper(
     for stim in stim_order:
         if verbose:
             print('evaluating stimulus', stim)
-        with silence_stdout:
+        with silence_stdout():
             voltage_traces_ = s.run(p, stims = stim)
             voltage_traces.update(voltage_traces_)
             # this is currently specific to the hay simulator / evaluator, which gets confused if 

@@ -1,7 +1,7 @@
 """Handle :ref:`param_file_format` files in ISF.
 """
 
-from collections.abc import MutableMapping
+from collections.abc import MutableMapping, Mapping
 from pathlib import Path
 import json, re, neuron
 from data_base.dbopen import dbopen, resolve_db_path
@@ -58,11 +58,12 @@ def build_parameters(filename):
     """Read in a :ref:`param_file_format` file and return a NTParameterSet object.
 
     Args:
-        filename (str): path to the parameter file
+        filename (str | Path): path to the parameter file
 
     Returns:
         :class:`~single_cell_parser.parameters.NTParameterSet`: The parameter file as a :class:`~single_cell_parser.parameters.NTParameterSet` object.
     """
+    filename = str(filename)
     data = _read_params_to_dict(filename)
     data = resolve_parameter_paths(data, filename)
     return NTParameterSet(data)
@@ -219,14 +220,15 @@ class NTParameterSet(MutableMapping):
         """
         return self._unwrap(self._data)
 
-    def save(self, filename):
+    def save(self, filename, **kwargs):
         """Save the NTParameterSet to a file in JSON format.
 
         Args:
             filename (str): The path to the file where the parameters will be saved.
         """
-        with open(filename, 'w') as f:
-            json.dump(self.as_dict(), f, indent=4)
+        indent = kwargs.pop("indent", 2)  # default indent of 2
+        with open(file=filename, mode='w') as f:
+            json.dump(obj=self.as_dict(), fp=f, cls=CompactListEncoder, indent=indent, **kwargs)
 
     def keys(self):
         return self._data.keys()
@@ -322,16 +324,46 @@ class NTParameterSet(MutableMapping):
             other (dict, optional): Another dictionary to merge into this NTParameterSet.
             kwargs: Additional keyword arguments to merge into this NTParameterSet.
         """
-        def deep_merge(d, u):
-            for k, v in u.items():
-                if isinstance(v, dict) and isinstance(d.get(k), dict):
-                    deep_merge(d[k], v)
+        def deep_update(this, other):
+            for other_key, other_value in other.items():
+                if isinstance(other_value, Mapping):
+                    this[other_key] = deep_update(this=this.get(other_key, {}), other=other_value)
                 else:
-                    d[k] = self._wrap(v)
-        if other:
-            if isinstance(other, dict):
-                deep_merge(self._data, other)
-            else:
-                raise TypeError("update() expects a dict or keyword arguments")
-        if kwargs:
-            deep_merge(self._data, kwargs)
+                    this[other_key] = other_value
+            return this
+        if isinstance(other, NTParameterSet):
+            other = other._data
+        deep_update(this=self, other=other)
+        return self
+
+
+class CompactListEncoder(json.JSONEncoder):
+    """Custom JSON encoder to keep lists on a single line
+
+    Default JSON behavior is to break lines on commas. This makes many parameter files
+    unwieldy. This encoder is used in :meth:`~NTParameterSet.save` to keep lists in JSON files
+    on a single line.
+    """
+    def _encode(self, obj, level):
+        indent_str = ' ' * self.indent * level
+        inner_indent = ' ' * self.indent * (level + 1)
+
+        if isinstance(obj, list):
+            return '[' + ', '.join(self._encode(item, level + 1) for item in obj) + ']'
+        if isinstance(obj, dict):
+            if not obj:
+                return '{}'
+            keys = sorted(obj.keys()) if self.sort_keys else obj.keys()
+            items = [
+                f'{inner_indent}{json.dumps(k, ensure_ascii=self.ensure_ascii)}: {self._encode(v, level + 1)}'
+                for k in keys
+                for v in [obj[k]]
+            ]
+            return '{\n' + ',\n'.join(items) + '\n' + indent_str + '}'
+        return json.dumps(obj, ensure_ascii=self.ensure_ascii, allow_nan=self.allow_nan, default=self.default)
+
+    def encode(self, obj):
+        return self._encode(obj, 0)
+
+    def iterencode(self, obj, _one_shot=False):
+        return iter([self.encode(obj)])

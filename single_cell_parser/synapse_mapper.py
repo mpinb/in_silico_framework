@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''Basic synapse mapper to assign synapses to a neuron morphology, based on an existing synapse distribution.
 
@@ -37,7 +35,7 @@ class SynapseMapper(object):
     The synapse distribution can be:
 
     - a previously created synapse realization in dictionary form 
-      (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.reader.read_synapse_realization` for more info)
+      (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.io.connectivity.read_synapse_realization` for more info)
     - a :class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities, in which case the synapses are mapped
       in the same way as in :func:`~single_cell_parser.synapse_mapper.SynapseMapper.create_synapses`.
     - a list of synapse distances.
@@ -55,12 +53,12 @@ class SynapseMapper(object):
     '''
     def __init__(self, cell=None, synDist=None, isDensity=True):
         '''
-        :param:`synDist` can be read from a :ref:`syn_file_format` file using :func:`~single_cell_parser.reader.read_synapse_realization`.
+        :param:`synDist` can be read from a :ref:`syn_file_format` file using :func:`~single_cell_parser.io.connectivity.read_synapse_realization`.
 
         Args:
             cell (:class:`~single_cell_parser.cell.Cell`): The cell to map synapses onto.
             synDist (dict | :class:`single_cell_parser.scalar_field.ScalarField`): 
-                Either a previously created synapse realization in dictionary form (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.reader.read_synapse_realization` for more info)
+                Either a previously created synapse realization in dictionary form (see the :ref:`syn_file_format` file type and :func:`~single_cell_parser.io.connectivity.read_synapse_realization` for more info)
                 or a :class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities.
             isDensity (bool): 
                 If True, then the synapse distribution is interpreted as an average density, and the actual number of synapses that will be assigned is drawn from a Poisson distribution. 
@@ -82,7 +80,7 @@ class SynapseMapper(object):
 
         See also:
 
-        - :func:`~single_cell_parser.reader.read_synapse_realization`
+        - :func:`~single_cell_parser.io.connectivity.read_synapse_realization`
         - The :ref:`syn_file_format` file type.
         '''
         sections = self.cell.sections
@@ -113,7 +111,7 @@ class SynapseMapper(object):
 
         See also:
 
-        - :func:`~single_cell_parser.reader.read_pruned_synapse_realization`
+        - :func:`~single_cell_parser.io.connectivity.read_pruned_synapse_realization`
         - The :ref:`syn_file_format` file type.
         '''
         sections = self.cell.sections
@@ -334,7 +332,7 @@ class SynapseMapper(object):
 
 
 #def map_synapses(cellFName, synapseFName):
-#    synDist = reader.read_scalar_field(synapseFName)
+#    synDist = io.connectivity.read_scalar_field(synapseFName)
 #
 #    parser = cell_parser.CellParser(cellFName)
 #    parser.spatialgraph_to_cell()
@@ -347,7 +345,7 @@ class SynapseMapper(object):
 #    cellName = '93_CDK080806_marcel_3x3_registered_zZeroBarrel.hoc.am-14678.hoc'
 #    synapseFName = 'SynapseCount.14678.am'
 #
-#    synDist = reader.read_scalar_field(synapseFName)
+#    synDist = io.connectivity.read_scalar_field(synapseFName)
 #    synMapper = SynapseMapper()
 #    for i in range(100):
 #        print 'Creating synapse instance %s' % i
@@ -359,7 +357,7 @@ class SynapseMapper(object):
 #        print 'Writing synapse instance %s' % i
 #        listOfSynapses = [s.coordinates for s in testParser.cell.synapses['Generic']]
 #        landmarkFName = 'random_test_refactor/SynapseInstance_'+str(i)
-#        writer.write_landmark_file(landmarkFName, listOfSynapses)
+#        io.amira.write_landmark_file(landmarkFName, listOfSynapses)
 #
 #def profile():
 ##    import cProfile
@@ -368,7 +366,7 @@ class SynapseMapper(object):
 #        cellName = '93_CDK080806_marcel_3x3_registered_zZeroBarrel.hoc.am-14678.hoc'
 #        synapseFName = 'SynapseCount.14678.am'
 #
-#        synDist = reader.read_scalar_field(synapseFName)
+#        synDist = io.connectivity.read_scalar_field(synapseFName)
 #
 #        testParser = cell_parser.CellParser(cellName)
 #        testParser.spatialgraph_to_cell()

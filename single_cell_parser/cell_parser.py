@@ -1,31 +1,30 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
-
-'''Parse :ref:`neuron_parameters_format` to a :class:`~single_cell_parser.cell.Cell`.
+'''Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`morphology_file_format` file.
 '''
 
 import warnings, traceback
 from neuron import h
 import numpy as np
 import math
-from . import reader
+from .io.morphology import read_morphology
 from .cell import PySection, Cell
 from . import cell_modify_functions
 import logging
+from pathlib import Path
 
 __author__  = ["Robert Egger", "Arco Bast"]
 __credits__ = ["Robert Egger", "Arco Bast"]
@@ -35,51 +34,61 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class CellParser(object):
-    r'''Configure a :class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+    '''Configure a :class:`~single_cell_parser.cell.Cell` object from a :ref:`morphology_file_format` file.
     
-    This class is used to read a hoc file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
-    It segmentizes the morphology using the :math:`d-\lambda` rule based on passive properties (:cite:t:`hines2001neuron`), and sets active
-    mechanisms (Hodgkin-Huxley mechanisms or calcium buffering dynamics) as specified in a :ref:`cell_parameters_format` file.
-    
-    See also:
-        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
-        This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
+    This class is used to read a :ref:`morphology_file_format`  file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
+    It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's 
+    membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
     
     Attributes:
-        hoc_path (str): Path to hoc file
+        path (str): Path to the morphology file
+        hoc_path (str): Path to the :ref:`hoc_file_format` morphology file (if the morphology is in the :ref:`hoc_file_format` format)
+        swc_path (str): Path to the :ref:`swc_file_format` morphology file (if the morphology is in the :ref:`swc_file_format` format)
         membraneParams (dict): Membrane parameters
         cell_modify_functions_applied (bool): 
             Whether or not cell modify functions have already been applied. See: :func:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
         cell (:class:`~single_cell_parser.cell.Cell`): Cell object.
     '''
-    #    h = neuron.h
     cell = None
 
-    def __init__(self, hocFilename=''):
+    def __init__(self, fn=''):
         '''
         Args:
-            hocFilename (str): Path to :ref:`hoc_file_format` file.
+            fn (str): Path to :ref:`morphology_file_format` file.
         '''
-        if not hocFilename:
-            warnings.warn('No hoc file specified')
-        self.hoc_path = hocFilename
-        #         self.hoc_fname = self.hoc_path.split('/')[-1]
-
-        #        implement parameters to be read from
-        #        corresponding membrane file
-        #        (analogous to synapse distribution,
-        #        every cell could have its own optimized
-        #        channel distributions)
+        if not fn: warnings.warn('No morphology file specified')
+        self.path = fn
+        self.hoc_path = ""
+        self.swc_path = ""
+        if Path(fn).suffix.lower() == ".hoc": self.hoc_path = fn
+        elif Path(fn).suffix.lower() == ".swc": self.swc_path = fn
         self.membraneParams = {}
         self.cell_modify_functions_applied = False
 
-    def spatialgraph_to_cell(self, parameters=None, axon=False, scaleFunc=None):
-        '''Create a :class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
+    def spatialgraph_to_cell(
+        self, 
+        parameters=None, 
+        axon=False, 
+        scaleFunc=None,
+        force_connect_soma_halfway=True
+        ):
+        '''Create a :class:`~single_cell_parser.cell.Cell` object from the :ref:`morphology_file_format`.
         
-        Reads cell morphology from Amira hoc file and sets up PySections and Cell object.
+        Reads a :ref:`morphology_file_format` file and sets up PySections and Cell object.
         
         Args:
-            axon (bool): Whether or not to add an axon initial segment (AIS). AIS creation is according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
+            axon (bool): 
+                Whether or not to add a custom axon initial segment (AIS) instead of the one in the morphology file. If ``True``, an AIS is created according to the methods described in :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
+            force_connect_soma_halfway (bool): 
+                Force direct descendants of the soma to connect to the soma at :math:`x=0.5`.
+                Sections that connect to soma at :math:`x=0` mess up the calculation of :math:`R_a`.
+                In addition, this flag is useful for consistency for those morphologies where the soma geometry is ill-defined, or
+                to preserve continuity between :ref:`swc_file_format` and :ref:`hoc_file_format` in those cases where :ref:`hoc_file_format` defines connectivity
+                between soma and child sections in ways that :ref:`swc_file_format` can't define (i.e. continuous coordinate that lands in-between points)
+                Default is ``True``. 
+
+        See also:
+            :meth:`~_create_ais_Hay2013` for how a custom AIS is created.
         
         .. deprecated:: 0.1.0
             The `scaleFunc` argument is deprecated and will be removed in a future version.
@@ -91,22 +100,26 @@ class CellParser(object):
             Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :func:`set_up_biophysics`.
         
         '''
-        edgeList = reader.read_hoc_file(self.hoc_path)
-        #part1 = self.hoc_fname.split('_')[0]
-        #part2 = self.hoc_fname.split('_')[1]
-        #part3 = self.hoc_fname.split('.')[-2]
+        # Skip reading axon in morph file if we build it manually
+        label_map = {"axon": None, "myelin": None} if axon == True else {}
+        edgeList = read_morphology(fn=self.path, remap_labels=label_map)
         self.cell = Cell()
-        #self.cell.id = '_'.join([part1, part2, part3])
-        self.cell.hoc_path = self.hoc_path  # sotre path to hoc_file in cell object
+        self.cell.hoc_path = self.hoc_path
+        self.cell.swc_path = self.swc_path
+        self.cell.path = self.path
 
         # 1. Create all Sections
         for secID, edge in enumerate(edgeList):
-            sec = PySection(edge.hocLabel, self.cell.id, edge.label)
+            sec = PySection(
+                name=edge.hocLabel, 
+                cell=self.cell.id, 
+                label=edge.label
+            )
             sec.secID = secID
             if sec.label != 'Soma':
                 sec.parentx = edge.parentConnect
                 sec.parentID = edge.parentID
-            sec.set_3d_geometry(edge.edgePts, edge.diameterList)
+            sec.set_3d_geometry(pts=edge.edgePts, diams=edge.diameterList)
             self.cell.sections.append(sec)
             if sec.label == 'Soma':
                 self.cell.soma = sec
@@ -132,9 +145,11 @@ class CellParser(object):
         for sec in self.cell.sections:
             if sec.label != 'Soma':
                 if self.cell.sections[sec.parentID].label == 'Soma':
-                    #                    unfortunately, necessary to enforce that nothing
-                    #                    is connected to soma(0) b/c of ri computation in NEURON
-                    sec.parentx = 0.5
+                    if force_connect_soma_halfway == True:
+                        # unfortunately, necessary to enforce that nothing
+                        # is connected to soma(0) b/c of ri computation in NEURON
+                        sec.parentx = 0.5
+                    elif sec.parentx < 1e-6: raise ValueError("Direct descendants of the soma should not connect at x=0.")
                 sec.connect(self.cell.sections[sec.parentID], sec.parentx, 0.0)
                 sr = h.SectionRef(sec=sec)
                 sec.parent = sr.parent
@@ -211,11 +226,11 @@ class CellParser(object):
             #if not 'rieke_spines' in parameters.spatialgraph_modify_functions.keys():
             #    if label == 'SpineHead' or label == 'SpineNeck':
             #        continue
-            logger.info('    Adding membrane properties to %s' % label)
+            logger.debug('    Adding membrane properties to %s' % label)
             self.insert_membrane_properties(label, parameters[label].properties)
 
         #  spatial discretization
-        logger.info('    Setting up spatial discretization...')
+        logger.debug('    Setting up spatial discretization...')
         if 'discretization' in parameters:
             f = parameters['discretization']['f']
             max_seg_length = parameters['discretization']['max_seg_length']
@@ -240,7 +255,7 @@ class CellParser(object):
             except AttributeError:
                 pass
             
-            logger.info('    Adding membrane range mechanisms to %s' % label)
+            logger.debug('    Adding membrane range mechanisms to %s' % label)
             self.insert_range_mechanisms(
                 label,
                 parameters[label].mechanisms.range)
@@ -315,18 +330,18 @@ class CellParser(object):
                 as they are taken care of by :func:`insert_range_mechanisms` and :func:`_insert_ion_properties`.
                 
         Raises:
-            RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+            RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
         '''
         if self.cell is None:
             raise RuntimeError(
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         propStrings = []
@@ -343,14 +358,12 @@ class CellParser(object):
     def insert_range_mechanisms(self, label, mechs):
         r'''Inserts range mechanisms into all structures named as :param:`label`.
         
-        Range mechanism specifications can be found in :mod:`mechanisms`.
-        
         Args:
             label (str): Label of the structure.
             mechs (:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
             
         Raises:
-            RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+            RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
             NotImplementedError: If the spatial distribution is not implemented.
                 
         The following table lists the possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
@@ -368,8 +381,6 @@ class CellParser(object):
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | exponential            | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`                                           |
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | exponential_by_z_dist  | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{z - \text{xOffset}}{\lambda}}`                                           |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | capped_exponential     | ``offset``, ``linScale``, ``_lambda``, ``xOffset``, ``max_g``   | :math:`y = \min(\text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}, \text{max_g})`                       |
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | sigmoid                | ``offset``, ``linScale``, ``xOffset``, ``width``                | :math:`y = \text{offset} + \frac{\text{linScale}}{1 + e^{\frac{x - \text{xOffset}}{\text{width}}}}`                                 |
@@ -383,16 +394,16 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         for mechName in list(mechs.keys()):
             mech = mechs[mechName]
-            logger.info('        Inserting mechanism %s with spatial distribution %s' %(mechName, mech.spatial))
+            logger.debug('        Inserting mechanism %s with spatial distribution %s' %(mechName, mech.spatial))
             
             if mech.spatial == 'uniform':
                 ''' spatially uniform distribution'''
@@ -431,7 +442,7 @@ class CellParser(object):
                                 h.pop_section()
 
             elif mech.spatial == 'linear':
-                ''' spatially linear distribution with negative slope'''
+                ''' spatially linear distribution with slope'''
                 maxDist = self.cell.max_distance(label)
                 #                set origin to 0 of first branch with this label
                 if label == 'Soma':
@@ -459,8 +470,11 @@ class CellParser(object):
                             dist = self.cell.distance_to_soma(sec, seg.x)
                             if relDistance:
                                 dist = dist / maxDist
-                            #rangeVarVal = mech[param]*(dist*slope + offset)
-                            rangeVarVal = max(mech[param] * (dist * slope + 1),
+                            if slope > 0: # positive slope
+                                rangeVarVal = min(mech[param] * (dist * slope + 1),
+                                              mech[param] * offset)
+                            else: 
+                                rangeVarVal = max(mech[param] * (dist * slope + 1),
                                               mech[param] * offset)
                             s = param + '=' + str(rangeVarVal)
                             paramStrings.append(s)
@@ -536,61 +550,6 @@ class CellParser(object):
                             dist = h.distance(seg.x, sec=sec)
                             if relDistance:
                                 dist = dist / maxDist
-                            rangeVarVal = mech[param] * (
-                                offset + linScale * np.exp(_lambda *
-                                                           (dist - xOffset)))
-                            s = param + '=' + str(rangeVarVal)
-                            paramStrings.append(s)
-                        for s in paramStrings:
-                            s = '.'.join(('seg', mechName, s))
-                            exec(s)
-
-            # exponential distribution in the apical dendrite based on the distance by z
-            elif mech.spatial == 'exponential_by_z_dist':
-                ''' spatially exponential distribution:
-                f(x) = offset + linScale*exp(_lambda*(x-xOffset))'''
-                maxDist = self.cell.max_distance(label)
-                #                set origin to 0 of first branch with this label
-                if label == 'Soma':
-                    silent = h.distance(0, 0.0, sec=self.cell.soma)
-                else:
-                    for sec in self.cell.sections:
-                        if sec.label != label:
-                            continue
-                        if sec.parent.label == 'Soma':
-                            silent = h.distance(0, 0.0, sec=sec)
-                            break
-                relDistance = False
-                if mech['distance'] == 'relative':
-                    relDistance = True
-                offset = mech['offset']
-                linScale = mech['linScale']
-                _lambda = mech['_lambda']
-                xOffset = mech['xOffset']
-                for sec in self.cell.structures[label]:
-                    sec.insert(mechName)
-                    if label == 'ApicalDendrite':
-                        relPts_list = sec.relPts
-                        mid_soma = int(self.cell.soma.nrOfPts / 2)
-                        z_distance_per_relPts = [
-                            sec.pts[i][2] - self.cell.soma.pts[mid_soma][2]
-                            for i in range(len(relPts_list))
-                        ]
-                    for seg in sec:
-                        paramStrings = []
-                        for param in list(mech.keys()):
-                            if param == 'spatial' or param == 'distance' or param == 'offset'\
-                            or param == 'linScale' or param == '_lambda' or param == 'xOffset':
-                                continue
-                            if label == 'ApicalDendrite':
-                                dist = np.interp(seg.x, relPts_list,
-                                                 z_distance_per_relPts)
-                            else:
-                                dist = h.distance(seg.x, sec=sec)
-                            if relDistance:
-                                dist = dist / maxDist
-                            if not relDistance:
-                                dist = dist / 1000
                             rangeVarVal = mech[param] * (
                                 offset + linScale * np.exp(_lambda *
                                                            (dist - xOffset)))
@@ -749,7 +708,7 @@ class CellParser(object):
             mechs (:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :func:`insert_range_mechanisms`.
             
         Raises:
-            RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+            RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
             NotImplementedError: If the spatial distribution is not implemented.
         '''
         if self.cell is None:
@@ -795,11 +754,11 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         propStrings = []
@@ -831,11 +790,11 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         spineDens = spineParam.density
@@ -866,11 +825,11 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         spineDens = spineParam.density
@@ -899,11 +858,11 @@ class CellParser(object):
             raise RuntimeError('Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.branches:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         for branch in self.cell.branches[label]:
@@ -943,7 +902,7 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label not in self.cell.branches:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         for branch in self.cell.branches[label]:
@@ -1049,13 +1008,13 @@ class CellParser(object):
                     # logger.info '\tnr of segments: %d' % sec.nseg
         totalL = avgL
         avgL /= totalNSeg
-        logger.info(
+        logger.debug(
             '    frequency used for determining discretization: {}'.format(f))
-        logger.info('    maximum segment length: {}'.format(max_seg_length))
-        logger.info('    Total number of compartments in model: %d' % totalNSeg)
-        logger.info('    Total length of model cell: %.2f' % totalL)
-        logger.info('    Average compartment length: %.2f' % avgL)
-        logger.info('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
+        logger.debug('    maximum segment length: {}'.format(max_seg_length))
+        logger.debug('    Total number of compartments in model: %d' % totalNSeg)
+        logger.debug('    Total length of model cell: %.2f' % totalL)
+        logger.debug('    Average compartment length: %.2f' % avgL)
+        logger.debug('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
 
     def _create_ais(self):
         '''Create axon hillock and AIS according to :cite:t:`Mainen_Joerges_Huguenard_Sejnowski_1995`
@@ -1091,10 +1050,10 @@ class CellParser(object):
         hillTaper = (aisDiam - hillBeginDiam) / (nseg - 1)  # from 4mu to 1mu
         hillStep = hillLength / (nseg - 1)
 
-        logger.info('Creating AIS:')
-        logger.info('    soma diameter: %.2f' % somaDiam)
-        logger.info('    axon hillock diameter: %.2f' % hillBeginDiam)
-        logger.info('    initial segment diameter: %.2f' % aisDiam)
+        logger.info('Creating AIS')
+        logger.debug('    soma diameter: %.2f' % somaDiam)
+        logger.debug('    axon hillock diameter: %.2f' % hillBeginDiam)
+        logger.debug('    initial segment diameter: %.2f' % aisDiam)
         '''myelin & nodes'''
         myelinSeg = 25  # nr of segments internode section
         #        myelinDiam = 1.5 # [um]
@@ -1172,11 +1131,31 @@ class CellParser(object):
             myelinBegin = node[-1]
 
     def _create_ais_Hay2013(self):
-        '''Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
+        r'''Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
+            
+        This method creates a straight axon hillock, AIS and myelinated axon along the z-axis starting from the bottom of the soma.
+        If the morphology already contains an axon, this axon is disconnected from the soma and left unused.
+        The dimensions of the axon hillock, AIS and myelin are as described in :cite:t:`Hay_Schuermann_Markram_Segev_2013`, but repeated
+        here for completeness:
+        
+        - Axon hillock:
+            - Length: 20 :math:`\mu m`
+            - Diameter tapering from 3 :math:`\mu m` (at soma) to 1.75 :math:`\mu m` (at AIS)
+        - Axon Initial Segment (AIS):
+            - Length: 30 :math:`\mu m`
+            - Diameter tapering from 1.75 :math:`\mu m` (at hillock) to 1.0 :math:`\mu m` (at myelin)
+        - Myelinated axon:
+            - Length: 1000 :math:`\mu m`
+        
+        The amount of segments for the axon hillock, AIS and myelin is **not** determined using d-lambda segmentation.
+        Instead, they are set to fixed values to ensure sufficient spatial discretization of these important structures:
+        
+        - Axon hillock: 1 + 2 segments per 10 :math:`\mu m`, i.e., 5 segments for a length of 20 :math:`\mu m`
+        - AIS: 1 + 2 segments per 10 :math:`\mu m`, i.e., 7 segments for a length of 30 :math:`\mu m`
+        - Myelinated axon: 1 + 2 segments per 100 :math:`\mu m`, i.e., 21 segments for a length of 1000 :math:`\mu m`
         
         Note:
-            connectivity is automatically taken care of since this should only be called from :func:`spatialgraph_to_cell`
-            
+            Connectivity is automatically taken care of since this should only be called from :func:`spatialgraph_to_cell`
         '''
         
         '''myelin'''
@@ -1209,10 +1188,10 @@ class CellParser(object):
         #        hillTaper = (aisDiam-hillBeginDiam)/(hillSeg-1)
         #        hillStep = hillLength/(hillSeg-1)
 
-        logger.info('Creating AIS:')
-        logger.info('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
-        logger.info('    initial segment diameter: {:.2f}'.format(aisDiam))
-        logger.info('    myelin diameter: {:.2f}'.format(myelinDiam))
+        logger.info('Creating AIS')
+        logger.debug('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
+        logger.debug('    initial segment diameter: {:.2f}'.format(aisDiam))
+        logger.debug('    myelin diameter: {:.2f}'.format(myelinDiam))
 
         zAxis = np.array([0, 0, 1])
 
@@ -1287,7 +1266,7 @@ class CellParser(object):
         logger.info(("    spine head length: {}".format(spineheadLength)))
         logger.info(("    spine head diameter: {}".format(spineheadDiam)))
 
-        from config.cell_types import EXCITATORY
+        from config.user.cell_types import EXCITATORY
         excitatory = EXCITATORY.extend("GENERIC")
 
         def get_closest(lst, target):

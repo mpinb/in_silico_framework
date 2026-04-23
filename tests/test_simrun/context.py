@@ -21,6 +21,9 @@ NEUP_FN = os.path.join(
     TEST_DATA_FOLDER,
     'biophysical_constraints',
     '86_C2_center.param')
+NEUP_FN_REPROD = os.path.join(
+    data_dir,
+    '86_C2_center_reprod.param')
 NETP_FN = os.path.join(
     TEST_DATA_FOLDER,
     'functional_constraints', 

@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 A Python translation of the evaluation functions used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
 This module provides methods to run Hay's stimulus protocols, and evaluate the resulting voltage traces.
@@ -122,7 +120,7 @@ class BAC:
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
     See also:
-        :func:`biophysics_fitting.setup_stim.setup_BAC` for more information on the stimulus protocol.
+        :func:`biophysics_fitting.hay.setup_stim.setup_BAC` for more information on the stimulus protocol.
 
     Attributes:
         hot_zone_thresh (float): The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
@@ -140,16 +138,17 @@ class BAC:
         punish_minspikenum (int): The minimum number of spikes required for this stimulus protocol.
         punish_returning_to_rest_tolerance (float): The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
         prefix (str): The prefix for the evaluation metric checks. Defaults to an empty string.
-        definitions (dict): The empirical means and standard deviations for the evaluation metrics. Defaults to::
+        definitions (dict): 
+            The empirical means and standard deviations for the evaluation metrics. Defaults to::
 
-            {
-                'BAC_APheight': ('AP_height', 25.0, 5.0),
-                'BAC_ISI': ('BAC_ISI', 9.901, 0.8517),
-                'BAC_ahpdepth': ('AHP_depth_abs', -65.0, 4.0),
-                'BAC_caSpike_height': ('BAC_caSpike_height', 6.73, 2.54),
-                'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
-                'BAC_spikecount': ('Spikecount', 3.0, 0.01)
-            }
+                {
+                    'BAC_APheight': ('AP_height', 25.0, 5.0),
+                    'BAC_ISI': ('BAC_ISI', 9.901, 0.8517),
+                    'BAC_ahpdepth': ('AHP_depth_abs', -65.0, 4.0),
+                    'BAC_caSpike_height': ('BAC_caSpike_height', 6.73, 2.54),
+                    'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
+                    'BAC_spikecount': ('Spikecount', 3.0, 0.01)
+                }
         
             Here, the format of each line is: ``acronym: [full name, mean, std]`` 
     """
@@ -457,7 +456,7 @@ class bAP:
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
     See also:
-        :func:`biophysics_fitting.setup_stim.setup_bAP` for more information on the stimulus protocol.
+        :func:`biophysics_fitting.hay.setup_stim.setup_bAP` for more information on the stimulus protocol.
 
     Attributes:
         soma_thresh (float): The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
@@ -723,7 +722,7 @@ class _Step:
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
     See also:
-        :func:`biophysics_fitting.setup_stim` for more information on the stimulus protocols.
+        :func:`biophysics_fitting.hay.setup_stim` for more information on the stimulus protocols.
 
     Attributes:
         soma_thresh (float): The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
@@ -1130,7 +1129,7 @@ class StepOne(_Step):
     Here, the format of each line is: ``acronym: [full name, mean, std]`` 
     
     See also:
-        :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepOne` for more information on the stimulus protocol.
+        :class:`_Step` for the template class, and :func:`biophysics_fitting.hay.setup_stim.setup_StepOne` for more information on the stimulus protocol.
     """
 
     def __init__(
@@ -1182,7 +1181,7 @@ class StepTwo(_Step):
     Here, the format of each line is: ``acronym: [full name, mean, std]`` 
 
     See also:
-        :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
+        :class:`_Step` for the template class, and :func:`biophysics_fitting.hay.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
     """
 
     def __init__(
@@ -1234,7 +1233,7 @@ class StepThree(_Step):
     Here, the format of each line is: ``acronym: [full name, mean, std]`` 
 
     See also:
-        :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepThree` for more information on the stimulus protocol.
+        :class:`_Step` for the template class, and :func:`biophysics_fitting.hay.setup_stim.setup_StepThree` for more information on the stimulus protocol.
     """
 
     def __init__(

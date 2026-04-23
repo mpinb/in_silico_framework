@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
 """
@@ -23,17 +21,17 @@ import single_cell_parser as scp
 def get_cell_with_network(neuron_param, network_param, cache=True):
     """Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
     
-    This method creates a new network embedding for the :class:`~single_cell_parser.cell.Cell` based on the :ref:`network_parameters_format` file.
+    This method creates a new network embedding for the :py:class:`~single_cell_parser.cell.Cell` based on the :ref:`network_parameters_format` file.
     
     Args:
-        neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
-        network_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
+        neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
+        network_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
     
     Returns:
-        callable: A callable that returns a :class:`~single_cell_parser.cell.Cell` and :class:`~single_cell_parser.network.NetworkMapper` when called.
+        callable: A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
     
     See also:
-        :mod:`simrun.parameters_to_cell` for rebuilding **and** simulating the cell and network from 
+        :py:mod:`simrun.parameters_to_cell` for rebuilding **and** simulating the cell and network from 
         an existing network realization (:ref:`syn_file_format` file) it.
     """
     cell = scp.create_cell(neuron_param.neuron)

@@ -1,19 +1,17 @@
 # It Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 r"""Save and load dask dataframes to msgpack with categorical columns.
 
 This dumper is designed for dataframes with the following properties:
@@ -21,17 +19,17 @@ This dumper is designed for dataframes with the following properties:
 - The index is str
 - The columns have a lot of repetitive values, so they can be grouped.
  
-If the number of partitions is very large (:math:`>10000`), it will repartition the 
+If the number of partitions is very large (:math:`\textgreater 10000`), it will repartition the 
 dataframe to 5000 partitions. 
 Loading such a dataframe is normaly possible within 1 second.
 
 Before saving, all str-columns will be converted to ``pd.Categorical``s
-In each respective partition, if the part of unique values in the respective column is :math:`<= 20\%`. The original datatype
+In each respective partition, if the part of unique values in the respective column is :math:`\leq 20%`. The original datatype
 will be restored if the dataframe is loaded. 
 This therefore only serves as optimization to increase loading speed and reduce network traffic for suitable dataframes. 
 Suitable dataframes are for example the :ref:`syn_activation_format` dataframe.
 
-This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`__
+This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`_.
 """
 
 import os, yaml

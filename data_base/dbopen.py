@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Open files directly in a database.
 
 This module provides funtcionality to open files in a database directly.
@@ -98,6 +96,7 @@ def resolve_reldb_path(path, db_basedir=None):
     Returns:
         str: The resolved path.
     """
+    path = str(path)
     if not path.startswith('reldb://'):
         return path
     
@@ -130,6 +129,7 @@ def create_reldb_path(path):
     Returns:
         str: The relative path of the form ``reldb://...``.
     """
+    path = str(path)
     if path.startswith('reldb://'):
         logger.debug('Path {} already in reldb:// format'.format(path))
         return path
@@ -165,6 +165,7 @@ def resolve_modular_db_path(path):
             '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/')  # TODO: make this more general
         logger.debug('new path', path)
     
+    path = str(path)
     if not path.startswith('mdb://'):
         return path
 
@@ -197,6 +198,7 @@ def create_modular_db_path(path):
     Returns:
         str: The database path.
     """
+    path = str(path)
     if path.startswith('mdb://'):
         logger.debug('Path {} already in mdb:// format'.format(path))
         return path
@@ -240,6 +242,7 @@ def resolve_db_path(path, db_basedir=None):
     Returns:
         str: The resolved path.
     """
+    path = str(path)
     if path.startswith('reldb://'):
         return resolve_reldb_path(path, db_basedir=db_basedir)
     elif path.startswith('mdb://'):
@@ -255,9 +258,9 @@ def find_common_db_path(paths):
     
     
     """
-    if all([e.startswith("reldb://") for e in paths]):
+    if all([str(e).startswith("reldb://") for e in paths]):
         prefix = "reldb://"
-    elif all([e.startswith("mdb://") for e in paths]):
+    elif all([str(e).startswith("mdb://") for e in paths]):
         prefix = "mdb://"
     else:
         prefix = ""

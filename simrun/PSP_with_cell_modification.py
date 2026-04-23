@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''Calculate PSPs depending on cell modifications.
 
@@ -41,10 +39,10 @@ class PSP_with_current_injection:
     The membrane potential is clamped by injecting a current into the soma.
         
     See also:
-        :mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
+        :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
     
     Attributes:
-        neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): Parameters of the neuron model.
+        neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Parameters of the neuron model.
         confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
         target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
         delay (float): Delay before the current injection starts (in :math:`ms`).
@@ -54,12 +52,12 @@ class PSP_with_current_injection:
             This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
         tEnd (float): End time of the simulation (in :math:`ms`).
         cell_modify_functions (dict):
-            Dictionary of cell modification functions (see :mod:`~single_cell_parser.cell_modify_functions`).
+            Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
             The keys are the names of the functions, the values are the parameters of the functions.
         bounds (tuple):
             Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
         holding_current (float):
-            Current that needs to be injected to hold the somatic potential at :attr:`target_vm`.
+            Current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
     '''
     def __init__(
         self,
@@ -74,7 +72,7 @@ class PSP_with_current_injection:
         bounds=(0, 0.7)):
         """
         Args:
-            neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): Parameters of the neuron model.
+            neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Parameters of the neuron model.
             confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
             target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
             delay (float): Delay before the current injection starts (in :math:`ms`).
@@ -84,7 +82,7 @@ class PSP_with_current_injection:
                 This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
             tEnd (float): End time of the simulation (in :math:`ms`).
             cell_modify_functions (dict):
-                Dictionary of cell modification functions (see :mod:`~single_cell_parser.cell_modify_functions`).
+                Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
                 The keys are the names of the functions, the values are the parameters of the functions.
             bounds (tuple):
                 Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
@@ -107,9 +105,9 @@ class PSP_with_current_injection:
                 cell_modify_functions)
 
     def optimize_holding_current(self):
-        '''Calculate the current that needs to be injected to hold the somatic potential at :attr:`target_vm`.
+        '''Calculate the current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
         
-        :attr:`target_vm` is defined during initialization of the object
+        :paramref:`target_vm` is defined during initialization of the object
         '''
         print('starting optimization of holding current. target membrane potential is {} mV'.format(self.target_vm))
         bounds = self.bounds
@@ -131,7 +129,7 @@ class PSP_with_current_injection:
     def _objective_fun(self, current):
         '''Callable to optimize. 
         
-        Input must be current in :math:`nA` and output must be squared deviation from :attr:`target_vm` in :math:`mV^2` at the timepoint :attr:`optimize_for_timepoint`.
+        Input must be current in :math:`nA` and output must be squared deviation from :paramref:`target_vm` in :math:`mV^2` at the timepoint :paramref:`optimize_for_timepoint`.
         '''
         tVec, vm = self._get_current_dependent_vt(current)
         if max(vm[tVec > self.delay]) > -40:  # there may be no spikes
@@ -172,7 +170,7 @@ class PSP_with_current_injection:
     def get_neuron_param_with_current_injection(self):
         '''Get a :ref:`cell_parameters_format` file with a current injection.
         
-        The current injection is set up such that the potential :attr:`target_vm` is reached at the timepoint :attr:`optimize_for_timepoint`
+        The current injection is set up such that the potential :paramref:`target_vm` is reached at the timepoint :paramref:`optimize_for_timepoint`
         '''
         if self.holding_current is None:
             self.optimize_holding_current()
@@ -190,25 +188,23 @@ class PSP_with_current_injection:
         return scp.NTParameterSet(neuron_param)
 
     def get_psp_simulator(self, gExRange=[1.0], exc_inh='exc', mode='synapses'):
-        '''Set up a :class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.
+        r'''Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.
         
         This method initializes a PSPs object with the given parameters to simulate excitatory or inhibitory postsynaptic potentials.
         
         Args:
             mode (str): 
-                Mode of the simulation. Options:
+                Mode of the simulation. 
+                Options:
             
                 - ``'synapses'`` to activate individual synapses (default)
                 - ``'cells'`` to activate individual cells
 
-            exc_inh (str): ``"exc"`` for excitatory, ``"inh"`` for inhibitory.
-            gExRange (List[float]): 
-                List of synaptic strength scaling factors to simulate. 
-                These will be multiplied with the synaptic strengths in the :ref:`network_parameters_format`.
-                The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
+            gExRange (list): Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
+            exc_inh (str): Whether to fetch a :class:`~simrun.synaptic_strength_fitting.PSPs` for excitatory or inhibitory synapses.
             
         Returns:
-            PSPs: Object to simulate PSPs
+            :class:`~simrun.synaptic_strength_fitting.PSPs`: Object to simulate PSPs
         '''
         psp = PSPs(
             self.get_neuron_param_with_current_injection(),
@@ -223,9 +219,8 @@ class PSP_with_current_injection:
     def get_psp_simulator_exc_and_inh_combined(
         self,
         gExRange=[1.0],
-        mode='synapses'
-    ):
-        '''Set up and combine excitatory and inhibitory PSP simulators.
+        mode='synapses'):
+        r'''Set up and combine excitatory and inhibitory PSP simulators.
         
         This method initializes two PSPs objects, one for excitatory and one for inhibitory postsynaptic potentials, 
         and combines them into a single PSPs object.
@@ -237,13 +232,10 @@ class PSP_with_current_injection:
                 - ``'synapses'`` to activate individual synapses (default)
                 - ``'cells'`` to activate individual cells
 
-            gExRange (List[float]): 
-                List of synaptic strength scaling factors to simulate. 
-                These will be multiplied with the synaptic strengths in the :ref:`network_parameters_format`.
-                The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
+            gExRange (list): Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
             
         Returns:
-            PSPs: Combined PSPs object with both excitatory and inhibitory components.
+            :class:`~simrun.synaptic_strength_fitting.PSPs`: Object to simulate PSPs
         '''
         psp_inh = self.get_psp_simulator(exc_inh='inh',
                                          gExRange=gExRange,
@@ -257,12 +249,12 @@ class PSP_with_current_injection:
         return psp_excinh
 
     def get(self):
-        '''Get the final :class:`~simrun.synaptic_strength_fitting.PSPs` object.
+        '''Get the final :py:class:`~simrun.synaptic_strength_fitting.PSPs` object.
         
         Shortcut to get the combined excitatory and inhibitory PSP object.
         
         Returns:
-            :class:`~simrun.synaptic_strength_fitting.PSPs`: PSP object to simulate PSPs
+            :py:class:`~simrun.synaptic_strength_fitting.PSPs`: PSP object to simulate PSPs
         '''
         return self.get_psp_simulator_exc_and_inh_combined()
 
@@ -271,11 +263,11 @@ def combine_PSP_objects(PSPexc, PSPinh):
     """Combine two PSPs objects into one.
     
     Args:
-        PSPexc (:class:`~simrun.synaptic_strength_fitting.PSPs`): :class:`~simrun.synaptic_strength_fitting.PSPs` object for excitatory synapses.
-        PSPinh (:class:`~simrun.synaptic_strength_fitting.PSPs`): :class:`~simrun.synaptic_strength_fitting.PSPs` object for inhibitory synapses.
+        PSPexc (:py:class:`~simrun.synaptic_strength_fitting.PSPs`): :py:class:`~simrun.synaptic_strength_fitting.PSPs` object for excitatory synapses.
+        PSPinh (:py:class:`~simrun.synaptic_strength_fitting.PSPs`): :py:class:`~simrun.synaptic_strength_fitting.PSPs` object for inhibitory synapses.
         
     Returns:
-        :class:`~simrun.synaptic_strength_fitting.PSPs`: Combined :class:`~simrun.synaptic_strength_fitting.PSPs` object with both excitatory and inhibitory components.
+        :py:class:`~simrun.synaptic_strength_fitting.PSPs`: Combined :py:class:`~simrun.synaptic_strength_fitting.PSPs` object with both excitatory and inhibitory components.
     """
     assert PSPexc.neuron_param == PSPinh.neuron_param
     assert PSPexc.confile == PSPinh.confile

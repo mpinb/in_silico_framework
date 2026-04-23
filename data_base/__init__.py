@@ -1,29 +1,32 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 Efficient, reproducible and flexible database with dictionary-like API. 
+
 This package provides efficient and scalable methods to store and access simulation results at a terrabyte scale.
-Each data base entry contains metadata, indicating when the data was written, and the exact version of the source code that was used at this timepoint.
 A wide variety of input data and output file formats are supported (see :mod:`data_base.IO.LoaderDumper`), including:
 
 - 1D and ND numpy arrays
 - pandas and dask dataframes
 - :class:`~single_cell_parser.cell.Cell` objects
-- :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+
+Databases saves keys as folders containing at least three files:
+
+- ``Loader``: JSON file containing information on how to load the data
+- ``metadata``: JSON file containing metadata.
+- Data file(s): The actual data, in a format specified by the ``Loader`` file. Some file formats split up the data in multiple files, such as parquet and msgpack.
 
 Simulation results from :mod:`single_cell_parser` and :mod:`simrun` can be imported and converted to a high performance binary format using the :mod:`data_base.db_initializers` subpackage.
 
@@ -54,6 +57,22 @@ Example:
             "dirty": false, 
             "error": null
         }
+
+Saving and loading data is easily achieved::
+
+    from data_base import DataBase
+    
+    db = DataBase('/path/to/database')
+    obj = pd.DataFrame(...)  # some pandas dataframe for example
+    db['my_key'] = obj  # saves the object to the database with the default format
+    loaded_obj = db['my_key']  # loads the object from the database
+    db.set('my_other_key', obj, dumper='pandas_to_msgpack')  # saves the object with a specific format
+    
+When you don't specify the dumper, the default dumper as specified in the configuration file is used.
+The default dumper is purposely chosen to prioritize flexibility (i.e. save anything), not performance (i.e. save something specific very efficiently). 
+Performant data formats will need to be specified explicitly, as they often depend on the object being saved and the intended use case.
+You can (but shouldn't) reconfigure the default dumper in ``config/db_settings.json``
+ 
 """
 import os
 from . import data_base_register
@@ -172,6 +191,13 @@ def get_db_by_unique_id(unique_id):
         :class:`data_base.DataBase`: The database associated with the :param:`unique_id`.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
+    if _is_isf_data_base(db_path):
+        from .isf_data_base import ISFDataBase
+        DataBase = ISFDataBase
+    elif _is_legacy_model_data_base(db_path):
+        try: from model_data_base import ModelDataBase
+        except ImportError: "The requested database with unique_id {} is a legacy ModelDataBase. Make sure you have this on your PATH, e.g. by importing ibs_projects.compatibility".format(unique_id)
+        DataBase = ModelDataBase
     db = DataBase(db_path, nocreate=True)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db

@@ -5,7 +5,7 @@ Installation
 
 .. md-tab-set::
 
-   .. md-tab-item:: Linux
+   .. md-tab-item:: Linux/macOS
 
       Before installing ISF, make sure you have the following requirements installed:
 
@@ -13,7 +13,7 @@ Installation
          :header: "Requirement", "Download", ""
 
          `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__ 
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__, Likely already installed
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__
 
       .. success::
          :title: Check requirements
@@ -33,41 +33,7 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
-         cd in_silico_framework
-         pixi run install
-
-   .. md-tab-item:: macOS
-
-      Before installing ISF, make sure you have the following requirements installed:
-
-      .. csv-table::
-         :header: "Requirement", "Download"
-
-         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/mac>`__
-
-
-      .. success::
-         :title: Check requirements
-         :collapsible:
-
-         You can check if the requirements are installed correctly by running the following commands in your terminal:
-
-         .. code-block:: bash
-
-            which pixi
-            which git
-
-         Each command should return a path to the program.
-         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
-
-
-      You can then install ISF:
-
-      .. code-block:: bash
-
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
@@ -110,23 +76,51 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
+The ISF environment
+-------------------
+ISF provides two environments:
 
+- ``default``: the runtime environment used when you activate the ISF environment. This includes all dependencies of ISF necessary for normal operation
+- ``docs``: dependencies needed to build the ISF documentation
 
-Developer installation
------------------------
+Each ISF environment adapts the following environment variables:
 
+.. md-tab-set::
 
-If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
-you should also clone the ``develop`` branch of the repository:
+   .. md-tab-item:: Linux/macOS
 
-.. code-block:: bash
+      - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
 
-   git remote set-branches origin 'develop'
-   git fetch --depth 1 origin develop
+   .. md-tab-item:: Windows
+
+      - ``PYTHONPATH``: ISF packages and the python packages that ship with your NEURON installation are prepended to the ``PYTHONPATH`` in that order. 
+        The NEURON python packages can be found at ``%NEURONHOME%/lib/python``.
+        In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``PATH``: The location of your NEURON executables is appended to your ``PATH``, so that you can invoke them from within the environment. These are located at ``%NEURONHOME%/bin``
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
+
+.. attention::
+   The ISF ``pixi`` environment is, similar to other virtual environments, not isolated from system-level or user-level site-packages by default. 
+   If you have installed site-packages on the system- or user-level (i.e. not in a virtual environment) you may contaminate your virtual environments in unintended ways.
+   It is recommended to install all python packages for any project in a dedicated environment for each project.
+   If you encounter unexpected package versions or mismatches, try inspecting the result of:
+   
+   .. code-block:: bash
+
+      python -m site
+
+   If ``ENABLE_USER_SITE`` is True (default) and ``USER_SITE`` exists (not default), then all site-packages in ``USER_SITE`` will be loaded into
+   virtual environments. For most use cases, this is not desirable.
+
+   .. seealso::
+      https://docs.python.org/3/library/site.html
 
 
 Configuration
@@ -172,8 +166,6 @@ To test if all components of ISF are working as intended, you can run the test s
 .. code-block:: bash
 
    pixi run test
-
-
 
 
 
