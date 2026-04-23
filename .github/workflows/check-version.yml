@@ -50,14 +50,7 @@ jobs:
 
           ok = True
 
-          # --- 1. pyproject.toml and CITATION.cff must agree ---
-          if pyproject_ver != citation_ver:
-              print(f"::error::Version mismatch: pyproject.toml has {pyproject_ver} but CITATION.cff has {citation_ver}. Please make them match.")
-              ok = False
-          else:
-              print(f"OK: pyproject.toml and CITATION.cff both at {pyproject_ver}")
-
-          # --- 2. version must be strictly greater than latest tag ---
+          # --- 1. version in pyproject.toml be strictly greater than latest tag ---
           if not latest_tag:
               print("No existing tags found, skipping tag comparison.")
           else:
@@ -65,10 +58,17 @@ jobs:
               latest  = Version(latest_tag)
               print(f"Latest tag: {latest}")
               if current <= latest:
-                  print(f"::error::Version {current} is not strictly greater than latest tag {latest}. Please bump the version.")
+                  print(f"::error::Version in pyproject.toml (ground truth) {current} is not strictly greater than latest tag {latest}. Please bump the version in pyrpoject.toml.")
                   ok = False
               else:
-                  print(f"OK: {current} > {latest}")
+                  print(f"OK: pyproject.toml (ground truth): {current} > {latest}")
+
+          # --- 2. pyproject.toml and CITATION.cff must agree ---
+          if pyproject_ver != citation_ver:
+              print(f"::error::Version mismatch: pyproject.toml (ground truth) has {pyproject_ver} but CITATION.cff has {citation_ver}. Please make them match.")
+              ok = False
+          else:
+              print(f"OK: pyproject.toml and CITATION.cff both at {pyproject_ver}")
 
           sys.exit(0 if ok else 1)
           EOF
