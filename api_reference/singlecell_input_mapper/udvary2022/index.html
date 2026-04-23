@@ -963,14 +963,6 @@
 <p>This module provides a full pipeline for creating dense connectome models
 of the rat barrel cortex, based on methods and data presented in
 <span id="id2">Udvary <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id11" title="Daniel Udvary, Philipp Harth, Jakob H. Macke, Hans-Christian Hege, Christiaan P.J. De Kock, Bert Sakmann, and Marcel Oberlaender. The impact of neuron morphology on cortical network architecture. Cell Reports, 39(2):110677, April 2022. doi:10.1016/j.celrep.2022.110677.">12</a>]</span> and <span id="id3">Egger <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id8" title="Robert Egger, Vincent J. Dercksen, Daniel Udvary, Hans-Christian Hege, and Marcel Oberlaender. Generation of dense statistical connectomes from sparse morphological data. Frontiers in Neuroanatomy, 2014. Citation Key: 10.3389/fnana.2014.00129. URL: https://www.frontiersin.org/articles/10.3389/fnana.2014.00129, doi:10.3389/fnana.2014.00129.">13</a>]</span>.</p>
-<p>This runfile assumes you have downloaded and extracted the barrel cortex model data from
-<a class="reference external" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa</a>.
-If this is not the case, please consult <code class="docutils literal notranslate"><span class="pre">installer/download_bc_model</span></code> and extract.</p>
-<div class="attention admonition">
-<p class="admonition-title">Attention</p>
-<p>This file is specific to the barrel cortex model data. If you want to use it for other data,
-you need to adapt the paths to the data accordingly. This runfile can serve as a template.</p>
-</div>
 <p>Inputs:</p>
 <ul class="simple">
 <li><p>Morphology of the postsynaptic neuron</p></li>
@@ -979,14 +971,6 @@ you need to adapt the paths to the data accordingly. This runfile can serve as a
 <li><p>Connections spreadsheet containing Post-Synaptic Targets (PSTs) per unit of length and area</p></li>
 <li><p>Bouton locations of individual axon tracings per presynaptic cell type.</p></li>
 </ul>
-<div class="attention admonition">
-<p class="admonition-title">Attention</p>
-<p>This runfile has default values for the barrel cortex, and so assumes that you have downloaded
-and extracted the barrel cortex model data from
-<a class="reference external" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa</a>.
-If this is not the case, please consult <code class="docutils literal notranslate"><span class="pre">installer/download_bc_model</span></code> and extract,
-or adapt the paths in this file to your data.</p>
-</div>
 <p>This module then uses <code class="xref py py-class docutils literal notranslate"><span class="pre">NetworkMapper</span></code>
 to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
 This happens according to the following pipeline:</p>
