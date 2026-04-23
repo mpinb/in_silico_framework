@@ -1,0 +1,45 @@
+name: Check version
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # needed to access tags
+
+      - name: Parse version from pyproject.toml
+        id: pyproject
+        run: |
+          VERSION=$(grep -m1 '^version' pyproject.toml | sed 's/version\s*=\s*"\(.*\)"/\1/')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+
+      - name: Get latest git tag
+        id: tag
+        run: |
+          LATEST=$(git tag --sort=-version:refname | head -n1)
+          echo "tag=$LATEST" >> $GITHUB_OUTPUT
+          echo "Latest tag: $LATEST"
+
+      - name: Check version is newer than latest tag
+        run: |
+          PYPROJECT_VER="${{ steps.pyproject.outputs.version }}"
+          LATEST_TAG="${{ steps.tag.outputs.tag }}"
+          # Strip leading 'v' if present
+          TAG_VER="${LATEST_TAG#v}"
+          if [ "$PYPROJECT_VER" = "$TAG_VER" ]; then
+            echo "::warning::pyproject.toml version ($PYPROJECT_VER) matches the latest tag — remember to bump before releasing."
+            exit 1
+          else
+            echo "Version $PYPROJECT_VER differs from latest tag $TAG_VER — looks good."
+          fi
