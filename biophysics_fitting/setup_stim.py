@@ -65,9 +65,9 @@ def setup_soma_step(cell, amplitude=None, delay=None, duration=None, dist=0):
     else:
         sec, x = utils.get_inner_section_at_distance(cell, dist)
     iclamp = h.IClamp(x, sec=sec)
-    iclamp.delay = delay  # give the cell time to reach steady state
-    iclamp.dur = duration  # 5ms rectangular pulse
-    iclamp.amp = amplitude  # 1.9 ?? todo ampere
+    iclamp.delay = delay  
+    iclamp.dur = duration 
+    iclamp.amp = amplitude 
     _append(cell, name='iclamp', item=iclamp)
 
 
