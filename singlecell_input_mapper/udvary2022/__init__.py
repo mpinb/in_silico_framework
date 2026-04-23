@@ -188,8 +188,8 @@ def map_singlecell_inputs(
 
     start_t_sec_total = time.time()
 
-    logger.info("Loading cell morphology")
-    parser = CellParser(cellName)
+    logger.info("Loading cell morphology: {}".format(cellName))
+    parser = CellParser(morph_fn=cellName)
     parser.spatialgraph_to_cell()
     singleCell = parser.get_cell()  # This is a sim.Cell, not scp.cell
     logger.debug("Cell morphology loaded")

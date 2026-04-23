@@ -1,0 +1,40 @@
+name: Update CITATION.cff
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update_citation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Get metadata
+        id: meta
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "date=$(date -u +%Y-%m-%d)" >> $GITHUB_OUTPUT
+          # Read version from pyproject.toml
+          VERSION=$(grep -m1 '^version' pyproject.toml | sed 's/version\s*=\s*"\(.*\)"/\1/')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Update CITATION.cff
+        run: |
+          sed -i "s/^date-released:.*/date-released: '${{ steps.meta.outputs.date }}'/" CITATION.cff
+          sed -i "s/^version:.*/version: ${{ steps.meta.outputs.version }}/" CITATION.cff
+
+      - name: Commit updated CITATION.cff
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add CITATION.cff
+          git diff --staged --quiet || git commit -m "ci: update CITATION.cff commit and date [skip ci]"
+          git push

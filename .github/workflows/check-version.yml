@@ -1,0 +1,58 @@
+name: Check version
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # needed to access tags
+
+      - name: Parse version from pyproject.toml
+        id: pyproject
+        run: |
+          VERSION=$(grep -m1 '^version' pyproject.toml | sed 's/version\s*=\s*"\(.*\)"/\1/')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+
+      - name: Get latest git tag
+        id: tag
+        run: |
+          LATEST=$(git tag --sort=-version:refname | head -n1)
+          echo "tag=$LATEST" >> $GITHUB_OUTPUT
+          echo "Latest tag: $LATEST"
+
+      - name: Check version is newer than latest tag
+        run: |
+          python3 - <<'EOF'
+          from packaging.version import Version
+          import sys
+
+          pyproject_ver = "${{ steps.pyproject.outputs.version }}"
+          latest_tag = "${{ steps.tag.outputs.tag }}".lstrip("v")
+
+          if not latest_tag:
+              print("No existing tags found, skipping version check.")
+              sys.exit(0)
+
+          current = Version(pyproject_ver)
+          latest = Version(latest_tag)
+
+          print(f"pyproject.toml version : {current}")
+          print(f"Latest tag             : {latest}")
+
+          if current <= latest:
+              print(f"::error::Version {current} is not strictly greater than latest tag {latest}. Please bump the version in pyproject.toml.")
+              sys.exit(1)
+          else:
+              print(f"OK: {current} > {latest}")
+          EOF

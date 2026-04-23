@@ -286,7 +286,6 @@ Activity data
 =============
 :ref:`param_file_format` files are used to store activity data. Activity data can be defined by the following activity distributions:
 
-
 .. list-table:: Activity Distributions
     :header-rows: 1
 
@@ -302,8 +301,6 @@ Activity data
       - "intervals", "probabilities", "offset"
     * - "PSTH_absolute_number"
       - "intervals", "number_active_synapses", "offset"
-    * - "PSTH_poissontrain" (deprecated)
-      - "intervals", "rates", "offset"
     * - "PSTH_poissontrain_v2"
       - "bins", "rates", "offset"
     * - "poissontrain_modulated"
