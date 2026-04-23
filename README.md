@@ -15,7 +15,7 @@ Multi-scale modeling and analysis of *in vivo* neuron-network mechanisms
 )](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml)
 [![docs](https://img.shields.io/github/actions/workflow/status/mpinb/in_silico_framework/pages/pages-build-deployment?style=flat-square&logo=sphinx&label=docs)](https://mpinb.github.io/in_silico_framework)
 [![codecov](https://img.shields.io/codecov/c/github/mpinb/in_silico_framework?token=V4P4QMFM12&style=flat-square&logo=codecov)](https://codecov.io/gh/mpinb/in_silico_framework)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19712119.svg)](https://doi.org/10.5281/zenodo.19712118)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19712118.svg)](https://doi.org/10.5281/zenodo.19712118)
 
 </div>
 
