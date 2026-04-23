@@ -37,6 +37,7 @@ jobs:
           key: neuron-8.0.w64-mingwsetup
 
       - name: Install NEURON
+        if: steps.cache-neuron.outputs.cache-hit != 'true'
         shell: cmd
         run: |
           echo ------------ Downloading NEURON installer -------------
