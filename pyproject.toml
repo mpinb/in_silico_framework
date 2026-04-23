@@ -124,7 +124,6 @@ ISF_HOME="$(pwd)"
 [tool.pixi.target.win.activation.env]
 PYTHONPATH = "%cd%;%NEURONHOME%/lib/python;%PYTHONPATH%"
 PATH = "%PATH%;%NEURONHOME%/bin"
-HOME = "%USERPROFILE%"
 ISF_HOME="%cd%"
 
 
