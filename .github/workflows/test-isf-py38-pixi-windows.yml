@@ -33,8 +33,8 @@ jobs:
         id: cache-neuron
         uses: actions/cache@v4
         with:
-          path: C:\nrn
-          key: neuron-8.0.w64-mingwsetup
+          path: nrn_installer_8.0.exe
+          key: nrn_installer_8.0
 
       - name: Download NEURON
         if: steps.cache-neuron.outputs.cache-hit != 'true'
