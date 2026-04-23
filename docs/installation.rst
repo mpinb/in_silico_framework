@@ -114,9 +114,10 @@ Each ISF environment adapts the following environment variables:
    
    .. code-block:: bash
 
-      python -c "import site; print(site.getsitepackages())"
+      python -m site
 
-   If this returns anything, then you have site packages installed system-wide, and these will interfere with the packages of any virtual environment that uses the same python version.
+   If ``ENABLE_USER_SITE`` is True (default) and ``USER_SITE`` exists (not default), then all site-packages in ``USER_SITE`` will be loaded into
+   virtual environments. For most ues cases, this is not desirable.
 
    .. seealso::
       https://docs.python.org/3/library/site.html
