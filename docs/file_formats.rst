@@ -978,9 +978,8 @@ Example:
 
   : What to calculate each time step
   BREAKPOINT {
-    : solve the DERIVATIVE block named "states"
-    : By default tries analytical solve using `sympy.dsolve` first
-    : Falls back to `cnexp` (Crank-Nicolson, exponential)
+    : Solve the DERIVATIVE block named "states"
+    : Use `cnexp` (Crank-Nicolson, exponential)
     : For more info, see https://www.neuronsimulator.org/en/latest/nmodl/transpiler/notebooks/nmodl-sympy-solver-cnexp.html#Implementation
     SOLVE states METHOD cnexp
     : Calculate the conductance of the Im current = conductance density * gating variable
