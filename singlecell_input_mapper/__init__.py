@@ -17,7 +17,7 @@
 
 This package provides classes and methods to create a dense connectome model with defined activity patterns.
 It can be largely divided in two parts: :ref:`connectivity` and :ref:`activity`.
-This data is generated or read directly from empirical data sources, and added to a single :ref`network_parameters_format`.
+This data is generated or read directly from empirical data sources, and added to a single :ref:`network_parameters_format`.
 
 .. _connectivity:
  
