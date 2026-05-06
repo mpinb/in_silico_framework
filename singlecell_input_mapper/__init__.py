@@ -37,7 +37,7 @@ ISF currently implements the following workflows to generate :ref:`syn_file_form
 .. hint::
    If you work on a model system that does not have the required input data for these workflows, we recommend to infer
    synapse locations in whichever way is most suited to your model system, and convert this information to 
-   :ref:`syn_file_format` and :ref:`conf_file_format` files. These file formats are pruposfully simple and human-readable.
+   :ref:`syn_file_format` and :ref:`con_file_format` files. These file formats are pruposfully simple and human-readable.
 
 .. _activity:
 
