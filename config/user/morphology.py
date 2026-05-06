@@ -12,6 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+Configure label names for :ref:`hoc_file_format` and :ref:`swc_file_format` morphology files.
+"""
 
 HOC_LABEL_MAP = {
     'soma':          'Soma',
@@ -26,4 +29,18 @@ Labels are matched based on a case-insensitive basis.
 
 For example, if a :ref:`hoc_file_format` contains the label "DEND", "Dend", or "BasalDendrite", these will be converted in ISF to just "Dendrite".
 If a connections spreadsheet contains labels "BASAL", it will be converted to "Dendrite".
+"""
+
+SWC_LABEL_MAP = {
+    1: 'Soma', 
+    2: "AIS", 
+    3: "Dendrite", 
+    4: "ApicalDendrite", 
+    5: "Myelin"
+}
+"""Mapping between labels found in :ref:`swc_file_format` morphology files, and the label to be used internally throughout ISF.
+
+For example, if a :ref:`swc_file_format` contains the label ``3``, this will be converted in ISF to just "Dendrite".
+
+Useful for defining custom labels on a project-wide basis.
 """

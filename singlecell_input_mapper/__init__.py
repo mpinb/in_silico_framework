@@ -17,7 +17,7 @@
 
 This package provides classes and methods to create a dense connectome model with defined activity patterns.
 It can be largely divided in two parts: :ref:`connectivity` and :ref:`activity`.
-This data is generated or read directly from empirical data sources, and added to a single :ref`network_parameters_format`.
+This data is generated or read directly from empirical data sources, and added to a single :ref:`network_parameters_format`.
 
 .. _connectivity:
  
@@ -28,16 +28,16 @@ Connectivity
 and keeping track of the synapse type and associated presynaptic cell type. 
 Based on the presynaptic cell type of each synapse, ISf can generate spike times for each presynaptic source (see section Activity below).
 Assigning synapses onto the postsynaptic morphology is referred to as a 'network embedding'. 
-A network embedding for a given morphology is uniquely defined as a :ref:`syn_file_format` and :ref:`conf_file_format` file.
+A network embedding for a given morphology is uniquely defined as a :ref:`syn_file_format` and :ref:`con_file_format` file.
 
-ISF currently implements the following workflows to generate :ref:`syn_file_format` and :ref:`conf_file_format` files:
+ISF currently implements the following workflows to generate :ref:`syn_file_format` and :ref:`con_file_format` files:
 
 - :mod:`~singlecell_input_mapper.udvary2022`
 
 .. hint::
    If you work on a model system that does not have the required input data for these workflows, we recommend to infer
    synapse locations in whichever way is most suited to your model system, and convert this information to 
-   :ref:`syn_file_format` and :ref:`conf_file_format` files. These file formats are pruposfully simple and human-readable.
+   :ref:`syn_file_format` and :ref:`con_file_format` files. These file formats are pruposfully simple and human-readable.
 
 .. _activity:
 
