@@ -522,7 +522,7 @@ def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
         max\_ (float): The maximum distance from the soma.
         outsidescale_sections (list): 
             A list of sections not part of the hot zone, but including calcium channels nonetheless.
-            These sections will get a Ca channel density equal to the :ref:`neuron_parameters_format` key ``outside_scale``.
+            These sections will get a Ca channel density equal to the :ref:`cell_parameters_format` key ``outside_scale``.
             Usually, this is less than the hot zone density.
             See :ref:`~single_cell_parser.cell_parser.insert_range_mechanisms` for more information on channel density during neuron model creation.
         

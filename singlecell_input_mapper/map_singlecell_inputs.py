@@ -14,10 +14,17 @@
 # limitations under the License.
 
 """Top-level pipeline to map synapses onto a postsynaptic cell.
+
+The purpose of this module is to provide access to synapse mapping strategies.
+These are either defined by the user in user config, or can be explicitly invoked.
+
+The currently supported synapse mapping strategies in ISF are:
+- :mod:`~singlecell_input_mapper.udvary2022`
 """
 import logging
 from config.user.network_connectivity import SELECTED_SYNAPSE_MAPPING_METHOD
 from config import AVAILABLE_SYNAPSE_MAPPING_METHODS
+from .udvary2022 import map_singlecell_inputs as udvary2022
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -27,9 +34,12 @@ def map_singlecell_inputs(
     *args,
     **kwargs
 ) -> None:
-    """Infer which network embedding strategy to run.
+    """Infer which synapse embedding strategy to run.
 
-    This function checks the user configuration and runs the configure network embedding strategy.
+    This function checks the user configuration and runs the configured network embedding strategy.
+
+    Currently supported strategies are:
+    - :mod:`~singlecell_input_mapper.udvary2022`
 
     See also:
         :mod:`config.user.network_connectivity` for configuring network embedding strategies.
