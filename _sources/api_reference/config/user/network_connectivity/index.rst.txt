@@ -14,6 +14,18 @@ network_connectivity
 
 .. module:: config.user.network_connectivity
 
+.. autoapi-nested-parse::
+   Configure the default values for synapse mapping and network connectivity workflows in ISF.
+
+   This module allows the user to configure default settings for synapse mapping in ISF.
+
+   In particular, it allows:
+
+   - Setting a default synapse mapping strategy
+   - Setting default paths for data sources for this synapse mapping strategy
+
+   We generally recommend to always explicitly pass both the synapse mapping strategy and the data sources, as it makes the code more explicit. Relying too much on these default values can have the undesirable side effect that the same code may yield different results, when these values are changed.
+
 
 
 
@@ -30,7 +42,7 @@ Attributes
    :class: summarytable
    
    * - :py:obj:`SELECTED_SYNAPSE_MAPPING_METHOD <config.user.network_connectivity.SELECTED_SYNAPSE_MAPPING_METHOD>`
-     - \-
+     - Which synapse mapping workflow to use for calculating synapse positions on the morphology. Default is :mod:`~singlecell_input_mapper.udvary2022`
    * - :py:obj:`prefix <config.user.network_connectivity.prefix>`
      - \-
    * - :py:obj:`DATA_REQS_UDVARY2022 <config.user.network_connectivity.DATA_REQS_UDVARY2022>`

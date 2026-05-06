@@ -1911,7 +1911,7 @@ An example of the raw and parsed format is shown below:</p>
 <p>Writers:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">write_presynaptic_spike_file()</span></code> is used by <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> and <a class="reference internal" href="api_reference/single_cell_parser/analyze/synanalysis/index.html#module-single_cell_parser.analyze.synanalysis" title="single_cell_parser.analyze.synanalysis (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">synanalysis</span></code></a></dt><dd><p>to write raw output data.</p>
+<dt><a class="reference internal" href="api_reference/single_cell_parser/io/activity/write_presynaptic_spike_times.html#single_cell_parser.io.activity.write_presynaptic_spike_times" title="single_cell_parser.io.activity.write_presynaptic_spike_times (Python function) — Write cell type, presynaptic cell ID and spike times of all connected presynaptic point cells."><code class="xref py py-func docutils literal notranslate"><span class="pre">write_presynaptic_spike_times()</span></code></a> is used by <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> and <a class="reference internal" href="api_reference/single_cell_parser/analyze/synanalysis/index.html#module-single_cell_parser.analyze.synanalysis" title="single_cell_parser.analyze.synanalysis (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">synanalysis</span></code></a></dt><dd><p>to write raw output data.</p>
 </dd>
 </dl>
 </li>
@@ -2230,7 +2230,8 @@ That way, the DERIVATIVE block can use human-readable variable names.</p></td>
 
 <span class="c">: What to calculate each time step</span>
 <span class="nb">BREAKPOINT</span> <span class="o">{</span>
-  <span class="c">: solve the DERIVATIVE block named &quot;states&quot; using `sympy.dsolve` and fall back to `CNEXP` method</span>
+  <span class="c">: Solve the DERIVATIVE block named &quot;states&quot;</span>
+  <span class="c">: Use `cnexp` (Crank-Nicolson, exponential)</span>
   <span class="c">: For more info, see https://www.neuronsimulator.org/en/latest/nmodl/transpiler/notebooks/nmodl-sympy-solver-cnexp.html#Implementation</span>
   <span class="k">SOLVE</span> states <span class="k">METHOD</span> cnexp
   <span class="c">: Calculate the conductance of the Im current = conductance density * gating variable</span>

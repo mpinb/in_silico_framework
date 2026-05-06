@@ -18,6 +18,12 @@ map_singlecell_inputs
 .. autoapi-nested-parse::
    Top-level pipeline to map synapses onto a postsynaptic cell.
 
+   The purpose of this module is to provide access to synapse mapping strategies.
+   These are either defined by the user in user config, or can be explicitly invoked.
+
+   The currently supported synapse mapping strategies in ISF are:
+   - :mod:`~singlecell_input_mapper.udvary2022`
+
 
 
 
@@ -33,7 +39,7 @@ Functions
    :class: summarytable
    
    * - :py:obj:`map_singlecell_inputs <singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs>`\ (\*args, \*\*kwargs)
-     - Infer which network embedding strategy to run.
+     - Infer which synapse embedding strategy to run.
 
 
 .. rst-class:: absolute-paragraph

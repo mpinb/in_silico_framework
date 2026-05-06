@@ -648,7 +648,7 @@ Parsed dataframe
 
 Writers:
 
-- :func:`~single_cell_parser.writer.write_presynaptic_spike_file` is used by :mod:`simrun` and :mod:`~single_cell_parser.analyze.synanalysis`
+- :func:`~single_cell_parser.io.activity.write_presynaptic_spike_times` is used by :mod:`simrun` and :mod:`~single_cell_parser.analyze.synanalysis`
    to write raw output data.
 - :func:`data_base.db_initializers.load_simrun_general.init` parses these files into a pandas dataframe.
 
@@ -978,7 +978,8 @@ Example:
 
   : What to calculate each time step
   BREAKPOINT {
-    : solve the DERIVATIVE block named "states" using `sympy.dsolve` and fall back to `CNEXP` method
+    : Solve the DERIVATIVE block named "states"
+    : Use `cnexp` (Crank-Nicolson, exponential)
     : For more info, see https://www.neuronsimulator.org/en/latest/nmodl/transpiler/notebooks/nmodl-sympy-solver-cnexp.html#Implementation
     SOLVE states METHOD cnexp
     : Calculate the conductance of the Im current = conductance density * gating variable

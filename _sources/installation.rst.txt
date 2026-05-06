@@ -125,9 +125,14 @@ Each ISF environment adapts the following environment variables:
 
 Configuration
 -------------
+The :mod:`config` module allows the user to configure many aspects of ISF, such as:
 
-ISF works best with a dask server for parallel computing. We provide default scripts to launch a dask server and workers
-that should work on most systems. 
+- The default file format for saving objects in a :mod:`data_base` (see :mod:`config`)
+- Which file locking method to use (see :mod:`config.file_locking`)
+- User-specific configuration for your project, such as morphology label names, cell type definitions, synapse mapping strategies, and default values for activity data (see :mod:`config.user`)
+
+ISF works best with a dask server for parallel computing, and all compute-intensive workflows in ISF work with a client for distributed computing. 
+We provide default scripts to launch a dask server and workers that should work on most systems:
 
 .. code-block:: bash
 
@@ -139,6 +144,7 @@ that should work on most systems.
 
 For High-Performance Computing (HPC), you may want to launch the dask server with custom configuration instead of these default scripts.
 The underlying commands for these shortcuts are configured in the ``pyproject.toml`` file.
+
 
 Usage
 -----

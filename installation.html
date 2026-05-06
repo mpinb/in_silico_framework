@@ -639,8 +639,14 @@ virtual environments. For most use cases, this is not desirable.</p>
 </div>
 </div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
-<p>ISF works best with a dask server for parallel computing. We provide default scripts to launch a dask server and workers
-that should work on most systems.</p>
+<p>The <a class="reference internal" href="api_reference/config/index.html#module-config" title="config (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a> module allows the user to configure many aspects of ISF, such as:</p>
+<ul class="simple">
+<li><p>The default file format for saving objects in a <a class="reference internal" href="api_reference/data_base/index.html#module-data_base" title="data_base (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data_base</span></code></a> (see <a class="reference internal" href="api_reference/config/index.html#module-config" title="config (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a>)</p></li>
+<li><p>Which file locking method to use (see <a class="reference internal" href="api_reference/config/file_locking/index.html#module-config.file_locking" title="config.file_locking (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config.file_locking</span></code></a>)</p></li>
+<li><p>User-specific configuration for your project, such as morphology label names, cell type definitions, synapse mapping strategies, and default values for activity data (see <a class="reference internal" href="api_reference/config/user/index.html#module-config.user" title="config.user (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config.user</span></code></a>)</p></li>
+</ul>
+<p>ISF works best with a dask server for parallel computing, and all compute-intensive workflows in ISF work with a client for distributed computing.
+We provide default scripts to launch a dask server and workers that should work on most systems:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>pixi<span class="w"> </span>run<span class="w"> </span>launch_dask_server
 </code></pre></div>
 </div>

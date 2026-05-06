@@ -9,6 +9,15 @@ get_meta_file_format
 .. function:: config.get_meta_file_format()
 
 
+   Check which file format to use for saving data_base meta objects.
+
+   This is either ``"msgpack"`` or ``"json"``.
+   The actual format is defined in the database settings. This functions simply reads it to check which one should be used.
+
+   :returns: The specified file format for meta objects.
+   :rtype: str
+
+
 
 .. container:: doc-feedback
 

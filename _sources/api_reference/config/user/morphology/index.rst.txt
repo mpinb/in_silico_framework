@@ -14,6 +14,9 @@ morphology
 
 .. module:: config.user.morphology
 
+.. autoapi-nested-parse::
+   Configure label names for :ref:`hoc_file_format` and :ref:`swc_file_format` morphology files.
+
 
 
 
@@ -31,6 +34,8 @@ Attributes
    
    * - :py:obj:`HOC_LABEL_MAP <config.user.morphology.HOC_LABEL_MAP>`
      - Mapping between labels found in :ref:`hoc_file_format` morphology files or connections spreadsheets, and the label to be used internally throughout ISF.
+   * - :py:obj:`SWC_LABEL_MAP <config.user.morphology.SWC_LABEL_MAP>`
+     - Mapping between labels found in :ref:`swc_file_format` morphology files, and the label to be used internally throughout ISF.
 
 
 

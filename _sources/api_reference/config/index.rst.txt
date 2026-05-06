@@ -53,7 +53,7 @@ Functions
    * - :py:obj:`get_default_db_dumper <config.get_default_db_dumper>`\ ()
      - Get the default database dumper.
    * - :py:obj:`get_meta_file_format <config.get_meta_file_format>`\ ()
-     - \-
+     - Check which file format to use for saving data_base meta objects.
 
 
 .. rst-class:: absolute-paragraph
@@ -68,7 +68,7 @@ Attributes
    :class: summarytable
    
    * - :py:obj:`AVAILABLE_SYNAPSE_MAPPING_METHODS <config.AVAILABLE_SYNAPSE_MAPPING_METHODS>`
-     - \-
+     - Which methods ISF currently implements to infer synapse locations onto a poastsynaptic neuron morphology.
 
 
 .. rst-class:: absolute-paragraph
@@ -85,7 +85,7 @@ Modules
    * - :py:obj:`user <config.user>`
      - User-specific configuration
    * - :py:obj:`file_locking <config.file_locking>`
-     - \-
+     - Default values for file locking.
    * - :py:obj:`isf_configure <config.isf_configure>`
      - Configure ISF for your local system.
    * - :py:obj:`isf_logging <config.isf_logging>`

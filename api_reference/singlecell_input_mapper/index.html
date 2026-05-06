@@ -656,6 +656,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config/index.html" class="md-nav__link">
+        <span title="/api_reference/config/index.rst (reference label)" class="md-ellipsis">config</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -796,14 +811,14 @@
 <p id="module-singlecell_input_mapper">Create an empirically constrained dense connectome model with presynaptic activity.</p>
 <p>This package provides classes and methods to create a dense connectome model with defined activity patterns.
 It can be largely divided in two parts: <a class="reference internal" href="#connectivity"><span class="std std-ref">Connectivity</span></a> and <a class="reference internal" href="#activity"><span class="std std-ref">Activity</span></a>.
-This data is generated or read directly from empirical data sources, and added to a single :ref`network_parameters_format`.</p>
+This data is generated or read directly from empirical data sources, and added to a single <a class="reference internal" href="../../file_formats.html#network-parameters-format"><span class="std std-ref">Network parameters</span></a>.</p>
 <h2 id="connectivity"><span id="id1"></span>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">¶</a></h2>
 <p><a class="reference internal" href="map_singlecell_inputs/index.html#module-singlecell_input_mapper.map_singlecell_inputs" title="singlecell_input_mapper.map_singlecell_inputs (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">singlecell_input_mapper.map_singlecell_inputs</span></code></a> is responsible for assigning synapses to the morphology of a postsynaptic neuron,
 and keeping track of the synapse type and associated presynaptic cell type.
 Based on the presynaptic cell type of each synapse, ISf can generate spike times for each presynaptic source (see section Activity below).
 Assigning synapses onto the postsynaptic morphology is referred to as a ‘network embedding’.
-A network embedding for a given morphology is uniquely defined as a <a class="reference internal" href="../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> and <span class="xref std std-ref">conf_file_format</span> file.</p>
-<p>ISF currently implements the following workflows to generate <a class="reference internal" href="../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> and <span class="xref std std-ref">conf_file_format</span> files:</p>
+A network embedding for a given morphology is uniquely defined as a <a class="reference internal" href="../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> and <a class="reference internal" href="../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
+<p>ISF currently implements the following workflows to generate <a class="reference internal" href="../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> and <a class="reference internal" href="../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> files:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="udvary2022/index.html#module-singlecell_input_mapper.udvary2022" title="singlecell_input_mapper.udvary2022 (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">udvary2022</span></code></a></p></li>
 </ul>
@@ -811,7 +826,7 @@ A network embedding for a given morphology is uniquely defined as a <a class="re
 <p class="admonition-title">Hint</p>
 <p>If you work on a model system that does not have the required input data for these workflows, we recommend to infer
 synapse locations in whichever way is most suited to your model system, and convert this information to
-<a class="reference internal" href="../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> and <span class="xref std std-ref">conf_file_format</span> files. These file formats are pruposfully simple and human-readable.</p>
+<a class="reference internal" href="../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> and <a class="reference internal" href="../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> files. These file formats are pruposfully simple and human-readable.</p>
 </div>
 <h2 id="activity"><span id="id2"></span>Activity<a class="headerlink" href="#activity" title="Link to this heading">¶</a></h2>
 <p>This section is responsible for generating activity patterns for the assigned synapses based in empirically observed PSTHs of the presynaptic neurons.

@@ -65,10 +65,6 @@ Attributes
    
    * - :py:obj:`logger <single_cell_parser.io.morphology.swc.logger>`
      - \-
-   * - :py:obj:`SWC_LABEL_MAP <single_cell_parser.io.morphology.swc.SWC_LABEL_MAP>`
-     - \-
-   * - :py:obj:`REVERSE_SWC_LABEL_MAP <single_cell_parser.io.morphology.swc.REVERSE_SWC_LABEL_MAP>`
-     - \-
 
 
 

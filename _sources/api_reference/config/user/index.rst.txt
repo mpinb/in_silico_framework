@@ -47,11 +47,11 @@ Modules
    * - :py:obj:`cell_types <config.user.cell_types>`
      - Cell type configuration.
    * - :py:obj:`morphology <config.user.morphology>`
-     - \-
+     - Configure label names for :ref:`hoc_file_format` and :ref:`swc_file_format` morphology files.
    * - :py:obj:`network_activity <config.user.network_activity>`
      - Configure default locations to look for data, when not explicitly given in those pipelines that require it
    * - :py:obj:`network_connectivity <config.user.network_connectivity>`
-     - \-
+     - Configure the default values for synapse mapping and network connectivity workflows in ISF.
 
 
 
