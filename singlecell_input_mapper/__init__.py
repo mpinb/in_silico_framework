@@ -30,7 +30,7 @@ Based on the presynaptic cell type of each synapse, ISf can generate spike times
 Assigning synapses onto the postsynaptic morphology is referred to as a 'network embedding'. 
 A network embedding for a given morphology is uniquely defined as a :ref:`syn_file_format` and :ref:`conf_file_format` file.
 
-ISF currently implements the following workflows to generate :ref:`syn_file_format` and :ref:`conf_file_format` files:
+ISF currently implements the following workflows to generate :ref:`syn_file_format` and :ref:`con_file_format` files:
 
 - :mod:`~singlecell_input_mapper.udvary2022`
 
