@@ -24,6 +24,7 @@ AVAILABLE_SYNAPSE_MAPPING_METHODS = (
     "udvary2022",
     # no other methods have been implemented yet
 )
+"""Which methods ISF currently implements to infer synapse locations onto a poastsynaptic neuron morphology."""
 
 
 def _read_db_settings():
@@ -98,6 +99,14 @@ def get_default_db_dumper():
 
 
 def get_meta_file_format():
+    """Check which file format to use for saving data_base meta objects.
+
+    This is either ``"msgpack"`` or ``"json"``.
+    The actual format is defined in the database settings. This functions simply reads it to check which one should be used.
+
+    Returns:
+        str: The specified file format for meta objects.
+    """
     allowed_formats = ("msgpack", "json")
     db_settings = _read_db_settings()
     meta_file_format = db_settings.get("OBJECT_META_FORMAT")['file_format']
