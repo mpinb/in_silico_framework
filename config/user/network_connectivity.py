@@ -18,6 +18,7 @@ Configure the default values for synapse mapping and network connectivity workfl
 This module allows the user to configure default settings for synapse mapping in ISF.
 
 In particular, it allows:
+
 - Setting a default synapse mapping strategy
 - Setting default paths for data sources for this synapse mapping strategy
 
