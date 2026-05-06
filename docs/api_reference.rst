@@ -15,6 +15,7 @@ API reference
    ./api_reference/spike_analysis/index
    ./api_reference/visualize/index
    ./api_reference/mechanisms/index
+   ./api_reference/config/index
 
 .. autoapisummary::
 
@@ -27,3 +28,4 @@ API reference
    spike_analysis
    visualize
    mechanisms
+   config
