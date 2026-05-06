@@ -143,7 +143,7 @@ def map_singlecell_inputs(
     Returns:
         None. 
             Writes the results to disk, at the same location as the input :param:`cellName`.
-            Results consist of a :ref:`syn_file_format`, :ref:`conf_file_format` file, and a ``.csv`` file containing the amount of connected 
+            Results consist of a :ref:`syn_file_format`, :ref:`con_file_format` file, and a ``.csv`` file containing the amount of connected 
             presynaptic cells per cell type, and per anatomical area.
     """
     if not (cellTypeName in EXCITATORY) and not (cellTypeName in INHIBITORY):
