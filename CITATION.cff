@@ -1,0 +1,62 @@
+cff-version: 1.2.0
+title: In Silico Framework
+message: >-
+  An In Silico Framework (ISF) for modeling and analyzing in
+  vivo neuron-network mechanisms
+type: software
+authors:
+  - given-names: Bjorge
+    family-names: Meulemeester
+    email: bjorge.meulemeester@mpinb.mpg.de
+    affiliation: >-
+      Max Planck Institute for Neurobiology of Behavior -
+      caesar (MPINB)
+    orcid: 'https://orcid.org/0000-0003-3935-2006'
+  - given-names: Arco
+    family-names: Bast
+    email: basta@janelia.hhmi.org
+    affiliation: Howard Hughes Medical Institute - Janelia Campus
+    orcid: 'https://orcid.org/0000-0001-7258-6248'
+  - given-names: Maria
+    family-names: Royo
+    affiliation: >-
+      Max Planck Institute for Neurobiology of Behavior -
+      caesar (MPINB)
+    orcid: 'https://orcid.org/0009-0007-8364-2023'
+  - given-names: Rieke
+    family-names: Fruengel
+    affiliation: >-
+      Max Planck Institute for Neurobiology of Behavior -
+      caesar (MPINB)
+    orcid: 'https://orcid.org/0000-0002-1086-9143'
+  - given-names: Marcel
+    family-names: Oberlaender
+    email: m.oberlaender@vu.nl
+    affiliation: >-
+      Department of Integrative Neurophysiology, Center for
+      Neurogenomics and Cognitive Research, Vrije
+      Universiteit Amsterdam
+    orcid: 'https://orcid.org/0000-0001-9011-0630'
+identifiers:
+  - type: url
+    value: 'https://github.com/mpinb/in_silico_framework'
+    description: Repository
+  - type: url
+    value: 'https://mpinb.github.io/in_silico_framework/'
+    description: Home page
+repository-code: 'https://github.com/mpinb/in_silico_framework'
+url: 'https://mpinb.github.io/in_silico_framework/'
+abstract: >-
+  Generate, simulate, and analyze biologically diverse sets
+  of network-embedded neuron models
+keywords:
+  - neuroscience
+  - computational
+  - model
+  - multi-compartmental
+  - anatomical
+  - python
+  - neuron
+license: Apache-2.0
+version: 0.7.1-beta
+date-released: '2026-04-22'

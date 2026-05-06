@@ -16,16 +16,12 @@
 Read and write :ref:`swc_file_format` morphologies.
 """
 from __future__ import annotations
-from typing import Any
+from config.user.morphology import SWC_LABEL_MAP
 import numpy as np
 import warnings
-from pathlib import Path
 import logging
 from ._edge import _Edge
 logger = logging.getLogger("ISF").getChild(__name__)
-
-SWC_LABEL_MAP = {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
-REVERSE_SWC_LABEL_MAP = {v: k for k, v in SWC_LABEL_MAP.items()}
 
 def _get_swc_lines_per_section(
     sections, 
@@ -116,6 +112,7 @@ def _get_swc_lines_per_section(
         swc_lines_per_section.append(swc_lines_this_section)
     return swc_lines_per_section
 
+
 def _get_only_child_sections(sections):
     """Check if a cell has sections that are only children.
     
@@ -133,7 +130,7 @@ def _get_only_child_sections(sections):
         if sec.parent and len(sec.parent.children()) == 1:
             direct_desc_sections[sec_ind] = sections.index(sec.parent)
     return direct_desc_sections
-    
+
 
 def write_swc(sections, of, skip_myelin=False, remap_sections=None):
     """
@@ -174,8 +171,8 @@ def write_swc(sections, of, skip_myelin=False, remap_sections=None):
             line = [str(e) for e in line]
             f.write(' '.join(line))
             f.write('\n')  
-            
-            
+
+
 def swc_to_point_dict(swc_filepath):
     """
     Extract point coordinate information.
@@ -273,7 +270,7 @@ def _traverse(point_id, sec_name, sec_label, parent_sec_id, points_dict, section
     parent_sec_id= len(sections) - 1
     for i, child_id in enumerate(children_pt_id):
         section_type = points_dict[child_id]["type"]
-        child_sec_label = REVERSE_SWC_LABEL_MAP[section_type]
+        child_sec_label = SWC_LABEL_MAP[section_type]
         child_sec_name = f"{sec_name}_{i}"
         sections= _traverse(
             point_id=child_id, 
@@ -330,7 +327,7 @@ def build_section_directory(root_ids, points_dict):
         for child_id in points_dict[root_id]["children"]:
             if child_id <= len(sections[0].edgePts): continue  # child is soma - already added
             section_type = points_dict[child_id]["type"]
-            label = REVERSE_SWC_LABEL_MAP.get(section_type, f"type{section_type}")
+            label = SWC_LABEL_MAP.get(section_type, f"type{section_type}")
             counters[section_type] = counters.get(section_type, 0) + 1
             child_sec_name = f"{label}_{counters[section_type]}_0"
             sections = _traverse(
