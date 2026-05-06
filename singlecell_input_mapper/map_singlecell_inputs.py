@@ -36,7 +36,7 @@ def map_singlecell_inputs(
 ) -> None:
     """Infer which synapse embedding strategy to run.
 
-    This function checks the user configuration and runs the configure network embedding strategy.
+    This function checks the user configuration and runs the configured network embedding strategy.
 
     Currently supported strategies are:
     - :mod:`~singlecell_input_mapper.udvary2022`
