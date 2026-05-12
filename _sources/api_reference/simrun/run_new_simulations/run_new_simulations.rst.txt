@@ -16,16 +16,14 @@ run_new_simulations
 
    The workflow of this method is as follows:
 
-   1. Initialize the simulation
+   1. Initialize the simulation:
 
-       1. Set a random seed. Used in the output directory name and for generating network realizations with :class:`~single_cell_parser.network.NetworkMapper`.
-       2. Build the cell with biophysical properties.
-       3. Set up the simulation with recording sites from the neuron parameters
+      a. Set a random seed. Used in the output directory name and for generating network realizations with :class:`~single_cell_parser.network.NetworkMapper`.
+      b. Build the cell with biophysical properties.
+      c. Set up the simulation with recording sites from the neuron parameters
 
-   2. Run :param:`nSweeps` simulations using :func:`~single_cell_parser.init_neuron_run`,
-   each time creating a new network embedding and sampling new activity using :func:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
-   3. Parse and write out simulation data, including voltage traces from the soma
-   and additional recording sites defined in the neuron parameters.
+   2. Run :param:`nSweeps` simulations using :func:`~single_cell_parser.init_neuron_run`, each time creating a new network embedding and sampling new activity using :func:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
+   3. Parse and write out simulation data, including voltage traces from the soma and additional recording sites defined in the neuron parameters.
    4. Finalize the simulation by removing the "_running" suffix from the dirname ``dirPrefix/results/YYYYMMDD-HHMM_UID_running``.
 
    :param cellParamName: Path to a :ref:`cell_parameters_format` file.

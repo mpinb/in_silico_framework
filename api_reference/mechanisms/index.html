@@ -865,14 +865,14 @@ In addition, it contains network connectivity parameters that define synaptic co
 <p>Importing this module on UNIX systems registers the mechanisms in NEURON namespace.
 This only works if they are compiled, which should have happened upon configuring ISF.
 If this is not the case, you can:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">from</span> <span class="pre">config.user</span> <span class="pre">import</span> <span class="pre">mechanisms</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">mechanisms.are_compiled()</span>&#160; <span class="pre">#</span> <span class="pre">check</span> <span class="pre">if</span> <span class="pre">all</span> <span class="pre">mechanisms</span> <span class="pre">are</span> <span class="pre">compiled</span>
-<span class="pre">False</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">mechanisms.compile_mechanisms(force_recompile=False)</span>&#160; <span class="pre">#</span> <span class="pre">compile</span> <span class="pre">mechanisms</span> <span class="pre">if</span> <span class="pre">not</span> <span class="pre">already</span> <span class="pre">compiled</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">mechanisms.are_compiled()</span>&#160; <span class="pre">#</span> <span class="pre">check</span> <span class="pre">if</span> <span class="pre">all</span> <span class="pre">mechanisms</span> <span class="pre">are</span> <span class="pre">compiled</span>
-<span class="pre">True</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">mechanisms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mechanisms</span><span class="o">.</span><span class="n">are_compiled</span><span class="p">()</span>  <span class="c1"># check if all mechanisms are compiled</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mechanisms</span><span class="o">.</span><span class="n">compile_mechanisms</span><span class="p">(</span><span class="n">force_recompile</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># compile mechanisms if not already compiled</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mechanisms</span><span class="o">.</span><span class="n">are_compiled</span><span class="p">()</span>  <span class="c1"># check if all mechanisms are compiled</span>
+<span class="go">True</span>
+</code></pre></div>
+</div>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../config/isf_configure/index.html#module-config.isf_configure" title="config.isf_configure (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config.isf_configure</span></code></a></p>

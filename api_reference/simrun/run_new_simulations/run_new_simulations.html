@@ -1063,22 +1063,18 @@
 <p>This is the core method used throughout <a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> to read and build neuron models from <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> files,
 generate synaptic input patterns based on the <a class="reference internal" href="../../../file_formats.html#network-parameters-format"><span class="std std-ref">Network parameters</span></a>, and simulate the resulting network-embedded neuron model.</p>
 <p>The workflow of this method is as follows:</p>
-<ol class="arabic">
-<li><p>Initialize the simulation</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
+<li><p>Initialize the simulation:</p>
+<ol class="loweralpha simple">
 <li><p>Set a random seed. Used in the output directory name and for generating network realizations with <a class="reference internal" href="../../single_cell_parser/network/NetworkMapper.html#single_cell_parser.network.NetworkMapper" title="single_cell_parser.network.NetworkMapper (Python class) — Map active presynaptic cells to a multi-compartmental neuron model."><code class="xref py py-class docutils literal notranslate"><span class="pre">NetworkMapper</span></code></a>.</p></li>
 <li><p>Build the cell with biophysical properties.</p></li>
 <li><p>Set up the simulation with recording sites from the neuron parameters</p></li>
 </ol>
-</div></blockquote>
 </li>
+<li><p>Run <a class="reference internal" href="#simrun.run_new_simulations.run_new_simulations.nSweeps" title="simrun.run_new_simulations.run_new_simulations.nSweeps (Python parameter) — Number of simulations to run per process with these parameters. Trial-to-trial variability is introduced by the random seed in terms of different network activity and connectivity realizations (see create_saved_network2())."><code class="xref py py-param docutils literal notranslate"><span class="pre">nSweeps</span></code></a> simulations using <a class="reference internal" href="../../single_cell_parser/init_neuron_run.html#single_cell_parser.init_neuron_run" title="single_cell_parser.init_neuron_run (Python function) — Default NEURON run with inital parameters according to parameter file."><code class="xref py py-func docutils literal notranslate"><span class="pre">init_neuron_run()</span></code></a>, each time creating a new network embedding and sampling new activity using <a class="reference internal" href="../../single_cell_parser/network/NetworkMapper.create_saved_network2.html#single_cell_parser.network.NetworkMapper.create_saved_network2" title="single_cell_parser.network.NetworkMapper.create_saved_network2 (Python function) — Recreate a saved network embedding and activate it."><code class="xref py py-func docutils literal notranslate"><span class="pre">create_saved_network2()</span></code></a>.</p></li>
+<li><p>Parse and write out simulation data, including voltage traces from the soma and additional recording sites defined in the neuron parameters.</p></li>
+<li><p>Finalize the simulation by removing the “_running” suffix from the dirname <code class="docutils literal notranslate"><span class="pre">dirPrefix/results/YYYYMMDD-HHMM_UID_running</span></code>.</p></li>
 </ol>
-<p>2. Run <a class="reference internal" href="#simrun.run_new_simulations.run_new_simulations.nSweeps" title="simrun.run_new_simulations.run_new_simulations.nSweeps (Python parameter) — Number of simulations to run per process with these parameters. Trial-to-trial variability is introduced by the random seed in terms of different network activity and connectivity realizations (see create_saved_network2())."><code class="xref py py-param docutils literal notranslate"><span class="pre">nSweeps</span></code></a> simulations using <a class="reference internal" href="../../single_cell_parser/init_neuron_run.html#single_cell_parser.init_neuron_run" title="single_cell_parser.init_neuron_run (Python function) — Default NEURON run with inital parameters according to parameter file."><code class="xref py py-func docutils literal notranslate"><span class="pre">init_neuron_run()</span></code></a>,
-each time creating a new network embedding and sampling new activity using <a class="reference internal" href="../../single_cell_parser/network/NetworkMapper.create_saved_network2.html#single_cell_parser.network.NetworkMapper.create_saved_network2" title="single_cell_parser.network.NetworkMapper.create_saved_network2 (Python function) — Recreate a saved network embedding and activate it."><code class="xref py py-func docutils literal notranslate"><span class="pre">create_saved_network2()</span></code></a>.
-3. Parse and write out simulation data, including voltage traces from the soma
-and additional recording sites defined in the neuron parameters.
-4. Finalize the simulation by removing the “_running” suffix from the dirname <code class="docutils literal notranslate"><span class="pre">dirPrefix/results/YYYYMMDD-HHMM_UID_running</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.run_new_simulations.run_new_simulations-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.run_new_simulations.run_new_simulations-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
