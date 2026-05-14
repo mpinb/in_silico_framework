@@ -17,7 +17,7 @@ compute_basis
 
    .. math::
 
-       WNI(t) = \int_{t-width}^{t} \int_z \mathbf{w}_{\\tau}(\\tau) \cdot \mathbf{w}_{z}(z) \cdot \mathbf{D} = \int_{t-width}^{t} \int_z \mathbf{x} \cdot \mathbf{y} \cdot \mathbf{f}(t) \cdot \mathbf{g}(z) \cdot \mathbf{D}
+       WNI(t) = \int_{t-width}^{t} \int_z \mathbf{w}_{\tau}(\tau) \cdot \mathbf{w}_{z}(z) \cdot \mathbf{D} = \int_{t-width}^{t} \int_z \mathbf{x} \cdot \mathbf{y} \cdot \mathbf{f}(t) \cdot \mathbf{g}(z) \cdot \mathbf{D}
 
    .. attention::
 
@@ -26,7 +26,7 @@ compute_basis
       Since dot product is commutative, the order of this multiplication does not matter for calculating
       the weighted net input, but these intermediate basis vectors are different.
 
-   :returns: A dictionary of basis vectors for each group. basis vectors are of shape :math:`(n_trials, dim(\mathbf{f}(\\tau)), dim(\mathbf{g}(z)))`.
+   :returns: A dictionary of basis vectors for each group. basis vectors are of shape :math:`(n\_trials, dim(\mathbf{f}(\tau)), dim(\mathbf{g}(z)))`.
    :rtype: dict
 
 

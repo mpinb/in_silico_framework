@@ -36,20 +36,20 @@ RaisedCosineBasis
 
    .. math::
 
-       f_i(x) = \\frac{1}{2} cos(a \cdot log(\\tau + c) - \phi_i) + \\frac{1}{2}
+       f_i(x) = \frac{1}{2} cos(a \cdot log(\tau + c) - \phi_i) + \frac{1}{2}
 
-   where :math:`\\tau` is the input dimension (space or time e.g.), :math:`a` is the steepness, :math:`c` is the offset, and :math:`\phi` is the phase.
-   These basis functions can be superimposed using learnable weights :math:`x_i` to form a single filter :math:`\mathbf{w}(\\tau)` over the domain :math:`\\tau`:
+   where :math:`\tau` is the input dimension (space or time e.g.), :math:`a` is the steepness, :math:`c` is the offset, and :math:`\phi` is the phase.
+   These basis functions can be superimposed using learnable weights :math:`x_i` to form a single filter :math:`\mathbf{w}(\tau)` over the domain :math:`\tau`:
 
    .. math::
 
-       \mathbf{w}(\\tau) = \sum_{i} x_i \cdot f_i(\\tau)
+       \mathbf{w}(\tau) = \sum_{i} x_i \cdot f_i(\tau)
 
    And this filter can then be used to weigh the input data :math:`\mathbf{D}`:
 
    .. math::
 
-       WI(t) = \int_{t-width}^{t}  \mathbf{w}(\\tau) \cdot \mathbf{D}(\\tau)
+       WI(t) = \int_{t-width}^{t}  \mathbf{w}(\tau) \cdot \mathbf{D}(\tau)
 
    .. note::
 
@@ -126,7 +126,7 @@ RaisedCosineBasis
       * - :py:obj:`get <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get>`\ ()
         - Get the basis functions :math:`\mathbf{f}`.
       * - :py:obj:`get_superposition <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition>`\ (x)
-        - Get the weighed sum :math:`\mathbf{w}(\\tau)` of the basis functions :math:`f`.
+        - Get the weighed sum :math:`\mathbf{w}(\tau)` of the basis functions :math:`f`.
       * - :py:obj:`visualize <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize>`\ (ax, plot\_kwargs)
         - Visualize the basis functions :math:`\mathbf{f}`.
       * - :py:obj:`visualize_w <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize_w>`\ (x, ax, plot\_kwargs)

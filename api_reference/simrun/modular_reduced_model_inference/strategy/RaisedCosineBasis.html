@@ -1666,14 +1666,14 @@
 <p>Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.</p>
 <p>A raised cosine is defined as:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}f_i(x) = \\frac{1}{2} cos(a \cdot log(\\tau + c) - \phi_i) + \\frac{1}{2}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\\tau\)</span> is the input dimension (space or time e.g.), <span class="math notranslate nohighlight">\(a\)</span> is the steepness, <span class="math notranslate nohighlight">\(c\)</span> is the offset, and <span class="math notranslate nohighlight">\(\phi\)</span> is the phase.
-These basis functions can be superimposed using learnable weights <span class="math notranslate nohighlight">\(x_i\)</span> to form a single filter <span class="math notranslate nohighlight">\(\mathbf{w}(\\tau)\)</span> over the domain <span class="math notranslate nohighlight">\(\\tau\)</span>:</p>
+\[f_i(x) = \frac{1}{2} cos(a \cdot log(\tau + c) - \phi_i) + \frac{1}{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tau\)</span> is the input dimension (space or time e.g.), <span class="math notranslate nohighlight">\(a\)</span> is the steepness, <span class="math notranslate nohighlight">\(c\)</span> is the offset, and <span class="math notranslate nohighlight">\(\phi\)</span> is the phase.
+These basis functions can be superimposed using learnable weights <span class="math notranslate nohighlight">\(x_i\)</span> to form a single filter <span class="math notranslate nohighlight">\(\mathbf{w}(\tau)\)</span> over the domain <span class="math notranslate nohighlight">\(\tau\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{w}(\\tau) = \sum_{i} x_i \cdot f_i(\\tau)\end{split}\]</div>
+\[\mathbf{w}(\tau) = \sum_{i} x_i \cdot f_i(\tau)\]</div>
 <p>And this filter can then be used to weigh the input data <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}WI(t) = \int_{t-width}^{t}  \mathbf{w}(\\tau) \cdot \mathbf{D}(\\tau)\end{split}\]</div>
+\[WI(t) = \int_{t-width}^{t}  \mathbf{w}(\tau) \cdot \mathbf{D}(\tau)\]</div>
 <div class="note admonition">
 <p class="admonition-title">Note</p>
 <p>The notation here heavily implies that the cosine functions are defined over the time domain.
@@ -1786,8 +1786,8 @@ However, they can equally well be used for spatial or spatiotemporal data.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="RaisedCosineBasis.get.html#simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get" title="simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get (Python function) — Get the basis functions \mathbf{f}."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>()</p></td>
 <td><p>Get the basis functions <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="RaisedCosineBasis.get_superposition.html#simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition" title="simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition (Python function) — Get the weighed sum \mathbf{w}(\\tau) of the basis functions f."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_superposition</span></code></a>(x)</p></td>
-<td><p>Get the weighed sum <span class="math notranslate nohighlight">\(\mathbf{w}(\\tau)\)</span> of the basis functions <span class="math notranslate nohighlight">\(f\)</span>.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="RaisedCosineBasis.get_superposition.html#simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition" title="simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition (Python function) — Get the weighed sum \mathbf{w}(\tau) of the basis functions f."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_superposition</span></code></a>(x)</p></td>
+<td><p>Get the weighed sum <span class="math notranslate nohighlight">\(\mathbf{w}(\tau)\)</span> of the basis functions <span class="math notranslate nohighlight">\(f\)</span>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="RaisedCosineBasis.visualize.html#simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize" title="simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize (Python function) — Visualize the basis functions \mathbf{f}."><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize</span></code></a>(ax, plot_kwargs)</p></td>
 <td><p>Visualize the basis functions <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>.</p></td>

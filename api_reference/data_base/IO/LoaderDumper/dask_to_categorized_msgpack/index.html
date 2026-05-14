@@ -1562,11 +1562,11 @@
 <li><p>The index is str</p></li>
 <li><p>The columns have a lot of repetitive values, so they can be grouped.</p></li>
 </ul>
-<p>If the number of partitions is very large (<span class="math notranslate nohighlight">\(\textgreater 10000\)</span>), it will repartition the
+<p>If the number of partitions is very large (<span class="math notranslate nohighlight">\(\gt 10000\)</span>), it will repartition the
 dataframe to 5000 partitions.
 Loading such a dataframe is normaly possible within 1 second.</p>
-<p>Before saving, all str-columns will be converted to <a href="#id1"><span class="problematic" id="id2">``</span></a>pd.Categorical``s
-In each respective partition, if the part of unique values in the respective column is <span class="math notranslate nohighlight">\(\leq 20%\)</span>. The original datatype
+<p>Before saving, all str-columns will be converted to <code class="docutils literal notranslate"><span class="pre">pd.Categorical</span></code>
+In each respective partition, if the part of unique values in the respective column is <span class="math notranslate nohighlight">\(\leq 20\%\)</span>. The original datatype
 will be restored if the dataframe is loaded.
 This therefore only serves as optimization to increase loading speed and reduce network traffic for suitable dataframes.
 Suitable dataframes are for example the <a class="reference internal" href="../../../../../file_formats.html#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> dataframe.</p>

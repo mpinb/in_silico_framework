@@ -1273,7 +1273,7 @@ Overview of file formats.</span><a class="headerlink" href="#id8" title="Permali
 </div>
 </div><h2 id="syn"><span id="syn-file-format"></span>.syn<a class="headerlink" href="#syn" title="Link to this heading">¶</a></h2>
 <p>ISF custom file format to store synapse locations onto a morphology.
-Only valid with an associated morphology <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file.</p>
+Only valid with an associated morphology <a class="reference internal" href="#morphology-file-format"><span class="std std-ref">Morphology</span></a> file.</p>
 <p>For each synapse, it provides the synapse type and location onto the morphology.
 Each row index corresponds to its synapse ID, providing a link to a corresponding <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.
 The location is encoded as a section ID and x (a normalized distance along the section),
@@ -1296,9 +1296,9 @@ it must be used in conjunction with an associated <a class="reference internal" 
 </div>
 <h2 id="con"><span id="con-file-format"></span>.con<a class="headerlink" href="#con" title="Link to this heading">¶</a></h2>
 <p>ISF custom file format to store connectivity data.
-To be used in conjunction with an associated <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file and morphology <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file.
+To be used in conjunction with an associated <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file and morphology <a class="reference internal" href="#morphology-file-format"><span class="std std-ref">Morphology</span></a> file.
 It numbers each synapse, and links it to its associated presynaptic cell type and ID.
-While a <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file and <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file provide the anatomical realization of a morphology embedding into a network,
+While a <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file and <a class="reference internal" href="#morphology-file-format"><span class="std std-ref">Morphology</span></a> file provide the anatomical realization of a morphology embedding into a network,
 the addition of a <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file makes possible to construct a functional realization, as it allows linking the synapses to
 presynaptic cells of a dense connectome model, which in turn allows to assign cell type specific activation patterns
 to each synapse. ISF’s workflow is designed to create these files in tandem, so they always co-exist.</p>
@@ -1330,7 +1330,7 @@ The <code class="docutils literal notranslate"><span class="pre">.param</span></
 </div>
 <h3 id="cell-parameters"><span id="cell-parameters-format"></span>Cell parameters<a class="headerlink" href="#cell-parameters" title="Link to this heading">¶</a></h3>
 <p><a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> file to store biophysical parameters of a cell.
-Includes a reference to a <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> morphology file,
+Includes a reference to a <a class="reference internal" href="#morphology-file-format"><span class="std std-ref">Morphology</span></a> morphology file,
 biophysical properties of the cell per morphological structure (e.g. soma, dendrite, axon initial segment …),
 and basic simulation parameters. Morphology structure labels should match those inferred from the morphology file.</p>
 <p>Parameters under the key <code class="docutils literal notranslate"><span class="pre">*.mechanisms.range</span></code> are range mechanisms, and their name should match the name of a loaded <a class="reference internal" href="#mod-file-format"><span class="std std-ref">.mod</span></a> file.
@@ -1413,7 +1413,7 @@ Spatial profiles are evaluated on a segment-by-segment basis: the segment center
 <h3 id="network-parameters"><span id="network-parameters-format"></span>Network parameters<a class="headerlink" href="#network-parameters" title="Link to this heading">¶</a></h3>
 <p>The <a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> format is used to store network parameters,
 describing the presynaptic cells and their synaptic activations.
-Only valid with an associated <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> morphology file, <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file, and <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
+Only valid with an associated <a class="reference internal" href="#morphology-file-format"><span class="std std-ref">Morphology</span></a> morphology file, <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file, and <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
 <p>For each presynaptic cell type in the network, this following information is provided:</p>
 <table class="docutils data align-default" id="id9">
 <caption><span class="caption-text">Network Parameters</span><a class="headerlink" href="#id9" title="Link to this table">¶</a></caption>
