@@ -368,25 +368,34 @@ class CellParser(object):
                 
         The following table lists the possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
 
-        .. table:: Possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
+        .. list-table:: Possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
+           :header-rows: 1
+           :widths: 20 35 45
 
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | Spatial Key            | Additional Keys                                                 | Math Equation                                                                                                                       |
-            +========================+=================================================================+=====================================================================================================================================+
-            | uniform                | None                                                            | :math:`y = c`                                                                                                                       |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | linear                 | ``slope``, ``offset``                                           | :math:`y = \text{slope} \cdot x + \text{offset}`                                                                                    |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | linear_capped          | ``prox_value``, ``dist_value``, ``dist_value_distance``         | :math:`y = \min(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})` |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | exponential            | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`                                           |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | capped_exponential     | ``offset``, ``linScale``, ``_lambda``, ``xOffset``, ``max_g``   | :math:`y = \min(\text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}, \text{max_g})`                       |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | sigmoid                | ``offset``, ``linScale``, ``xOffset``, ``width``                | :math:`y = \text{offset} + \frac{\text{linScale}}{1 + e^{\frac{x - \text{xOffset}}{\text{width}}}}`                                 |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | uniform_range          | ``begin``, ``end``, ``outsidescale``, ``outsidescale_sections`` | :math:`y = c` for :math:`\text{begin} \leq x \leq \text{end}`, :math:`y = c \cdot \text{outsidescale}` otherwise                    |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+           * - Spatial Key
+             - Additional Keys
+             - Math Equation
+           * - uniform
+             - None
+             - :math:`y = c`
+           * - linear
+             - ``slope``, ``offset``
+             - :math:`y = \text{slope} \cdot x + \text{offset}`
+           * - linear_capped
+             - ``prox_value``, ``dist_value``, ``dist_value_distance``
+             - :math:`y = \min(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})`
+           * - exponential
+             - ``offset``, ``linScale``, ``_lambda``, ``xOffset``
+             - :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`
+           * - capped_exponential
+             - ``offset``, ``linScale``, ``_lambda``, ``xOffset``, ``max_g``
+             - :math:`y = \min(\text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}, \text{max_g})`
+           * - sigmoid
+             - ``offset``, ``linScale``, ``xOffset``, ``width``
+             - :math:`y = \text{offset} + \frac{\text{linScale}}{1 + e^{\frac{x - \text{xOffset}}{\text{width}}}}`
+           * - uniform_range
+             - ``begin``, ``end``, ``outsidescale``, ``outsidescale_sections``
+             - :math:`y = c` for :math:`\text{begin} \leq x \leq \text{end}`, :math:`y = c \cdot \text{outsidescale}` otherwise
 
         '''
         if self.cell is None:
