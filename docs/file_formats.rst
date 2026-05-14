@@ -21,7 +21,7 @@ File & data formats
 .syn
 ****
 ISF custom file format to store synapse locations onto a morphology.
-Only valid with an associated morphology :ref:`hoc_file_format` file.
+Only valid with an associated morphology :ref:`morphology_file_format` file.
 
 For each synapse, it provides the synapse type and location onto the morphology.
 Each row index corresponds to its synapse ID, providing a link to a corresponding :ref:`con_file_format` file.
@@ -50,9 +50,9 @@ Example::
 .con
 ****
 ISF custom file format to store connectivity data. 
-To be used in conjunction with an associated :ref:`syn_file_format` file and morphology :ref:`hoc_file_format` file.
+To be used in conjunction with an associated :ref:`syn_file_format` file and morphology :ref:`morphology_file_format` file.
 It numbers each synapse, and links it to its associated presynaptic cell type and ID.
-While a :ref:`syn_file_format` file and :ref:`hoc_file_format` file provide the anatomical realization of a morphology embedding into a network,
+While a :ref:`syn_file_format` file and :ref:`morphology_file_format` file provide the anatomical realization of a morphology embedding into a network,
 the addition of a :ref:`con_file_format` file makes possible to construct a functional realization, as it allows linking the synapses to
 presynaptic cells of a dense connectome model, which in turn allows to assign cell type specific activation patterns 
 to each synapse. ISF's workflow is designed to create these files in tandem, so they always co-exist.
@@ -91,7 +91,7 @@ Cell parameters
 ===============
 
 :ref:`param_file_format` file to store biophysical parameters of a cell.
-Includes a reference to a :ref:`hoc_file_format` morphology file, 
+Includes a reference to a :ref:`morphology_file_format` morphology file, 
 biophysical properties of the cell per morphological structure (e.g. soma, dendrite, axon initial segment ...),
 and basic simulation parameters. Morphology structure labels should match those inferred from the morphology file.
 
@@ -181,7 +181,7 @@ Network parameters
 ==================
 The :ref:`param_file_format` format is used to store network parameters, 
 describing the presynaptic cells and their synaptic activations.
-Only valid with an associated :ref:`hoc_file_format` morphology file, :ref:`syn_file_format` file, and :ref:`con_file_format` file.
+Only valid with an associated :ref:`morphology_file_format` morphology file, :ref:`syn_file_format` file, and :ref:`con_file_format` file.
 
 For each presynaptic cell type in the network, this following information is provided:
 
