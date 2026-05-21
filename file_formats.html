@@ -2231,7 +2231,6 @@ That way, the DERIVATIVE block can use human-readable variable names.</p></td>
 <span class="nb">BREAKPOINT</span> <span class="o">{</span>
   <span class="c">: Solve the DERIVATIVE block named &quot;states&quot;</span>
   <span class="c">: Use `cnexp` (Crank-Nicolson, exponential)</span>
-  <span class="c">: For more info, see https://www.neuronsimulator.org/en/latest/nmodl/transpiler/notebooks/nmodl-sympy-solver-cnexp.html#Implementation</span>
   <span class="k">SOLVE</span> states <span class="k">METHOD</span> cnexp
   <span class="c">: Calculate the conductance of the Im current = conductance density * gating variable</span>
   gIm <span class="o">=</span> gImbar<span class="o">*</span>m

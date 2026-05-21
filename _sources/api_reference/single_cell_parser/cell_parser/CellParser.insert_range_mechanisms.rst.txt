@@ -36,7 +36,7 @@ insert_range_mechanisms
         - :math:`y = \text{slope} \cdot x + \text{offset}`
       * - linear_capped
         - ``prox_value``, ``dist_value``, ``dist_value_distance``
-        - :math:`y = \min(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})`
+        - :math:`y = \max(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})`
       * - exponential
         - ``offset``, ``linScale``, ``_lambda``, ``xOffset``
         - :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`
