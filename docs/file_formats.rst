@@ -980,7 +980,6 @@ Example:
   BREAKPOINT {
     : Solve the DERIVATIVE block named "states"
     : Use `cnexp` (Crank-Nicolson, exponential)
-    : For more info, see https://www.neuronsimulator.org/en/latest/nmodl/transpiler/notebooks/nmodl-sympy-solver-cnexp.html#Implementation
     SOLVE states METHOD cnexp
     : Calculate the conductance of the Im current = conductance density * gating variable
     gIm = gImbar*m
