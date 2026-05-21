@@ -383,7 +383,7 @@ class CellParser(object):
              - :math:`y = \text{slope} \cdot x + \text{offset}`
            * - linear_capped
              - ``prox_value``, ``dist_value``, ``dist_value_distance``
-             - :math:`y = \min(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})`
+             - :math:`y = \max(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})`
            * - exponential
              - ``offset``, ``linScale``, ``_lambda``, ``xOffset``
              - :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`
@@ -599,11 +599,8 @@ class CellParser(object):
                             or param == 'linScale' or param == '_lambda' or param == 'xOffset':
                                 continue
                             dist = h.distance(seg.x, sec=sec)
-                            if relDistance:
-                                dist = dist / maxDist
-                            rangeVarVal = mech[param] * (
-                                offset + linScale * np.exp(_lambda *
-                                                           (dist - xOffset)))
+                            if relDistance: dist = dist / maxDist
+                            rangeVarVal = mech[param] * (offset + linScale * np.exp(_lambda * (dist - xOffset)))
                             if rangeVarVal < max_g:
                                 s = param + '=' + str(rangeVarVal)
                                 paramStrings.append(s)
