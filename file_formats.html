@@ -859,7 +859,7 @@ Hide data sources</label><label class="tabbed-label" for="__tabbed_1_2">
 Show data sources</label></div>
 <div class="tabbed-content docutils">
 <div class="tabbed-block docutils">
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id8">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 343.00 404.00" class="graphviz" style="width: 21.4375rem;height: 25.25rem;">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 400)">
 <title>sphinx-ext-graphviz</title>
@@ -1038,11 +1038,11 @@ Show data sources</label></div>
 </g>
 </svg><figcaption>
 <p><span class="caption-text"><span class="caption-text">
-Overview of file formats.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></figcaption>
+Overview of file formats.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></figcaption>
 </figure>
 </div>
 <div class="tabbed-block docutils">
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id9">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 457.00 404.80" class="graphviz" style="width: 28.5625rem;height: 25.3125rem;">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 400.8)">
 <title>sphinx-ext-graphviz</title>
@@ -1267,7 +1267,7 @@ Overview of file formats.</span><a class="headerlink" href="#id7" title="Permali
 </g>
 </svg><figcaption>
 <p><span class="caption-text"><span class="caption-text">
-Overview of file formats.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></figcaption>
+Overview of file formats.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></figcaption>
 </figure>
 </div>
 </div>
@@ -1338,9 +1338,10 @@ Note that the mechanism name in <a class="reference internal" href="#mod-file-fo
 <p class="admonition-title">See also</p>
 <p>The <a class="reference internal" href="#mod-file-format"><span class="std std-ref">.mod</span></a> file documentation for how these files are structured.</p>
 </div>
-<p>Each range mechanism must have the key <code class="docutils literal notranslate"><span class="pre">spatial</span></code>, and its value must match one of the supported spatial profiles in ISF. All spatial profiles except for <code class="docutils literal notranslate"><span class="pre">&quot;uniform&quot;</span></code> require additional parameters that need to be defined for a given range mechanism. E.g. the exponential profile expects the parameters <code class="docutils literal notranslate"><span class="pre">offset</span></code>, <code class="docutils literal notranslate"><span class="pre">linScale</span></code>, <code class="docutils literal notranslate"><span class="pre">_lambda</span></code>, <code class="docutils literal notranslate"><span class="pre">xOffset</span></code>. Distances for these spatial profiles are calculated in terms of distance to soma.
+<p>Each range mechanism must have the key <code class="docutils literal notranslate"><span class="pre">spatial</span></code>, and its value must match one of the supported spatial profiles in ISF. All spatial profiles except for <code class="docutils literal notranslate"><span class="pre">&quot;uniform&quot;</span></code> require additional parameters that need to be defined for a given range mechanism. E.g. the exponential profile expects the parameters <code class="docutils literal notranslate"><span class="pre">offset</span></code>, <code class="docutils literal notranslate"><span class="pre">linScale</span></code>, <code class="docutils literal notranslate"><span class="pre">_lambda</span></code>, <code class="docutils literal notranslate"><span class="pre">xOffset</span></code>.
+Distances for these spatial profiles are calculated in terms of distance to soma.
 If <code class="docutils literal notranslate"><span class="pre">&quot;distance&quot;:</span> <span class="pre">&quot;relative&quot;</span></code> is passed for a range mechanism, the distance dependency is scaled by the maximum distance of all sections with the same label. E.g. for a simple dendrite, this means that all distance metrics are scaled with the length of the longest dendrite. This is useful for setting scaling parameters without necessarily having to worry about the exact dimensions of the neurites beforehand.
-Spatial profiles are evaluated on a segment-by-segment basis: the segment center is used as the distance dependency of each spatial profile, and channels are uniform within a single segment.</p>
+Spatial profiles are evaluated on a segment-by-segment basis: the segment center is used as the distance dependency of each spatial profile, and neuron parameters are uniform within a single segment.</p>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="api_reference/single_cell_parser/cell_parser/CellParser.insert_range_mechanisms.html#single_cell_parser.cell_parser.CellParser.insert_range_mechanisms" title="single_cell_parser.cell_parser.CellParser.insert_range_mechanisms (Python function) — Inserts range mechanisms into all structures named as label."><code class="xref py py-meth docutils literal notranslate"><span class="pre">insert_range_mechanisms()</span></code></a> for an overview of the available spatial profiles for range mechanisms.</p>
@@ -1414,8 +1415,8 @@ Spatial profiles are evaluated on a segment-by-segment basis: the segment center
 describing the presynaptic cells and their synaptic activations.
 Only valid with an associated <a class="reference internal" href="#morphology-file-format"><span class="std std-ref">Morphology</span></a> morphology file, <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file, and <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
 <p>For each presynaptic cell type in the network, this following information is provided:</p>
-<table class="docutils data align-default" id="id9">
-<caption><span class="caption-text">Network Parameters</span><a class="headerlink" href="#id9" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id10">
+<caption><span class="caption-text">Network Parameters</span><a class="headerlink" href="#id10" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
@@ -1434,8 +1435,8 @@ Only valid with an associated <a class="reference internal" href="#morphology-fi
 </tbody>
 </table>
 <p>The <code class="docutils literal notranslate"><span class="pre">synapses</span></code> key of each presynaptic cell type contains the following information:</p>
-<table class="docutils data align-default" id="id10">
-<caption><span class="caption-text">Synapse parameters</span><a class="headerlink" href="#id10" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id11">
+<caption><span class="caption-text">Synapse parameters</span><a class="headerlink" href="#id11" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
@@ -1458,8 +1459,8 @@ A synapse is either active or not active, never inbetween.</p></td>
 </tbody>
 </table>
 <p>Each <code class="docutils literal notranslate"><span class="pre">synapses.receptors.&lt;receptor</span> <span class="pre">type&gt;</span></code> in <code class="docutils literal notranslate"><span class="pre">synapses.receptors</span></code> contains the following information:</p>
-<table class="docutils data align-default" id="id11">
-<caption><span class="caption-text">Receptor parameters</span><a class="headerlink" href="#id11" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id12">
+<caption><span class="caption-text">Receptor parameters</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
@@ -1533,8 +1534,8 @@ For example, for an AMPA synapse, this could be the decay time constant, the fac
 </div>
 <h3 id="activity-data"><span id="activity-data-format"></span>Activity data<a class="headerlink" href="#activity-data" title="Link to this heading">¶</a></h3>
 <p><a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> files are used to store activity data. Activity data can be defined by the following activity distributions:</p>
-<table class="docutils data align-default" id="id12">
-<caption><span class="caption-text">Activity Distributions</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id13">
+<caption><span class="caption-text">Activity Distributions</span><a class="headerlink" href="#id13" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Distribution Type</p></th>
 <th class="head"><p>Required Parameters</p></th>
@@ -1606,8 +1607,8 @@ In that case, the parameter file below would contain only one entry.</p>
 Ongoing activity is modeled as a Poisson spiketrain with a certain interval.</p>
 <p>The data format should be a two-column <code class="docutils literal notranslate"><span class="pre">.csv</span></code> table. The column names are ignored, and only present for clarity.
 The first column must be the cell type. This may include the anatomical area as a suffix, but does not need to.</p>
-<table class="docutils data align-default" id="id13">
-<caption><span class="caption-text">Ongoing activity example data format</span><a class="headerlink" href="#id13" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id14">
+<caption><span class="caption-text">Ongoing activity example data format</span><a class="headerlink" href="#id14" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Cell type</p></th>
 <th class="head"><p>Ongoing firing interval (ms)</p></th>
@@ -1713,8 +1714,8 @@ for each individual simulation trial. Each file contains the following informati
 <p>These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis:
 An example of the raw and parsed format is shown below:</p>
 <h4 id="raw-simrun-output">Raw <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#raw-simrun-output" title="Link to this heading">¶</a></h4>
-<table class="docutils data align-default" id="id14">
-<caption><span class="caption-text">Synapse activations (single trial)</span><a class="headerlink" href="#id14" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id15">
+<caption><span class="caption-text">Synapse activations (single trial)</span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>synapse type</p></th>
 <th class="head"><p>synapse ID</p></th>
@@ -1761,8 +1762,8 @@ An example of the raw and parsed format is shown below:</p>
 </tbody>
 </table>
 <h4 id="parsed-dataframe">Parsed dataframe<a class="headerlink" href="#parsed-dataframe" title="Link to this heading">¶</a></h4>
-<table class="docutils data align-default" id="id15">
-<caption><span class="caption-text">Synapse activations (all trials)</span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id16">
+<caption><span class="caption-text">Synapse activations (all trials)</span><a class="headerlink" href="#id16" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>trial index</p></th>
 <th class="head"><p>synapse type</p></th>
@@ -1840,8 +1841,8 @@ for each individual simulation trial. Each file contains the following informati
 <p>These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis
 An example of the raw and parsed format is shown below:</p>
 <h4 id="id1">Raw <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
-<table class="docutils data align-default" id="id16">
-<caption><span class="caption-text">Presynaptic spike times (single trial)</span><a class="headerlink" href="#id16" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id17">
+<caption><span class="caption-text">Presynaptic spike times (single trial)</span><a class="headerlink" href="#id17" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>cell type</p></th>
 <th class="head"><p>cell ID</p></th>
@@ -1872,8 +1873,8 @@ An example of the raw and parsed format is shown below:</p>
 </tbody>
 </table>
 <h4 id="id2">Parsed dataframe<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
-<table class="docutils data align-default" id="id17">
-<caption><span class="caption-text">Presynaptic spike times (all trials)</span><a class="headerlink" href="#id17" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id18">
+<caption><span class="caption-text">Presynaptic spike times (all trials)</span><a class="headerlink" href="#id18" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>trial index</p></th>
 <th class="head"><p>cell type</p></th>
@@ -1926,8 +1927,8 @@ For this reason, the synapse activations are saved separately (see <a class="ref
 <p>The raw output of the <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package contains <code class="docutils literal notranslate"><span class="pre">.npz</span></code> or <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files containing the voltage traces of the postsynaptic cells.
 Unlike the synapse activations and spike times, it is possible for one such file to contain multiple trials.</p>
 <h4 id="voltage-trace-csv"><span id="voltage-traces-csv-format"></span>Voltage trace <code class="docutils literal notranslate"><span class="pre">.csv</span></code><a class="headerlink" href="#voltage-trace-csv" title="Link to this heading">¶</a></h4>
-<table class="docutils data align-default" id="id18">
-<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">vm_all_traces.csv</span></code></span><a class="headerlink" href="#id18" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id19">
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">vm_all_traces.csv</span></code></span><a class="headerlink" href="#id19" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>t</p></th>
 <th class="head"><p>Vm run 00</p></th>
@@ -1968,8 +1969,8 @@ Unlike the synapse activations and spike times, it is possible for one such file
 </div>
 <h4 id="voltage-trace-dataframe"><span id="voltage-traces-df-format"></span>Voltage trace dataframe<a class="headerlink" href="#voltage-trace-dataframe" title="Link to this heading">¶</a></h4>
 <p>The parsed dataframe is usually created by the <a class="reference internal" href="api_reference/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-func docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> function.</p>
-<table class="docutils data align-default" id="id19">
-<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">trace</span> <span class="pre">dataframe</span></code></span><a class="headerlink" href="#id19" title="Link to this table">¶</a></caption>
+<table class="docutils data align-default" id="id20">
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">trace</span> <span class="pre">dataframe</span></code></span><a class="headerlink" href="#id20" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">sim_trial_index</span></code></p></th>
 <th class="head"><p>0.000</p></th>
@@ -2148,19 +2149,19 @@ for the official documentation on SWC.</p>
 </code></pre></div>
 </div>
 <h2 id="mod"><span id="mod-file-format"></span>.mod<a class="headerlink" href="#mod" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">MODL</span></code> is a file format Used to define dynamical systems as simply as reasonably possible.
-NEURON <span id="id4">Hines and Carnevale [<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> provides an extension to this format called <code class="docutils literal notranslate"><span class="pre">NMODL</span></code>, in this
-case to define channel and synapse dynamics for use in NEURON simulations.
-NEURON translates these files to <code class="docutils literal notranslate"><span class="pre">C</span></code> (and to <code class="docutils literal notranslate"><span class="pre">C++</span></code> since NEURON 9.0), to be compiled to machine code on the host machine.</p>
-<p><code class="docutils literal notranslate"><span class="pre">NMODL</span></code> files are categorized in blocks.
+<p><code class="docutils literal notranslate"><span class="pre">MODL</span></code> (“MOdel Description Language”) is a file format developed at the National Biomedical Simulation Resource, intended to define physical systems as simultaneous algebraic equations <span id="id4">[<a class="reference internal" href="bibliography.html#id19" title="M. C. Kohn, M. L. Hines, J. M. Kootsey, and M. D. Feezor. A block organized model builder. Mathematical and Computer Modelling, 19(6):75–97, March 1994. doi:10.1016/0895-7177(94)90190-2.">15</a>]</span>.
+NEURON <span id="id5">[<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> provides an extension to this format called <code class="docutils literal notranslate"><span class="pre">NMODL</span></code> (“Neuron MODL”), in this
+case to define channel and synapse dynamics per neuronal compartment for use in NEURON simulations.
+The NEURON simulation environment provides translators and compilers (<code class="docutils literal notranslate"><span class="pre">nrnivmodl</span></code> for UNIX, <code class="docutils literal notranslate"><span class="pre">nrnmkdll</span></code> for Windows) to translate these files to <code class="docutils literal notranslate"><span class="pre">C</span></code> (and to <code class="docutils literal notranslate"><span class="pre">C++</span></code> since NEURON 9.0), and to compile the resulting C/C++ to machine code on the host machine.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MODL</span></code>/<code class="docutils literal notranslate"><span class="pre">NMODL</span></code> files are categorized in blocks.
 We highlight some important ones below:</p>
 <table class="docutils data align-default">
 <tbody>
 <tr class="row-odd"><td><p>NEURON</p></td>
-<td><p>NEURON <span id="id5">Hines and Carnevale [<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> specific specification, such as <code class="docutils literal notranslate"><span class="pre">READ</span></code> and <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statements,
-defining which global variables this particular mechanism needs access to (e.g. intracellular <span class="math notranslate nohighlight">\(Ca^{2+}\)</span> for <span class="math notranslate nohighlight">\(Ca^{2+}\)</span>-activated channels).
+<td><p>NEURON <span id="id6">[<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> specific specification, such as <code class="docutils literal notranslate"><span class="pre">READ</span></code> and <code class="docutils literal notranslate"><span class="pre">WRITE</span></code> statements,
+defining which segment-wide shared variables this particular mechanism needs access to (e.g. <span class="math notranslate nohighlight">\(Ca^{2+}\)</span>-activated channels and buffers both need access to the intracellular <span class="math notranslate nohighlight">\(Ca^{2+}\)</span> concentration).
 The mechanism’s name is defined as either a <code class="docutils literal notranslate"><span class="pre">SUFFIX</span></code> or <code class="docutils literal notranslate"><span class="pre">POINTPROCESS</span></code> in this block.
-This is the name that will be accessible by the user, and how NEURON will register it in the NEURON or Python namespace.</p></td>
+This is the name that will be accessible by the user in <a class="reference internal" href="#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>, and how NEURON will register it in the NEURON or Python namespace.</p></td>
 </tr>
 <tr class="row-even"><td><p>PARAMETER</p></td>
 <td><p>Free parameters used in this mechanism.
@@ -2269,7 +2270,7 @@ That way, the DERIVATIVE block can use human-readable variable names.</p></td>
 <p class="admonition-title">See also</p>
 <p>Refer to the <a class="reference external" href="https://www.neuronsimulator.org/en/9.0.0/nmodl/language/nmodl.html">NEURON NMODL documentation</a>,
 <a class="reference external" href="https://neuronline.github.io/compneuro/software/neuron/nmodl/">compneuro</a>,
-or <span id="id6">Hines and Carnevale [<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> (chapters 9 and 10) for more info on <code class="docutils literal notranslate"><span class="pre">BLOCKS</span></code> and their meaning, usage, or any other
+or <span id="id7">Hines and Carnevale [<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> (chapters 9 and 10) for more info on <code class="docutils literal notranslate"><span class="pre">BLOCKS</span></code> and their meaning, usage, or any other
 aspect of MODL/NMODL.</p>
 </div>
 <div class="seealso admonition">

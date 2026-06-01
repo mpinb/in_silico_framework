@@ -100,9 +100,10 @@ Note that the mechanism name in :ref:`mod_file_format` files are defined in the 
 .. seealso::
    The :ref:`mod_file_format` file documentation for how these files are structured.
 
-Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF. All spatial profiles except for ``"uniform"`` require additional parameters that need to be defined for a given range mechanism. E.g. the exponential profile expects the parameters ``offset``, ``linScale``, ``_lambda``, ``xOffset``. Distances for these spatial profiles are calculated in terms of distance to soma.
+Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF. All spatial profiles except for ``"uniform"`` require additional parameters that need to be defined for a given range mechanism. E.g. the exponential profile expects the parameters ``offset``, ``linScale``, ``_lambda``, ``xOffset``. 
+Distances for these spatial profiles are calculated in terms of distance to soma.
 If ``"distance": "relative"`` is passed for a range mechanism, the distance dependency is scaled by the maximum distance of all sections with the same label. E.g. for a simple dendrite, this means that all distance metrics are scaled with the length of the longest dendrite. This is useful for setting scaling parameters without necessarily having to worry about the exact dimensions of the neurites beforehand.
-Spatial profiles are evaluated on a segment-by-segment basis: the segment center is used as the distance dependency of each spatial profile, and channels are uniform within a single segment.
+Spatial profiles are evaluated on a segment-by-segment basis: the segment center is used as the distance dependency of each spatial profile, and neuron parameters are uniform within a single segment.
 
 .. seealso::
    :meth:`~single_cell_parser.cell_parser.CellParser.insert_range_mechanisms` for an overview of the available spatial profiles for range mechanisms.
@@ -897,21 +898,21 @@ Example::
 
 .mod
 ****
-``MODL`` is a file format Used to define dynamical systems as simply as reasonably possible.
-NEURON :cite:t:`hines2001neuron` provides an extension to this format called ``NMODL``, in this
-case to define channel and synapse dynamics for use in NEURON simulations.
-NEURON translates these files to ``C`` (and to ``C++`` since NEURON 9.0), to be compiled to machine code on the host machine.
+``MODL`` ("MOdel Description Language") is a file format developed at the National Biomedical Simulation Resource, intended to define physical systems as simultaneous algebraic equations :cite:`MODL`.
+NEURON :cite:`hines2001neuron` provides an extension to this format called ``NMODL`` ("Neuron MODL"), in this
+case to define channel and synapse dynamics per neuronal compartment for use in NEURON simulations.
+The NEURON simulation environment provides translators and compilers (``nrnivmodl`` for UNIX, ``nrnmkdll`` for Windows) to translate these files to ``C`` (and to ``C++`` since NEURON 9.0), and to compile the resulting C/C++ to machine code on the host machine.
 
-``NMODL`` files are categorized in blocks. 
+``MODL``/``NMODL`` files are categorized in blocks. 
 We highlight some important ones below:
 
 .. list-table::
 
   * - NEURON
-    - NEURON :cite:t:`hines2001neuron` specific specification, such as ``READ`` and ``WRITE`` statements, 
-      defining which global variables this particular mechanism needs access to (e.g. intracellular :math:`Ca^{2+}` for :math:`Ca^{2+}`-activated channels).
+    - NEURON :cite:`hines2001neuron` specific specification, such as ``READ`` and ``WRITE`` statements, 
+      defining which segment-wide shared variables this particular mechanism needs access to (e.g. :math:`Ca^{2+}`-activated channels and buffers both need access to the intracellular :math:`Ca^{2+}` concentration).
       The mechanism's name is defined as either a ``SUFFIX`` or ``POINTPROCESS`` in this block.
-      This is the name that will be accessible by the user, and how NEURON will register it in the NEURON or Python namespace.
+      This is the name that will be accessible by the user in :ref:`cell_parameters_format`, and how NEURON will register it in the NEURON or Python namespace.
   * - PARAMETER
     - Free parameters used in this mechanism. 
       These are the parameters the user has direct access to, and can be tweaked during optimization or exploration.
@@ -1023,11 +1024,6 @@ Example:
 .. seealso::
    See the folder `mechanisms` in the project source for convenience methods for compiling mechanisms or checking
    if they exist in the NEURON namespace.
-
-
-
-
-
 
 
 .. _am_file_format:

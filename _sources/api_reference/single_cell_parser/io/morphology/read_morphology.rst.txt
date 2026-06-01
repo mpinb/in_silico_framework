@@ -11,10 +11,13 @@ read_morphology
 
    Read a morphology in :ref:`hoc_file_format` or :ref:`swc_file_format` format.
 
-   This function is a simply strategy pattern to decide which reader to use.
+   This function is simply a strategy pattern to decide which reader to use:
+
+   - :meth:`~single_cell_parser.io.morphology.hoc.read_hoc`
+   - :meth:`~single_cell_parser.io.morphology.swc.read_swc`
 
    :param fn: Name of the morphology file.
-   :type fn: ~Path
+   :type fn: ~pathlib.Path
 
    :returns: List of :class:`~_Edge` objects for further parsing, usually by :meth:`~CellParser.spatialgraph_to_cell`
    :rtype: List[_Edge]
