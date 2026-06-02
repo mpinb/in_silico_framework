@@ -28,4 +28,4 @@ Tutorials on ISF's most important workflows are available [online](https://mpinb
 
 ## 🔩 Installation
 
-Installation instructions can be found [here](https://mpinb.github.io/in_silico_framework/installation), but are also repeated below.
+Installation instructions can be found [here](https://mpinb.github.io/in_silico_framework/installation).
