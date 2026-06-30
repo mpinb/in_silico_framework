@@ -44,7 +44,7 @@ the following keys:
       - Dask dataframe containing the spike times of the postsynaptic cell for all trials.
 
       
-If you initialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
+If you initialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.db_initializers.load_simrun_general.config`).
 If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
 
 .. warning::
