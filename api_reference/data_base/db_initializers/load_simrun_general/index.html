@@ -1361,12 +1361,21 @@ containing the <a class="reference internal" href="../../../../file_formats.html
 </tr>
 </tbody>
 </table>
-<p>If you intialize the database with <code class="docutils literal notranslate"><span class="pre">rewrite_in_optimized_format=True</span></code> (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see <code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code>).
-If <code class="docutils literal notranslate"><span class="pre">rewrite_in_optimized_format=False</span></code> instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
-This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
-Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">optimize()</span></code> on specific database
-keys.</p>
+<p>If you initialize the database with <code class="docutils literal notranslate"><span class="pre">rewrite_in_optimized_format=True</span></code> (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see <a class="reference internal" href="config/index.html#module-data_base.db_initializers.load_simrun_general.config" title="data_base.db_initializers.load_simrun_general.config (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a>).
+If <code class="docutils literal notranslate"><span class="pre">rewrite_in_optimized_format=False</span></code> instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.</p>
+<div class="warning admonition">
+<p class="admonition-title">Warning</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">pickle</span></code> as a data format is useful for fast intermediate analysis, but <strong>strongly discouraged</strong> for long-term storage.
+These pickle files are instructions to build the data, not the data itself.
+The instructions contain absolute paths to the original data files, which invalidate once they are moved or deleted.
+They have a hard dependency on the loader functions, which invalidate if those are renamed or moved in the source code.</p>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Hint</p>
+<p>Individual data keys can afterwards be re-optimized to other data formats by calling
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">optimize()</span></code> on specific database keys.
+This is useful to convert intermediate pickle data to long-term stsorage formats.</p>
+</div>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">paramfile_copy_config</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>    <span class="s2">&quot;copy_method&quot;</span><span class="p">:</span> <span class="s2">&quot;remount&quot;</span><span class="p">,</span>
@@ -1409,12 +1418,6 @@ keys.</p>
 <span class="go">&lt;spike times dataframe&gt;</span>
 </code></pre></div>
 </div>
-<p>If you intialize the database with <code class="docutils literal notranslate"><span class="pre">rewrite_in_optimized_format=True</span></code> (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see <code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code>).
-If <code class="docutils literal notranslate"><span class="pre">rewrite_in_optimized_format=False</span></code> instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
-This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
-Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling
-<code class="xref py py-func docutils literal notranslate"><span class="pre">optimize()</span></code> on specific database
-keys.</p>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../../../../file_formats.html#simresult-dir-format"><span class="std std-ref">Raw simulation results</span></a> for more information on the raw output format of <a class="reference internal" href="../../../simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a>.</p>
