@@ -46,10 +46,18 @@ the following keys:
       
 If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
 If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
-This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
-Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling 
-:py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
-keys.
+
+.. warning::
+
+   Using pickle as a data format is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted. In addition, the pickled objects have a hard dependency on the loader functions, which invalidate if those are renamed or moved in the source code.
+   
+
+.. hint::
+
+   Individual data keys can afterwards be re-optimized to other data formats by calling 
+   :py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
+keys. This is useful to convert intermediate pickle data to long-term stsorage formats.
+
 
 Example::
 
@@ -93,13 +101,6 @@ After initialization, you can access the data from the data_base in the followin
     >>> db['spike_times']
     <spike times dataframe>
     
-If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
-If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
-This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
-Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling 
-:func:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
-keys.
-
 See also:
     :ref:`simresult_dir_format` for more information on the raw output format of :mod:`simrun`.
 
