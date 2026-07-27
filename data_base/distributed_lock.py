@@ -77,6 +77,11 @@ def _get_locking_config():
     
     This method allows for a lazy evaluation of the locking configuration, 
     and is used to set the global variable ``_CONFIG``.
+
+    If the env variable ``ISF_DISTRIBUTED_LOCK_CONFIG`` is not set, it falls back to :attr:`~DEFAULT_CONFIG`.
+
+    Returns:
+        List[dict]: List of configurations to try. Order of the list reflects priority.
     """
     global _CONFIG
 

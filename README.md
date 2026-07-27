@@ -12,9 +12,10 @@ Multi-scale modeling and analysis of *in vivo* neuron-network mechanisms
 [![macOS](https://img.shields.io/github/actions/workflow/status/mpinb/in_silico_framework/test-isf-py38-pixi-macos.yml?style=flat-square&logo=apple&label=macOS
 )](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml)
 [![Windows](https://img.shields.io/github/actions/workflow/status/mpinb/in_silico_framework/test-isf-py38-pixi-windows.yml?style=flat-square&logo=quarto&label=Windows
-)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml)
+)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-windows.yml)
 [![docs](https://img.shields.io/github/actions/workflow/status/mpinb/in_silico_framework/pages/pages-build-deployment?style=flat-square&logo=sphinx&label=docs)](https://mpinb.github.io/in_silico_framework)
 [![codecov](https://img.shields.io/codecov/c/github/mpinb/in_silico_framework?token=V4P4QMFM12&style=flat-square&logo=codecov)](https://codecov.io/gh/mpinb/in_silico_framework)
+[![zenodo](https://img.shields.io/badge/doi-10.5281%2Fzenodo.19712118-blue?style=flat-square&logo=zenodo)](https://doi.org/10.5281/zenodo.19712118)
 
 </div>
 
@@ -27,16 +28,4 @@ Tutorials on ISF's most important workflows are available [online](https://mpinb
 
 ## 🔩 Installation
 
-Installation instructions can be found [here](https://mpinb.github.io/in_silico_framework/installation), but are also repeated below.
-
-ISF is available for Linux, Windows and macOS.
-For installation and environment management, ISF uses [pixi](https://pixi.sh/latest/). 
-Please follow the installation instructions on the [pixi documentation](https://pixi.sh/latest/#installation)
-
-To install ISF with pixi, simply:
-
-```bash
-git clone https://github.com/mpinb/in_silico_framework.git --depth 1
-cd in_silico_framework
-pixi run install
-```
+Installation instructions can be found [here](https://mpinb.github.io/in_silico_framework/installation).

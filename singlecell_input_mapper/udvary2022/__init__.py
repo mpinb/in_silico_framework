@@ -18,14 +18,6 @@ This module provides a full pipeline for creating dense connectome models
 of the rat barrel cortex, based on methods and data presented in 
 :cite:t:`Udvary_Harth_Macke_Hege_De_Kock_Sakmann_Oberlaender_2022` and :cite:t:`Egger_Dercksen_Udvary_Hege_Oberlaender_2014`.
 
-This runfile assumes you have downloaded and extracted the barrel cortex model data from
-https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
-If this is not the case, please consult ``installer/download_bc_model`` and extract.
-
-Attention:
-    This file is specific to the barrel cortex model data. If you want to use it for other data,
-    you need to adapt the paths to the data accordingly. This runfile can serve as a template.
-
 Inputs:
 
 - Morphology of the postsynaptic neuron
@@ -33,13 +25,6 @@ Inputs:
 - Number of cells per cell type in the neuropil.
 - Connections spreadsheet containing Post-Synaptic Targets (PSTs) per unit of length and area
 - Bouton locations of individual axon tracings per presynaptic cell type.
-
-Attention:
-    This runfile has default values for the barrel cortex, and so assumes that you have downloaded 
-    and extracted the barrel cortex model data from
-    https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
-    If this is not the case, please consult ``installer/download_bc_model`` and extract,
-    or adapt the paths in this file to your data.
 
 This module then uses :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
 to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
@@ -158,7 +143,7 @@ def map_singlecell_inputs(
     Returns:
         None. 
             Writes the results to disk, at the same location as the input :param:`cellName`.
-            Results consist of a :ref:`syn_file_format`, :ref:`conf_file_format` file, and a ``.csv`` file containing the amount of connected 
+            Results consist of a :ref:`syn_file_format`, :ref:`con_file_format` file, and a ``.csv`` file containing the amount of connected 
             presynaptic cells per cell type, and per anatomical area.
     """
     if not (cellTypeName in EXCITATORY) and not (cellTypeName in INHIBITORY):
@@ -188,8 +173,8 @@ def map_singlecell_inputs(
 
     start_t_sec_total = time.time()
 
-    logger.info("Loading cell morphology")
-    parser = CellParser(cellName)
+    logger.info("Loading cell morphology: {}".format(cellName))
+    parser = CellParser(morph_fn=cellName)
     parser.spatialgraph_to_cell()
     singleCell = parser.get_cell()  # This is a sim.Cell, not scp.cell
     logger.debug("Cell morphology loaded")

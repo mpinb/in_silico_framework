@@ -21,14 +21,14 @@ Importing this module on UNIX systems registers the mechanisms in NEURON namespa
 This only works if they are compiled, which should have happened upon configuring ISF.
 If this is not the case, you can:
 
-```python
->>> from config.user import mechanisms
->>> mechanisms.are_compiled()  # check if all mechanisms are compiled
-False
->>> mechanisms.compile_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
->>> mechanisms.are_compiled()  # check if all mechanisms are compiled
-True
-```
+.. code-block:: python
+
+    >>> import mechanisms
+    >>> mechanisms.are_compiled()  # check if all mechanisms are compiled
+    False
+    >>> mechanisms.compile_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
+    >>> mechanisms.are_compiled()  # check if all mechanisms are compiled
+    True
 
 See also:
     :mod:`config.isf_configure`

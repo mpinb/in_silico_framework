@@ -14,7 +14,7 @@ authors = [
 description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
 name = "ISF"
 requires-python = ">=3.8"
-version = "0.5.0-beta"
+version = "0.7.2-beta"
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
@@ -124,7 +124,6 @@ ISF_HOME="$(pwd)"
 [tool.pixi.target.win.activation.env]
 PYTHONPATH = "%cd%;%NEURONHOME%/lib/python;%PYTHONPATH%"
 PATH = "%PATH%;%NEURONHOME%/bin"
-HOME = "%USERPROFILE%"
 ISF_HOME="%cd%"
 
 

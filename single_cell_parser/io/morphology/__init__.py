@@ -19,11 +19,7 @@ Specific readers for morphology files are defined in submodules.
 This module specifies converters between :ref:`swc_file_format` and :ref:`hoc_file_format` morphologies.
 """
 from __future__ import annotations
-from typing import List, Dict, Any
-import numpy as np
-from data_base.dbopen import dbopen
 from config.isf_logging import get_isf_logger
-from typing import Optional
 from .hoc import read_hoc, write_hoc
 from .swc import read_swc
 from pathlib import Path
@@ -36,10 +32,13 @@ def read_morphology(
     ):
     """Read a morphology in :ref:`hoc_file_format` or :ref:`swc_file_format` format.
     
-    This function is a simply strategy pattern to decide which reader to use.
+    This function is simply a strategy pattern to decide which reader to use:
+
+    - :meth:`~single_cell_parser.io.morphology.hoc.read_hoc`
+    - :meth:`~single_cell_parser.io.morphology.swc.read_swc`
 
     Args:
-        fn (str|:class:`~Path`): Name of the morphology file.
+        fn (str | :class:`~pathlib.Path`): Name of the morphology file.
 
     Returns:
        List[_Edge]: List of :class:`~_Edge` objects for further parsing, usually by :meth:`~CellParser.spatialgraph_to_cell`

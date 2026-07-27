@@ -21,7 +21,7 @@ File & data formats
 .syn
 ****
 ISF custom file format to store synapse locations onto a morphology.
-Only valid with an associated morphology :ref:`hoc_file_format` file.
+Only valid with an associated :ref:`morphology_file_format` file.
 
 For each synapse, it provides the synapse type and location onto the morphology.
 Each row index corresponds to its synapse ID, providing a link to a corresponding :ref:`con_file_format` file.
@@ -50,10 +50,9 @@ Example::
 .con
 ****
 ISF custom file format to store connectivity data. 
-To be used in conjunction with an associated :ref:`syn_file_format` file and morphology :ref:`hoc_file_format` file.
+To be used in conjunction with an associated :ref:`syn_file_format` file and :ref:`morphology_file_format` file.
 It numbers each synapse, and links it to its associated presynaptic cell type and ID.
-While a :ref:`syn_file_format` file and :ref:`hoc_file_format` file provide the anatomical realization of a morphology embedding into a network,
-the addition of a :ref:`con_file_format` file makes possible to construct a functional realization, as it allows linking the synapses to
+A :ref:`syn_file_format` file and :ref:`morphology_file_format` file provide the anatomical realization of a morphology embedding into a network. The addition of a :ref:`con_file_format` file makes possible to construct a functional realization, as it allows linking the synapses to
 presynaptic cells of a dense connectome model, which in turn allows to assign cell type specific activation patterns 
 to each synapse. ISF's workflow is designed to create these files in tandem, so they always co-exist.
 
@@ -91,7 +90,7 @@ Cell parameters
 ===============
 
 :ref:`param_file_format` file to store biophysical parameters of a cell.
-Includes a reference to a :ref:`hoc_file_format` morphology file, 
+Includes a reference to a :ref:`morphology_file_format` file, 
 biophysical properties of the cell per morphological structure (e.g. soma, dendrite, axon initial segment ...),
 and basic simulation parameters. Morphology structure labels should match those inferred from the morphology file.
 
@@ -101,14 +100,15 @@ Note that the mechanism name in :ref:`mod_file_format` files are defined in the 
 .. seealso::
    The :ref:`mod_file_format` file documentation for how these files are structured.
 
-Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF. All spatial profiles except for ``"uniform"`` require additional parameters that need to be defined for a given range mechanism. E.g. the exponential profile expects the parameters ``offset``, ``linScale``, ``_lambda``, ``xOffset``. Distances for these spatial profiles are calculated in terms of distance to soma.
+Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF. All spatial profiles except for ``"uniform"`` require additional parameters that need to be defined for a given range mechanism. E.g. the exponential profile expects the parameters ``offset``, ``linScale``, ``_lambda``, ``xOffset``. 
+Distances for these spatial profiles are calculated in terms of distance to soma.
 If ``"distance": "relative"`` is passed for a range mechanism, the distance dependency is scaled by the maximum distance of all sections with the same label. E.g. for a simple dendrite, this means that all distance metrics are scaled with the length of the longest dendrite. This is useful for setting scaling parameters without necessarily having to worry about the exact dimensions of the neurites beforehand.
-Spatial profiles are evaluated on a segment-by-segment basis: the segment center is used as the distance dependency of each spatial profile, and channels are uniform within a single segment.
+Spatial profiles are evaluated on a segment-by-segment basis: the segment center is used as the distance dependency of each spatial profile, and neuron parameters are uniform within a single segment.
 
 .. seealso::
    :meth:`~single_cell_parser.cell_parser.CellParser.insert_range_mechanisms` for an overview of the available spatial profiles for range mechanisms.
 
-All other remaining parameters of a range mechanism must be valid attributes of a NEURON segment, such as passive properties, or parameters defined in ``PARAMETER`` blocks in loaded :ref:`mod_file_format` files. Typically, channels only expose their conductance density as a parameter, but there is nothing stopping you from also exposing e.g. :math:`\tau_m` and :math:`m_\inf`. The simplest range mechanism entry in a neuron parameter file is thus::
+All other remaining parameters of a range mechanism must be valid attributes of a NEURON segment, such as passive properties, or parameters defined in ``PARAMETER`` blocks in loaded :ref:`mod_file_format` files. Typically, channels only expose their conductance density as a parameter, but there is nothing stopping you from also exposing e.g. :math:`\tau_m` and :math:`m_\infty`. The simplest range mechanism entry in a neuron parameter file is thus::
 
   # The range mechanism name, defined as a SUFFIX in a loaded .mod file
   'Ca_LVAst': {
@@ -181,7 +181,7 @@ Network parameters
 ==================
 The :ref:`param_file_format` format is used to store network parameters, 
 describing the presynaptic cells and their synaptic activations.
-Only valid with an associated :ref:`hoc_file_format` morphology file, :ref:`syn_file_format` file, and :ref:`con_file_format` file.
+Only valid with an associated :ref:`morphology_file_format` morphology file, :ref:`syn_file_format` file, and :ref:`con_file_format` file.
 
 For each presynaptic cell type in the network, this following information is provided:
 
@@ -286,7 +286,6 @@ Activity data
 =============
 :ref:`param_file_format` files are used to store activity data. Activity data can be defined by the following activity distributions:
 
-
 .. list-table:: Activity Distributions
     :header-rows: 1
 
@@ -302,8 +301,6 @@ Activity data
       - "intervals", "probabilities", "offset"
     * - "PSTH_absolute_number"
       - "intervals", "number_active_synapses", "offset"
-    * - "PSTH_poissontrain" (deprecated)
-      - "intervals", "rates", "offset"
     * - "PSTH_poissontrain_v2"
       - "bins", "rates", "offset"
     * - "poissontrain_modulated"
@@ -321,12 +318,12 @@ Example::
     "celltypeA_area1": {
     "distribution": "PSTH",
     "intervals": [(0.0,1.0),(1.0,2.0),(2.0,3.0),(3.0,4.0),(4.0,5.0),(5.0,6.0),(6.0,7.0),(7.0,8.0),(8.0,9.0),(9.0,10.0),(10.0,11.0),(11.0,12.0),(12.0,13.0),(13.0,14.0),(14.0,15.0),(15.0,16.0),(16.0,17.0),(17.0,18.0),(18.0,19.0),(19.0,20.0),(20.0,21.0),(21.0,22.0),(22.0,23.0),(23.0,24.0),(24.0,25.0),(25.0,26.0),(26.0,27.0),(27.0,28.0),(28.0,29.0),(29.0,30.0),(30.0,31.0),(31.0,32.0),(32.0,33.0),(33.0,34.0),(34.0,35.0),(35.0,36.0),(36.0,37.0),(37.0,38.0),(38.0,39.0),(39.0,40.0),(40.0,41.0),(41.0,42.0),(42.0,43.0),(43.0,44.0),(44.0,45.0),(45.0,46.0),(46.0,47.0),(47.0,48.0),(48.0,49.0),(49.0,50.0)],
-    "probabilities": [-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,0.0062,-0.0004,0.0129,0.0062,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,-0.0004,0.0062,0.0062,-0.0004,-0.0004,-0.0004],
+    "probabilities": [0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0062,0.0062,0.0004,0.0129,0.0062,0.0004,0.0004,0.0062,0.0004,0.0004,0.0004,0.0062,0.0062,0.0004,0.0004,0.0004],
     },
     "celltypeA_area2": {
     "distribution": "PSTH",
     "intervals": [(0.0,1.0),(1.0,2.0),(2.0,3.0),(3.0,4.0),(4.0,5.0),(5.0,6.0),(6.0,7.0),(7.0,8.0),(8.0,9.0),(9.0,10.0),(10.0,11.0),(11.0,12.0),(12.0,13.0),(13.0,14.0),(14.0,15.0),(15.0,16.0),(16.0,17.0),(17.0,18.0),(18.0,19.0),(19.0,20.0),(20.0,21.0),(21.0,22.0),(22.0,23.0),(23.0,24.0),(24.0,25.0),(25.0,26.0),(26.0,27.0),(27.0,28.0),(28.0,29.0),(29.0,30.0),(30.0,31.0),(31.0,32.0),(32.0,33.0),(33.0,34.0),(34.0,35.0),(35.0,36.0),(36.0,37.0),(37.0,38.0),(38.0,39.0),(39.0,40.0),(40.0,41.0),(41.0,42.0),(42.0,43.0),(43.0,44.0),(44.0,45.0),(45.0,46.0),(46.0,47.0),(47.0,48.0),(48.0,49.0),(49.0,50.0)],
-    "probabilities": [-0.0004,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,0.0129,0.0062,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004],
+    "probabilities": [0.0004,0.0062,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0062,0.0004,0.0004,0.0004,0.0004,0.0004,0.0004,0.0062,0.0004,0.0004,0.0129,0.0062,0.0062,0.0004,0.0004,0.0004,0.0004,0.0062,0.0004,0.0004,0.0062,0.0004,0.0004,0.0004,0.0004,0.0004],
     },
     "celltypeA_area3": {
     "distribution": "lognormal",
@@ -651,7 +648,7 @@ Parsed dataframe
 
 Writers:
 
-- :func:`~single_cell_parser.writer.write_presynaptic_spike_file` is used by :mod:`simrun` and :mod:`~single_cell_parser.analyze.synanalysis`
+- :func:`~single_cell_parser.io.activity.write_presynaptic_spike_times` is used by :mod:`simrun` and :mod:`~single_cell_parser.analyze.synanalysis`
    to write raw output data.
 - :func:`data_base.db_initializers.load_simrun_general.init` parses these files into a pandas dataframe.
 
@@ -766,7 +763,7 @@ The only information that this :ref:`hoc_file_format` subset can capture, that c
 :ref:`hoc_file_format` allows the definition of a connection between two sections as a continuous coordinate, even if this coordinate lands between two points. 
 :ref:`swc_file_format` defines connectivity in terms of point ID, and so every connection in :ref:`swc` necessarily connects to a point, not in-between points.
 For most use-cases, this difference is trivial, since sections are generally defined as a neurite between connection points, and so every connection point is at relative coordinate ``x=0`` or ``x=1`` anyways.
-One notable example is the soma, where sections are sometimes allowed to connect at a relative coordinate that deviates from ``0`` and ``1``.
+One notable exception is the soma, where sections are sometimes allowed to connect at a relative coordinate that deviates from ``0`` and ``1``.
 Even then, ISF by default connects child sections to the soma at ``x=0.5`` anyways, so this information is not used in ISF.
 
 .. seealso::
@@ -901,21 +898,21 @@ Example::
 
 .mod
 ****
-``MODL`` is a file format Used to define dynamical systems as simply as reasonably possible.
-NEURON :cite:t:`hines2001neuron` provides an extension to this format called ``NMODL``, in this
-case to define channel and synapse dynamics for use in NEURON simulations.
-NEURON translates these files to ``C`` (and to ``C++`` since NEURON 9.0), to be compiled to machine code on the host machine.
+``MODL`` ("MOdel Description Language") is a file format developed at the National Biomedical Simulation Resource, intended to define physical systems as simultaneous algebraic equations :cite:`MODL`.
+NEURON :cite:`hines2001neuron` provides an extension to this format called ``NMODL`` ("Neuron MODL"), in this
+case to define channel and synapse dynamics per neuronal compartment for use in NEURON simulations.
+The NEURON simulation environment provides translators and compilers (``nrnivmodl`` for UNIX, ``nrnmkdll`` for Windows) to translate these files to ``C`` (and to ``C++`` since NEURON 9.0), and to compile the resulting C/C++ to machine code on the host machine.
 
-``NMODL`` files are categorized in blocks. 
+``MODL``/``NMODL`` files are categorized in blocks. 
 We highlight some important ones below:
 
 .. list-table::
 
   * - NEURON
-    - NEURON :cite:t:`hines2001neuron` specific specification, such as ``READ`` and ``WRITE`` statements, 
-      defining which global variables this particular mechanism needs access to (e.g. intracellular :math:`Ca^{2+}` for :math:`Ca^{2+}`-activated channels).
+    - NEURON :cite:`hines2001neuron` specific specification, such as ``READ`` and ``WRITE`` statements, 
+      defining which segment-wide shared variables this particular mechanism needs access to (e.g. :math:`Ca^{2+}`-activated channels and buffers both need access to the intracellular :math:`Ca^{2+}` concentration).
       The mechanism's name is defined as either a ``SUFFIX`` or ``POINTPROCESS`` in this block.
-      This is the name that will be accessible by the user, and how NEURON will register it in the NEURON or Python namespace.
+      This is the name that will be accessible by the user in :ref:`cell_parameters_format`, and how NEURON will register it in the NEURON or Python namespace.
   * - PARAMETER
     - Free parameters used in this mechanism. 
       These are the parameters the user has direct access to, and can be tweaked during optimization or exploration.
@@ -981,8 +978,8 @@ Example:
 
   : What to calculate each time step
   BREAKPOINT {
-    : solve the DERIVATIVE block named "states" using `sympy.dsolve` and fall back to `CNEXP` method
-    : For more info, see https://www.neuronsimulator.org/en/latest/nmodl/transpiler/notebooks/nmodl-sympy-solver-cnexp.html#Implementation
+    : Solve the DERIVATIVE block named "states"
+    : Use `cnexp` (Crank-Nicolson, exponential)
     SOLVE states METHOD cnexp
     : Calculate the conductance of the Im current = conductance density * gating variable
     gIm = gImbar*m
@@ -1029,11 +1026,6 @@ Example:
    if they exist in the NEURON namespace.
 
 
-
-
-
-
-
 .. _am_file_format:
 
 .am
@@ -1044,8 +1036,8 @@ This flexible format can be used to store 3D scalar meshes, 3D neuron morphology
 
 Readers:
 
-- :mod:`~single_cell_parser.reader.read_scalar_field`
-- :mod:`~single_cell_parser.reader.read_landmark_file`
+- :mod:`~single_cell_parser.io.amira.read_scalar_field`
+- :mod:`~single_cell_parser.io.amira.read_landmark_file`
 
 
 .. container:: doc-feedback

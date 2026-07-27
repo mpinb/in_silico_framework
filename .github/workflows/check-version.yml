@@ -1,0 +1,84 @@
+name: Check version
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+      - 'CITATION.cff'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+      - 'CITATION.cff'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Parse versions from pyproject.toml and CITATION.cff
+        id: versions
+        run: |
+          PYPROJECT_VER=$(grep -m1 '^version' pyproject.toml | sed 's/version\s*=\s*"\(.*\)"/\1/')
+          CITATION_VER=$(grep -m1 '^version:' CITATION.cff | sed 's/version:\s*//')
+          echo "pyproject=$PYPROJECT_VER" >> $GITHUB_OUTPUT
+          echo "citation=$CITATION_VER" >> $GITHUB_OUTPUT
+          echo "pyproject.toml version : $PYPROJECT_VER"
+          echo "CITATION.cff version   : $CITATION_VER"
+
+      - name: Get latest git tag
+        id: tag
+        run: |
+          LATEST=$(git tag --sort=-version:refname | head -n1)
+          echo "tag=$LATEST" >> $GITHUB_OUTPUT
+          echo "Latest tag: $LATEST"
+
+      - name: Check versions
+        run: |
+          python3 - <<'EOF'
+          from packaging.version import Version
+          import sys
+
+          pyproject_ver = "${{ steps.versions.outputs.pyproject }}"
+          citation_ver  = "${{ steps.versions.outputs.citation }}"
+          latest_tag    = "${{ steps.tag.outputs.tag }}".lstrip("v")
+
+          ok = True
+
+          # --- 1. version in pyproject.toml be strictly greater than latest tag ---
+          if not latest_tag:
+              print("No existing tags found, skipping tag comparison.")
+          else:
+              current = Version(pyproject_ver)
+              latest  = Version(latest_tag)
+              print(f"Latest tag: {latest}")
+              if current <= latest:
+                  print(f"::error::Version in pyproject.toml (ground truth) {current} is not strictly greater than latest tag {latest}. Please bump the version in pyrpoject.toml.")
+                  ok = False
+              else:
+                  print(f"OK: pyproject.toml (ground truth): {current} > {latest}")
+
+          # --- 2. pyproject.toml and CITATION.cff must agree ---
+          if pyproject_ver != citation_ver:
+              print(f"::error::Version mismatch: pyproject.toml (ground truth) has {pyproject_ver} but CITATION.cff has {citation_ver}. Please make them match.")
+              ok = False
+          else:
+              print(f"OK: pyproject.toml and CITATION.cff both at {pyproject_ver}")
+
+          sys.exit(0 if ok else 1)
+          EOF
