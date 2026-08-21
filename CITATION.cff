@@ -23,12 +23,6 @@ authors:
       Max Planck Institute for Neurobiology of Behavior -
       caesar (MPINB)
     orcid: 'https://orcid.org/0009-0007-8364-2023'
-  - given-names: María
-      family-names: Royo
-      affiliation: >-
-        Max Planck Institute for Neurobiology of Behavior -
-        caesar (MPINB)
-      orcid: 'https://orcid.org/0009-0007-8364-2023'
   - given-names: Rieke
     family-names: Fruengel
     affiliation: >-
@@ -36,18 +30,18 @@ authors:
       caesar (MPINB)
     orcid: 'https://orcid.org/0000-0002-1086-9143'
   - given-names: Su
-        family-names: Saka
-        affiliation: >-
-          Department of Integrative Neurophysiology, Center for 
-          Neurogenomics and Cognitive Research, Vrije 
-          Universiteit Amsterdam
-        orcid: 'https://orcid.org/0009-0002-6551-825X'
+    family-names: Saka
+    affiliation: >-
+        Department of Integrative Neurophysiology, Center for 
+        Neurogenomics and Cognitive Research, Vrije 
+        Universiteit Amsterdam
+    orcid: 'https://orcid.org/0009-0002-6551-825X'
   - given-names: Foivos
-          family-names: Kastrinakis
-          affiliation: >-
-            Department of Integrative Neurophysiology, Center for 
-            Neurogenomics and Cognitive Research, Vrije 
-            Universiteit Amsterdam
+    family-names: Kastrinakis
+    affiliation: >-
+        Department of Integrative Neurophysiology, Center for 
+        Neurogenomics and Cognitive Research, Vrije 
+        Universiteit Amsterdam
   - given-names: Marcel
     family-names: Oberlaender
     email: m.oberlaender@vu.nl
@@ -101,11 +95,11 @@ preferred-citation:
       caesar (MPINB)
     orcid: 'https://orcid.org/0009-0007-8364-2023'
   - given-names: María
-      family-names: Royo
-      affiliation: >-
+    family-names: Royo
+    affiliation: >-
         Max Planck Institute for Neurobiology of Behavior -
         caesar (MPINB)
-      orcid: 'https://orcid.org/0009-0007-8364-2023'
+    orcid: 'https://orcid.org/0009-0007-8364-2023'
   - given-names: Rieke
     family-names: Fruengel
     affiliation: >-
@@ -113,18 +107,18 @@ preferred-citation:
       caesar (MPINB)
     orcid: 'https://orcid.org/0000-0002-1086-9143'
   - given-names: Su
-        family-names: Saka
-        affiliation: >-
-          Department of Integrative Neurophysiology, Center for 
-          Neurogenomics and Cognitive Research, Vrije 
-          Universiteit Amsterdam
-        orcid: 'https://orcid.org/0009-0002-6551-825X'
+    family-names: Saka
+    affiliation: >-
+        Department of Integrative Neurophysiology, Center for 
+        Neurogenomics and Cognitive Research, Vrije 
+        Universiteit Amsterdam
+    orcid: 'https://orcid.org/0009-0002-6551-825X'
   - given-names: Foivos
-          family-names: Kastrinakis
-          affiliation: >-
-            Department of Integrative Neurophysiology, Center for 
-            Neurogenomics and Cognitive Research, Vrije 
-            Universiteit Amsterdam
+    family-names: Kastrinakis
+    affiliation: >-
+        Department of Integrative Neurophysiology, Center for 
+        Neurogenomics and Cognitive Research, Vrije 
+        Universiteit Amsterdam
   - given-names: Marcel
     family-names: Oberlaender
     email: m.oberlaender@vu.nl
