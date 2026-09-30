@@ -14,11 +14,15 @@
 # limitations under the License.
 """Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module."""
 
+import logging
+import sys
+
 import numpy as np
 import pandas as pd
+import six
 
 class silence_stdout():
-    '''Silence stdout
+    '''Silence stdout.
     
     Can be used as context manager and decorator.
     
