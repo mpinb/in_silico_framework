@@ -24,3 +24,4 @@ this package provides methods and full workflows that allow you to make random v
 run the stimulus protocols on the cell, and evaluate how much they deviate from the empirically recorded mean.
 Eventually, this random walk through parameter space can explore very diverse biophysical models that are all within the empirical constraints.
 """
+from .RW import RW
