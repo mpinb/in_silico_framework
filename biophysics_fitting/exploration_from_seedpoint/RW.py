@@ -48,7 +48,7 @@ class RW:
             Must take one argument (a parameter vector as a ``pd.Series``) and return a tuple of  ``(inside, evaluation)``:
         
             - inside (bool): Boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not.
-            - evaluation (dict|:class:`pd.DataFrame`|:class:`pd.Series`): Evaluation metrics, containing relevant evaluation metrics, and their corresponing parameters. 
+            - evaluation (dict|:class:`pd.DataFrame`): Evaluation metrics, containing relevant evaluation metrics, and their corresponing parameters. 
 
             This function is usually :func:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
         
@@ -261,14 +261,20 @@ class RW:
 
         Args:
             iteration (int): current iteration number
-            out (list): list of dictionaries containing the evaluation results for each parameter vector
+            out (list): list of dictionaries or pandas DataFrames containing the evaluation results for each parameter vector
             op_dir (str): directory where the results are saved
 
         Returns:
             None. Saves the results to a pickle file in the specified directory.
         """
+        if not out: # continue if empty, could happen if checkpointing is changed with a resume
+            return
         path = os.path.join(op_dir, f'{iteration}.pickle')
-        pd.concat(out).to_pickle(path + '.saving')
+        # out can be a list of dictionaries or a list of pandas DataFrames
+        if isinstance(out[0], dict):
+            pd.DataFrame(out).to_pickle(path + '.saving')
+        else:
+            pd.concat(out).to_pickle(path + '.saving')
         logger.info('Checkpointing')
         with open(path + '.rngn', 'wb') as f:
             cloudpickle.dump(np.random.get_state(), f)
