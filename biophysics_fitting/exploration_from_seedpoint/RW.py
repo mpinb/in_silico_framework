@@ -375,7 +375,7 @@ class RW:
         Args:
             outdir (str): directory where the pickle or parquet files are located
             iteration (int): iteration number
-            mode (str): mode to load the results. Default: 'parquet_load'
+            mode (str): mode to load the results. Options: 'pickle' or 'parquet'
             
         Returns:
             tuple: dataframe and path to the file
