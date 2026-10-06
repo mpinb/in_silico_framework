@@ -67,7 +67,8 @@ def evaluation_function_incremental_helper(
         stim_order = None, 
         verbose = True,
         additional_evaluation_functions = None,
-        objectives_by_stimulus = None):
+        objectives_by_stimulus = None,
+        stim_run_name_mapping = None):
     '''Evaluate a model shows one stimulus at a time.
     
     This is useful for performace, as it allows to run the fastest simulations first,
@@ -90,6 +91,11 @@ def evaluation_function_incremental_helper(
         additional_evaluation_functions (list): additional functions to be applied onto the final voltage 
             traces dictionary, which return a dictionary which is appended to the
             evaluations. 
+        stim_run_name_mapping (Dict[str, str | (str)], optional): 
+            Maps names in stim_order to the stimulus name or tuple of stimulus names passed to the Simulator.
+            This allows grouped protocols to be referred to by one name in stim_order, cutoffs and objectives_by_stimulus.
+            Names not in the mapping are passed to the Simulator unchanged.
+            Default: None (no mapping).
     
     Returns: 
         True if all stimuli pass. False if at least one stimulus has an error above its cutoff. 
@@ -97,6 +103,7 @@ def evaluation_function_incremental_helper(
     # make sure all defined cutoffs can actually be applied
     additional_evaluation_functions = additional_evaluation_functions or []
     cutoffs = cutoffs or []
+    stim_run_name_mapping = stim_run_name_mapping or {}
     assert s is not None, "Please provide a Simulator object"
     assert e is not None, "Please provide an Evaluator object"
     for c in cutoffs:
@@ -111,7 +118,7 @@ def evaluation_function_incremental_helper(
         if verbose:
             print('evaluating stimulus', stim)
         with silence_stdout():
-            voltage_traces_ = s.run(p, stims = stim)
+            voltage_traces_ = s.run(p, stims = stim_run_name_mapping.get(stim, stim))
             voltage_traces.update(voltage_traces_)
             # this is currently specific to the hay simulator / evaluator, which gets confused if 
             # any voltage traces beyond what it expects are present
