@@ -153,7 +153,8 @@ def get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix):
     #         ]
 
     basenames = [os.path.basename(e) for e in filelist]
-    pattern = re.compile(r"(seed\d+)?_?(pid\d+)?_?(?P<recsite_label>[a-zA-Z0-9\._]+)(?=_).*" + re.escape(full_suffix))
+    # recsite label starts with the landmark file name, which may contain "-"
+    pattern = re.compile(r"(seed\d+)?_?(pid\d+)?_?(?P<recsite_label>[a-zA-Z0-9\._\-]+)(?=_).*" + re.escape(full_suffix))
     recsite_labels = [re.match(pattern, e).group("recsite_label") for e in basenames]
     return recsite_labels
 
