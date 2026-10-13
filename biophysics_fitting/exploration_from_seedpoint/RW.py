@@ -217,18 +217,23 @@ class RW:
                 movement[idx] = abs(movement[idx]) * direction
         return movement
 
-    def _check_movement_towards_aim(self, current_np, proposal):
+    def _check_movement_towards_aim(self, current_np, proposal, reached_aim_params):
         """
         Check if the proposed parameters are closer to the aim parameters than the current parameters.
+        Aim parameters that have already reached their aim value do not move (see :meth:`_ensure_direction_toward_aim`)
+        and are exempt.
 
         Args:
             current_np (np.array): current normalized parameters
             proposal (np.array): proposed normalized parameters
-        
+            reached_aim_params (list): list of booleans indicating whether each aim parameter has been reached or not.
+
         Returns:
             bool: True if the proposed parameters are closer to the aim parameters, False otherwise.
         """
-        for key in self.aim_params:
+        for key, reached in zip(self.aim_params, reached_aim_params):
+            if reached:
+                continue
             idx = self.params_to_explore.index(key)
             prev_dist = abs(current_np[idx] - self.normalized_aim_params[key])
             new_dist = abs(proposal[idx] - self.normalized_aim_params[key])
@@ -313,6 +318,8 @@ class RW:
             p_proposal = p_normalized_np + movement
             if p_proposal.max() > 1 or p_proposal.min() < 0:
                 continue
+            if len(self.normalized_aim_params.keys()) > 0 and not self._check_movement_towards_aim(p_normalized_np, p_proposal, reached_aim_params):
+                continue
             if self.mode is None:
                 mode_fulfilled = True
             elif (self.mode == 'expand' and 
@@ -322,10 +329,8 @@ class RW:
                 if self.mode_condition_fun is None:
                     raise ValueError('mode_condition_fun must be provided in "custom" mode')
                 mode_fulfilled = self.mode_condition_fun(p_proposal)
-            if len(self.normalized_aim_params.keys()) > 0 and not self._check_movement_towards_aim(p_normalized_np, p_proposal):
-                continue
-            logger.info(f"Position within boundaries found, step size is {step_size}, Tested {n_suggestion} positions to find one.")
-            return p_proposal, n_suggestion
+        logger.info(f"Position within boundaries found, step size is {step_size}, Tested {n_suggestion} positions to find one.")
+        return p_proposal, n_suggestion
         
     
     def _concatenate_and_clean(self, seed_folder, particle_id): 
