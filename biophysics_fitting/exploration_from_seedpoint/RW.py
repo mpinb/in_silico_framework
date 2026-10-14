@@ -415,7 +415,7 @@ class RW:
         assert max(iteration_files) == iteration_files[0]
         with open(os.path.join(OPERATION_DIR, f'{iteration_files[0]}.pickle.rngn'), 'rb') as f:
             rngn = cloudpickle.load(f)
-        return p, iteration_files[0] + 1, pickle_count, rngn
+        return p, iteration_files[0], pickle_count, rngn
     
     def run_RW(self, selected_seedpoint, particle_id, seed = None):
         """Run random walk exploration from a seed point.
@@ -456,10 +456,6 @@ class RW:
         iteration_files = list(set([int(f.split('.')[0]) for f in file_list 
                                     if f.endswith('.pickle') or f.endswith('.parquet')])) #set to list to drop duplicates
         iteration_files = sorted(iteration_files,reverse=True)
-        if iteration_files and max(iteration_files) > self.n_iterations:
-            logger.info('Max iterations reached. Exiting gracefully')
-            self._concatenate_and_clean(SEED_PT_DIR, particle_id)
-            return 
         if len(iteration_files) == 0:
             logger.info(f"Starting fresh from seedpoint {selected_seedpoint}")
             p = seed_params_all_pd
@@ -484,6 +480,12 @@ class RW:
         save_time = time.time()
         while True:
             logger.info(f"New loop. Current iteration {iteration}")
+
+            if iteration>self.n_iterations:
+                self._save_checkpoint(iteration, out, OPERATION_DIR)
+                self._concatenate_and_clean(SEED_PT_DIR, particle_id)
+                logger.info('Max iterations reached. Exiting gracefully')
+                return 
             if self.checkpoint_by_time: 
                 since_last_save = (time.time() - save_time)/60 #in minutes
                 if since_last_save>self.checkpoint_by_time and len(out) > 0:
@@ -492,7 +494,7 @@ class RW:
                     save_time = time.time()
                     out = []
                     save_count += 1 
-            elif iteration > 0 and iteration % self.checkpoint_every == 0:
+            elif iteration > 0 and iteration % self.checkpoint_every == 0 and len(out) > 0:
                 self._save_checkpoint(iteration, out, OPERATION_DIR)
                 out = []
                 save_count += 1 
@@ -528,8 +530,4 @@ class RW:
                     if count == self.stop_n_inside_with_aim_params:
                         logger.info('Reached aim params {} times for successful models. Exit gracefully'.format(count))
                         return
-                if iteration>self.n_iterations:
-                    self._concatenate_and_clean(SEED_PT_DIR, particle_id)
-                    logger.info('Max iterations reached. Exiting gracefully')
-                    return 
             iteration += 1
