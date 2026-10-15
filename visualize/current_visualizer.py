@@ -40,7 +40,7 @@ Example:
 
 from biophysics_fitting import get_main_bifurcation_section
 import numpy as np
-import matploblib.pyplot as plt
+import matplotlib.pyplot as plt
 
 COLORMAP = {
     'Ca_HVA.ica': '#4682C3',
