@@ -22,45 +22,7 @@ See also:
 import pandas as pd
 import os
 import dask
-import numpy as np
 from pickle import UnpicklingError
-
-def read_parameters(
-    seed_folder,
-    particle_id,
-    normalized=False,
-    only_in_space=False,
-    only_return_parameters=True,
-    param_names=None,
-    param_ranges=None
-    ):
-    """
-    Read the biophysical parameters that were explored during a RW exploration.
-    To read the full results, use :func:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_pickle` instead.
-    See: :class:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` for more info.
-    
-    Args:
-        seed_folder (str): path to the folder that contains the RW exploration result for a particular seed.
-        
-    Returns:
-        pd.DataFrame: a dataframe containing all biophysical parameters explored by a single particle.
-    """
-    df = read_pickle(seed_folder, particle_id)
-    if only_in_space:
-        df2 = df.dropna(subset=objectives_2BAC + objectives_step)
-        df3 = df2[df2[objectives_2BAC].max(axis=1) < 3.2]
-        df4 = df3[df3[objectives_step].max(axis=1) < 4.5]
-        df = df4
-    if only_return_parameters:
-        df = df[param_names]
-    else:
-        assert normalized == False
-    if normalized:
-        df = (df - param_ranges['min']) / (param_ranges['max'] -
-                                           param_ranges['min'])
-    df['particle_id'] = particle_id
-    return df
-
 
 def robust_read_pickle(path):
     """
@@ -206,82 +168,6 @@ def get_param_range_evolution_from_ddf(ddf, params, return_mi_ma = False):
     else:
         return normalize(ma_, params) - normalize(mi_, params)
     
-def get_index(dataframe, channel):
-    '''Compute the depolarization or hyperpolarization index.
-    
-    This index is how much the given channel contributed to depolarization (or hyperpolarization),
-    relative to the total depolarization (or hyperpolarization) current.
-    
-    Args:
-        dataframe (pd.DataFrame): the dataframe containing the biophysical parameters
-        channel (str): the channel for which to compute the index
-        
-    Returns:
-        pd.Series: the depolarization/hyperpolarization index for the given channel'''
-    if channel in hyperpo_channels:
-        norm = dataframe[hyperpo_channels].sum(axis = 1)
-    elif channel in depo_channels:
-        norm = dataframe[depo_channels].sum(axis = 1)
-    return dataframe[channel] / norm
-
-def get_depolarization_index(dataframe):
-    """Compute the relative difference in depolarization contribution of Ca_LVA and Ca_HVA during the BAC stimulus.
-    
-    This index is defined as:
-    
-    .. math::
-
-        \\frac{Ca_{LVA} - Ca_{HVA}}{Ca_{HVA} + Ca_{LVA}}
-    
-    Args:
-        dataframe (pd.DataFrame): the dataframe containing the biophysical parameters
-        
-    Returns:
-        pd.Series: the depolarization index for each model in the dataframe
-        
-    Note:
-        This method is specific to L5PT neurons, or any cell with Ca_LVA and Ca_HVA channels."""
-    CaHVA = get_index(dataframe, 'BAC_bifurcation_charges.Ca_HVA.ica')
-    CaLVA = get_index(dataframe, 'BAC_bifurcation_charges.Ca_LVAst.ica')
-    return (CaLVA-CaHVA)/(CaHVA+CaLVA)
-
-def get_hyperpolarization_index(dataframe):
-    """Compute the relative difference in hyperpolarization contribution of Im and SK during the BAC stimulus.
-    
-    This index is defined as:
-    
-    .. math::
-
-        \\frac{I_{SK} - I_{m}}{I_{SK} + I_{m}}
-        
-    Returns:
-        pd.Series: the hyperpolarization index for each model in the dataframe"""
-    Im = get_index(dataframe, 'BAC_bifurcation_charges.Im.ik')
-    Sk = get_index(dataframe, 'BAC_bifurcation_charges.SK_E2.ik')
-    return (Sk-Im)/(Im+Sk)
-
-def augment_ddf_with_PCA_space(ddf):
-    """Augment a dask dataframe with the first two principal components of the hz current space.
-    
-    The hz current space is the space of current utilization during the BAC stimulus.
-    The PCA space is the space spanned by the first two principal components of this space.
-    
-    Args:
-        ddf (dask.dataframe): the dataframe to augment
-        
-    Returns:
-        dask.dataframe: the augmented dataframe, containing the additional columns: 'pc0', 'pc1', 'depolarization_index', 'hyperpolarization_index'
-    """
-    def _helper(df):
-        df['pc0'] = np.dot(df[hz_current_columns], pca_components[0])
-        df['pc1'] = np.dot(df[hz_current_columns], pca_components[1])
-        df['depolarization_index'] = get_depolarization_index(df)
-        df['hyperpolarization_index'] = get_hyperpolarization_index(df)
-        return df
-    meta_ = _helper(ddf.head())
-    ddf_augmented = ddf.map_partitions(_helper, meta = meta_)
-    return ddf_augmented
-
 def pandas_binby(df, c1, c2, binsize = 0.01):
     """Bin a pandas dataframe by two columns.
     
@@ -295,30 +181,3 @@ def pandas_binby(df, c1, c2, binsize = 0.01):
         pd.DataFrame: the binned dataframe"""
     return df.groupby([(df[c1]/binsize).round()*binsize, 
                 (df[c2]/binsize).round()*binsize]).apply(lambda x: x.sample(1))
-
-hz_current_columns = [
-    'BAC_bifurcation_charges.Ca_HVA.ica',
-    'BAC_bifurcation_charges.SK_E2.ik',
-    'BAC_bifurcation_charges.Ca_LVAst.ica',
-    'BAC_bifurcation_charges.NaTa_t.ina',
-    'BAC_bifurcation_charges.Im.ik',
-    'BAC_bifurcation_charges.SKv3_1.ik']
-
-hz_current_columns_short = [k.split('.')[1] for k in hz_current_columns]
-
-depo_channels = [
-    'BAC_bifurcation_charges.Ca_HVA.ica',
-    'BAC_bifurcation_charges.Ca_LVAst.ica',
-    'BAC_bifurcation_charges.NaTa_t.ina']
-
-hyperpo_channels = [
-    'BAC_bifurcation_charges.SK_E2.ik',
-    'BAC_bifurcation_charges.Im.ik',
-    'BAC_bifurcation_charges.SKv3_1.ik']
-
-pca_components = np.array([
-    [ 7.63165639e-01,   6.29498003e-01,  -8.63749227e-02,
-      2.74177180e-04,  -1.40787230e-02,   1.16839883e-01],
-    [ 5.24587951e-01,  -5.64428021e-01,   5.25520353e-01,
-     -1.39713239e-03,   3.57672349e-01,   4.61019458e-02]
-    ])
