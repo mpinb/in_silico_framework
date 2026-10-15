@@ -93,15 +93,17 @@ Write clear and descriptive commit messages. Follow these guidelines:
 
 ### Pull Request Process
 
+The `master` branch always contains the latest release. Releases are submitted through fixed release schedules, i.e. when all features for a specific release are considered complete. For this reason, we ask you not to push intermediate code changes directly to master.
+
 To submit a pull request:
 
-1. **Fork the repository** 
-2. **Create a branch** for your contribution from your version of `develop`.
+1. **Fork or clone the repository**. Currently, ISF does not have many contributors, and cloning is fine. When more contributors come in, we ask you to fork, in order to keep the amount of branches on this repo to a manageable amount.
+2. **Create a branch** for your contribution, branched off from `develop`.
 3. **Commit your changes** with clear commit messages. Do not commit to `master` or `develop` directly.
    - If your changes are related to a specific issue, include the issue number in the commit message (e.g., `Fixes #123`).
    - Use `git commit --amend` to update the last commit message if needed.
-4. **Push your branch** to your forked repository.
-5. **Open a pull request** against the `develop` branch of the main repository.
+4. **Publish your branch**.
+5. **Open a pull request** against the `develop` branch of the main repository. Do not merge with `master`, as it risks breaking the release version of ISF, and does not trigger the release cycle CI.
    - Ensure your pull request is based on the latest `develop` branch.
    - Provide a clear title and description for your pull request.
    - If your changes are related to an issue, link to the issue in the pull request description.
