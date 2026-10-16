@@ -140,34 +140,31 @@ def normalize(df, params):
 
 idx = pd.IndexSlice
 
-def get_param_range_evolution_from_ddf(ddf, params, return_mi_ma = False):
-    """Compute the range of parameters explored by a RW exploration, as a fraction of the total parameter range.
-    
+def get_param_range_evolution_from_df(df, params, iteration_group_size = 20, return_min_max = False):
+    """Compute the cumulative range of each parameter explored by a RW exploration, as a fraction of its total range.
+
+    Successful iterations differ between particles, so iterations are pooled into groups of
+    ``iteration_group_size`` before taking the running min and max across all particles.
+
     Args:
-        ddf (dask.dataframe): the exploration results
-        params (pd.DataFrame): the parameter ranges
-        return_mi_ma (bool): whether or not to return the min and max values of the parameter ranges separately, rather than a fraction.
-        
+        df (pd.DataFrame): the exploration results of successful iterations, containing the parameter columns and an ``iteration`` column.
+        params (pd.DataFrame): the parameter ranges, with columns ``min`` and ``max`` and the parameter names as index.
+        iteration_group_size (int): the number of consecutive iterations pooled into one group.
+        return_min_max (bool): whether to return the normalized running max and min separately, rather than their difference.
+
     Returns:
-        pd.DataFrame: the range of parameters explored by the RW exploration. If return_mi_ma is True, returns the min and max values of the parameter ranges."""
-    assert(isinstance(params, pd.DataFrame))
+        pd.DataFrame | (pd.DataFrame, pd.DataFrame): the explored range per parameter (columns) and iteration group (index).
+        If ``return_min_max`` is True, the normalized running max and min instead."""
     param_names = list(params.index)
-    def _helper(df):
-        return df[param_names + ['iteration']].groupby('iteration').agg(['max', 'min'])
-    meta_ = ddf.get_partition(0).compute()
-    meta_ = _helper(meta_).head(0)
-    df_ranges = ddf.map_partitions(_helper, meta = meta_).compute()
-    df_max = df_ranges.loc[:,idx[:,'max']]
-    df_min = df_ranges.loc[:,idx[:,'max']]
-    df_max.columns = param_names
-    df_min.columns = param_names
-    mi_ = df_min.groupby(df_max.index).min().cummin()
-    ma_ = df_max.groupby(df_max.index).max().cummax()
-    if return_mi_ma:
-        return normalize(ma_, params), normalize(mi_, params)
-    else:
-        return normalize(ma_, params) - normalize(mi_, params)
-    
+    df = df[param_names + ['iteration']].copy()
+    df['iteration'] = (df.iteration // iteration_group_size) * iteration_group_size
+    df_ranges = df.groupby('iteration').agg(['max', 'min'])
+    df_min = normalize(df_ranges.loc[:, idx[:, 'min']].droplevel(1, axis=1).cummin(), params)
+    df_max = normalize(df_ranges.loc[:, idx[:, 'max']].droplevel(1, axis=1).cummax(), params)
+    if return_min_max:
+        return df_max, df_min
+    return df_max - df_min
+
 def pandas_binby(df, c1, c2, binsize = 0.01):
     """Bin a pandas dataframe by two columns.
     
