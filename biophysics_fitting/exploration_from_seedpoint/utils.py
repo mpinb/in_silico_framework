@@ -69,28 +69,34 @@ def evaluation_function_incremental_helper(
         additional_evaluation_functions = None,
         objectives_by_stimulus = None,
         stim_run_name_mapping = None):
-    '''Evaluate a model shows one stimulus at a time.
+    '''Evaluate a model one stimulus at a time, stopping early if a stimulus exceeds its cutoff.
     
     This is useful for performace, as it allows to run the fastest simulations first,
     and provides an early stopping criterion if a model is not able to match these objectives.
 
     Args:
+        p (dict | pd.Series): Biophysical parameters of the model. Copied before simulation.
         s (:class:`~biophysics_fitting.simulator.Simulator`): Simulator object
         e (:class:`~biophysics_fitting.evaluator.Evaluator`): Evaluator object
+        cutoffs (Dict[str,float], optional): 
+            Keys (str) must appear in stim_order and objectives_by_stimulus. 
+            Values (float) indicate the maximum error allowed for these stimuli.
+            A stimulus fails if any of its objectives exceeds the cutoff or is NaN.
+            Stimuli without a cutoff are evaluated but never cause an early stop.
+            Default: None (no cutoffs).
         stim_order ([str] | [(str)]):
             Order in which stimuli are simulated. 
             List consisting of strings and tuples of strings. 
             Use strings if only one stimulus is to be simulated.
             Use tuples of strings to simulate several stimuli in one go. 
-        cutoffs (Dict[str,float]): 
-            Keys (str) must appear in stim_order. 
-            Values (float)indicate the maximum error allowed for these stimuli
-        objectives_by_stimulus (Dict[str,list]): 
+        verbose (bool, optional): If True, prints which stimulus is evaluated and why evaluation stops. Default: True.
+        additional_evaluation_functions (list, optional): additional functions to be applied onto the final voltage 
+            traces dictionary, which return a dictionary which is appended to the
+            evaluations. Only applied if all stimuli pass. Default: None (no additional functions).
+        objectives_by_stimulus (Dict[str,list], optional): 
             Keys (str) must appear in stim_order. 
             Values (list) are objective names returned by the evaluator object.
-        additional_evaluation_functions (list): additional functions to be applied onto the final voltage 
-            traces dictionary, which return a dictionary which is appended to the
-            evaluations. 
+            Required if cutoffs are given.
         stim_run_name_mapping (Dict[str, str | (str)], optional): 
             Maps names in stim_order to the stimulus name or tuple of stimulus names passed to the Simulator.
             This allows grouped protocols to be referred to by one name in stim_order, cutoffs and objectives_by_stimulus.
@@ -98,14 +104,19 @@ def evaluation_function_incremental_helper(
             Default: None (no mapping).
     
     Returns: 
-        True if all stimuli pass. False if at least one stimulus has an error above its cutoff. 
+        Tuple[bool, dict]: 
+            ``True`` if all stimuli pass, ``False`` if at least one stimulus has an error above its cutoff.
+            The dictionary contains the input parameters ``p`` and the objective values returned by the evaluator.
+            If all stimuli pass, it also contains the output of the additional evaluation functions.
+            On an early stop, it only contains the objectives of the stimuli evaluated so far.
     '''
-    # make sure all defined cutoffs can actually be applied
     additional_evaluation_functions = additional_evaluation_functions or []
-    cutoffs = cutoffs or []
+    cutoffs = cutoffs or {}
     stim_run_name_mapping = stim_run_name_mapping or {}
     assert s is not None, "Please provide a Simulator object"
     assert e is not None, "Please provide an Evaluator object"
+    assert not cutoffs or objectives_by_stimulus is not None, "Please provide objectives_by_stimulus to apply cutoffs"
+    # make sure all defined cutoffs can actually be applied
     for c in cutoffs:
         assert c in stim_order
         assert c in objectives_by_stimulus
@@ -124,12 +135,11 @@ def evaluation_function_incremental_helper(
             # any voltage traces beyond what it expects are present
             # thus filter it out and have a 'clean' voltage_traces_for_evaluation
             voltage_traces_for_evaluation = {k:v for k,v in voltage_traces_.items() if k.endswith('hay_measure')}
-            print("traces: ", voltage_traces_for_evaluation)
             evaluation_ = e.evaluate(voltage_traces_for_evaluation, raise_ = False)
             evaluation.update(evaluation_)
         if stim in cutoffs:
-            error = max(pd.Series(evaluation_)[objectives_by_stimulus[stim]])
-            if error > cutoffs[stim]:
+            error = pd.Series(evaluation_)[objectives_by_stimulus[stim]].max(skipna=False)
+            if np.isnan(error) or error > cutoffs[stim]:
                 if verbose: 
                     print('stimulus', stim, 'has an error of', error, '- skipping further evaluation')
                 return False, evaluation
