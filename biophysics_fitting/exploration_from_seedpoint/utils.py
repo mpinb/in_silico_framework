@@ -24,17 +24,15 @@ import six
 class silence_stdout():
     '''Silence stdout.
     
-    Can be used as context manager and decorator.
-    
+    Can be used as context manager (``with silence_stdout():``) and decorator (``@silence_stdout()``).
+
     See also:
         https://stackoverflow.com/a/2829036/5082048
     '''
-    
-    def __init__(self, fun = None):
+
+    def __init__(self):
         self.save_stdout = sys.stdout
-        if fun is not None:
-            return self(fun)
-        
+
     def __enter__(self):
         logging.disable(logging.CRITICAL)
         sys.stdout = six.StringIO()
@@ -61,10 +59,11 @@ def get_vector_norm(v):
 
 def evaluation_function_incremental_helper(
         p,
+        *,
         s = None,  
         e = None,
         cutoffs = None,
-        stim_order = None, 
+        stim_order, 
         verbose = True,
         additional_evaluation_functions = None,
         objectives_by_stimulus = None,
@@ -73,6 +72,9 @@ def evaluation_function_incremental_helper(
     
     This is useful for performace, as it allows to run the fastest simulations first,
     and provides an early stopping criterion if a model is not able to match these objectives.
+
+    Only simulator outputs whose names end in ``measure`` (e.g. ``BAC.hay_measure``) are passed to the Evaluator.
+    Other outputs (e.g. ``BAC.range_vars``) are only passed to the additional evaluation functions.
 
     Args:
         p (dict | pd.Series): Biophysical parameters of the model. Copied before simulation.
@@ -131,10 +133,10 @@ def evaluation_function_incremental_helper(
         with silence_stdout():
             voltage_traces_ = s.run(p, stims = stim_run_name_mapping.get(stim, stim))
             voltage_traces.update(voltage_traces_)
-            # this is currently specific to the hay simulator / evaluator, which gets confused if 
-            # any voltage traces beyond what it expects are present
-            # thus filter it out and have a 'clean' voltage_traces_for_evaluation
-            voltage_traces_for_evaluation = {k:v for k,v in voltage_traces_.items() if k.endswith('hay_measure')}
+            # only pass voltage traces to the evaluator. these are saved with "measure" suffix by convention
+            # other outputs (e.g. ranges) are only passed to the additional evaluation functions
+
+            voltage_traces_for_evaluation = {k: v for k, v in voltage_traces_.items() if k.endswith('measure')}
             evaluation_ = e.evaluate(voltage_traces_for_evaluation, raise_ = False)
             evaluation.update(evaluation_)
         if stim in cutoffs:
