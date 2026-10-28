@@ -15,11 +15,14 @@
 """Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module."""
 
 import logging
+import os
 import sys
 
 import numpy as np
 import pandas as pd
 import six
+
+logger = logging.getLogger("ISF").getChild(__name__)
 
 class silence_stdout():
     '''Silence stdout.
@@ -47,6 +50,70 @@ class silence_stdout():
                 return func(*args, **kwds)
         return wrapper
     
+def read_df_file(path, robust=False):
+    """
+    Read a dataframe saved as ``.pickle`` or ``.parquet``, depending on the file extension.
+    If ``robust`` and it cannot be read, still return a dataframe, containing an error as content.
+    Useful for when you don't want your code to error during some large-scale analysis.
+
+    Args:
+        path (str): path to the ``.pickle`` or ``.parquet`` dataframe
+        robust (bool): whether to return a dataframe containing the error instead of raising if the file cannot be read.
+            An unsupported file extension raises regardless.
+
+    Returns:
+        pd.DataFrame: the stored DataFrame if reading was successful, otherwise a single-row DataFrame
+        holding only the error in the column 'init_error'. If ``robust``, a successfully read DataFrame
+        always contains the column 'init_error', added as '' if missing (stored values are kept).
+        Otherwise, it is returned exactly as stored.
+
+    Raises:
+        ValueError: if the file extension is neither ``.pickle`` nor ``.parquet``.
+    """
+    readers = {'.pickle': pd.read_pickle, '.parquet': pd.read_parquet}
+    extension = os.path.splitext(path)[1]
+    if extension not in readers:
+        raise ValueError(f'Cannot read {path}: file extension must be one of {list(readers)}')
+    try:
+        df = readers[extension](path)
+    except Exception as e:
+        if not robust:
+            raise
+        logger.warning(f'Could not read {path}: {e!r}')
+        return pd.DataFrame({'init_error': [f'Could not read {path}: {e!r}']})
+    if robust and 'init_error' not in df.columns:
+        df['init_error'] = ''
+    return df
+
+def read_particle_df(seed_folder, particle_id, robust=True, file_types=('.pickle', '.parquet')):
+    """
+    Read the results of a single particle of a RW exploration.
+    
+    Args:
+        seed_folder (str): the path of the directory corresponding to a seedpoint.
+        particle_id (str): the particle id
+        robust (bool): whether unreadable files are replaced by a row containing the error instead of raising, 
+            see :py:func:`~biophysics_fitting.exploration_from_seedpoint.utils.read_df_file`.
+        file_types (tuple): the file extensions to read.
+        
+    Returns:
+        pd.DataFrame | str: The results of the RW exploration of a single particle, ordered by the
+        iteration number in the file names, with added 'iteration' (row count) and 'particle_id'
+        columns. If ``robust``, it is guaranteed to contain an 'init_error' column.
+        'empty' if the particle has no result files.
+    """
+    path = os.path.join(seed_folder, str(particle_id))
+    df_names = [p for p in os.listdir(path) if p.endswith(tuple(file_types))]
+    df_names = sorted(df_names, key=lambda x: int(x.split('.')[0]))
+    dfs = [read_df_file(os.path.join(path, p), robust=robust) for p in df_names]
+    if len(dfs) == 0:
+        return 'empty'
+    df = pd.concat(dfs).reset_index(drop=True)
+    df['iteration'] = df.index
+    df['particle_id'] = particle_id
+    return df
+
+
 def get_vector_norm(v):
     """Calculate the norm of a vector v.
     

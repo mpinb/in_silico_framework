@@ -29,9 +29,7 @@ import shutil
 import time
 import math
 import glob
-from typing import Literal
-from .utils import get_vector_norm, convert_all_check_columns_bool_to_float
-from .RW_analysis import read_pickle
+from .utils import get_vector_norm, convert_all_check_columns_bool_to_float, read_df_file, read_particle_df
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -353,7 +351,7 @@ class RW:
             self._clean_the_pickles(outdir, pickle_files, iteration) 
             return 
 
-        df = read_pickle(seed_folder, particle_id)
+        df = read_particle_df(seed_folder, particle_id, robust=False, file_types=('.pickle',))
         df = convert_all_check_columns_bool_to_float(df)
         df.to_parquet(df_parquet_path + '.saving')
         shutil.move(df_parquet_path + '.saving', df_parquet_path) 
@@ -374,20 +372,6 @@ class RW:
             if not path.endswith(f'{iteration}.pickle'): # do not remove the last rngn
                 os.remove(path + '.rngn')
 
-    def _load_pickle_or_parquet(self,outdir, iteration, mode: Literal['pickle', 'parquet']):
-        """Load the results of a iteration from a pickle or parquet file.
-        
-        Args:
-            outdir (str): directory where the pickle or parquet files are located
-            iteration (int): iteration number
-            mode (str): mode to load the results. Options: 'pickle' or 'parquet'
-            
-        Returns:
-            tuple: dataframe and path to the file
-        """
-        df_path = os.path.join(outdir, '.'.join([str(iteration), mode]))
-        return getattr(pd, 'read_' + mode)(df_path), df_path
-
     def _load_existing_exploration(self, OPERATION_DIR, iteration_files, file_list):
         """Load the existing exploration results from the specified directory to continue the random walk.
 
@@ -404,7 +388,8 @@ class RW:
         parquet_count = len([f for f in file_list if f.endswith('.parquet')])
         load_list = ['pickle'] * pickle_count + ['parquet'] * parquet_count
         for i, iteration in enumerate(iteration_files):
-            df, df_path = self._load_pickle_or_parquet(OPERATION_DIR, iteration, load_list[i])
+            df_path = os.path.join(OPERATION_DIR, f'{iteration}.{load_list[i]}')
+            df = read_df_file(df_path)
             logger.info(f'Loaded file {df_path}')
             df = df[df.inside]
             try:

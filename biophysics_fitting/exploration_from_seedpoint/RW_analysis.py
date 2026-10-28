@@ -19,51 +19,14 @@ See also:
     :mod:`~biophysics_fitting.exploration_from_seedpoint.RW`
 """
 
+import functools
 import pandas as pd
 import os
 import dask
-from pickle import UnpicklingError
+from .utils import read_particle_df
 
-def robust_read_pickle(path):
-    """
-    Read a pickled dataframe. If it cannot be read, still return a dataframe, containing an error as content.
-    Useful for when you don't want your code to error during some large-scale analysis.
-    
-    Args:
-        path (str): path to the pickled dataframe
-        
-    Returns:
-        pd.DataFrame | pd.Series: the pickled DataFrame if reading was succesful, a pd.Series otherwise. Both contain the key 'init_error', specifying whether or not the read was succesful.
-    """
-    try:
-        df = pd.read_pickle(path) 
-        df['init_error'] = ''
-        return df
-    # except (UnpicklingError, EOFError) as e:
-    except:
-        return pd.Series({"init_error":"Could not read {}".format(1)}).to_frame('init_error')
-        
-def read_pickle(seed_folder, particle_id):
-    """
-    Read the results of a single particle of a RW exploration.
-    
-    Args:
-        seed_folder (str): the path of the directory corresponding to a seedpoint.
-        particle_id (str): the particle id
-        
-    Returns:
-        pd.DataFrame: The results of the RW exploration of a single particle.
-    """
-    path = os.path.join(seed_folder, str(particle_id))
-    df_names = [p for p in os.listdir(path) if p.endswith('.pickle')]
-    df_names = sorted(df_names, key=lambda x: int(x.split('.')[0]))
-    dfs = [robust_read_pickle(os.path.join(path, p)) for p in df_names]
-    if len(dfs) == 0:
-        return 'empty'
-    df = pd.concat(dfs).reset_index(drop=True)
-    df['iteration'] = df.index
-    df['particle_id'] = particle_id
-    return df
+# deprecated: use read_particle_df
+read_pickle = functools.partial(read_particle_df, file_types=('.pickle',))
 
 def read_all(basedir, n_particles_start = 0, n_particles_end = 1000):
     """
