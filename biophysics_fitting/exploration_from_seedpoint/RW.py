@@ -34,6 +34,49 @@ import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 
+def concatenate_and_clean(seed_folder, particle_id):
+    """Concatenate the intermediate ``.pickle`` results of a particle and save them as one parquet file.
+    Removes the pickle files.
+
+    Args:
+        seed_folder (str): folder where the seedpoint is located
+        particle_id (int): id of the particle
+    """
+    outdir = os.path.join(seed_folder, str(particle_id))
+    iterations = sorted(list(set([int(f.split('.')[0]) for f in os.listdir(outdir)
+                  if f.endswith('.pickle') or f.endswith('.parquet')])), reverse=True)
+    pickle_files = [f for f in os.listdir(outdir) if f.endswith('.pickle')]
+    iteration = iterations[0]
+
+    df_parquet_path = os.path.join(outdir, f'{iteration}.parquet')
+    if os.path.isfile(df_parquet_path):
+        logger.warning(f'Parquet file already exists {df_parquet_path}')
+        _clean_the_pickles(outdir, pickle_files, iteration)
+        return
+
+    df = read_particle_df(seed_folder, particle_id, robust=False, file_types=('.pickle',))
+    df = convert_all_check_columns_bool_to_float(df)
+    df.to_parquet(df_parquet_path + '.saving')
+    shutil.move(df_parquet_path + '.saving', df_parquet_path)
+    _clean_the_pickles(outdir, pickle_files, iteration)
+
+
+def _clean_the_pickles(outdir, files, iteration):
+    """Remove the pickle files that correspond to the intermediate results of a iteration.
+
+    Args:
+        outdir (str): directory where the pickle files are located
+        files (list): list of files in the directory
+        iteration (int): iteration number
+    """
+    paths = [os.path.join(outdir, file) for file in files]
+    logger.info(f'Cleaning the pickle files in {outdir}')
+    for path in paths:
+        os.remove(path)
+        if not path.endswith(f'{iteration}.pickle'): # do not remove the last rngn
+            os.remove(path + '.rngn')
+
+
 class RW:
     """Class to perform RW exploration from a seedpoint.
     
@@ -331,47 +374,6 @@ class RW:
         return p_proposal, n_suggestion
         
     
-    def _concatenate_and_clean(self, seed_folder, particle_id): 
-        """Concatenate the intermediate ``.pickle`` results and save as one parquet file. 
-        Removes the pickle files.
-        
-        Args:
-            seed_folder (str): folder where the seedpoint is located
-            particle_id (int): id of the particle
-        """
-        outdir = os.path.join(seed_folder, str(particle_id))
-        iterations = sorted(list(set([int(f.split('.')[0]) for f in os.listdir(outdir)
-                      if f.endswith('.pickle') or f.endswith('.parquet')])), reverse=True)
-        pickle_files = [f for f in os.listdir(outdir) if f.endswith('.pickle')]
-        iteration = iterations[0]
-        
-        df_parquet_path = os.path.join(outdir, f'{iteration}.parquet')
-        if os.path.isfile(df_parquet_path): 
-            logger.warning(f'Parquet file already exists {df_parquet_path}')
-            self._clean_the_pickles(outdir, pickle_files, iteration) 
-            return 
-
-        df = read_particle_df(seed_folder, particle_id, robust=False, file_types=('.pickle',))
-        df = convert_all_check_columns_bool_to_float(df)
-        df.to_parquet(df_parquet_path + '.saving')
-        shutil.move(df_parquet_path + '.saving', df_parquet_path) 
-        self._clean_the_pickles(outdir, pickle_files, iteration) 
-
-    def _clean_the_pickles(self,outdir, files, iteration):
-        """Remove the pickle files that correspond to the intermediate results of a iteration.
-        
-        Args:
-            outdir (str): directory where the pickle files are located
-            files (list): list of files in the directory
-            iteration (int): iteration number
-        """
-        paths = [os.path.join(outdir, file) for file in files]
-        logger.info(f'Cleaning the pickle files in {outdir}')
-        for path in paths: 
-            os.remove(path)
-            if not path.endswith(f'{iteration}.pickle'): # do not remove the last rngn
-                os.remove(path + '.rngn')
-
     def _load_existing_exploration(self, OPERATION_DIR, iteration_files, file_list):
         """Load the existing exploration results from the specified directory to continue the random walk.
 
@@ -468,7 +470,7 @@ class RW:
 
             if iteration>self.n_iterations:
                 self._save_checkpoint(iteration, out, OPERATION_DIR)
-                self._concatenate_and_clean(SEED_PT_DIR, particle_id)
+                concatenate_and_clean(SEED_PT_DIR, particle_id)
                 logger.info('Max iterations reached. Exiting gracefully')
                 return 
             if self.checkpoint_by_time: 
@@ -484,7 +486,7 @@ class RW:
                 out = []
                 save_count += 1 
             if save_count != 0 and save_count % concat_every == 0:
-                self._concatenate_and_clean(SEED_PT_DIR, particle_id)
+                concatenate_and_clean(SEED_PT_DIR, particle_id)
                 save_count = 0
 
             dist = get_vector_norm(params_expl_normalized_np - seed_params_expl_normalized_np)
