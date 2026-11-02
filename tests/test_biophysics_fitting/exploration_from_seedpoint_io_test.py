@@ -7,33 +7,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from biophysics_fitting.exploration_from_seedpoint.RW import RW
-from biophysics_fitting.exploration_from_seedpoint.RW_analysis import read_pickle
+from biophysics_fitting.exploration_from_seedpoint.RW import RW, concatenate_and_clean
 from biophysics_fitting.exploration_from_seedpoint.utils import read_df_file, read_particle_df
-
-
-def _head_robust_read_pickle(path):
-    '''robust_read_pickle as it was before read_df_file, to check the deprecated read_pickle alias against.'''
-    try:
-        df = pd.read_pickle(path)
-        df['init_error'] = ''
-        return df
-    except:
-        return pd.Series({"init_error": "Could not read {}".format(1)}).to_frame('init_error')
-
-
-def _head_read_pickle(seed_folder, particle_id):
-    '''read_pickle as it was before read_particle_df, to check the deprecated alias against.'''
-    path = os.path.join(seed_folder, str(particle_id))
-    df_names = [p for p in os.listdir(path) if p.endswith('.pickle')]
-    df_names = sorted(df_names, key=lambda x: int(x.split('.')[0]))
-    dfs = [_head_robust_read_pickle(os.path.join(path, p)) for p in df_names]
-    if len(dfs) == 0:
-        return 'empty'
-    df = pd.concat(dfs).reset_index(drop=True)
-    df['iteration'] = df.index
-    df['particle_id'] = particle_id
-    return df
 
 
 def _results(first_value, n_rows):
@@ -154,28 +129,10 @@ def test_read_particle_df_mixes_empty_string_and_float_init_error(tmp_path):
     assert list(df['init_error']) == [0.0, '', '', '', '']
 
 
-def test_deprecated_aliases_match_previous_behaviour(particle_dir):
-    seed_folder = str(particle_dir.parent)
-    new = read_pickle(seed_folder, 0)
-    pd.testing.assert_frame_equal(new, _head_read_pickle(seed_folder, 0))
-    assert (new['init_error'] == '').all()
-    os.mkdir(os.path.join(seed_folder, '1'))
-    assert read_pickle(seed_folder, 1) == _head_read_pickle(seed_folder, 1) == 'empty'
-
-
-def test_deprecated_read_pickle_robust_to_unreadable_files(particle_dir):
-    with open(str(particle_dir / '20.pickle'), 'wb') as f:
-        f.write(b'garbage')
-    new = read_pickle(str(particle_dir.parent), 0)
-    old = _head_read_pickle(str(particle_dir.parent), 0)
-    pd.testing.assert_frame_equal(new.drop(columns='init_error'), old.drop(columns='init_error'))
-    assert new['init_error'].iloc[-1].startswith('Could not read') and old['init_error'].iloc[-1] == 'Could not read 1'
-
-
-def test_deprecated_read_pickle_works_with_dask_delayed(particle_dir):
-    delayed = dask.delayed(read_pickle)(str(particle_dir.parent), 0)
+def test_read_particle_df_works_with_dask_delayed(particle_dir):
+    delayed = dask.delayed(read_particle_df)(str(particle_dir.parent), 0)
     df = delayed.compute(scheduler='synchronous')
-    pd.testing.assert_frame_equal(df, _head_read_pickle(str(particle_dir.parent), 0))
+    pd.testing.assert_frame_equal(df, read_particle_df(str(particle_dir.parent), 0))
 
 
 @pytest.fixture
@@ -190,7 +147,7 @@ def checkpoint_dir(tmp_path):
 
 
 def test_concatenate_and_clean_merges_pickles_into_parquet(checkpoint_dir):
-    RW.__new__(RW)._concatenate_and_clean(str(checkpoint_dir.parent), 0)
+    concatenate_and_clean(str(checkpoint_dir.parent), 0)
     assert sorted(os.listdir(str(checkpoint_dir))) == ['30.parquet', '30.pickle.rngn']
     df = pd.read_parquet(str(checkpoint_dir / '30.parquet'))
     assert list(df['x']) == [0., 1., 10., 11., 20., 21.]
@@ -202,7 +159,7 @@ def test_concatenate_and_clean_raises_on_corrupt_pickle_and_keeps_pickles(checkp
         f.write(b'garbage')
     files_before = sorted(os.listdir(str(checkpoint_dir)))
     with pytest.raises(Exception):
-        RW.__new__(RW)._concatenate_and_clean(str(checkpoint_dir.parent), 0)
+        concatenate_and_clean(str(checkpoint_dir.parent), 0)
     assert sorted(os.listdir(str(checkpoint_dir))) == files_before
 
 
