@@ -196,7 +196,7 @@ def get_db_by_unique_id(unique_id):
         DataBase = ISFDataBase
     elif _is_legacy_model_data_base(db_path):
         try: from model_data_base import ModelDataBase
-        except ImportError: "The requested database with unique_id {} is a legacy ModelDataBase. Make sure you have this on your PATH, e.g. by importing ibs_projects.compatibility".format(unique_id)
+        except ImportError: "The requested database with unique_id {} is a legacy ModelDataBase. Make sure you have this on your PATH, e.g. by importing isf_legacy_compatibility from ibs_projects".format(unique_id)
         DataBase = ModelDataBase
     db = DataBase(db_path, nocreate=True)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)

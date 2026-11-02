@@ -44,7 +44,7 @@ def isf_is_using_legacy_mdb():
     
     There are two reasons to use it anyways:
     
-    - Reading in existing data that has already been saved with this database system (i.e. the IBS Oberlaender Lab), in which case one must also `from ibs_projects import compatibility`
+    - Reading in existing data that has already been saved with this database system (i.e. the IBS Oberlaender Lab), in which case one must also `import isf_legacy_compatibility` (from ibs_projects)
     - Testing purposes
     
     Returns:
