@@ -69,7 +69,7 @@ def load_helper(savedir, n_partitions, partition, meta=None, columns=None):
 
 
 @dask.delayed
-def save_helper(savedir, delayed_df, n_partitions, partition):
+def save_helper(savedir, delayed_df, n_partitions, partition, schema=None, compression=COMPRESSION):
     """Save a single partition of a dask dataframe to a parquet file
     
     Args:
@@ -77,6 +77,8 @@ def save_helper(savedir, delayed_df, n_partitions, partition):
         delayed_df (dask.dataframe): Dask dataframe
         n_partitions (int): Number of partitions
         partition (int): Partition number
+        schema (pyarrow.Schema, optional): Schema to write the partition with. Default: inferred by pyarrow.
+        compression (str, optional): Parquet compression codec. Default: :py:data:`COMPRESSION`.
         
     Returns:
         None
@@ -87,7 +89,8 @@ def save_helper(savedir, delayed_df, n_partitions, partition):
             savedir,
             'pandas_to_parquet.{}.{}.parquet'.format(n_partitions, partition)),
         engine=ENGINE,
-        compression=COMPRESSION)
+        compression=compression,
+        schema=schema)
 
 @dask.delayed
 def check_df_suitable_for_pq(delayed_df):
@@ -144,12 +147,13 @@ class Loader(parent_classes.Loader):
         return ddf
 
 
-def dump(obj, savedir, schema=None, client=None, repartition = 10000):
+def dump(obj, savedir, schema=None, client=None, repartition = 10000, compression=COMPRESSION):
     """Save a dask dataframe to one or more parquet files.
     
     One parquet file per partition is created.
     Each partition is written to a file named 'pandas_to_parquet.<n_partitions>.<partition>.parquet'.
-    The writing of these files is parallelized using the dask client if one is provided.
+    The writing of these files is parallelized using the dask client if one is provided,
+    and the default dask scheduler otherwise.
     
     In addition to the dask dataframe itself, meta information is saved in the form of a JSON file.
     
@@ -159,10 +163,15 @@ def dump(obj, savedir, schema=None, client=None, repartition = 10000):
     Args:
         obj (dask.dataframe): Dask dataframe to save
         savedir (str): Directory where the parquet files will be stored
-        client (dask.distributed.Client): Dask client for parallellization.
+        schema (pyarrow.Schema, optional): 
+            Schema to write every partition with, e.g. to avoid that pyarrow infers different types per partition
+            (``null`` for an all-None column). A non-range index must be part of it as ``__index_level_0__``,
+            and a RangeIndex is not saved with a schema. Default: inferred by pyarrow per partition.
+        client (dask.distributed.Client, optional): Dask client for parallellization.
         repartition (int): 
             If the original object has more than twice this amount of partitions, it will be repartitioned.
             Otherwise, the object is saved according to its original partitioning.
+        compression (str, optional): Parquet compression codec. Default: :py:data:`COMPRESSION`.
             
     Returns:
         None
@@ -190,14 +199,14 @@ def dump(obj, savedir, schema=None, client=None, repartition = 10000):
     # Note: this converts the column names to string. These are reset to their original dtype at the end
     delayeds = obj.to_delayed()
     delayeds = [dask.delayed(df_colnames_to_str)(d) for d in delayeds]
+    schema = dask.delayed(schema)  # shared by all tasks instead of copied into each
     delayeds = [
-        save_helper(savedir, d, len(delayeds), lv)
+        save_helper(savedir, d, len(delayeds), lv, schema=schema, compression=compression)
         for lv, d in enumerate(delayeds)
     ]
 
     # Execute the delayeds: save the df to parquet files
-    futures = client.compute(delayeds)
-    client.gather(futures)
+    dask.compute(*delayeds, scheduler=client)
     
     # Save the divisions
     if obj.divisions is not None:
