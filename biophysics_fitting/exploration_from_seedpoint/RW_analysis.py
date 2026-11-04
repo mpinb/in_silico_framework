@@ -43,7 +43,7 @@ _COMPRESSION = 'zstd'
 def _scan_particle(particle_dir):
     """Count the inside and outside rows of the readable parquet files of a particle and collect their columns.
 
-    Only the footer and the ``inside`` column are read.
+    Only the footer (parquet metadata) and the ``inside`` column are read.
 
     Raises:
         ValueError: if the ``inside`` column of a file is missing, not bool or has missing values.
@@ -76,8 +76,10 @@ def _scan_particle(particle_dir):
 
 
 def _build_exploration_schema(scans):
-    """Build one parquet schema for all partitions: the union of the chunk columns, the generated columns and the index."""
+    """Build one parquet schema (data structure: columns, data types etc.) for all partitions. 
+    Columns: file columns, the generated columns and the index."""
     columns = dict.fromkeys([c for scan in scans for c in scan['columns'] if c != 'init_error'] + list(_GENERATED_COLUMNS))
+    # we drop the init error column that was added by a robust read using func exploration_from_seedpoint.RW.utils.read_drw_df_file
     array_columns = set().union(*(scan['array_columns'] for scan in scans))
     # Fix array columns to list<double>: pyarrow otherwise infers the type per file (list<int64>, or null
     # for all-None columns), and files of one key then cannot be read as one dataset.
@@ -132,19 +134,21 @@ def consolidate_exploration(exploration_dir, db, key, client=None, overwrite=Fal
     """Convert the parquet results of a RW exploration into the parquet keys ``<key>_inside`` and ``<key>_outside`` of a
     database.
 
-    Each particle becomes one partition of each key it has rows in. All partitions share one schema: ``inside`` is bool,
-    ``iteration``, ``particle_id`` and ``seedpoint_id`` are int64, array-valued columns are ``list<double>`` (non-array
-    cells, e.g. the stored means in the first row of a resumed particle, become None), and all other columns are
-    float64 (NaN where a column is missing in a file). ``init_error`` and the stored index are dropped. ``iteration``
-    counts the rows of a particle over its readable files, and ``seedpoint_id`` and ``particle_id`` are taken from the
-    folder names.
+    Each particle becomes one partition of each key. All partitions share the same schemaL=:
 
-    Unreadable files and particles without files are recorded in
-    ``errors.json`` in the managed folder ``db['<key>_errors']``. All three keys are written to a staging key
-    ``<key>_consolidating_<id>`` first and only replace existing keys once complete, so a failure while reading or
-    writing leaves existing keys untouched and removes the staging key. If replacing an existing key fails, that key
-    may be deleted already, and the staging key is kept, as it holds the new data of the keys not yet replaced. If the
-    process is killed, the staging key can be left behind.
+    - ``inside`` is bool.
+    - ``iteration``, ``particle_id`` and ``seedpoint_id`` are int64. ``iteration`` counts the rows of a particle.
+    The two ids are taken from the folder names.
+    - Array-valued columns are ``list<double>``. Non-array cells, e.g. the stored means in the first row of a resumed
+      particle, become None.
+    - All other columns are float64, with NaN where a file lacks the column.
+    - ``init_error`` and the stored index are dropped.
+
+    Unreadable files and particles without files are recorded in ``errors.json`` in the managed folder ``db['<key>_errors']``.
+
+    All three keys are first written under a staging key ``<key>_consolidating_<id>`` and then moved into place. A failure
+    while reading or writing leaves existing keys untouched and removes the staging key. However, a failure during 
+    the replacement of existing keys or a killed process can leave the staging key behind.
 
     Args:
         exploration_dir (str): directory containing ``<seedpoint_id>/<particle_id>/<N>.parquet`` files.
@@ -160,7 +164,7 @@ def consolidate_exploration(exploration_dir, db, key, client=None, overwrite=Fal
     Raises:
         KeyError: if a key exists and not ``overwrite``.
         ValueError: if a particle folder contains ``.pickle`` files, which must be folded into parquet first with
-            :py:func:`~biophysics_fitting.exploration_from_seedpoint.RW.concatenate_and_clean`, or if a file has no
+            :func:`~biophysics_fitting.exploration_from_seedpoint.RW.concatenate_and_clean`, or if a file has no
             valid bool ``inside`` column.
         RuntimeError: if replacing an existing key fails.
     """
@@ -185,7 +189,7 @@ def consolidate_exploration(exploration_dir, db, key, client=None, overwrite=Fal
     staged_dirs = {name: staging_dir / name for name in keys}
     try:
         # Two passes, as every partition must have the same schema before we start writing
-        # which columns hold arrays (if some files might only have NaN for certain columns while the others have arrays) 
+        # which columns hold arrays (if some files might only have NaN for certain columns while the others have arrays)
         # and the row index for divisions needs to know the length the inside and outside data of each particle.
         all_scans = dask.compute(*[dask.delayed(_scan_particle)(d) for d in particle_dirs], scheduler=client)
         schema = _build_exploration_schema(all_scans)
@@ -238,7 +242,7 @@ def consolidate_exploration(exploration_dir, db, key, client=None, overwrite=Fal
 
 
 def load_exploration(db, key, subset='inside', columns=None):
-    """Load the inside or outside rows of a RW exploration converted with :py:func:`consolidate_exploration`.
+    """Load the inside or outside rows of a RW exploration converted with :func:`consolidate_exploration`.
 
     Args:
         db (ISFDataBase): the database in which the exploration was stored.

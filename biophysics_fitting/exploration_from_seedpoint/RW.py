@@ -29,7 +29,7 @@ import shutil
 import time
 import math
 import glob
-from .utils import get_vector_norm, convert_all_check_columns_bool_to_float, read_df_file, read_particle_df
+from .utils import get_vector_norm, convert_all_check_columns_bool_to_float, read_drw_df_file, read_drw_particle_df
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -54,7 +54,7 @@ def concatenate_and_clean(seed_folder, particle_id):
         _clean_the_pickles(outdir, pickle_files, iteration)
         return
 
-    df = read_particle_df(seed_folder, particle_id, robust=False, file_types=('.pickle',))
+    df = read_drw_particle_df(seed_folder, particle_id, robust=False, file_types=('.pickle',))
     df = convert_all_check_columns_bool_to_float(df)
     df.to_parquet(df_parquet_path + '.saving')
     shutil.move(df_parquet_path + '.saving', df_parquet_path)
@@ -391,7 +391,7 @@ class RW:
         load_list = ['pickle'] * pickle_count + ['parquet'] * parquet_count
         for i, iteration in enumerate(iteration_files):
             df_path = os.path.join(OPERATION_DIR, f'{iteration}.{load_list[i]}')
-            df = read_df_file(df_path)
+            df = read_drw_df_file(df_path)
             logger.info(f'Loaded file {df_path}')
             df = df[df.inside]
             try:

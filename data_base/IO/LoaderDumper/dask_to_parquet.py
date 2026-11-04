@@ -78,7 +78,7 @@ def save_helper(savedir, delayed_df, n_partitions, partition, schema=None, compr
         n_partitions (int): Number of partitions
         partition (int): Partition number
         schema (pyarrow.Schema, optional): Schema to write the partition with. Default: inferred by pyarrow.
-        compression (str, optional): Parquet compression codec. Default: :py:data:`COMPRESSION`.
+        compression (str, optional): Parquet compression codec. Default: ``COMPRESSION`` (``'snappy'``).
         
     Returns:
         None
@@ -172,7 +172,7 @@ def dump(obj, savedir, schema=None, client=None, repartition = 10000, compressio
         repartition (int): 
             If the original object has more than twice this amount of partitions, it will be repartitioned.
             Otherwise, the object is saved according to its original partitioning.
-        compression (str, optional): Parquet compression codec. Default: :py:data:`COMPRESSION`.
+        compression (str, optional): Parquet compression codec. Default: ``COMPRESSION`` (``'snappy'``).
             
     Returns:
         None
