@@ -110,7 +110,7 @@ class MetadataAccessor:
 
     def keys(self):
         """Return the keys of the Database"""
-        return [ k for k in self.db.keys() if Path.exists(self.db._basedir/k/"Loader.[json][pickle]") ]
+        return [ k for k in self.db.keys() if Path.exists(self.db._basedir/k/"metadata.json") ]
         
 
 def _check_working_dir_clean_for_build(working_dir):
