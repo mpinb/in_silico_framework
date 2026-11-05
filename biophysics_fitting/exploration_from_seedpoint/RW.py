@@ -29,11 +29,52 @@ import shutil
 import time
 import math
 import glob
-from typing import Literal
-from .utils import get_vector_norm, convert_all_check_columns_bool_to_float
-from .RW_analysis import read_pickle
+from .utils import get_vector_norm, convert_all_check_columns_bool_to_float, read_drw_df_file, read_drw_particle_df
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
+
+
+def concatenate_and_clean(seed_folder, particle_id):
+    """Concatenate the intermediate ``.pickle`` results of a particle and save them as one parquet file.
+    Removes the pickle files.
+
+    Args:
+        seed_folder (str): folder where the seedpoint is located
+        particle_id (int): id of the particle
+    """
+    outdir = os.path.join(seed_folder, str(particle_id))
+    iterations = sorted(list(set([int(f.split('.')[0]) for f in os.listdir(outdir)
+                  if f.endswith('.pickle') or f.endswith('.parquet')])), reverse=True)
+    pickle_files = [f for f in os.listdir(outdir) if f.endswith('.pickle')]
+    iteration = iterations[0]
+
+    df_parquet_path = os.path.join(outdir, f'{iteration}.parquet')
+    if os.path.isfile(df_parquet_path):
+        logger.warning(f'Parquet file already exists {df_parquet_path}')
+        _clean_the_pickles(outdir, pickle_files, iteration)
+        return
+
+    df = read_drw_particle_df(seed_folder, particle_id, robust=False, file_types=('.pickle',))
+    df = convert_all_check_columns_bool_to_float(df)
+    df.to_parquet(df_parquet_path + '.saving')
+    shutil.move(df_parquet_path + '.saving', df_parquet_path)
+    _clean_the_pickles(outdir, pickle_files, iteration)
+
+
+def _clean_the_pickles(outdir, files, iteration):
+    """Remove the pickle files that correspond to the intermediate results of a iteration.
+
+    Args:
+        outdir (str): directory where the pickle files are located
+        files (list): list of files in the directory
+        iteration (int): iteration number
+    """
+    paths = [os.path.join(outdir, file) for file in files]
+    logger.info(f'Cleaning the pickle files in {outdir}')
+    for path in paths:
+        os.remove(path)
+        if not path.endswith(f'{iteration}.pickle'): # do not remove the last rngn
+            os.remove(path + '.rngn')
 
 
 class RW:
@@ -48,7 +89,7 @@ class RW:
             Must take one argument (a parameter vector as a ``pd.Series``) and return a tuple of  ``(inside, evaluation)``:
         
             - inside (bool): Boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not.
-            - evaluation (dict|:class:`pd.DataFrame`|:class:`pd.Series`): Evaluation metrics, containing relevant evaluation metrics, and their corresponing parameters. 
+            - evaluation (dict|:class:`pd.DataFrame`): Evaluation metrics, containing relevant evaluation metrics, and their corresponing parameters. 
 
             This function is usually :func:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
         
@@ -217,18 +258,23 @@ class RW:
                 movement[idx] = abs(movement[idx]) * direction
         return movement
 
-    def _check_movement_towards_aim(self, current_np, proposal):
+    def _check_movement_towards_aim(self, current_np, proposal, reached_aim_params):
         """
         Check if the proposed parameters are closer to the aim parameters than the current parameters.
+        Aim parameters that have already reached their aim value do not move (see :meth:`_ensure_direction_toward_aim`)
+        and are exempt.
 
         Args:
             current_np (np.array): current normalized parameters
             proposal (np.array): proposed normalized parameters
-        
+            reached_aim_params (list): list of booleans indicating whether each aim parameter has been reached or not.
+
         Returns:
             bool: True if the proposed parameters are closer to the aim parameters, False otherwise.
         """
-        for key in self.aim_params:
+        for key, reached in zip(self.aim_params, reached_aim_params):
+            if reached:
+                continue
             idx = self.params_to_explore.index(key)
             prev_dist = abs(current_np[idx] - self.normalized_aim_params[key])
             new_dist = abs(proposal[idx] - self.normalized_aim_params[key])
@@ -261,14 +307,20 @@ class RW:
 
         Args:
             iteration (int): current iteration number
-            out (list): list of dictionaries containing the evaluation results for each parameter vector
+            out (list): list of dictionaries or pandas DataFrames containing the evaluation results for each parameter vector
             op_dir (str): directory where the results are saved
 
         Returns:
             None. Saves the results to a pickle file in the specified directory.
         """
+        if not out: # continue if empty, could happen if checkpointing is changed with a resume
+            return
         path = os.path.join(op_dir, f'{iteration}.pickle')
-        pd.concat(out).to_pickle(path + '.saving')
+        # out can be a list of dictionaries or a list of pandas DataFrames
+        if isinstance(out[0], dict):
+            pd.DataFrame(out).to_pickle(path + '.saving')
+        else:
+            pd.concat(out).to_pickle(path + '.saving')
         logger.info('Checkpointing')
         with open(path + '.rngn', 'wb') as f:
             cloudpickle.dump(np.random.get_state(), f)
@@ -307,6 +359,8 @@ class RW:
             p_proposal = p_normalized_np + movement
             if p_proposal.max() > 1 or p_proposal.min() < 0:
                 continue
+            if len(self.normalized_aim_params.keys()) > 0 and not self._check_movement_towards_aim(p_normalized_np, p_proposal, reached_aim_params):
+                continue
             if self.mode is None:
                 mode_fulfilled = True
             elif (self.mode == 'expand' and 
@@ -316,67 +370,10 @@ class RW:
                 if self.mode_condition_fun is None:
                     raise ValueError('mode_condition_fun must be provided in "custom" mode')
                 mode_fulfilled = self.mode_condition_fun(p_proposal)
-            if len(self.normalized_aim_params.keys()) > 0 and not self._check_movement_towards_aim(p_normalized_np, p_proposal):
-                continue
-            logger.info(f"Position within boundaries found, step size is {step_size}, Tested {n_suggestion} positions to find one.")
-            return p_proposal, n_suggestion
+        logger.info(f"Position within boundaries found, step size is {step_size}, Tested {n_suggestion} positions to find one.")
+        return p_proposal, n_suggestion
         
     
-    def _concatenate_and_clean(self, seed_folder, particle_id): 
-        """Concatenate the intermediate ``.pickle`` results and save as one parquet file. 
-        Removes the pickle files.
-        
-        Args:
-            seed_folder (str): folder where the seedpoint is located
-            particle_id (int): id of the particle
-        """
-        outdir = os.path.join(seed_folder, str(particle_id))
-        iterations = sorted(list(set([int(f.split('.')[0]) for f in os.listdir(outdir)
-                      if f.endswith('.pickle') or f.endswith('.parquet')])), reverse=True)
-        pickle_files = [f for f in os.listdir(outdir) if f.endswith('.pickle')]
-        iteration = iterations[0]
-        
-        df_parquet_path = os.path.join(outdir, f'{iteration}.parquet')
-        if os.path.isfile(df_parquet_path): 
-            logger.warning(f'Parquet file already exists {df_parquet_path}')
-            self._clean_the_pickles(outdir, pickle_files, iteration) 
-            return 
-
-        df = read_pickle(seed_folder, particle_id)
-        df = convert_all_check_columns_bool_to_float(df)
-        df.to_parquet(df_parquet_path + '.saving')
-        shutil.move(df_parquet_path + '.saving', df_parquet_path) 
-        self._clean_the_pickles(outdir, pickle_files, iteration) 
-
-    def _clean_the_pickles(self,outdir, files, iteration):
-        """Remove the pickle files that correspond to the intermediate results of a iteration.
-        
-        Args:
-            outdir (str): directory where the pickle files are located
-            files (list): list of files in the directory
-            iteration (int): iteration number
-        """
-        paths = [os.path.join(outdir, file) for file in files]
-        logger.info(f'Cleaning the pickle files in {outdir}')
-        for path in paths: 
-            os.remove(path)
-            if not path.endswith(f'{iteration}.pickle'): # do not remove the last rngn
-                os.remove(path + '.rngn')
-
-    def _load_pickle_or_parquet(self,outdir, iteration, mode: Literal['pickle', 'parquet']):
-        """Load the results of a iteration from a pickle or parquet file.
-        
-        Args:
-            outdir (str): directory where the pickle or parquet files are located
-            iteration (int): iteration number
-            mode (str): mode to load the results. Default: 'parquet_load'
-            
-        Returns:
-            tuple: dataframe and path to the file
-        """
-        df_path = os.path.join(outdir, '.'.join([str(iteration), mode]))
-        return getattr(pd, 'read_' + mode)(df_path), df_path
-
     def _load_existing_exploration(self, OPERATION_DIR, iteration_files, file_list):
         """Load the existing exploration results from the specified directory to continue the random walk.
 
@@ -393,7 +390,8 @@ class RW:
         parquet_count = len([f for f in file_list if f.endswith('.parquet')])
         load_list = ['pickle'] * pickle_count + ['parquet'] * parquet_count
         for i, iteration in enumerate(iteration_files):
-            df, df_path = self._load_pickle_or_parquet(OPERATION_DIR, iteration, load_list[i])
+            df_path = os.path.join(OPERATION_DIR, f'{iteration}.{load_list[i]}')
+            df = read_drw_df_file(df_path)
             logger.info(f'Loaded file {df_path}')
             df = df[df.inside]
             try:
@@ -404,7 +402,7 @@ class RW:
         assert max(iteration_files) == iteration_files[0]
         with open(os.path.join(OPERATION_DIR, f'{iteration_files[0]}.pickle.rngn'), 'rb') as f:
             rngn = cloudpickle.load(f)
-        return p, iteration_files[0] + 1, pickle_count, rngn
+        return p, iteration_files[0], pickle_count, rngn
     
     def run_RW(self, selected_seedpoint, particle_id, seed = None):
         """Run random walk exploration from a seed point.
@@ -445,10 +443,6 @@ class RW:
         iteration_files = list(set([int(f.split('.')[0]) for f in file_list 
                                     if f.endswith('.pickle') or f.endswith('.parquet')])) #set to list to drop duplicates
         iteration_files = sorted(iteration_files,reverse=True)
-        if iteration_files and max(iteration_files) > self.n_iterations:
-            logger.info('Max iterations reached. Exiting gracefully')
-            self._concatenate_and_clean(SEED_PT_DIR, particle_id)
-            return 
         if len(iteration_files) == 0:
             logger.info(f"Starting fresh from seedpoint {selected_seedpoint}")
             p = seed_params_all_pd
@@ -473,6 +467,12 @@ class RW:
         save_time = time.time()
         while True:
             logger.info(f"New loop. Current iteration {iteration}")
+
+            if iteration>self.n_iterations:
+                self._save_checkpoint(iteration, out, OPERATION_DIR)
+                concatenate_and_clean(SEED_PT_DIR, particle_id)
+                logger.info('Max iterations reached. Exiting gracefully')
+                return 
             if self.checkpoint_by_time: 
                 since_last_save = (time.time() - save_time)/60 #in minutes
                 if since_last_save>self.checkpoint_by_time and len(out) > 0:
@@ -481,12 +481,12 @@ class RW:
                     save_time = time.time()
                     out = []
                     save_count += 1 
-            elif iteration > 0 and iteration % self.checkpoint_every == 0:
+            elif iteration > 0 and iteration % self.checkpoint_every == 0 and len(out) > 0:
                 self._save_checkpoint(iteration, out, OPERATION_DIR)
                 out = []
                 save_count += 1 
             if save_count != 0 and save_count % concat_every == 0:
-                self._concatenate_and_clean(SEED_PT_DIR, particle_id)
+                concatenate_and_clean(SEED_PT_DIR, particle_id)
                 save_count = 0
 
             dist = get_vector_norm(params_expl_normalized_np - seed_params_expl_normalized_np)
@@ -517,8 +517,4 @@ class RW:
                     if count == self.stop_n_inside_with_aim_params:
                         logger.info('Reached aim params {} times for successful models. Exit gracefully'.format(count))
                         return
-                if iteration>self.n_iterations:
-                    self._concatenate_and_clean(SEED_PT_DIR, particle_id)
-                    logger.info('Max iterations reached. Exiting gracefully')
-                    return 
             iteration += 1
