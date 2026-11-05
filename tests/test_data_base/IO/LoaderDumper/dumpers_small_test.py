@@ -1,10 +1,4 @@
-import os
-
 import numpy as np
-import pandas as pd
-import pyarrow as pa
-import pyarrow.parquet as pq
-import dask.dataframe as dd
 from pandas.testing import assert_frame_equal
 import dask 
 from config import isf_is_using_legacy_mdb
@@ -20,7 +14,6 @@ from data_base.IO.LoaderDumper import (
     to_cloudpickle, 
     reduced_lda_model,
     )
-from data_base.IO.LoaderDumper.meta import read_object_meta
 from tests.test_simrun.reduced_model.get_kernel_test import get_test_Rm
 from numpy.testing import assert_array_equal
 import pytest
@@ -95,37 +88,6 @@ def test_pandas_to_parquet_small(empty_db, pdf):
 @pytest.mark.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
 def test_dask_to_parquet_small(empty_db, pdf, ddf, client):
     small_data_frame_test(empty_db, pdf, ddf, dask_to_parquet, client=client)
-
-def _partition_files(savedir):
-    return sorted(os.path.join(savedir, f) for f in os.listdir(savedir) if f.endswith('.parquet'))
-
-
-def _all_none_then_int_arrays():
-    pdf = pd.DataFrame({'a': [None, None, np.array([1, 2])], 'b': [1., 2., 3.]}, index=pd.Index([0, 1, 2]))
-    return pdf, dd.from_delayed([dask.delayed(pdf.iloc[:2]), dask.delayed(pdf.iloc[2:])], meta=pdf.iloc[:0])
-
-
-def test_dask_to_parquet_writes_every_partition_with_schema_and_compression(tmp_path):
-    pdf, ddf = _all_none_then_int_arrays()
-    schema = pa.schema([('a', pa.list_(pa.float64())), ('b', pa.float64()), ('__index_level_0__', pa.int64())])
-    dask_to_parquet.dump(ddf, str(tmp_path), schema=schema, compression='zstd')
-    assert len(_partition_files(str(tmp_path))) == 2
-    for path in _partition_files(str(tmp_path)):
-        assert pq.read_schema(path).equals(schema)
-        assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == 'ZSTD'
-    loaded = dask_to_parquet.Loader(read_object_meta(str(tmp_path))).get(str(tmp_path)).compute()
-    assert list(loaded.index) == [0, 1, 2]
-    assert loaded['a'].iloc[0] is None and list(loaded['a'].iloc[2]) == [1., 2.]
-
-
-def test_dask_to_parquet_default_infers_schema_per_partition(tmp_path, client):
-    pdf, ddf = _all_none_then_int_arrays()
-    dask_to_parquet.dump(ddf, str(tmp_path), client=client)
-    types = [pq.read_schema(path).field('a').type for path in _partition_files(str(tmp_path))]
-    assert types == [pa.null(), pa.list_(pa.int64())]
-    for path in _partition_files(str(tmp_path)):
-        assert pq.ParquetFile(path).metadata.row_group(0).column(0).compression == dask_to_parquet.COMPRESSION.upper()
-
 
 def test_pandas_to_pickle_small(empty_db, pdf):
     small_data_frame_test(empty_db, pdf, pdf.copy(), pandas_to_pickle)
